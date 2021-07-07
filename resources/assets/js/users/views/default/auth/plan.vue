@@ -7,7 +7,7 @@
         <div class="background-logo">
             <img src="/images/logo.png" alt="logo" width="100%">
         </div>
-        <div class="col-12 plan" v-if="show_page">
+        <div class="col-12 plan login" v-if="show_page">
 
 
             <div class="exit-button" @click="EXIT">
@@ -18,7 +18,7 @@
 
             <transition name="slide-fade">
 
-                <div class="col-12 col-md-8 col-lg-8 offset-md-2 p-sm-4 plan-form" v-show="planShow">
+                <div class="col-12 col-md-8 col-lg-10 offset-md-1 p-sm-4 plan-form" v-show="planShow">
                     <div class="col-8 offset-2">
                         <div class="steps hidden-xs-down">
                             <div class="step-1">
@@ -55,29 +55,59 @@
                             </div>
                         </div>
                     </div>
-                    <div class="title mt-sm-5">
-                        <h3>{{$t('register.choose_plan_message')}}</h3>
-                    </div>
 
-                    <div class="col-lg-12 text-center">
-                        <div class="row m-2">
-                            <div class="col-12 col-sm-6 col mt-3 text-center" v-for="(item, index) in planList"
-                                 :key="index" @click="plan = item.plan_id">
-                                <div class="card-plan" :class="{active_plan: plan === item.plan_id}">
-                                    <h3>{{item.plan_name}}</h3>
-                                    <h1>${{item.plan_amount}}
-                                        <small>/mo</small>
-                                    </h1>
-                                    <i v-if="item.plan_trial !== null">{{item.plan_trial}}
-                                        {{$t('register.day_free')}}</i>
+                    <div class="login-box plane-box row">
+                        <div class="plan-image">
+
+                        </div>
+                        <div class="login-form plane-form">
+                            <div class="header row">
+                                <div class="left_homepage row">
+                                    <router-link :to="{name: 'discover'}">
+                                        <div class="row">
+                                            <img src="/images/home.png" width="25px" height="25px" alt="logo">
+                                            <p>Homepage</p>
+                                        </div>
+                                    </router-link>
+                                </div>
+                                <div class="right_homepage row">
+                                    <router-link :to="{name: 'login'}" v-if="!$Helper.getIntGatewayStatus('int_gateway')">
+                                        <div class="row">
+                                            <p>Login</p>
+                                            <img src="/images/arrow.png" width="25px" height="25px" alt="logo">
+                                        </div>
+                                    </router-link>
+                                    <router-link :to="{name: 'signup-non-payment'}" v-if="$Helper.getIntGatewayStatus('int_gateway')">
+                                        <div class="row">
+                                            <p>Login</p>
+                                            <img src="/images/arrow.png" width="25px" height="25px" alt="logo">
+                                        </div>
+                                    </router-link>
+                                </div>
+                            </div>
+
+                            <div class="mt-sm-7 col-lg-12 mt-sm-5 text-center">
+                                <div class="row m-2">
+                                    <div class="col-12 col-sm-4 col mt-3 text-center" v-for="(item, index) in planList"
+                                        :key="index" @click="plan = item.plan_id">
+                                        <div class="card-plan" :class="{active_plan: plan === item.plan_id}">
+                                            <h3>{{item.plan_name}}</h3>
+                                            <h1>${{item.plan_amount}}
+                                                <small>/mo</small>
+                                            </h1>
+                                            <i v-if="item.plan_trial !== null">{{item.plan_trial}}
+                                                {{$t('register.day_free')}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 offset-md-4 mt-5">
+                                    <button class="btn btn-warning" @click="NEXT" :class="{disabled: plan === 0}">
+                                        {{$t('register.continue')}}
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4 offset-md-4 mt-5">
-                            <button class="btn btn-warning" @click="NEXT" :class="{disabled: plan === 0}">
-                                {{$t('register.continue')}}
-                            </button>
-                        </div>
+
                     </div>
                 </div>
             </transition>
