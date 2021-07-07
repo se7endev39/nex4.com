@@ -1,0 +1,16 @@
+.cast-page {
+  &__cast {
+    .image {
+      display: inline-block;
+      position: relative;
+      width: 200px;
+      height: 200px;
+      overflow: hidden;
+      border-radius: 50%;
+      z-index: -1;
+      -webkit-box-shadow: 0px 6px 30px 0px #000;
+      -moz-box-shadow: 0px 6px 30px 0px #000;
+      box-shadow: 0px 6px 30px 0px #000;
+    }
+  }
+}

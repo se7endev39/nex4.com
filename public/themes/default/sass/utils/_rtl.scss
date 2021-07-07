@@ -1,0 +1,211 @@
+.rtl {
+
+  input {
+    direction: rtl;
+
+    text-align: right;
+  }
+  .dropdown-menu  a {
+    text-align: right;
+  }
+  .control-label{
+    text-align: right;
+  }
+  .list-unstyled {
+    padding-right: 0;
+    padding-left: initial;
+  }
+  .list-inline {
+    padding-right: 0;
+    padding-left: initial;
+    margin-right: -5px;
+    margin-left: 0;
+  }
+
+
+  .table {
+    direction: rtl;
+    th {
+      text-align: right;
+    }
+  }
+  .form-control {
+    text-align: right;
+  }
+  blockquote {
+    border-right: 5px solid #eeeeee;
+    border-left: 0;
+  }
+  .blockquote-reverse,
+  blockquote.pull-left {
+    padding-left: 15px;
+    padding-right: 0;
+    border-left: 5px solid #eeeeee;
+    border-right: 0;
+    text-align: left;
+  }
+
+  .recenlty {
+    direction: rtl;
+    margin: 20px;
+    margin-top: 0;
+  }
+
+  /* Navbar */
+
+  .navbar-content {
+    direction:  rtl;
+     .nav-md .bg-inverse .search {
+       left: -170px !important;
+     }
+   .nav-md .bg-inverse .register .singup {
+     left: 0;
+    }
+
+    .mr-auto {
+      margin-right: 0 !important;
+    }
+  }
+
+  /* Top Slider */
+
+  .top-item {
+
+    &__film-ovarlay {
+      direction: rtl;
+    }
+    &__film-details {
+      right: 5%;
+    }
+    .btn-group > .btn {
+      border-radius: 20px !important;
+      margin: 3px;
+    }
+
+    .title,
+    .overview,
+    .control{
+      right: 120px !important;
+    }
+  }
+
+
+
+  .movies-page,
+  .series-page,
+  .kids-page,
+  .collection-page .film-list{
+    direction: rtl;
+
+    .genre hr {
+      right: 7px !important;
+      left: inherit;
+    }
+  }
+
+  .discover-page,
+  .live-page {
+    .genre {
+      direction: rtl;
+      hr {
+        right: 7px !important;
+        left: inherit;
+      }
+    }
+    .__title {
+      direction: rtl;
+    }
+  }
+
+
+.search-page {
+  .film-list {
+    direction: rtl;
+  }
+  .search-icon {
+    right: -10px;
+    left: inherit;
+  }
+}
+
+  .show_item {
+    &__body {
+      direction: rtl !important;
+    }
+    .header__collection,
+    .header__like {
+      right: 50px;
+      margin: 10px;
+      margin-top: 0;
+    }
+
+    .btn-group {
+      direction: ltr;
+    }
+  }
+
+  .privacy,
+  .contact-us,
+  .about-us,
+  .terms {
+
+    .exit-button {
+      right: 40px !important;
+      left:inherit;
+    }
+  }
+
+  .exit-button {
+    left: 40px;
+  }
+
+
+  .sidebar-content {
+    right: 0;
+  }
+  .device-activity {
+    direction: rtl;
+  }
+
+  .settings .title p {
+    text-align: right;
+  }
+
+  .report-modal #modal .body {
+    direction: rtl;
+    .form-check-label {
+      width: 100%;
+    }
+    .custom-control-input {
+      width: 100%;
+      height: 30px;
+    }
+  }
+
+
+  .register {
+    .forget-password {
+      direction: rtl;
+      text-align: right;
+    }
+    p {
+      text-align: right;
+    }
+    .form-group {
+      direction: rtl;
+      text-align: right;
+    }
+    .login > div > div > div:nth-child(6),
+    .signup-form > div > div:nth-child(7){
+      direction: inherit;
+      text-align: inherit;
+    }
+  }
+
+
+  @media only screen and (max-width: 767px) {
+    .top-item__film-ovarlay {
+      left: 0;
+    }
+  }
+}

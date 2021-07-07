@@ -1,0 +1,41 @@
+/* ----------- iPad 1, 2, Mini and Air ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+and (min-width: 768px)
+and (max-width: 1224px){
+
+
+  .animation-active {
+    height: 75% !important;
+  }
+
+  .show_itme {
+    height: auto !important;
+
+    &__body .body__background-sm-up {
+      height: auto !important;
+    }
+  }
+
+  .top-item {
+        height: 0 !important;
+    .VueCarousel-wrapper {
+      width: 120%;
+      height: auto !important;
+      position: relative !important;
+      overflow: hidden;
+      .VueCarousel-slide {
+        height: auto !important;
+      }
+    }
+
+
+    &__film-cover {
+      height: auto !important;
+      img {
+        position: relative !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+
+.sidebar-content {
+  background-color: #1e78bf;
+  background: linear-gradient(356deg, #119eb0 0%, #1e78bf 100%);
+  position: fixed;
+  height: 100%;
+  -ms-flex: 0 0 3.33333333%;
+  flex: 0 0 3.33333333%;
+  max-width: 3.333333%;
+  z-index: 1000000;
+
+}
+
+.sidebar-sm {
+  -ms-flex: 0 0 12.33333333% !important;
+  flex: 0 0 12.33333333% !important;;
+  max-width: 12.333333% !important;;
+}
+
+.sidebar {
+
+  &__list ul  {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+  &__list ul li .icon {
+    position: relative;
+    display: block;
+    margin: 5px;
+    margin-top: 10px;
+  }
+  &__list ul li svg path,
+  &__list ul li svg polygon,
+  &__list ul li svg rect,
+  &__list ul li svg circle
+   {
+    fill:#b4dcfc;
+  }
+  &__list ul li svg {
+    transition: 300ms;
+  }
+  &__list ul li:hover{
+    cursor: pointer;
+    svg {
+    width: 90%;
+     path,
+     polygon,
+     rect,
+     circle {
+      fill: #fff;
+    }
+  }
+  }
+
+  &__list ul li.setting {
+    position: absolute;
+    bottom: 2%;
+  }
+
+  &__list ul li.help {
+    position: absolute;
+    bottom: 9%;
+  }
+  .router-link-exact-active svg,
+  .show svg {
+    width: 90%;
+    path,
+    polygon,
+    rect,
+    circle {
+     fill: #fff;
+   }
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 0;
+    left: 70px;
+  }
+}
+
