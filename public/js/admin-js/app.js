@@ -22468,7 +22468,9 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n            " + _vm._s(item.message) + "\n        "
+                        "\r\n            " +
+                          _vm._s(item.message) +
+                          "\r\n        "
                       )
                     ]
                   )
@@ -22515,9 +22517,9 @@ var render = function() {
                     }
                   }),
                   _vm._v(
-                    "\n                            " +
+                    "\r\n                            " +
                       _vm._s(_vm.$auth.getUserInfo("name")) +
-                      "\n                        "
+                      "\r\n                        "
                   )
                 ]
               ),
@@ -26852,7 +26854,7 @@ var render = function() {
                                             attrs: { id: "btn-progress" }
                                           }),
                                           _vm._v(
-                                            " Prepare\n                                        "
+                                            " Prepare\r\n                                        "
                                           )
                                         ])
                                   ]),
@@ -26922,7 +26924,7 @@ var render = function() {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Delete\n                                                        "
+                                                          "Delete\r\n                                                        "
                                                         )
                                                       ]
                                                     )
@@ -26943,7 +26945,7 @@ var render = function() {
                                                           }
                                                         }),
                                                         _vm._v(
-                                                          " Loading\n                                                        "
+                                                          " Loading\r\n                                                        "
                                                         )
                                                       ]
                                                     )
@@ -26978,7 +26980,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "Upload Subtitle\n                                "
+                                "Upload Subtitle\r\n                                "
                               )
                             ]
                           )
@@ -27092,7 +27094,7 @@ var render = function() {
                                 item.m_cloud == "local"
                                   ? _c("td", [
                                       _vm._v(
-                                        "\n                                    Local Server\n                                "
+                                        "\r\n                                    Local Server\r\n                                "
                                       )
                                     ])
                                   : _vm._e(),
@@ -27100,7 +27102,7 @@ var render = function() {
                                 item.m_cloud == "aws"
                                   ? _c("td", [
                                       _vm._v(
-                                        "\n                                    AWS S3\n                                "
+                                        "\r\n                                    AWS S3\r\n                                "
                                       )
                                     ])
                                   : _vm._e(),
@@ -27138,7 +27140,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "Analysis\n                                        "
+                                            "Analysis\r\n                                        "
                                           )
                                         ]
                                       ),
@@ -27161,7 +27163,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "\n                                            Top\n                                        "
+                                                "\r\n                                            Top\r\n                                        "
                                               )
                                             ]
                                           )
@@ -27187,7 +27189,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "Get Subtitles\n                                        "
+                                            "Get Subtitles\r\n                                        "
                                           )
                                         ]
                                       ),
@@ -27207,7 +27209,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "Edit\n                                        "
+                                            "Edit\r\n                                        "
                                           )
                                         ]
                                       ),
@@ -27333,7 +27335,7 @@ var render = function() {
                                 item.m_cloud == "local"
                                   ? _c("td", [
                                       _vm._v(
-                                        "\n                                    Local Server\n                                "
+                                        "\r\n                                    Local Server\r\n                                "
                                       )
                                     ])
                                   : _vm._e(),
@@ -27341,7 +27343,7 @@ var render = function() {
                                 item.m_cloud == "aws"
                                   ? _c("td", [
                                       _vm._v(
-                                        "\n                                    AWS S3\n                                "
+                                        "\r\n                                    AWS S3\r\n                                "
                                       )
                                     ])
                                   : _vm._e(),
@@ -27379,7 +27381,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "Analysis\n                                        "
+                                            "Analysis\r\n                                        "
                                           )
                                         ]
                                       ),
@@ -27402,7 +27404,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Top\n                                        "
+                                                "Top\r\n                                        "
                                               )
                                             ]
                                           )
@@ -27428,7 +27430,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "Get Subtitles\n                                        "
+                                            "Get Subtitles\r\n                                        "
                                           )
                                         ]
                                       ),
@@ -27448,7 +27450,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "Edit\n                                        "
+                                            "Edit\r\n                                        "
                                           )
                                         ]
                                       ),
@@ -27645,7 +27647,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { id: "subtitleLabel", for: "subtitle" } }, [
-      _vm._v("Add New Subtitles\n                                        "),
+      _vm._v("Add New Subtitles\r\n                                        "),
       _c("br"),
       _vm._v(" "),
       _c("small", [
@@ -34706,9 +34708,9 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                           " +
+                    "\r\n                           " +
                       _vm._s(_vm.analysis_date) +
-                      "\n            "
+                      "\r\n            "
                   )
                 ]
               ),
@@ -39041,7 +39043,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Manage\n                    ")]
+                    [_vm._v("Manage\r\n                    ")]
                   )
                 ],
                 1
@@ -39063,7 +39065,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Episode API\n                    ")]
+                    [_vm._v("Episode API\r\n                    ")]
                   )
                 ],
                 1
@@ -39087,7 +39089,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        Episode custom\n                    "
+                        "\r\n                        Episode custom\r\n                    "
                       )
                     ]
                   )
@@ -39125,7 +39127,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Delete\n                    ")]
+                          [_vm._v("Delete\r\n                    ")]
                         )
                       : _vm._e(),
                     _vm._v(" "),
@@ -39280,7 +39282,7 @@ var render = function() {
                                                 attrs: { id: "btn-progress" }
                                               }),
                                               _vm._v(
-                                                " Prepare\n                                        "
+                                                " Prepare\r\n                                        "
                                               )
                                             ])
                                       ]),
@@ -39368,7 +39370,7 @@ var render = function() {
                                                                 },
                                                                 [
                                                                   _vm._v(
-                                                                    "Delete\n                                                        "
+                                                                    "Delete\r\n                                                        "
                                                                   )
                                                                 ]
                                                               )
@@ -39391,7 +39393,7 @@ var render = function() {
                                                                       "fa fa-circle-o-notch fa-spin"
                                                                   }),
                                                                   _vm._v(
-                                                                    " Loading\n                                                        "
+                                                                    " Loading\r\n                                                        "
                                                                   )
                                                                 ]
                                                               )
@@ -39429,7 +39431,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "Upload Subtitle\n                                "
+                                    "Upload Subtitle\r\n                                "
                                   )
                                 ]
                               )
@@ -39507,7 +39509,7 @@ var render = function() {
                           item.cloud == "local"
                             ? _c("td", [
                                 _vm._v(
-                                  "\n                                Local Server\n                            "
+                                  "\r\n                                Local Server\r\n                            "
                                 )
                               ])
                             : _vm._e(),
@@ -39515,7 +39517,7 @@ var render = function() {
                           item.cloud == "aws"
                             ? _c("td", [
                                 _vm._v(
-                                  "\n                                AWS S3\n                            "
+                                  "\r\n                                AWS S3\r\n                            "
                                 )
                               ])
                             : _vm._e(),
@@ -39553,7 +39555,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "Get Subtitles\n                                    "
+                                      "Get Subtitles\r\n                                    "
                                     )
                                   ]
                                 ),
@@ -39573,7 +39575,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Edit\n                                    "
+                                      "\r\n                                        Edit\r\n                                    "
                                     )
                                   ]
                                 ),
@@ -39593,7 +39595,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Ads\n                                    "
+                                      "\r\n                                        Ads\r\n                                    "
                                     )
                                   ]
                                 )
@@ -39777,7 +39779,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { id: "subtitleLabel", for: "subtitle" } }, [
-      _vm._v("Add New Subtitles\n                                        "),
+      _vm._v("Add New Subtitles\r\n                                        "),
       _c("br"),
       _vm._v(" "),
       _c("small", [
@@ -44507,9 +44509,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                        " +
+                              "\r\n                                        " +
                                 _vm._s(item.ad_name) +
-                                "\n                                    "
+                                "\r\n                                    "
                             )
                           ]
                         )
@@ -44553,9 +44555,9 @@ var render = function() {
                                 { staticClass: "left-text pull-left" },
                                 [
                                   _vm._v(
-                                    "\n                                        " +
+                                    "\r\n                                        " +
                                       _vm._s(item.ad_name) +
-                                      "\n                                    "
+                                      "\r\n                                    "
                                   )
                                 ]
                               ),
@@ -44565,9 +44567,9 @@ var render = function() {
                                 { staticClass: "right-text float-right" },
                                 [
                                   _vm._v(
-                                    "\n                                        " +
+                                    "\r\n                                        " +
                                       _vm._s(item.client) +
-                                      "\n                                    "
+                                      "\r\n                                    "
                                   )
                                 ]
                               )
@@ -44613,7 +44615,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "Duplicate\n                                    "
+                                      "Duplicate\r\n                                    "
                                     )
                                   ]
                                 )
@@ -45093,9 +45095,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                        " +
+                              "\r\n                                        " +
                                 _vm._s(item.ad_name) +
-                                "\n                                    "
+                                "\r\n                                    "
                             )
                           ]
                         )
@@ -45139,9 +45141,9 @@ var render = function() {
                                 { staticClass: "left-text pull-left" },
                                 [
                                   _vm._v(
-                                    "\n                                        " +
+                                    "\r\n                                        " +
                                       _vm._s(item.ad_name) +
-                                      "\n                                    "
+                                      "\r\n                                    "
                                   )
                                 ]
                               ),
@@ -45151,9 +45153,9 @@ var render = function() {
                                 { staticClass: "right-text float-right" },
                                 [
                                   _vm._v(
-                                    "\n                                        " +
+                                    "\r\n                                        " +
                                       _vm._s(item.client) +
-                                      "\n                                    "
+                                      "\r\n                                    "
                                   )
                                 ]
                               )
@@ -45199,7 +45201,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "Duplicate\n                                    "
+                                      "Duplicate\r\n                                    "
                                     )
                                   ]
                                 )
@@ -45821,7 +45823,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Manage\n                    ")]
+                    [_vm._v("Manage\r\n                    ")]
                   )
                 ],
                 1
@@ -45843,7 +45845,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Episode API\n                    ")]
+                    [_vm._v("Episode API\r\n                    ")]
                   )
                 ],
                 1
@@ -45867,7 +45869,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        Episode custom\n                    "
+                        "\r\n                        Episode custom\r\n                    "
                       )
                     ]
                   )
@@ -46303,9 +46305,9 @@ var render = function() {
                           { key: index, domProps: { value: item.id } },
                           [
                             _vm._v(
-                              "\n                                        " +
+                              "\r\n                                        " +
                                 _vm._s(item.name) +
-                                "\n                                    "
+                                "\r\n                                    "
                             )
                           ]
                         )
@@ -46387,7 +46389,7 @@ var render = function() {
                       [
                         _vm._v(
                           _vm._s(_vm.errors.first("overview")) +
-                            "\n                            "
+                            "\r\n                            "
                         )
                       ]
                     )
@@ -46802,7 +46804,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { id: "posterLabel", for: "poster" } }, [
-      _vm._v("Choose a poster\n                                    "),
+      _vm._v("Choose a poster\r\n                                    "),
       _c("br")
     ])
   },
@@ -46819,7 +46821,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { id: "backdropLabel", for: "backdrop" } }, [
-      _vm._v("Choose a backdrop\n                                    "),
+      _vm._v("Choose a backdrop\r\n                                    "),
       _c("br")
     ])
   },
@@ -47224,9 +47226,9 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                           " +
+                    "\r\n                           " +
                       _vm._s(_vm.analysis_date) +
-                      "\n            "
+                      "\r\n            "
                   )
                 ]
               ),
@@ -49505,7 +49507,7 @@ var render = function() {
                                           _vm._v(
                                             " " +
                                               _vm._s(item.id) +
-                                              "\n                                            "
+                                              "\r\n                                            "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -49514,7 +49516,7 @@ var render = function() {
                                           _vm._v(
                                             " " +
                                               _vm._s(item.m_name) +
-                                              "\n                                            "
+                                              "\r\n                                            "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -49565,7 +49567,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Show\n                                            "
+                                                "Show\r\n                                            "
                                               )
                                             ]
                                           ),
@@ -49587,7 +49589,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Delete\n                                            "
+                                                "Delete\r\n                                            "
                                               )
                                             ]
                                           )
@@ -49642,7 +49644,7 @@ var render = function() {
                                           _vm._v(
                                             " " +
                                               _vm._s(item.id) +
-                                              "\n                                                "
+                                              "\r\n                                                "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -49651,7 +49653,7 @@ var render = function() {
                                           _vm._v(
                                             " " +
                                               _vm._s(item.t_name) +
-                                              "\n                                                "
+                                              "\r\n                                                "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -49705,7 +49707,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Show\n                                                "
+                                                "Show\r\n                                                "
                                               )
                                             ]
                                           ),
@@ -49727,7 +49729,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Delete\n                                            "
+                                                "Delete\r\n                                            "
                                               )
                                             ]
                                           )
@@ -50228,7 +50230,7 @@ var render = function() {
                                 _vm._v(
                                   " " +
                                     _vm._s(_vm.report_item.username) +
-                                    "\n                            "
+                                    "\r\n                            "
                                 )
                               ]),
                               _vm._v(" "),
@@ -50277,7 +50279,7 @@ var render = function() {
                                 _vm._v(
                                   " " +
                                     _vm._s(_vm.report_item.name) +
-                                    "\n                            "
+                                    "\r\n                            "
                                 )
                               ]),
                               _vm._v(" "),
@@ -50288,7 +50290,7 @@ var render = function() {
                                 _vm._v(
                                   " " +
                                     _vm._s(_vm.report_item.report_details) +
-                                    "\n                            "
+                                    "\r\n                            "
                                 )
                               ])
                             ])
@@ -50836,7 +50838,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            Profile\n                        "
+                          "\r\n                            Profile\r\n                        "
                         )
                       ]
                     ),
@@ -50849,7 +50851,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            Security\n                        "
+                          "\r\n                            Security\r\n                        "
                         )
                       ]
                     )
@@ -50985,7 +50987,7 @@ var render = function() {
                           [
                             _vm._v(
                               _vm._s(_vm.errors.first("name")) +
-                                "\n                                "
+                                "\r\n                                "
                             )
                           ]
                         )
@@ -51050,7 +51052,7 @@ var render = function() {
                           [
                             _vm._v(
                               _vm._s(_vm.errors.first("email")) +
-                                "\n                                "
+                                "\r\n                                "
                             )
                           ]
                         )
@@ -51071,7 +51073,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "Update\n                                    "
+                              "Update\r\n                                    "
                             )
                           ]
                         )
@@ -51296,7 +51298,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                            Profile\n                        "
+                      "\r\n                            Profile\r\n                        "
                     )
                   ]
                 ),
@@ -51309,7 +51311,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                            Security\n                        "
+                      "\r\n                            Security\r\n                        "
                     )
                   ]
                 )
@@ -51979,7 +51981,7 @@ var render = function() {
                                     ? _c("h6", [
                                         _vm._v(
                                           _vm._s(_vm.invoices.name) +
-                                            " for\n                                                $" +
+                                            " for\r\n                                                $" +
                                             _vm._s(_vm.invoices.amount) +
                                             "/mo"
                                         )
@@ -51991,7 +51993,7 @@ var render = function() {
                                         _vm._v(
                                           " " +
                                             _vm._s(_vm.invoices.name) +
-                                            " for\n                                                $" +
+                                            " for\r\n                                                $" +
                                             _vm._s(_vm.invoices.amount) +
                                             "/y"
                                         )
@@ -52048,7 +52050,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Close\n                            ")]
+                          [_vm._v("Close\r\n                            ")]
                         )
                       ])
                     ])
@@ -52088,9 +52090,9 @@ var render = function() {
                                     _vm._v(" "),
                                     _c("td", [
                                       _vm._v(
-                                        "\n                                            " +
+                                        "\r\n                                            " +
                                           _vm._s(item.email) +
-                                          "\n                                        "
+                                          "\r\n                                        "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -52153,7 +52155,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Edit\n                                                "
+                                                "Edit\r\n                                                "
                                               )
                                             ]
                                           ),
@@ -52174,7 +52176,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Delete\n                                        "
+                                                "Delete\r\n                                        "
                                               )
                                             ]
                                           ),
@@ -52201,7 +52203,7 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "Billing\n                                        "
+                                                    "Billing\r\n                                        "
                                                   )
                                                 ]
                                               )
@@ -52246,9 +52248,9 @@ var render = function() {
                                     _vm._v(" "),
                                     _c("td", [
                                       _vm._v(
-                                        "\n                                            " +
+                                        "\r\n                                            " +
                                           _vm._s(item.email) +
-                                          "\n                                        "
+                                          "\r\n                                        "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -52328,7 +52330,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Edit\n                                                "
+                                                "Edit\r\n                                                "
                                               )
                                             ]
                                           ),
@@ -52350,7 +52352,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Delete\n                                        "
+                                                "Delete\r\n                                        "
                                               )
                                             ]
                                           ),
@@ -52377,7 +52379,7 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "Billing\n                                        "
+                                                    "Billing\r\n                                        "
                                                   )
                                                 ]
                                               )
@@ -52400,7 +52402,7 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "Billing\n                                        "
+                                                    "Billing\r\n                                        "
                                                   )
                                                 ]
                                               )
@@ -56142,7 +56144,7 @@ var render = function() {
     !_vm.spinner_loading
       ? _c("div", { staticClass: "k1_manage_table" }, [
           _c("div", { staticClass: "title p-2" }, [
-            _vm._v("\n            Administrator Users\n        ")
+            _vm._v("\r\n            Administrator Users\r\n        ")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-12 my-3 p-2" }, [
@@ -56202,9 +56204,9 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(
-                                "\n                                " +
+                                "\r\n                                " +
                                   _vm._s(item.email) +
-                                  "\n                            "
+                                  "\r\n                            "
                               )
                             ]),
                             _vm._v(" "),
@@ -56280,7 +56282,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                        Delete\n                                    "
+                                        "\r\n                                        Delete\r\n                                    "
                                       )
                                     ]
                                   )
@@ -56557,7 +56559,7 @@ var render = function() {
     !_vm.spinner_loading
       ? _c("div", { staticClass: "k1_manage_table" }, [
           _c("div", { staticClass: "title p-2" }, [
-            _vm._v("\n            Edit\n        ")
+            _vm._v("\r\n            Edit\r\n        ")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "container my-5" }, [
@@ -56682,7 +56684,7 @@ var render = function() {
                         [
                           _vm._v(
                             _vm._s(_vm.errors.first("name")) +
-                              "\n                            "
+                              "\r\n                            "
                           )
                         ]
                       )
@@ -56751,7 +56753,7 @@ var render = function() {
                         [
                           _vm._v(
                             _vm._s(_vm.errors.first("email")) +
-                              "\n                            "
+                              "\r\n                            "
                           )
                         ]
                       )
@@ -56865,7 +56867,7 @@ var render = function() {
                           staticClass: "btn btn-md btn-warning",
                           on: { click: _vm.UPDATE_DETAILS }
                         },
-                        [_vm._v("Update\n                            ")]
+                        [_vm._v("Update\r\n                            ")]
                       )
                     ])
                   ])
@@ -57091,7 +57093,7 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "k1_manage_table" }, [
       _c("div", { staticClass: "title p-2" }, [
-        _vm._v("\n            Create\n        ")
+        _vm._v("\r\n            Create\r\n        ")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
@@ -57176,7 +57178,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(_vm.errors.first("name")) + "\n              "
+                        _vm._s(_vm.errors.first("name")) + "\r\n              "
                       )
                     ]
                   )
@@ -57240,7 +57242,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(_vm.errors.first("email")) + "\n              "
+                        _vm._s(_vm.errors.first("email")) + "\r\n              "
                       )
                     ]
                   )
@@ -57305,7 +57307,7 @@ var render = function() {
                     [
                       _vm._v(
                         _vm._s(_vm.errors.first("password-field")) +
-                          "\n              "
+                          "\r\n              "
                       )
                     ]
                   )
@@ -57370,7 +57372,7 @@ var render = function() {
                     [
                       _vm._v(
                         _vm._s(_vm.errors.first("confirm-field")) +
-                          "\n              "
+                          "\r\n              "
                       )
                     ]
                   )
@@ -57445,7 +57447,7 @@ var render = function() {
                     [
                       _vm._v(
                         _vm._s(_vm.errors.first("permission")) +
-                          "\n              "
+                          "\r\n              "
                       )
                     ]
                   )
@@ -57460,7 +57462,7 @@ var render = function() {
                       staticClass: "btn btn-md btn-warning",
                       on: { click: _vm.CREATE }
                     },
-                    [_vm._v("Create\n              ")]
+                    [_vm._v("Create\r\n              ")]
                   )
                 ])
               ])
@@ -66057,7 +66059,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Delete\n                                    "
+                                      "\r\n                                        Delete\r\n                                    "
                                     )
                                   ]
                                 )

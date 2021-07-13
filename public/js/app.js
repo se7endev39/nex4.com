@@ -51792,6 +51792,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -51985,6 +52023,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "register" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
     _vm.show
       ? _c("div", [
           _c("div", { staticClass: "float-right" }, [
@@ -51992,11 +52034,11 @@ var render = function() {
               "h2",
               {
                 staticStyle: {
-                  color: "#F44336",
+                  color: "#FFFF",
                   cursor: "pointer",
                   position: "fixed",
-                  top: "0",
-                  right: "10px",
+                  top: "5rem",
+                  right: "3rem",
                   "z-index": "2"
                 },
                 on: {
@@ -52009,7 +52051,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-12 payment" }, [
+          _c("div", { staticClass: "col-12 payment login" }, [
             _c(
               "div",
               {
@@ -52020,7 +52062,7 @@ var render = function() {
                 _c("div", { staticClass: "col-8 offset-2" }, [
                   _c("div", { staticClass: "steps hidden-xs-down" }, [
                     _c("div", { staticClass: "step-1" }, [
-                      _vm._m(0),
+                      _vm._m(2),
                       _vm._v(" "),
                       _c("strong", [
                         _vm._v(_vm._s(_vm.$t("register.choose_plan")))
@@ -52055,7 +52097,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "step-2" }, [
-                      _vm._m(1),
+                      _vm._m(3),
                       _vm._v(" "),
                       _c("strong", [
                         _vm._v(_vm._s(_vm.$t("register.signup")) + " ")
@@ -52090,174 +52132,252 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "step-3" }, [
-                      _vm._m(2),
+                      _vm._m(4),
                       _vm._v(" "),
                       _c("strong", [_vm._v(_vm._s(_vm.$t("register.payment")))])
                     ])
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "title mt-sm-5" }, [
-                  _c("h3", [_vm._v(_vm._s(_vm.$t("register.payment_message")))])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "mb-5" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-sm btn-secondary",
-                      on: {
-                        click: function($event) {
-                          _vm.show_plan = !_vm.show_plan
-                        }
-                      }
-                    },
-                    [_vm._v("Change Plan")]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-danger mt-2" }, [
-                    _vm._v(_vm._s(_vm.plan_message))
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("transition", { attrs: { name: "fade" } }, [
-                  _vm.show_plan
-                    ? _c(
-                        "div",
-                        { staticClass: "plan-form payment-plan-form " },
-                        [
-                          _c("h3", [_vm._v("Change plan")]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-lg-12 text-center" }, [
-                            _c(
-                              "div",
-                              { staticClass: "row m-2" },
-                              _vm._l(_vm.planList, function(item, index) {
-                                return _c(
-                                  "div",
-                                  {
-                                    key: index,
-                                    staticClass:
-                                      "col-12 col-sm-6 col mt-3 text-center",
-                                    on: {
-                                      click: function($event) {
-                                        _vm.plan = item.plan_id
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "card-plan",
-                                        class: {
-                                          active_plan: _vm.plan === item.plan_id
-                                        }
-                                      },
-                                      [
-                                        _c("h3", [
-                                          _vm._v(_vm._s(item.plan_name))
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("h1", [
-                                          _vm._v(
-                                            "$" +
-                                              _vm._s(item.plan_amount) +
-                                              "\n                                            "
-                                          ),
-                                          _c("small", [_vm._v("/mo")])
-                                        ]),
-                                        _vm._v(" "),
-                                        item.plan_trial !== null
-                                          ? _c("i", [
-                                              _vm._v(
-                                                _vm._s(item.plan_trial) +
-                                                  " " +
-                                                  _vm._s(
-                                                    _vm.$t("register.day_free")
-                                                  )
-                                              )
-                                            ])
-                                          : _vm._e()
-                                      ]
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("hr")
-                        ]
-                      )
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: " col-lg-10 offset-lg-1 " }, [
-                  _vm._m(3),
-                  _vm._v(" "),
-                  _c("small", [
-                    _vm._v(_vm._s(_vm.$t("register.cancel_anytime")))
-                  ]),
-                  _vm._v(" "),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("small", { staticClass: "text-danger" }, [
-                    _vm._v(_vm._s(_vm.error))
-                  ]),
-                  _vm._v(" "),
-                  _c("br"),
+                _c("div", { staticClass: "login-box plane-box row" }, [
+                  _c("div", { staticClass: "plan-image" }),
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "col-12 col-xl-6 offset-xl-3 mt-5" },
+                    { staticClass: "login-form plane-form" },
                     [
-                      _c(
-                        "button",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value:
-                                !_vm.button_loading && !_vm.button_disabled,
-                              expression: "!button_loading && !button_disabled"
-                            }
+                      _c("div", { staticClass: "header row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "left_homepage row" },
+                          [
+                            _c(
+                              "router-link",
+                              { attrs: { to: { name: "discover" } } },
+                              [
+                                _c("div", { staticClass: "row" }, [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "/images/home.png",
+                                      width: "25px",
+                                      height: "25px",
+                                      alt: "logo"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("p", [_vm._v("Homepage")])
+                                ])
+                              ]
+                            )
                           ],
-                          ref: "submit",
-                          staticClass: "btn btn-warning mt-4 pay-with-stripe"
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(_vm.$t("register.start_membership")) +
-                              "\n                        "
-                          )
-                        ]
-                      ),
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "right_homepage row" },
+                          [
+                            !_vm.$Helper.getIntGatewayStatus("int_gateway")
+                              ? _c(
+                                  "router-link",
+                                  { attrs: { to: { name: "login" } } },
+                                  [
+                                    _c("div", { staticClass: "row" }, [
+                                      _c("p", [_vm._v("Login")]),
+                                      _vm._v(" "),
+                                      _c("img", {
+                                        attrs: {
+                                          src: "/images/arrow.png",
+                                          width: "25px",
+                                          height: "25px",
+                                          alt: "logo"
+                                        }
+                                      })
+                                    ])
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.$Helper.getIntGatewayStatus("int_gateway")
+                              ? _c(
+                                  "router-link",
+                                  {
+                                    attrs: {
+                                      to: { name: "signup-non-payment" }
+                                    }
+                                  },
+                                  [
+                                    _c("div", { staticClass: "row" }, [
+                                      _c("p", [_vm._v("Login")]),
+                                      _vm._v(" "),
+                                      _c("img", {
+                                        attrs: {
+                                          src: "/images/arrow.png",
+                                          width: "25px",
+                                          height: "25px",
+                                          alt: "logo"
+                                        }
+                                      })
+                                    ])
+                                  ]
+                                )
+                              : _vm._e()
+                          ],
+                          1
+                        )
+                      ]),
                       _vm._v(" "),
-                      _vm.button_loading
-                        ? _c(
+                      _c("transition", { attrs: { name: "fade" } }, [
+                        _vm.show_plan
+                          ? _c(
+                              "div",
+                              { staticClass: "plan-form payment-plan-form " },
+                              [
+                                _c("h3", [_vm._v("Change plan")]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-lg-12 text-center" },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "row m-2" },
+                                      _vm._l(_vm.planList, function(
+                                        item,
+                                        index
+                                      ) {
+                                        return _c(
+                                          "div",
+                                          {
+                                            key: index,
+                                            staticClass:
+                                              "col-12 col-sm-6 col mt-3 text-center",
+                                            on: {
+                                              click: function($event) {
+                                                _vm.plan = item.plan_id
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass: "card-plan",
+                                                class: {
+                                                  active_plan:
+                                                    _vm.plan === item.plan_id
+                                                }
+                                              },
+                                              [
+                                                _c("h3", [
+                                                  _vm._v(_vm._s(item.plan_name))
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("h1", [
+                                                  _vm._v(
+                                                    "$" +
+                                                      _vm._s(item.plan_amount) +
+                                                      "\n                                                    "
+                                                  ),
+                                                  _c("small", [_vm._v("/mo")])
+                                                ]),
+                                                _vm._v(" "),
+                                                item.plan_trial !== null
+                                                  ? _c("i", [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          item.plan_trial
+                                                        ) +
+                                                          " " +
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "register.day_free"
+                                                            )
+                                                          )
+                                                      )
+                                                    ])
+                                                  : _vm._e()
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      }),
+                                      0
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("hr")
+                              ]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: " col-lg-10 offset-lg-1 " }, [
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _c("small", [
+                          _vm._v(_vm._s(_vm.$t("register.cancel_anytime")))
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("small", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.error))
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 col-xl-12 mt-5" }, [
+                          _c(
                             "button",
                             {
-                              staticClass: "btn btn-warning",
-                              attrs: { disabled: "" }
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value:
+                                    !_vm.button_loading && !_vm.button_disabled,
+                                  expression:
+                                    "!button_loading && !button_disabled"
+                                }
+                              ],
+                              ref: "submit",
+                              staticClass:
+                                "btn btn-warning mt-4 pay-with-stripe"
                             },
                             [
-                              _c("i", { attrs: { id: "btn-progress" } }),
                               _vm._v(
-                                " " +
-                                  _vm._s(_vm.$t("register.loading")) +
-                                  "\n                        "
+                                _vm._s(_vm.$t("register.start_membership")) +
+                                  "\n                                "
                               )
                             ]
-                          )
-                        : _vm._e()
-                    ]
+                          ),
+                          _vm._v(" "),
+                          _vm.button_loading
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-warning",
+                                  attrs: { disabled: "" }
+                                },
+                                [
+                                  _c("i", { attrs: { id: "btn-progress" } }),
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(_vm.$t("register.loading")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ])
+                      ])
+                    ],
+                    1
                   )
                 ])
-              ],
-              1
+              ]
             )
           ])
         ])
@@ -52346,6 +52466,24 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "background-image" }, [
+      _c("div", { staticClass: "background-color" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "background-logo" }, [
+      _c("img", {
+        attrs: { src: "/images/logo.png", alt: "logo", width: "100%" }
+      })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -52898,7 +53036,7 @@ var render = function() {
                   [
                     _vm._v(
                       _vm._s(_vm.$t("register.agree_role")) +
-                        "\n                                "
+                        "\r\n                                "
                     ),
                     _c(
                       "router-link",
@@ -52908,14 +53046,14 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "Terms Of Service\n                                "
+                          "Terms Of Service\r\n                                "
                         )
                       ]
                     ),
                     _vm._v(
-                      "\n                                " +
+                      "\r\n                                " +
                         _vm._s(_vm.$t("register.and")) +
-                        "\n                                "
+                        "\r\n                                "
                     ),
                     _c(
                       "router-link",
@@ -52925,7 +53063,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "Privacy Policy\n                                "
+                          "Privacy Policy\r\n                                "
                         )
                       ]
                     )
@@ -52958,9 +53096,9 @@ var render = function() {
                       [
                         _c("i", { attrs: { id: "btn-progress" } }),
                         _vm._v(
-                          "\n                                    " +
+                          "\r\n                                    " +
                             _vm._s(_vm.$t("register.loading")) +
-                            "\n                                "
+                            "\r\n                                "
                         )
                       ]
                     )
@@ -53092,7 +53230,7 @@ exports = module.exports = __webpack_require__(9)(false);
 
 
 // module
-exports.push([module.i, "\n.not-found {\n    position: absolute;\n    top: 25%;\n    left: 50%;\n    -webkit-transform: translate(-50%);\n    transform: translate(-50%);\n}\n.not-found  h1 {\n    font-size: 25vh;\n    font-weight: bold;\n}\n.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary.active {\n    color: #fff;\n    background-color: #03A9F4;\n    background-image: none;\n    border-color: #03A9F4;\n}\n", ""]);
+exports.push([module.i, "\n.not-found {\r\n    position: absolute;\r\n    top: 25%;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%);\r\n    transform: translate(-50%);\n}\n.not-found  h1 {\r\n    font-size: 25vh;\r\n    font-weight: bold;\n}\n.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary.active {\r\n    color: #fff;\r\n    background-color: #03A9F4;\r\n    background-image: none;\r\n    border-color: #03A9F4;\n}\r\n", ""]);
 
 // exports
 
@@ -54456,9 +54594,9 @@ var render = function() {
                         staticClass: "list-carousel",
                         attrs: {
                           navigationPrevLabel:
-                            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-right-svg"><g><g>\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\n                                                          </g></g> </svg>',
+                            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-right-svg"><g><g>\r\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\r\n                                                          </g></g> </svg>',
                           navigationNextLabel:
-                            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-left-svg"><g transform="matrix(-1 1.22465e-16 -1.22465e-16 -1 129 129)"><g>\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\n                                                          </g></g> </svg>',
+                            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-left-svg"><g transform="matrix(-1 1.22465e-16 -1.22465e-16 -1 129 129)"><g>\r\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\r\n                                                          </g></g> </svg>',
                           navigationEnabled: true,
                           paginationEnabled: false,
                           autoplay: true,
@@ -54624,13 +54762,13 @@ var render = function() {
                                                         },
                                                         [
                                                           _vm._v(
-                                                            "\n                                                    " +
+                                                            "\r\n                                                    " +
                                                               _vm._s(
                                                                 _vm.$t(
                                                                   "home.play"
                                                                 )
                                                               ) +
-                                                              "\n\n                                                    "
+                                                              "\r\n\r\n                                                    "
                                                           ),
                                                           _c(
                                                             "svg",
@@ -54703,13 +54841,13 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "\n                                                    " +
+                                                                "\r\n                                                    " +
                                                                   _vm._s(
                                                                     _vm.$t(
                                                                       "home.my_list"
                                                                     )
                                                                   ) +
-                                                                  "\n\n                                                    "
+                                                                  "\r\n\r\n                                                    "
                                                               ),
                                                               _c(
                                                                 "svg",
@@ -54782,13 +54920,13 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "\n                                                    " +
+                                                                "\r\n                                                    " +
                                                                   _vm._s(
                                                                     _vm.$t(
                                                                       "home.my_list"
                                                                     )
                                                                   ) +
-                                                                  "\n\n                                                    "
+                                                                  "\r\n\r\n                                                    "
                                                               ),
                                                               _c(
                                                                 "svg",
@@ -54824,7 +54962,7 @@ var render = function() {
                                                                         {
                                                                           attrs: {
                                                                             d:
-                                                                              "M506.231,75.508c-7.689-7.69-20.158-7.69-27.849,0l-319.21,319.211L33.617,269.163c-7.689-7.691-20.158-7.691-27.849,0\n                                                                                        c-7.69,7.69-7.69,20.158,0,27.849l139.481,139.481c7.687,7.687,20.16,7.689,27.849,0l333.133-333.136\n                                                                                        C513.921,95.666,513.921,83.198,506.231,75.508z",
+                                                                              "M506.231,75.508c-7.689-7.69-20.158-7.69-27.849,0l-319.21,319.211L33.617,269.163c-7.689-7.691-20.158-7.691-27.849,0\r\n                                                                                        c-7.69,7.69-7.69,20.158,0,27.849l139.481,139.481c7.687,7.687,20.16,7.689,27.849,0l333.133-333.136\r\n                                                                                        C513.921,95.666,513.921,83.198,506.231,75.508z",
                                                                             fill:
                                                                               "#ffffff"
                                                                           }
@@ -55002,13 +55140,13 @@ var render = function() {
                                                         },
                                                         [
                                                           _vm._v(
-                                                            "\n                                                    " +
+                                                            "\r\n                                                    " +
                                                               _vm._s(
                                                                 _vm.$t(
                                                                   "home.play"
                                                                 )
                                                               ) +
-                                                              "\n\n                                                    "
+                                                              "\r\n\r\n                                                    "
                                                           ),
                                                           _c(
                                                             "svg",
@@ -55081,13 +55219,13 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "\n                                                    " +
+                                                                "\r\n                                                    " +
                                                                   _vm._s(
                                                                     _vm.$t(
                                                                       "home.my_list"
                                                                     )
                                                                   ) +
-                                                                  "\n\n                                                    "
+                                                                  "\r\n\r\n                                                    "
                                                               ),
                                                               _c(
                                                                 "svg",
@@ -55160,13 +55298,13 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "\n                                                    " +
+                                                                "\r\n                                                    " +
                                                                   _vm._s(
                                                                     _vm.$t(
                                                                       "home.my_list"
                                                                     )
                                                                   ) +
-                                                                  "\n\n                                                    "
+                                                                  "\r\n\r\n                                                    "
                                                               ),
                                                               _c(
                                                                 "svg",
@@ -55202,7 +55340,7 @@ var render = function() {
                                                                         {
                                                                           attrs: {
                                                                             d:
-                                                                              "M506.231,75.508c-7.689-7.69-20.158-7.69-27.849,0l-319.21,319.211L33.617,269.163c-7.689-7.691-20.158-7.691-27.849,0\n                                                                                        c-7.69,7.69-7.69,20.158,0,27.849l139.481,139.481c7.687,7.687,20.16,7.689,27.849,0l333.133-333.136\n                                                                                        C513.921,95.666,513.921,83.198,506.231,75.508z",
+                                                                              "M506.231,75.508c-7.689-7.69-20.158-7.69-27.849,0l-319.21,319.211L33.617,269.163c-7.689-7.691-20.158-7.691-27.849,0\r\n                                                                                        c-7.69,7.69-7.69,20.158,0,27.849l139.481,139.481c7.687,7.687,20.16,7.689,27.849,0l333.133-333.136\r\n                                                                                        C513.921,95.666,513.921,83.198,506.231,75.508z",
                                                                             fill:
                                                                               "#ffffff"
                                                                           }
@@ -55774,9 +55912,9 @@ var render = function() {
                                       ? _c("h3", [
                                           _c("strong", [
                                             _vm._v(
-                                              "\n                                            " +
+                                              "\r\n                                            " +
                                                 _vm._s(item.genre) +
-                                                "\n\n                                            "
+                                                "\r\n\r\n                                            "
                                             ),
                                             _c("hr")
                                           ]),
@@ -55799,7 +55937,7 @@ var render = function() {
                                             _vm._v(
                                               " " +
                                                 _vm._s(item.genre) +
-                                                "\n\n                                            "
+                                                "\r\n\r\n                                            "
                                             ),
                                             _c("hr")
                                           ]),
@@ -55823,9 +55961,9 @@ var render = function() {
                                       staticClass: "list-carousel",
                                       attrs: {
                                         navigationPrevLabel:
-                                          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-right-svg"><g><g>\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\n                                                          </g></g> </svg>',
+                                          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-right-svg"><g><g>\r\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\r\n                                                          </g></g> </svg>',
                                         navigationNextLabel:
-                                          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-left-svg"><g transform="matrix(-1 1.22465e-16 -1.22465e-16 -1 129 129)"><g>\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\n                                                          </g></g> </svg>',
+                                          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-left-svg"><g transform="matrix(-1 1.22465e-16 -1.22465e-16 -1 129 129)"><g>\r\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\r\n                                                          </g></g> </svg>',
                                         navigationEnabled: true,
                                         paginationEnabled: false,
                                         autoplay: false,
@@ -73084,7 +73222,7 @@ var render = function() {
                         ])
                       : _vm._e(),
                     _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "form-group text-center" }, [
                       _c("div", { staticClass: "col-12" }, [
                         _c(
                           "button",
@@ -73507,7 +73645,7 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "form-group text-center" }, [
                 _c("div", { staticClass: "col-12" }, [
                   _c(
                     "button",
@@ -76149,7 +76287,7 @@ exports = module.exports = __webpack_require__(9)(false);
 
 
 // module
-exports.push([module.i, "\n.table-inverse a[data-v-0fb0db7b] {\n    color: #2196F3 !important;\n}\n", ""]);
+exports.push([module.i, "\n.table-inverse a[data-v-0fb0db7b] {\r\n    color: #2196F3 !important;\n}\r\n", ""]);
 
 // exports
 
@@ -84599,24 +84737,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -84643,6 +84763,7 @@ var moment = __webpack_require__(0);
     data: function data() {
         return {
             active: null,
+            show_sidebar: true,
             activeGenre: "all",
             activeTrending: 1,
             trendingList: [{
@@ -85218,65 +85339,299 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      isAuth: null,
-      search_query: "",
-      email_confirmed: false,
-      username: "",
-      active_login: false,
-      active: null,
-      activeMenu: null,
-      activeGenre: 0,
-      activeTrending: 1,
-      show_phone_meuu: false,
-      show_profile_dropdown: ""
-    };
-  },
+    data: function data() {
+        return {
+            isAuth: null,
+            search_query: "",
+            email_confirmed: false,
+            username: "",
+            active_login: false,
+            active: null,
+            activeMenu: null,
+            activeGenre: 0,
+            activeTrending: 1,
+            show_phone_meuu: false,
+            show_profile_dropdown: ""
+        };
+    },
 
-  computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
-    collections: function collections(state) {
-      return state.collections.collections;
-    }
-  }),
-  watch: {
-    search_query: function search_query(val) {
-      if (val !== "") {
-        this.$router.push({
-          name: "search",
-          params: {
-            search: val
-          }
-        });
-      }
-    }
-  },
-  methods: {
-    SORT_BY: function SORT_BY(type, trending, genre) {
-      this.activeGenre = genre;
-      this.activeMenu = this.$route.name;
-      this.$parent.SORT_BY(type, this.$parent.activeTrending, genre);
-    },
-    SHOW_PHONE_MENU: function SHOW_PHONE_MENU() {
-      this.show_phone_meuu = !this.show_phone_meuu;
-    },
-    GO_TO_COLLECTION: function GO_TO_COLLECTION(id) {
-      this.show_phone_meuu = false;
-      this.$router.push({
-        name: "collection",
-        params: {
-          id: id
+    computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+        collections: function collections(state) {
+            return state.collections.collections;
         }
-      });
+    }),
+    watch: {
+        search_query: function search_query(val) {
+            if (val !== "") {
+                this.$router.push({
+                    name: "search",
+                    params: {
+                        search: val
+                    }
+                });
+            }
+        }
     },
-    LOGOUT: function LOGOUT() {
-      this.$store.dispatch("LOGOUT_AUTH");
+    methods: {
+        SORT_BY: function SORT_BY(type, trending, genre) {
+            this.activeGenre = genre;
+            this.activeMenu = this.$route.name;
+            this.$parent.SORT_BY(type, this.$parent.activeTrending, genre);
+        },
+        SHOW_PHONE_MENU: function SHOW_PHONE_MENU() {
+            this.show_phone_meuu = !this.show_phone_meuu;
+        },
+        GO_TO_COLLECTION: function GO_TO_COLLECTION(id) {
+            this.show_phone_meuu = false;
+            this.$router.push({
+                name: "collection",
+                params: {
+                    id: id
+                }
+            });
+        },
+        LOGOUT: function LOGOUT() {
+            this.$store.dispatch("LOGOUT_AUTH");
+        }
     }
-  }
 });
 
 /***/ }),
@@ -85289,7 +85644,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "sidebar" }, [
-      _c("div", { staticClass: "sidebar__log" }),
+      _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "sidebar__list" }, [
         (_vm.$route.name === "profile" ||
@@ -85899,12 +86254,165 @@ var render = function() {
                 ])
               ])
             ])
+          : _vm._e(),
+        _vm._v(" "),
+        (_vm.$route.name === "profile" ||
+        _vm.$route.name === "security" ||
+        _vm.$route.name === "payment-update" ||
+        _vm.$route.name === "billing-details" ||
+        _vm.$route.name === "change-plan" ||
+        _vm.$route.name === "language" ||
+        _vm.$route.name === "adjust-subtitles" ||
+        _vm.$route.name === "viewing-history" ||
+        _vm.$route.name === "support-inbox" ||
+        _vm.$route.name === "support-request" ||
+        _vm.$route.name === "device-activity"
+        ? false
+        : true)
+          ? _c(
+              "ul",
+              { staticClass: "list-unstyled text-center margin-left-3" },
+              [
+                _c(
+                  "li",
+                  { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" },
+                  [
+                    _c("router-link", { attrs: { to: { name: "discover" } } }, [
+                      _c("div", { staticClass: "left_homepage row" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("img", {
+                            attrs: {
+                              src: "/images/home_side.png",
+                              width: "25px",
+                              height: "25px",
+                              alt: "logo"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("On Demand")])
+                        ])
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" },
+                  [
+                    _c("router-link", { attrs: { to: { name: "movies" } } }, [
+                      _c("div", { staticClass: "left_homepage row" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("img", {
+                            attrs: {
+                              src: "/images/film-roll.png",
+                              width: "25px",
+                              height: "25px",
+                              alt: "logo"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Movies")])
+                        ])
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" },
+                  [
+                    _c("router-link", { attrs: { to: { name: "series" } } }, [
+                      _c("div", { staticClass: "left_homepage row" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("img", {
+                            attrs: {
+                              src: "/images/spotlight.png",
+                              width: "25px",
+                              height: "25px",
+                              alt: "logo"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Shows")])
+                        ])
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" },
+                  [
+                    _c("router-link", { attrs: { to: { name: "kids" } } }, [
+                      _c("div", { staticClass: "left_homepage row" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("img", {
+                            attrs: {
+                              src: "/images/clown.png",
+                              width: "25px",
+                              height: "25px",
+                              alt: "logo"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Kids")])
+                        ])
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" },
+                  [
+                    _c("router-link", { attrs: { to: { name: "channels" } } }, [
+                      _c("div", { staticClass: "left_homepage row" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("img", {
+                            attrs: {
+                              src: "/images/tv.png",
+                              width: "25px",
+                              height: "25px",
+                              alt: "logo"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Live TV")])
+                        ])
+                      ])
+                    ])
+                  ],
+                  1
+                )
+              ]
+            )
           : _vm._e()
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "sidebar__log" }, [
+      _c("div", { staticClass: "background-logo" }, [
+        _c("img", {
+          attrs: { src: "/images/logo.png", alt: "logo", width: "100%" }
+        })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -87717,141 +88225,10 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "offset-xl-1 collapse navbar-collapse ",
-                attrs: { id: "navbarTogglerDemo02" }
-              },
-              [
-                _c("ul", { staticClass: "navbar-nav mr-auto mt-2 mt-md-0" }, [
-                  _c(
-                    "li",
-                    { staticClass: "nav-item" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { to: { name: "discover" } }
-                        },
-                        [_vm._v(_vm._s(_vm.$t("home.home")))]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    { staticClass: "nav-item" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { to: { name: "movies" } }
-                        },
-                        [_vm._v(_vm._s(_vm.$t("home.movies")))]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    { staticClass: "nav-item" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { to: { name: "series" } }
-                        },
-                        [_vm._v(_vm._s(_vm.$t("home.series")))]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    { staticClass: "nav-item" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { to: { name: "kids" } }
-                        },
-                        [_vm._v(_vm._s(_vm.$t("home.kids")))]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    { staticClass: "nav-item" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { to: { name: "channels" } }
-                        },
-                        [_vm._v(_vm._s(_vm.$t("home.tv")) + " ")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _vm.collections.length > 0
-                    ? _c("li", { staticClass: "nav-item" }, [
-                        _c("div", { staticClass: "dropdown" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "nav-link",
-                              attrs: {
-                                id: "dropdownCollection",
-                                "data-toggle": "dropdown",
-                                "aria-haspopup": "true",
-                                "aria-expanded": "false"
-                              }
-                            },
-                            [_vm._v(_vm._s(_vm.$t("home.collection")))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "dropdown-menu dropdown-menu-right",
-                              attrs: { "aria-labelledby": "dropdownCollection" }
-                            },
-                            _vm._l(_vm.collections, function(item, index) {
-                              return _c(
-                                "router-link",
-                                {
-                                  key: index,
-                                  staticClass: "dropdown-item",
-                                  attrs: {
-                                    to: {
-                                      name: "collection",
-                                      params: { id: item.id }
-                                    }
-                                  }
-                                },
-                                [_vm._v(_vm._s(item.name))]
-                              )
-                            }),
-                            1
-                          )
-                        ])
-                      ])
-                    : _vm._e()
-                ])
-              ]
-            ),
+            _c("div", {
+              staticClass: "offset-xl-1 collapse navbar-collapse ",
+              attrs: { id: "navbarTogglerDemo02" }
+            }),
             _vm._v(" "),
             _c("div", { staticClass: "right-side" }, [
               _c("div", { staticClass: "register" }, [
@@ -89322,39 +89699,36 @@ var render = function() {
         ? _c("message", { attrs: { message: _vm.message_alert } })
         : _vm._e(),
       _vm._v(" "),
-      (_vm.$route.name === "discover" ||
-      _vm.$route.name === "series" ||
-      _vm.$route.name === "collection" ||
-      _vm.$route.name === "kids" ||
-      _vm.$route.name === "movies" ||
-      _vm.$route.name === "series-player" ||
-      _vm.$route.name === "movie-player" ||
-      _vm.$route.name === "tv-player" ||
-      _vm.$route.name === "series-player-sp" ||
-      _vm.$route.name === "channels"
-      ? true
-      : false)
-        ? _c("navbar")
-        : _vm._e(),
+      _c("navbar"),
       _vm._v(" "),
       _c("div", { staticClass: "col-12 grid" }, [
         _c(
           "div",
           { staticClass: "row" },
           [
-            (_vm.$route.name === "profile" ||
-            _vm.$route.name === "security" ||
-            _vm.$route.name === "payment-update" ||
-            _vm.$route.name === "billing-details" ||
-            _vm.$route.name === "change-plan" ||
-            _vm.$route.name === "language" ||
-            _vm.$route.name === "adjust-subtitles" ||
-            _vm.$route.name === "viewing-history" ||
-            _vm.$route.name === "support-inbox" ||
-            _vm.$route.name === "support-request" ||
-            _vm.$route.name === "device-activity"
-            ? true
-            : false)
+            _c(
+              "div",
+              {
+                staticClass: "hide_show_sidebar",
+                on: {
+                  click: function($event) {
+                    _vm.show_sidebar = !_vm.show_sidebar
+                  }
+                }
+              },
+              [
+                _c("img", {
+                  staticStyle: { "margin-top": "30px", "margin-left": "25px" },
+                  attrs: {
+                    src: "/images/menu-options.svg",
+                    alt: "actor",
+                    width: "25"
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _vm.show_sidebar
               ? _c("sidebar", {
                   staticClass: "col-1 hidden-sm-down sidebar-content"
                 })

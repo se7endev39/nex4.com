@@ -431,7 +431,7 @@
                 </router-link>
 
                 <div class="offset-xl-1 collapse navbar-collapse " id="navbarTogglerDemo02">
-                    <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+                    <!-- <ul class="navbar-nav mr-auto mt-2 mt-md-0">
                         <li class="nav-item">
                             <router-link class="nav-link" :to="{name: 'discover'}">{{$t('home.home')}}</router-link>
                         </li>
@@ -460,7 +460,7 @@
 
                         </li>
 
-                    </ul>
+                    </ul> -->
                 </div>
 
 

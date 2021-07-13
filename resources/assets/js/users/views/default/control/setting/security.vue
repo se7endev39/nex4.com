@@ -49,7 +49,7 @@
                             <span class="text-success">{{$t('setting.successful_update')}}</span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <div class="col-12">
                             <button class="btn btn-warning" @click="CHANGE_PASSWORD">{{$t('setting.update')}}</button>
                         </div>

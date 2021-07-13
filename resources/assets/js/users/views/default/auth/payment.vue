@@ -1,15 +1,22 @@
 <template>
     <div class="register">
+        <div class="background-image">
+            <div class="background-color"></div>
+        </div>
+
+        <div class="background-logo">
+            <img src="/images/logo.png" alt="logo" width="100%">
+        </div>
         <div v-if="show">
             <div class="float-right">
-                <h2 style="color:#F44336; cursor:pointer; position:fixed; top:0; right:10px; z-index:2;"
+                <h2 style="color:#FFFF; cursor:pointer; position:fixed; top:5rem; right:3rem; z-index:2;"
                     @click="$auth.destroyToken()">
                     <strong>{{$t('nav.logout')}}</strong>
                 </h2>
             </div>
 
 
-            <div class="col-12 payment">
+            <div class="col-12 payment login">
                 <div class="col-12 col-md-8 col-lg-8 offset-md-2 p-4 payment-form">
                     <div class="col-8 offset-2">
                         <div class="steps hidden-xs-down">
@@ -47,59 +54,90 @@
                             </div>
                         </div>
                     </div>
-                    <div class="title mt-sm-5">
-                        <h3>{{$t('register.payment_message')}}</h3>
-                    </div>
+                    <div class="login-box plane-box row">
+                        <div class="plan-image">
 
-                    <div class="mb-5">
-                        <button class="btn btn-sm btn-secondary" @click="show_plan = !show_plan">Change Plan</button>
-                        <p class="text-danger mt-2">{{plan_message}}</p>
-                    </div>
-
-                    <transition name="fade">
-                        <div class="plan-form payment-plan-form " v-if="show_plan">
-                            <h3>Change plan</h3>
-                            <div class="col-lg-12 text-center">
-                                <div class="row m-2">
-                                    <div class="col-12 col-sm-6 col mt-3 text-center" v-for="(item, index) in planList"
-                                         :key="index" @click="plan = item.plan_id">
-                                        <div class="card-plan" :class="{active_plan: plan === item.plan_id}">
-                                            <h3>{{item.plan_name}}</h3>
-                                            <h1>${{item.plan_amount}}
-                                                <small>/mo</small>
-                                            </h1>
-                                            <i v-if="item.plan_trial !== null">{{item.plan_trial}} {{$t('register.day_free')}}</i>
+                        </div>
+                        <div class="login-form plane-form">
+                            <div class="header row">
+                                <div class="left_homepage row">
+                                    <router-link :to="{name: 'discover'}">
+                                        <div class="row">
+                                            <img src="/images/home.png" width="25px" height="25px" alt="logo">
+                                            <p>Homepage</p>
                                         </div>
-                                    </div>
+                                    </router-link>
+                                </div>
+                                <div class="right_homepage row">
+                                    <router-link :to="{name: 'login'}" v-if="!$Helper.getIntGatewayStatus('int_gateway')">
+                                        <div class="row">
+                                            <p>Login</p>
+                                            <img src="/images/arrow.png" width="25px" height="25px" alt="logo">
+                                        </div>
+                                    </router-link>
+                                    <router-link :to="{name: 'signup-non-payment'}" v-if="$Helper.getIntGatewayStatus('int_gateway')">
+                                        <div class="row">
+                                            <p>Login</p>
+                                            <img src="/images/arrow.png" width="25px" height="25px" alt="logo">
+                                        </div>
+                                    </router-link>
                                 </div>
                             </div>
+                            <!-- <div class="title mt-sm-5">
+                                <h3>{{$t('register.payment_message')}}</h3>
+                            </div>
 
-                            <hr>
+                            <div class="mb-5">
+                                <button class="btn btn-sm btn-secondary" @click="show_plan = !show_plan">Change Plan</button>
+                                <p class="text-danger mt-2">{{plan_message}}</p>
+                            </div> -->
+
+                            <transition name="fade">
+                                <div class="plan-form payment-plan-form " v-if="show_plan">
+                                    <h3>Change plan</h3>
+                                    <div class="col-lg-12 text-center">
+                                        <div class="row m-2">
+                                            <div class="col-12 col-sm-6 col mt-3 text-center" v-for="(item, index) in planList"
+                                                :key="index" @click="plan = item.plan_id">
+                                                <div class="card-plan" :class="{active_plan: plan === item.plan_id}">
+                                                    <h3>{{item.plan_name}}</h3>
+                                                    <h1>${{item.plan_amount}}
+                                                        <small>/mo</small>
+                                                    </h1>
+                                                    <i v-if="item.plan_trial !== null">{{item.plan_trial}} {{$t('register.day_free')}}</i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                </div>
+                            </transition>
+
+
+                            <div class=" col-lg-10 offset-lg-1 ">
+
+                                <div id="dropin-wrapper">
+                                    <div id="checkout-message"></div>
+                                    <div id="dropin-container"></div>
+                                </div>
+
+                                <small>{{$t('register.cancel_anytime')}}</small>
+                                <br>
+                                <small class="text-danger">{{error}}</small>
+                                <br>
+                                <div class="col-12 col-xl-12 mt-5">
+
+                                    <button v-show="!button_loading && !button_disabled"
+                                            class="btn btn-warning mt-4 pay-with-stripe" ref="submit">{{$t('register.start_membership')}}
+                                    </button>
+                                    <button v-if="button_loading" class="btn btn-warning" disabled>
+                                        <i id="btn-progress"></i> {{$t('register.loading')}}
+                                    </button>
+                                </div>
+
+                            </div>
                         </div>
-                    </transition>
-
-
-                    <div class=" col-lg-10 offset-lg-1 ">
-
-                        <div id="dropin-wrapper">
-                            <div id="checkout-message"></div>
-                            <div id="dropin-container"></div>
-                        </div>
-
-                        <small>{{$t('register.cancel_anytime')}}</small>
-                        <br>
-                        <small class="text-danger">{{error}}</small>
-                        <br>
-                        <div class="col-12 col-xl-6 offset-xl-3 mt-5">
-
-                            <button v-show="!button_loading && !button_disabled"
-                                    class="btn btn-warning mt-4 pay-with-stripe" ref="submit">{{$t('register.start_membership')}}
-                            </button>
-                            <button v-if="button_loading" class="btn btn-warning" disabled>
-                                <i id="btn-progress"></i> {{$t('register.loading')}}
-                            </button>
-                        </div>
-
                     </div>
                 </div>
             </div>

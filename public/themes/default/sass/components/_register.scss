@@ -37,6 +37,33 @@
         }
       }
     }
+    .braintree-loader__container{
+        background-color: #0d163c;
+    }
+    .braintree-sheet {
+        background-color: #0d163c!important;
+        border: 1px solid #0d163c!important;
+    }
+    .braintree-sheet__header {
+        background: #161F44 0% 0% no-repeat padding-box;
+        box-shadow: 0px 5px 10px #00000029;
+        border-radius: 8px;
+        opacity: 1;
+        border-bottom: none!important;
+    }
+    .braintree-form-number {
+        border-bottom: none!important;
+    }
+    .braintree-form__hosted-field {
+        border-bottom: none!important;
+    }
+    .braintree-form__field {
+        background: #161F44 0% 0% no-repeat padding-box;
+        box-shadow: 0px 5px 10px #00000029;
+        border-radius: 8px;
+        opacity: 1;
+        border-bottom: none!important;
+    }
     .form-control::placeholder {
       color: #9e9e9e;
     }
@@ -364,8 +391,8 @@
   .payment-form {
     position: relative;
     top: 120px;
-    box-shadow: 0px 10px 25px -12px #000;
-    background: $background-color2;
+    // box-shadow: 0px 10px 25px -12px #000;
+    // background: $background-color2;
   }
   .payment-methods {
     .active-method {

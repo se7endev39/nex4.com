@@ -29,38 +29,20 @@
                          $route.name ==='movies'    ||
                          $route.name ==='channels' ? true : false" :message="message_alert"></message>
 
-        <navbar v-if="
-                         $route.name ==='discover'    ||
-                         $route.name ==='series'  ||
-                         $route.name ==='collection' ||
-                         $route.name ==='kids'    ||
-                         $route.name ==='movies'    ||
-                         $route.name ==='series-player'    ||
-                         $route.name ==='movie-player'    ||
-                         $route.name ==='tv-player'    ||
-                         $route.name === 'series-player-sp' ||
-                         $route.name ==='channels' ? true : false"></navbar>
+        <navbar ></navbar>
 
 
         <!-- Nabvar XS -->
 
         <div class="col-12 grid">
             <div class="row">
+                <div class="hide_show_sidebar" @click="show_sidebar = !show_sidebar">
+                    <img src="/images/menu-options.svg" alt="actor" style="margin-top:30px;margin-left:25px;" width="25">
+                </div>
 
-
-                <sidebar class="col-1 hidden-sm-down sidebar-content"v-if="
-                   $route.name === 'profile' ||
-                   $route.name === 'security' ||
-                   $route.name === 'payment-update' ||
-                   $route.name === 'billing-details' ||
-                   $route.name === 'change-plan' ||
-                   $route.name === 'language' ||
-                   $route.name === 'adjust-subtitles' ||
-                   $route.name === 'viewing-history' ||
-                   $route.name === 'support-inbox' ||
-                   $route.name === 'support-request' ||
-                   $route.name === 'device-activity'
-                  ? true : false" ></sidebar>
+                <sidebar class="col-1 hidden-sm-down sidebar-content"
+                v-if="show_sidebar"
+                ></sidebar>
 
                 <!-- SideBar -->
 
@@ -135,6 +117,7 @@
         data() {
             return {
                 active: null,
+                show_sidebar: true,
                 activeGenre: "all",
                 activeTrending: 1,
                 trendingList: [
