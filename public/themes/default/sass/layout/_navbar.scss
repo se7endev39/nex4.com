@@ -16,7 +16,11 @@
                 transform: translate(-50%, -5%);
                 left: 50%;
                 width: 40px;
-            }
+                -webkit-transform: translate(-50%, -5%);
+                -moz-transform: translate(-50%, -5%);
+                -ms-transform: translate(-50%, -5%);
+                -o-transform: translate(-50%, -5%);
+}
             .search {
                 position: relative;
                 right: 15px;
@@ -155,7 +159,8 @@
             }
             .search {
                 position: relative;
-                top: -11px;
+                // top: -11px;
+                width: 70%;
                 left: 150px;
                 display: inline-block;
                 .search-icon {

@@ -12243,6 +12243,27 @@ button.vjs-control.vjs-button.icon-vidoejs-exit {
   display: inline-block;
 }
 
+.search-page__nav_search input {
+  position: relative;
+  left: 10px;
+  border-bottom: 1px solid #4e4e4e;
+  background: transparent;
+}
+
+.search-page__nav_search input:focus,
+.search-page__nav_search input:hover,
+.search-page__nav_search input:active {
+  background: transparent;
+  border-bottom: 1px solid #4e4e4e !important;
+}
+
+.search-page__nav_search .search-icon {
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  display: inline-block;
+}
+
 .search-page__cast .image {
   position: relative;
   width: 130px;
@@ -13631,10 +13652,13 @@ button.vjs-control.vjs-button.icon-vidoejs-exit {
 
 .navbar-content .navbar-sm .section1 .logo {
   position: absolute;
-  -webkit-transform: translate(-50%, -5%);
-          transform: translate(-50%, -5%);
+  transform: translate(-50%, -5%);
   left: 50%;
   width: 40px;
+  -webkit-transform: translate(-50%, -5%);
+  -moz-transform: translate(-50%, -5%);
+  -ms-transform: translate(-50%, -5%);
+  -o-transform: translate(-50%, -5%);
 }
 
 .navbar-content .navbar-sm .section1 .search {
@@ -13793,7 +13817,7 @@ button.vjs-control.vjs-button.icon-vidoejs-exit {
 
 .navbar-content .nav-md .bg-inverse .search {
   position: relative;
-  top: -11px;
+  width: 70%;
   left: 150px;
   display: inline-block;
 }
@@ -13864,6 +13888,14 @@ button.vjs-control.vjs-button.icon-vidoejs-exit {
 
 .margin-left-3 {
   margin-left: 3rem;
+}
+
+.margin-left-13 {
+  margin-left: 13rem;
+}
+
+.margin-left-auto {
+  margin-left: auto;
 }
 
 .background-logo {

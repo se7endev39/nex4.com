@@ -36,9 +36,12 @@
 
         <div class="col-12 grid">
             <div class="row">
-                <div class="hide_show_sidebar" @click="show_sidebar = !show_sidebar">
-                    <img src="/images/menu-options.svg" alt="actor" style="margin-top:30px;margin-left:25px;" width="25">
-                </div>
+                <a @click="show_sidebar = !show_sidebar">
+                    <div class="hide_show_sidebar" >
+                        <img src="/images/menu-options.svg" alt="actor" style="margin-top:30px;margin-left:25px;" width="25">
+                    </div>
+                </a>
+
 
                 <sidebar class="col-1 hidden-sm-down sidebar-content"
                 v-if="show_sidebar"
@@ -47,8 +50,8 @@
                 <!-- SideBar -->
 
 
-                <router-view class="col p-0"></router-view>
-
+                <router-view class="col p-0 margin-left-auto" v-if="!show_sidebar"></router-view>
+                <router-view class="col p-0 margin-left-13" v-if="show_sidebar"></router-view>
                 <!-- Router view -->
 
                 <search-page v-if="showSearchPage"></search-page>

@@ -69108,6 +69108,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -69286,7 +69287,7 @@ var render = function() {
     ? _c("div", [
         _c(
           "div",
-          { staticClass: "col-12 search-page" },
+          { staticClass: "col-12 search-page margin-left-13" },
           [
             _c("collection-modal", {
               attrs: {
@@ -84737,6 +84738,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -86987,8 +86991,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -88225,10 +88227,90 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("div", {
-              staticClass: "offset-xl-1 collapse navbar-collapse ",
-              attrs: { id: "navbarTogglerDemo02" }
-            }),
+            _c(
+              "div",
+              {
+                staticClass: "offset-xl-1 collapse navbar-collapse ",
+                attrs: { id: "navbarTogglerDemo02" }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "search",
+                    on: { click: _vm.SHOW_SEARCH_PAGE }
+                  },
+                  [
+                    _c("div", { staticClass: "row" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "col-12 col-md-8 offset-md-2 search-page__nav_search"
+                        },
+                        [
+                          _c("div", { staticClass: "search-icon" }, [
+                            _c(
+                              "svg",
+                              {
+                                staticClass: "sm-search-svg",
+                                staticStyle: {
+                                  "enable-background": "new 0 0 56.966 56.966"
+                                },
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                                  version: "1.1",
+                                  x: "0px",
+                                  y: "0px",
+                                  viewBox: "0 0 56.966 56.966",
+                                  "xml:space": "preserve",
+                                  width: "100%"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z",
+                                    fill: "#ffffff"
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.search_query,
+                                expression: "search_query"
+                              }
+                            ],
+                            staticClass: "form-control mr-sm-2",
+                            attrs: {
+                              type: "text",
+                              placeholder: _vm.$t("home.search")
+                            },
+                            domProps: { value: _vm.search_query },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.search_query = $event.target.value
+                              }
+                            }
+                          })
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ]
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "right-side" }, [
               _c("div", { staticClass: "register" }, [
@@ -88302,89 +88384,7 @@ var render = function() {
                       1
                     )
                   : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "search", on: { click: _vm.SHOW_SEARCH_PAGE } },
-                [
-                  !_vm.showSearchPageEvent
-                    ? _c("div", { staticClass: "search-icon" }, [
-                        _c(
-                          "svg",
-                          {
-                            staticClass: "sm-search-svg",
-                            staticStyle: {
-                              "enable-background": "new 0 0 56.966 56.966"
-                            },
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                              x: "0px",
-                              y: "0px",
-                              viewBox: "0 0 56.966 56.966",
-                              "xml:space": "preserve",
-                              width: "100%"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z",
-                                fill: "#FFFFFF"
-                              }
-                            })
-                          ]
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.showSearchPageEvent
-                    ? _c("div", { staticClass: "search-icon" }, [
-                        _c(
-                          "svg",
-                          {
-                            staticClass: "sm-search-svg",
-                            staticStyle: {
-                              "enable-background": "new 0 0 22.135 22.135"
-                            },
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                              x: "0px",
-                              y: "0px",
-                              viewBox: "0 0 22.135 22.135",
-                              "xml:space": "preserve",
-                              width: "100%"
-                            }
-                          },
-                          [
-                            _c("g", [
-                              _c("g", [
-                                _c("path", {
-                                  attrs: {
-                                    d:
-                                      "M0,18.723L14.879,3.089c0,0,1.949-2.114,6.341-1.597c0,0,0.753,0.599,0.915,1.755L7.179,19.24    c0,0-1.236,1.558-6.461,1.438C0.717,20.678,0.2,20.438,0,18.723z",
-                                    fill: "#FFFFFF"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("path", {
-                                  attrs: {
-                                    d:
-                                      "M0,3.412l14.879,15.634c0,0,1.949,2.114,6.341,1.597c0,0,0.753-0.598,0.915-1.758L7.179,2.891    c0,0-1.236-1.556-6.461-1.436C0.717,1.456,0.2,1.696,0,3.412z",
-                                    fill: "#FFFFFF"
-                                  }
-                                })
-                              ])
-                            ])
-                          ]
-                        )
-                      ])
-                    : _vm._e()
-                ]
-              )
+              ])
             ])
           ],
           1
@@ -89707,25 +89707,15 @@ var render = function() {
           { staticClass: "row" },
           [
             _c(
-              "div",
+              "a",
               {
-                staticClass: "hide_show_sidebar",
                 on: {
                   click: function($event) {
                     _vm.show_sidebar = !_vm.show_sidebar
                   }
                 }
               },
-              [
-                _c("img", {
-                  staticStyle: { "margin-top": "30px", "margin-left": "25px" },
-                  attrs: {
-                    src: "/images/menu-options.svg",
-                    alt: "actor",
-                    width: "25"
-                  }
-                })
-              ]
+              [_vm._m(2)]
             ),
             _vm._v(" "),
             _vm.show_sidebar
@@ -89734,7 +89724,13 @@ var render = function() {
                 })
               : _vm._e(),
             _vm._v(" "),
-            _c("router-view", { staticClass: "col p-0" }),
+            !_vm.show_sidebar
+              ? _c("router-view", { staticClass: "col p-0 margin-left-auto" })
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.show_sidebar
+              ? _c("router-view", { staticClass: "col p-0 margin-left-13" })
+              : _vm._e(),
             _vm._v(" "),
             _vm.showSearchPage ? _c("search-page") : _vm._e()
           ],
@@ -89792,6 +89788,17 @@ var staticRenderFns = [
       _c("div", { staticStyle: { left: "50%" }, attrs: { id: "main" } }, [
         _c("span", { staticClass: "spinner" })
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "hide_show_sidebar" }, [
+      _c("img", {
+        staticStyle: { "margin-top": "30px", "margin-left": "25px" },
+        attrs: { src: "/images/menu-options.svg", alt: "actor", width: "25" }
+      })
     ])
   }
 ]

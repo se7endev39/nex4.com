@@ -431,6 +431,24 @@
                 </router-link>
 
                 <div class="offset-xl-1 collapse navbar-collapse " id="navbarTogglerDemo02">
+                    <div class="search" @click="SHOW_SEARCH_PAGE">
+                        <div class="row">
+
+                            <div class="col-12 col-md-8 offset-md-2 search-page__nav_search">
+                                <div class="search-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 56.966 56.966"
+                                        style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="100%" class="sm-search-svg">
+                                        <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"
+                                            fill="#ffffff" />
+                                    </svg>
+                                </div>
+                                <input class="form-control mr-sm-2" type="text" :placeholder="$t('home.search')" v-model="search_query">
+                            </div>
+
+                            <!-- END Search input-->
+
+                        </div>
+                    </div>
                     <!-- <ul class="navbar-nav mr-auto mt-2 mt-md-0">
                         <li class="nav-item">
                             <router-link class="nav-link" :to="{name: 'discover'}">{{$t('home.home')}}</router-link>
@@ -482,27 +500,7 @@
 
                     </div>
 
-                    <div class="search" @click="SHOW_SEARCH_PAGE">
-                        <div class="search-icon" v-if="!showSearchPageEvent">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
-                                width="100%" class="sm-search-svg">
-                                <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"
-                                    fill="#FFFFFF" />
-                            </svg>
-                        </div>
 
-                      <div class="search-icon" v-if="showSearchPageEvent">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 22.135 22.135" style="enable-background:new 0 0 22.135 22.135;" xml:space="preserve" width="100%" class="sm-search-svg">
-                            <g>
-                                <g>
-                                    <path d="M0,18.723L14.879,3.089c0,0,1.949-2.114,6.341-1.597c0,0,0.753,0.599,0.915,1.755L7.179,19.24    c0,0-1.236,1.558-6.461,1.438C0.717,20.678,0.2,20.438,0,18.723z" fill="#FFFFFF"/>
-                                    <path d="M0,3.412l14.879,15.634c0,0,1.949,2.114,6.341,1.597c0,0,0.753-0.598,0.915-1.758L7.179,2.891    c0,0-1.236-1.556-6.461-1.436C0.717,1.456,0.2,1.696,0,3.412z" fill="#FFFFFF"/>
-                                </g>
-                            </g>
-                            </svg>
-                       </div>
-                    </div>
                 </div>
             </nav>
         </div>

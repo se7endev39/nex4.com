@@ -6,7 +6,8 @@
                          $route.name ==='movies'    ||
                          $route.name ==='channels' ? true : false">
 
-        <div class="col-12 search-page">
+        <div class="col-12 search-page margin-left-13">
+
 
             <collection-modal @hideModalCollectionCancel="HIDE_COLLECTION_MODAL_CANCEL"
                               @hideModalCollectionSave="HIDE_COLLECTION_MODAL_SAVE"

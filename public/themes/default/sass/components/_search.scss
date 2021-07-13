@@ -29,6 +29,28 @@
       display: inline-block;
     }
   }
+  &__nav_search {
+    // margin-top: 80px;
+    input {
+      position: relative;
+      left: 10px;
+      border-bottom: 1px solid #4e4e4e;
+      background: transparent;
+      &:focus,
+      &:hover,
+      &:active {
+        background:  transparent;
+        border-bottom: 1px solid #4e4e4e !important;
+
+      }
+    }
+    .search-icon {
+      position: absolute;
+      top: 15px;
+      left: 10px;
+      display: inline-block;
+    }
+  }
   &__cast {
     .image {
       position: relative;
