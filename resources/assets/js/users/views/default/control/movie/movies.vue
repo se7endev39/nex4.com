@@ -181,8 +181,16 @@
                                 </div>
 
                                 <div class="mt-2">
-                                    <b> {{item.name}} </b> <br>
-                                    <small class="text-muted">{{item.genre}}</small>
+                                    <p class="ml-2">{{item.name}}</p> <br>
+                                    <div class="row margin-left-auto">
+                                        <small class="text-muted ml-2">Adventure</small>
+                                        <div class="row margin-left-auto margin-right-2">
+                                            <img src="/themes/default/img/favor.svg" alt="favor" width="17px"  height="17px" v-if="item.cloud == 'local'">
+                                            <p style="margin-left:4px;">{{item.rate}}</p>
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
                                 <div class="progress" v-if="item.current_time !== null && $auth.isAuthenticated() === 'active'">

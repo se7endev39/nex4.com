@@ -77,13 +77,13 @@
         <!-- END SIDEBAR IPAD col-sm -->
 
 
-        <end-footer v-if="
+        <!-- <end-footer v-if="
                          $route.name ==='discover'    ||
                          $route.name ==='series'  ||
                          $route.name ==='collection' ||
                          $route.name ==='kids'    ||
                          $route.name ==='movies'    ||
-                         $route.name ==='channels' ? true : false"></end-footer>
+                         $route.name ==='channels' ? true : false"></end-footer> -->
 
 
         <router-view :key="getShowPagePath" v-if="getShowPagePath != null"></router-view>

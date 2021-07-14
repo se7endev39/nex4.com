@@ -12011,7 +12011,7 @@ button.vjs-control.vjs-button.icon-vidoejs-exit {
   position: absolute;
   top: 15px;
   left: 7px;
-  width: 40px;
+  width: 11rem;
   border-top: 2px solid #2196F3;
 }
 
@@ -12029,7 +12029,7 @@ button.vjs-control.vjs-button.icon-vidoejs-exit {
 }
 
 .animation:hover {
-  background: #2f2f2f;
+  background: #111b46 0% 0% no-repeat padding-box;
   z-index: 1;
   padding: 15px !important;
 }
@@ -13728,7 +13728,6 @@ button.vjs-control.vjs-button.icon-vidoejs-exit {
   position: fixed;
   top: -200px;
   left: 0;
-  height: 103px;
   width: 100%;
   background: rgba(14, 14, 14, 0.95);
   -webkit-transition: 200ms ease-in-out;
@@ -13909,6 +13908,7 @@ button.vjs-control.vjs-button.icon-vidoejs-exit {
   -webkit-box-shadow: 0px 3px 6px #13132447;
           box-shadow: 0px 3px 6px #13132447;
   opacity: 1;
+  min-height: 7rem;
   margin-top: auto !important;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
@@ -13930,6 +13930,11 @@ button.vjs-control.vjs-button.icon-vidoejs-exit {
 
 .margin-left-13 {
   margin-left: 13rem;
+}
+
+.margin-right-2 {
+  margin-left: auto;
+  margin-right: 2rem;
 }
 
 .margin-left-auto {

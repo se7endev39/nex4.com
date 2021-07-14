@@ -53952,6 +53952,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -54594,9 +54601,9 @@ var render = function() {
                         staticClass: "list-carousel",
                         attrs: {
                           navigationPrevLabel:
-                            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-right-svg"><g><g>\r\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\r\n                                                          </g></g> </svg>',
+                            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-right-svg"><g><g>\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\n                                                          </g></g> </svg>',
                           navigationNextLabel:
-                            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-left-svg"><g transform="matrix(-1 1.22465e-16 -1.22465e-16 -1 129 129)"><g>\r\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\r\n                                                          </g></g> </svg>',
+                            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-left-svg"><g transform="matrix(-1 1.22465e-16 -1.22465e-16 -1 129 129)"><g>\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\n                                                          </g></g> </svg>',
                           navigationEnabled: true,
                           paginationEnabled: false,
                           autoplay: true,
@@ -54762,13 +54769,13 @@ var render = function() {
                                                         },
                                                         [
                                                           _vm._v(
-                                                            "\r\n                                                    " +
+                                                            "\n                                                    " +
                                                               _vm._s(
                                                                 _vm.$t(
                                                                   "home.play"
                                                                 )
                                                               ) +
-                                                              "\r\n\r\n                                                    "
+                                                              "\n\n                                                    "
                                                           ),
                                                           _c(
                                                             "svg",
@@ -54841,13 +54848,13 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "\r\n                                                    " +
+                                                                "\n                                                    " +
                                                                   _vm._s(
                                                                     _vm.$t(
                                                                       "home.my_list"
                                                                     )
                                                                   ) +
-                                                                  "\r\n\r\n                                                    "
+                                                                  "\n\n                                                    "
                                                               ),
                                                               _c(
                                                                 "svg",
@@ -54920,13 +54927,13 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "\r\n                                                    " +
+                                                                "\n                                                    " +
                                                                   _vm._s(
                                                                     _vm.$t(
                                                                       "home.my_list"
                                                                     )
                                                                   ) +
-                                                                  "\r\n\r\n                                                    "
+                                                                  "\n\n                                                    "
                                                               ),
                                                               _c(
                                                                 "svg",
@@ -54962,7 +54969,7 @@ var render = function() {
                                                                         {
                                                                           attrs: {
                                                                             d:
-                                                                              "M506.231,75.508c-7.689-7.69-20.158-7.69-27.849,0l-319.21,319.211L33.617,269.163c-7.689-7.691-20.158-7.691-27.849,0\r\n                                                                                        c-7.69,7.69-7.69,20.158,0,27.849l139.481,139.481c7.687,7.687,20.16,7.689,27.849,0l333.133-333.136\r\n                                                                                        C513.921,95.666,513.921,83.198,506.231,75.508z",
+                                                                              "M506.231,75.508c-7.689-7.69-20.158-7.69-27.849,0l-319.21,319.211L33.617,269.163c-7.689-7.691-20.158-7.691-27.849,0\n                                                                                        c-7.69,7.69-7.69,20.158,0,27.849l139.481,139.481c7.687,7.687,20.16,7.689,27.849,0l333.133-333.136\n                                                                                        C513.921,95.666,513.921,83.198,506.231,75.508z",
                                                                             fill:
                                                                               "#ffffff"
                                                                           }
@@ -55140,13 +55147,13 @@ var render = function() {
                                                         },
                                                         [
                                                           _vm._v(
-                                                            "\r\n                                                    " +
+                                                            "\n                                                    " +
                                                               _vm._s(
                                                                 _vm.$t(
                                                                   "home.play"
                                                                 )
                                                               ) +
-                                                              "\r\n\r\n                                                    "
+                                                              "\n\n                                                    "
                                                           ),
                                                           _c(
                                                             "svg",
@@ -55219,13 +55226,13 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "\r\n                                                    " +
+                                                                "\n                                                    " +
                                                                   _vm._s(
                                                                     _vm.$t(
                                                                       "home.my_list"
                                                                     )
                                                                   ) +
-                                                                  "\r\n\r\n                                                    "
+                                                                  "\n\n                                                    "
                                                               ),
                                                               _c(
                                                                 "svg",
@@ -55298,13 +55305,13 @@ var render = function() {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "\r\n                                                    " +
+                                                                "\n                                                    " +
                                                                   _vm._s(
                                                                     _vm.$t(
                                                                       "home.my_list"
                                                                     )
                                                                   ) +
-                                                                  "\r\n\r\n                                                    "
+                                                                  "\n\n                                                    "
                                                               ),
                                                               _c(
                                                                 "svg",
@@ -55340,7 +55347,7 @@ var render = function() {
                                                                         {
                                                                           attrs: {
                                                                             d:
-                                                                              "M506.231,75.508c-7.689-7.69-20.158-7.69-27.849,0l-319.21,319.211L33.617,269.163c-7.689-7.691-20.158-7.691-27.849,0\r\n                                                                                        c-7.69,7.69-7.69,20.158,0,27.849l139.481,139.481c7.687,7.687,20.16,7.689,27.849,0l333.133-333.136\r\n                                                                                        C513.921,95.666,513.921,83.198,506.231,75.508z",
+                                                                              "M506.231,75.508c-7.689-7.69-20.158-7.69-27.849,0l-319.21,319.211L33.617,269.163c-7.689-7.691-20.158-7.691-27.849,0\n                                                                                        c-7.69,7.69-7.69,20.158,0,27.849l139.481,139.481c7.687,7.687,20.16,7.689,27.849,0l333.133-333.136\n                                                                                        C513.921,95.666,513.921,83.198,506.231,75.508z",
                                                                             fill:
                                                                               "#ffffff"
                                                                           }
@@ -55912,9 +55919,9 @@ var render = function() {
                                       ? _c("h3", [
                                           _c("strong", [
                                             _vm._v(
-                                              "\r\n                                            " +
+                                              "\n                                            " +
                                                 _vm._s(item.genre) +
-                                                "\r\n\r\n                                            "
+                                                "\n\n                                            "
                                             ),
                                             _c("hr")
                                           ]),
@@ -55937,7 +55944,7 @@ var render = function() {
                                             _vm._v(
                                               " " +
                                                 _vm._s(item.genre) +
-                                                "\r\n\r\n                                            "
+                                                "\n\n                                            "
                                             ),
                                             _c("hr")
                                           ]),
@@ -55961,9 +55968,9 @@ var render = function() {
                                       staticClass: "list-carousel",
                                       attrs: {
                                         navigationPrevLabel:
-                                          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-right-svg"><g><g>\r\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\r\n                                                          </g></g> </svg>',
+                                          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-right-svg"><g><g>\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\n                                                          </g></g> </svg>',
                                         navigationNextLabel:
-                                          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-left-svg"><g transform="matrix(-1 1.22465e-16 -1.22465e-16 -1 129 129)"><g>\r\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\r\n                                                          </g></g> </svg>',
+                                          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-left-svg"><g transform="matrix(-1 1.22465e-16 -1.22465e-16 -1 129 129)"><g>\n                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>\n                                                          </g></g> </svg>',
                                         navigationEnabled: true,
                                         paginationEnabled: false,
                                         autoplay: false,
@@ -56441,27 +56448,82 @@ var render = function() {
                                                           "__title mt-2"
                                                       },
                                                       [
-                                                        _c("b", [
-                                                          _vm._v(
-                                                            " " +
-                                                              _vm._s(
-                                                                item.name
-                                                              ) +
-                                                              " "
-                                                          )
-                                                        ]),
-                                                        _vm._v(" "),
-                                                        _c("br"),
-                                                        _vm._v(" "),
                                                         _c(
-                                                          "small",
+                                                          "p",
                                                           {
-                                                            staticClass:
-                                                              "text-muted"
+                                                            staticClass: "ml-2"
                                                           },
                                                           [
                                                             _vm._v(
-                                                              _vm._s(item.genre)
+                                                              " " +
+                                                                _vm._s(
+                                                                  item.name
+                                                                ) +
+                                                                " "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "row margin-left-auto"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "small",
+                                                              {
+                                                                staticClass:
+                                                                  "text-muted ml-2"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "Adventure"
+                                                                )
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "div",
+                                                              {
+                                                                staticClass:
+                                                                  "row margin-left-auto margin-right-2"
+                                                              },
+                                                              [
+                                                                item.cloud ==
+                                                                "local"
+                                                                  ? _c("img", {
+                                                                      attrs: {
+                                                                        src:
+                                                                          "/themes/default/img/favor.svg",
+                                                                        alt:
+                                                                          "favor",
+                                                                        width:
+                                                                          "17px",
+                                                                        height:
+                                                                          "17px"
+                                                                      }
+                                                                    })
+                                                                  : _vm._e(),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "p",
+                                                                  {
+                                                                    staticStyle: {
+                                                                      "margin-left":
+                                                                        "4px"
+                                                                    }
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      _vm._s(
+                                                                        item.rate
+                                                                      )
+                                                                    )
+                                                                  ]
+                                                                )
+                                                              ]
                                                             )
                                                           ]
                                                         )
@@ -57186,6 +57248,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_loader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__utils_loader__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_notfound__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_notfound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__utils_notfound__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -58220,13 +58290,52 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("div", { staticClass: "mt-2" }, [
-                              _c("b", [_vm._v(" " + _vm._s(item.name) + " ")]),
+                              _c("p", { staticClass: "ml-2" }, [
+                                _vm._v(_vm._s(item.name))
+                              ]),
                               _vm._v(" "),
                               _c("br"),
                               _vm._v(" "),
-                              _c("small", { staticClass: "text-muted" }, [
-                                _vm._v(_vm._s(item.genre))
-                              ])
+                              _c(
+                                "div",
+                                { staticClass: "row margin-left-auto" },
+                                [
+                                  _c(
+                                    "small",
+                                    { staticClass: "text-muted ml-2" },
+                                    [_vm._v("Adventure")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "row margin-left-auto margin-right-2"
+                                    },
+                                    [
+                                      item.cloud == "local"
+                                        ? _c("img", {
+                                            attrs: {
+                                              src:
+                                                "/themes/default/img/favor.svg",
+                                              alt: "favor",
+                                              width: "17px",
+                                              height: "17px"
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c(
+                                        "p",
+                                        {
+                                          staticStyle: { "margin-left": "4px" }
+                                        },
+                                        [_vm._v(_vm._s(item.rate))]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
                             ]),
                             _vm._v(" "),
                             item.current_time !== null &&
@@ -60033,6 +60142,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -60821,13 +60937,50 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("div", { staticClass: "mt-2" }, [
-                              _c("b", [_vm._v(" " + _vm._s(item.name) + " ")]),
+                              _c("p", { staticClass: "ml-2" }, [
+                                _vm._v(" " + _vm._s(item.name) + " ")
+                              ]),
                               _vm._v(" "),
-                              _c("br"),
-                              _vm._v(" "),
-                              _c("small", { staticClass: "text-muted" }, [
-                                _vm._v(_vm._s(item.genre))
-                              ])
+                              _c(
+                                "div",
+                                { staticClass: "row margin-left-auto" },
+                                [
+                                  _c(
+                                    "small",
+                                    { staticClass: "text-muted ml-2" },
+                                    [_vm._v("Adventure")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "row margin-left-auto margin-right-2"
+                                    },
+                                    [
+                                      item.cloud == "local"
+                                        ? _c("img", {
+                                            attrs: {
+                                              src:
+                                                "/themes/default/img/favor.svg",
+                                              alt: "favor",
+                                              width: "17px",
+                                              height: "17px"
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c(
+                                        "p",
+                                        {
+                                          staticStyle: { "margin-left": "4px" }
+                                        },
+                                        [_vm._v(_vm._s(item.rate))]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
                             ]),
                             _vm._v(" "),
                             item.current_time !== null &&
@@ -62825,6 +62978,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -63478,16 +63645,55 @@ var render = function() {
                                       ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "mt-2" }, [
-                                        _c("b", [
+                                        _c("p", { staticClass: "ml-2" }, [
                                           _vm._v(" " + _vm._s(item.name) + " ")
                                         ]),
                                         _vm._v(" "),
-                                        _c("br"),
-                                        _vm._v(" "),
                                         _c(
-                                          "small",
-                                          { staticClass: "text-muted" },
-                                          [_vm._v(_vm._s(item.genre))]
+                                          "div",
+                                          {
+                                            staticClass: "row margin-left-auto"
+                                          },
+                                          [
+                                            _c(
+                                              "small",
+                                              {
+                                                staticClass: "text-muted ml-2"
+                                              },
+                                              [_vm._v("Adventure")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "row margin-left-auto margin-right-2"
+                                              },
+                                              [
+                                                item.cloud == "local"
+                                                  ? _c("img", {
+                                                      attrs: {
+                                                        src:
+                                                          "/themes/default/img/favor.svg",
+                                                        alt: "favor",
+                                                        width: "17px",
+                                                        height: "17px"
+                                                      }
+                                                    })
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  {
+                                                    staticStyle: {
+                                                      "margin-left": "4px"
+                                                    }
+                                                  },
+                                                  [_vm._v(_vm._s(item.rate))]
+                                                )
+                                              ]
+                                            )
+                                          ]
                                         )
                                       ]),
                                       _vm._v(" "),
@@ -63547,7 +63753,7 @@ var render = function() {
                                           expression: "showSlideUpAnimation"
                                         }
                                       ],
-                                      staticClass: "animation-ani92X"
+                                      staticClass: "animation"
                                     },
                                     [
                                       _c(
@@ -63998,16 +64204,55 @@ var render = function() {
                                       ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "mt-2" }, [
-                                        _c("b", [
+                                        _c("p", { staticClass: "ml-2" }, [
                                           _vm._v(" " + _vm._s(item.name) + " ")
                                         ]),
                                         _vm._v(" "),
-                                        _c("br"),
-                                        _vm._v(" "),
                                         _c(
-                                          "small",
-                                          { staticClass: "text-muted" },
-                                          [_vm._v(_vm._s(item.genre))]
+                                          "div",
+                                          {
+                                            staticClass: "row margin-left-auto"
+                                          },
+                                          [
+                                            _c(
+                                              "small",
+                                              {
+                                                staticClass: "text-muted ml-2"
+                                              },
+                                              [_vm._v("Adventure")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "row margin-left-auto margin-right-2"
+                                              },
+                                              [
+                                                item.cloud == "local"
+                                                  ? _c("img", {
+                                                      attrs: {
+                                                        src:
+                                                          "/themes/default/img/favor.svg",
+                                                        alt: "favor",
+                                                        width: "17px",
+                                                        height: "17px"
+                                                      }
+                                                    })
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  {
+                                                    staticStyle: {
+                                                      "margin-left": "4px"
+                                                    }
+                                                  },
+                                                  [_vm._v(_vm._s(item.rate))]
+                                                )
+                                              ]
+                                            )
+                                          ]
                                         )
                                       ]),
                                       _vm._v(" "),
@@ -64805,6 +65050,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -65055,7 +65314,7 @@ var render = function() {
                                         expression: "showSlideUpAnimation"
                                       }
                                     ],
-                                    staticClass: "animation-ani92X"
+                                    staticClass: "animation"
                                   },
                                   [
                                     _c(
@@ -65313,16 +65572,51 @@ var render = function() {
                                     ),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "mt-2" }, [
-                                      _c("b", [
+                                      _c("p", { staticClass: "ml-2" }, [
                                         _vm._v(" " + _vm._s(item.name) + " ")
                                       ]),
                                       _vm._v(" "),
-                                      _c("br"),
-                                      _vm._v(" "),
                                       _c(
-                                        "small",
-                                        { staticClass: "text-muted" },
-                                        [_vm._v(_vm._s(item.genre))]
+                                        "div",
+                                        { staticClass: "row margin-left-auto" },
+                                        [
+                                          _c(
+                                            "small",
+                                            { staticClass: "text-muted ml-2" },
+                                            [_vm._v("Adventure")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "row margin-left-auto margin-right-2"
+                                            },
+                                            [
+                                              item.cloud == "local"
+                                                ? _c("img", {
+                                                    attrs: {
+                                                      src:
+                                                        "/themes/default/img/favor.svg",
+                                                      alt: "favor",
+                                                      width: "17px",
+                                                      height: "17px"
+                                                    }
+                                                  })
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              _c(
+                                                "p",
+                                                {
+                                                  staticStyle: {
+                                                    "margin-left": "4px"
+                                                  }
+                                                },
+                                                [_vm._v(_vm._s(item.rate))]
+                                              )
+                                            ]
+                                          )
+                                        ]
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -65378,7 +65672,7 @@ var render = function() {
                                         expression: "showSlideUpAnimation"
                                       }
                                     ],
-                                    staticClass: "animation-ani92X"
+                                    staticClass: "animation"
                                   },
                                   [
                                     _c(
@@ -65674,16 +65968,51 @@ var render = function() {
                                     ),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "mt-2" }, [
-                                      _c("b", [
+                                      _c("p", { staticClass: "ml-2" }, [
                                         _vm._v(" " + _vm._s(item.name) + " ")
                                       ]),
                                       _vm._v(" "),
-                                      _c("br"),
-                                      _vm._v(" "),
                                       _c(
-                                        "small",
-                                        { staticClass: "text-muted" },
-                                        [_vm._v(_vm._s(item.genre))]
+                                        "div",
+                                        { staticClass: "row margin-left-auto" },
+                                        [
+                                          _c(
+                                            "small",
+                                            { staticClass: "text-muted ml-2" },
+                                            [_vm._v("Adventure")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "row margin-left-auto margin-right-2"
+                                            },
+                                            [
+                                              item.cloud == "local"
+                                                ? _c("img", {
+                                                    attrs: {
+                                                      src:
+                                                        "/themes/default/img/favor.svg",
+                                                      alt: "favor",
+                                                      width: "17px",
+                                                      height: "17px"
+                                                    }
+                                                  })
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              _c(
+                                                "p",
+                                                {
+                                                  staticStyle: {
+                                                    "margin-left": "4px"
+                                                  }
+                                                },
+                                                [_vm._v(_vm._s(item.rate))]
+                                              )
+                                            ]
+                                          )
+                                        ]
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -69109,6 +69438,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -69488,7 +69831,7 @@ var render = function() {
                                                       "showSlideUpAnimation"
                                                   }
                                                 ],
-                                                staticClass: "animation-ani92X"
+                                                staticClass: "animation"
                                               },
                                               [
                                                 _c(
@@ -69933,25 +70276,74 @@ var render = function() {
                                                   "div",
                                                   { staticClass: "mt-2" },
                                                   [
-                                                    _c("b", [
-                                                      _vm._v(
-                                                        " " +
-                                                          _vm._s(item.name) +
-                                                          " "
-                                                      )
-                                                    ]),
-                                                    _vm._v(" "),
-                                                    _c("br"),
-                                                    _vm._v(" "),
                                                     _c(
-                                                      "small",
-                                                      {
-                                                        staticClass:
-                                                          "text-muted"
-                                                      },
+                                                      "p",
+                                                      { staticClass: "ml-2" },
                                                       [
                                                         _vm._v(
-                                                          _vm._s(item.genre)
+                                                          " " +
+                                                            _vm._s(item.name) +
+                                                            " "
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "row margin-left-auto"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "small",
+                                                          {
+                                                            staticClass:
+                                                              "text-muted ml-2"
+                                                          },
+                                                          [_vm._v("Adventure")]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "row margin-left-auto margin-right-2"
+                                                          },
+                                                          [
+                                                            item.cloud ==
+                                                            "local"
+                                                              ? _c("img", {
+                                                                  attrs: {
+                                                                    src:
+                                                                      "/themes/default/img/favor.svg",
+                                                                    alt:
+                                                                      "favor",
+                                                                    width:
+                                                                      "17px",
+                                                                    height:
+                                                                      "17px"
+                                                                  }
+                                                                })
+                                                              : _vm._e(),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "p",
+                                                              {
+                                                                staticStyle: {
+                                                                  "margin-left":
+                                                                    "4px"
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    item.rate
+                                                                  )
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]
                                                         )
                                                       ]
                                                     )
@@ -70024,7 +70416,7 @@ var render = function() {
                                                       "showSlideUpAnimation"
                                                   }
                                                 ],
-                                                staticClass: "animation-ani92X"
+                                                staticClass: "animation"
                                               },
                                               [
                                                 _c(
@@ -70512,25 +70904,74 @@ var render = function() {
                                                   "div",
                                                   { staticClass: "mt-2" },
                                                   [
-                                                    _c("b", [
-                                                      _vm._v(
-                                                        " " +
-                                                          _vm._s(item.name) +
-                                                          " "
-                                                      )
-                                                    ]),
-                                                    _vm._v(" "),
-                                                    _c("br"),
-                                                    _vm._v(" "),
                                                     _c(
-                                                      "small",
-                                                      {
-                                                        staticClass:
-                                                          "text-muted"
-                                                      },
+                                                      "p",
+                                                      { staticClass: "ml-2" },
                                                       [
                                                         _vm._v(
-                                                          _vm._s(item.genre)
+                                                          " " +
+                                                            _vm._s(item.name) +
+                                                            " "
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "row margin-left-auto"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "small",
+                                                          {
+                                                            staticClass:
+                                                              "text-muted ml-2"
+                                                          },
+                                                          [_vm._v("Adventure")]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "row margin-left-auto margin-right-2"
+                                                          },
+                                                          [
+                                                            item.cloud ==
+                                                            "local"
+                                                              ? _c("img", {
+                                                                  attrs: {
+                                                                    src:
+                                                                      "/themes/default/img/favor.svg",
+                                                                    alt:
+                                                                      "favor",
+                                                                    width:
+                                                                      "17px",
+                                                                    height:
+                                                                      "17px"
+                                                                  }
+                                                                })
+                                                              : _vm._e(),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "p",
+                                                              {
+                                                                staticStyle: {
+                                                                  "margin-left":
+                                                                    "4px"
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    item.rate
+                                                                  )
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]
                                                         )
                                                       ]
                                                     )
@@ -89738,17 +90179,6 @@ var render = function() {
       ? true
       : false)
         ? _c("ads-notifcation")
-        : _vm._e(),
-      _vm._v(" "),
-      (_vm.$route.name === "discover" ||
-      _vm.$route.name === "series" ||
-      _vm.$route.name === "collection" ||
-      _vm.$route.name === "kids" ||
-      _vm.$route.name === "movies" ||
-      _vm.$route.name === "channels"
-      ? true
-      : false)
-        ? _c("end-footer")
         : _vm._e(),
       _vm._v(" "),
       _vm.getShowPagePath != null
