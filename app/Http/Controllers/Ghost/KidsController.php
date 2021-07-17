@@ -66,7 +66,6 @@ class KidsController extends Controller
         if (empty($getKidsMasQuery)) {
             $getKidsMasQuery = null;
         }
-
         return response()->json([
             'status' => 'success',
             'data' => [

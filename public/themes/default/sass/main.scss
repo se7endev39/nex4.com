@@ -409,6 +409,7 @@ body {
     width: 100%;
     position: relative;
     overflow: hidden;
+    background: #0d163c;
     .VueCarousel-slide {
       height: 70vh;
     }
@@ -428,7 +429,7 @@ body {
     width: 100%;
     z-index: 1;
     .poster {
-      width: 100px;
+      width: 180px;
       position: absolute;
       top: 6px;
     }
@@ -443,7 +444,7 @@ body {
     }
     .overview {
       font-size: 16px;
-      width: 400px;
+      width: 50%;
       color: #dcdcdc;
       margin-top: 3px;
 
@@ -452,7 +453,7 @@ body {
     .overview,
     .title {
       position: relative;
-      left: 120px;
+      left: 190px;
     }
 
     .btn {

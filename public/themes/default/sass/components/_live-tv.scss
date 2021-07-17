@@ -8,12 +8,19 @@
   cursor: pointer;
   padding: 15px;
   box-shadow: 0px 5px 20px -10px #000;
-  background: $background-color2;
-  &:hover {
+//   border-radius: 14rem;
+  //background: $background-color2;
+  &:hover
+    {
     position: relative;
     box-shadow: 0px 5px 20px -5px #000;
     transform: scale(1.05);
-  }
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    // border-radius: 14rem;
+}
   .title {
     color: #4b4b4b;
     font-weight: bold;

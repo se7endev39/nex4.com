@@ -1,6 +1,6 @@
 
 .sidebar-content {
-  background: #0D163C 0% 0% no-repeat padding-box;
+  background: #0a0f23  0% 0% no-repeat padding-box;
   position: fixed;
   height: 100%;
   -ms-flex: 0 0 3.33333333%;
@@ -51,6 +51,9 @@
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
 }
+.VueCarousel-wrapper {
+    background: #0d163c!important;
+}
 .search-page__nav_search {
     background: #151F5C 0% 0% no-repeat padding-box;
     border-radius: 4px;
@@ -78,7 +81,9 @@
         display: none!important;
     }
 }
-
+.margin-top-m5 {
+    margin-top: -5rem;
+}
 .margin-left-13 {
     margin-left: 13rem;
 }
@@ -86,8 +91,21 @@
     margin-left: auto;
     margin-right: 2rem;
 }
+.margin-right-1 {
+    margin-left: auto;
+    margin-right: 1rem;
+}
 .margin-left-auto {
     margin-left: auto;
+}
+
+.border-radius-13 {
+    border: 1px solid #d6daee;
+    border-radius: 13px;
+    opacity: 1;
+    margin-right: 10px;
+    font-size: 15px;
+    color: #d6daee;
 }
 .background-logo {
     width: 90px;

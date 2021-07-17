@@ -1,6 +1,223 @@
 <template>
     <div class="xjkax">
-        <div class="col-12 movies-page">
+
+    <div class="top-item" v-if="data.top !== null">
+            <carousel class="list-carousel" navigationPrevLabel='<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-right-svg"><g><g>
+                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>
+                                                          </g></g> </svg>' navigationNextLabel='<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="100%" class="arrow-left-svg"><g transform="matrix(-1 1.22465e-16 -1.22465e-16 -1 129 129)"><g>
+                                                            <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" data-original="#000000" class="active-path" data-old_color="#ffffff" fill="#ffffff"/>
+                                                          </g></g> </svg>' :navigationEnabled="true" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" easing="ease-in-out" :perPageCustom="[[220,1], [420,1],[768, 1], [1024, 1]]">
+                <slide v-for="(item,index) in data.top" :key="index">
+
+                    <div class="top-item__film-cover" v-if="item.type === 'movie'">
+                        <div class="gradient"></div>
+                        <img :src="'/storage/backdrops/original_' + item.backdrop" :alt="item.name" width="100%" class="backdrop" v-if="item.cloud == 'local' ">
+                        <img :src=" lg_backdrop + item.backdrop" :alt="item.name" width="100%" class="backdrop" v-if="item.cloud == 'aws' ">
+                        <router-link :to="{name: 'show-movie', params:{id: item.id}}">
+                            <div class="top-item__film-ovarlay">
+
+                                <div class="top-item__film-details">
+
+                                    <div class="hidden-sm-down poster">
+                                        <img :src="'/storage/posters/300_' + item.poster" :alt="item.name" class="poster" v-if="item.cloud == 'local'">
+                                        <img :src=" sm_poster + item.poster" :alt="item.name" class="poster" v-if="item.cloud == 'aws'">
+                                        </div>
+
+                                        <div class="title">
+                                            <h2>
+                                                <strong>{{item.name}}</strong>
+                                            </h2>
+                                            <div class="text-center row margin-left-auto">
+                                                <div class="stars" v-for="index in parseInt(item.rate/2 + item.rate%2)" key="index">
+                                                    <div class="row margin-left-auto margin-right-1">
+                                                        <img src="/themes/default/img/favor.svg" alt="favor" width="17px"  height="17px" v-if="item.cloud == 'local'">
+                                                    </div>
+                                                </div>
+                                                <div class="stars" v-for="index in parseInt(6-item.rate/2-item.rate%2)" key="index">
+                                                    <div class="row margin-left-auto margin-right-1">
+                                                        <img src="/themes/default/img/infavor.svg" alt="favor" width="17px"  height="17px" v-if="item.cloud == 'local'">
+                                                    </div>
+                                                </div>
+                                                <p style="margin-left:4px;font-size:20px;">{{item.rate}}</p>
+                                                <div class="control">
+                                            <div class="btn-group">
+
+                                                <router-link role="button" class="btn btn-sm btn-warning" :to="{name: 'movie-player', params: {id: item.id}}">
+                                                    {{$t('home.play')}}
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 191.255 191.255"
+                                                        style="enable-background:new 0 0 191.255 191.255;" xml:space="preserve"
+                                                        width="100%" class="top-play-svg">
+                                                        <g>
+                                                            <path d="M162.929,66.612c-2.814-1.754-6.514-0.896-8.267,1.917s-0.895,6.513,1.917,8.266c6.544,4.081,10.45,11.121,10.45,18.833  s-3.906,14.752-10.45,18.833l-98.417,61.365c-6.943,4.329-15.359,4.542-22.512,0.573c-7.154-3.97-11.425-11.225-11.425-19.406  V34.262c0-8.181,4.271-15.436,11.425-19.406c7.153-3.969,15.569-3.756,22.512,0.573l57.292,35.723  c2.813,1.752,6.513,0.895,8.267-1.917c1.753-2.812,0.895-6.513-1.917-8.266L64.512,5.247c-10.696-6.669-23.661-7-34.685-0.883  C18.806,10.48,12.226,21.657,12.226,34.262v122.73c0,12.605,6.58,23.782,17.602,29.898c5.25,2.913,10.939,4.364,16.616,4.364  c6.241,0,12.467-1.754,18.068-5.247l98.417-61.365c10.082-6.287,16.101-17.133,16.101-29.015S173.011,72.899,162.929,66.612z"
+                                                                data-original="#000000" class="active-path" data-old_color="#ffffff"
+                                                                fill="#ffffff" />
+                                                        </g>
+                                                    </svg>
+
+                                                </router-link>
+
+                                                <button class="btn btn-sm btn-plus btn-circle btn-success ml-1"
+                                                        v-if="! item.is_favorite"
+                                                        @click.prevent="SHOW_COLLECTION_MODAL(item.id, '/storage/backdrops/600_' + item.backdrop, item.name, 'movie', null, index)">
+                                                    {{$t('home.my_list')}}
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="top-collection-svg"
+                                                        x="0px" y="0px" viewBox="0 0 31.444 31.444" style="enable-background:new 0 0 31.444 31.444;"
+                                                        xml:space="preserve" width="100%">
+                                                        <g>
+                                                            <path d="M1.119,16.841c-0.619,0-1.111-0.508-1.111-1.127c0-0.619,0.492-1.111,1.111-1.111h13.475V1.127  C14.595,0.508,15.103,0,15.722,0c0.619,0,1.111,0.508,1.111,1.127v13.476h13.475c0.619,0,1.127,0.492,1.127,1.111  c0,0.619-0.508,1.127-1.127,1.127H16.833v13.476c0,0.619-0.492,1.127-1.111,1.127c-0.619,0-1.127-0.508-1.127-1.127V16.841H1.119z"
+                                                                data-original="#ffffff" class="active-path" data-old_color="#ffffff"
+                                                                fill="#ffffff" />
+                                                        </g>
+                                                    </svg>
+
+                                                </button>
+
+                                                <button class="btn btn-sm btn-plus btn-circle btn-danger ml-1"
+                                                        v-if="item.is_favorite"
+                                                        @click.prevent="DELETE_FROM_COLLECTION(item.id, 'movie', null, index)">
+                                                    {{$t('home.my_list')}}
+
+                                                    <svg version="1.1" class="top-collection-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        x="0px" y="0px" viewBox="0 0 511.999 511.999" width="100%" style="enable-background:new 0 0 511.999 511.999;"
+                                                        xml:space="preserve">
+                                                        <g>
+                                                            <g>
+                                                                <path d="M506.231,75.508c-7.689-7.69-20.158-7.69-27.849,0l-319.21,319.211L33.617,269.163c-7.689-7.691-20.158-7.691-27.849,0
+                                                                                        c-7.69,7.69-7.69,20.158,0,27.849l139.481,139.481c7.687,7.687,20.16,7.689,27.849,0l333.133-333.136
+                                                                                        C513.921,95.666,513.921,83.198,506.231,75.508z"
+                                                                    fill="#ffffff" />
+                                                            </g>
+                                                        </g>
+
+                                                    </svg>
+
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                            </div>
+                                            <div class="row margin-left-auto">
+                                                <p class="border-radius-13" v-for="code in (item.genre.split(','))" :key="code.index">{{ code }} </p>
+                                            </div>
+
+
+                                            <!-- <small>{{item.genre}}</small> -->
+                                        </div>
+                                        <div class="overview">
+                                            <p>{{ item.overview | truncate(110, item.overview )}}</p>
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+                        </router-link>
+
+                    </div>
+
+                    <!-- END Top Movie -->
+
+                    <div class="top-item__film-cover" v-if="item.type === 'series'">
+                        <div class="gradient"></div>
+                        <img :src="'/storage/backdrops/original_' + item.backdrop" :alt="item.name" width="100%" v-if="item.cloud == 'local' ">
+                        <img :src=" lg_backdrop + item.backdrop" :alt="item.name" width="100%"  v-if="item.cloud == 'aws' ">
+                        <router-link :to="{name: 'show-series', params:{id: item.id}}">
+                            <div class="top-item__film-ovarlay">
+
+                                <div class="top-item__film-details">
+                                    <div class="hidden-sm-down poster">
+                                        <img :src="'/storage/posters/300_' + item.poster" :alt="item.name" class="poster" v-if="item.cloud == 'local'">
+                                        <img :src=" sm_poster + item.poster" :alt="item.name" class="poster" v-if="item.cloud == 'aws'">
+                                        </div>
+
+                                        <div class="title">
+                                            <h2>
+                                                <strong>{{item.name}}</strong>
+                                            </h2>
+                                            <small>{{item.genre}}</small>
+                                        </div>
+                                        <div class="overview">
+                                            <p>{{ item.overview | truncate(110, item.overview )}}</p>
+                                        </div>
+
+                                        <div class="control">
+                                            <div class="btn-group">
+
+                                                <router-link role="button" class="btn btn-sm btn-warning" :to="{name: 'series-player', params: {series_id: item.id}}">
+                                                    {{$t('home.play')}}
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 191.255 191.255"
+                                                        style="enable-background:new 0 0 191.255 191.255;" xml:space="preserve"
+                                                        width="100%" class="top-play-svg">
+                                                        <g>
+                                                            <path d="M162.929,66.612c-2.814-1.754-6.514-0.896-8.267,1.917s-0.895,6.513,1.917,8.266c6.544,4.081,10.45,11.121,10.45,18.833  s-3.906,14.752-10.45,18.833l-98.417,61.365c-6.943,4.329-15.359,4.542-22.512,0.573c-7.154-3.97-11.425-11.225-11.425-19.406  V34.262c0-8.181,4.271-15.436,11.425-19.406c7.153-3.969,15.569-3.756,22.512,0.573l57.292,35.723  c2.813,1.752,6.513,0.895,8.267-1.917c1.753-2.812,0.895-6.513-1.917-8.266L64.512,5.247c-10.696-6.669-23.661-7-34.685-0.883  C18.806,10.48,12.226,21.657,12.226,34.262v122.73c0,12.605,6.58,23.782,17.602,29.898c5.25,2.913,10.939,4.364,16.616,4.364  c6.241,0,12.467-1.754,18.068-5.247l98.417-61.365c10.082-6.287,16.101-17.133,16.101-29.015S173.011,72.899,162.929,66.612z"
+                                                                data-original="#000000" class="active-path" data-old_color="#ffffff"
+                                                                fill="#ffffff" />
+                                                        </g>
+                                                    </svg>
+
+                                                </router-link>
+
+
+                                                <button class="btn btn-sm btn-plus btn-circle btn-success ml-1"
+                                                        v-if="! item.is_favorite"
+                                                        @click.prevent="SHOW_COLLECTION_MODAL(item.id, '/storage/backdrops/600_' + item.backdrop, item.name, 'movie', null, index)">
+                                                    {{$t('home.my_list')}}
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="top-collection-svg"
+                                                        x="0px" y="0px" viewBox="0 0 31.444 31.444" style="enable-background:new 0 0 31.444 31.444;"
+                                                        xml:space="preserve" width="100%">
+                                                        <g>
+                                                            <path d="M1.119,16.841c-0.619,0-1.111-0.508-1.111-1.127c0-0.619,0.492-1.111,1.111-1.111h13.475V1.127  C14.595,0.508,15.103,0,15.722,0c0.619,0,1.111,0.508,1.111,1.127v13.476h13.475c0.619,0,1.127,0.492,1.127,1.111  c0,0.619-0.508,1.127-1.127,1.127H16.833v13.476c0,0.619-0.492,1.127-1.111,1.127c-0.619,0-1.127-0.508-1.127-1.127V16.841H1.119z"
+                                                                data-original="#ffffff" class="active-path" data-old_color="#ffffff"
+                                                                fill="#ffffff" />
+                                                        </g>
+                                                    </svg>
+
+                                                </button>
+
+                                                <button class="btn btn-sm btn-plus btn-circle btn-danger ml-1"
+                                                        v-if="item.is_favorite"
+                                                        @click.prevent="DELETE_FROM_COLLECTION(item.id, 'movie', null, index)">
+                                                    {{$t('home.my_list')}}
+
+                                                    <svg version="1.1" class="top-collection-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        x="0px" y="0px" viewBox="0 0 511.999 511.999" width="100%" style="enable-background:new 0 0 511.999 511.999;"
+                                                        xml:space="preserve">
+                                                        <g>
+                                                            <g>
+                                                                <path d="M506.231,75.508c-7.689-7.69-20.158-7.69-27.849,0l-319.21,319.211L33.617,269.163c-7.689-7.691-20.158-7.691-27.849,0
+                                                                                        c-7.69,7.69-7.69,20.158,0,27.849l139.481,139.481c7.687,7.687,20.16,7.689,27.849,0l333.133-333.136
+                                                                                        C513.921,95.666,513.921,83.198,506.231,75.508z"
+                                                                    fill="#ffffff" />
+                                                            </g>
+                                                        </g>
+
+                                                    </svg>
+
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                        </router-link>
+
+                    </div>
+
+                    <!-- END Top Series -->
+
+                </slide>
+            </carousel>
+
+        </div>
+
+        <div class="col-12 movies-page margin-top-m5">
 
 
             <!-- END Spinner -->
@@ -55,7 +272,6 @@
             </div>
 
 
-            <hr>
 
             <div class="col-12" v-if="data.movies !== null">
                 <div class="row">
