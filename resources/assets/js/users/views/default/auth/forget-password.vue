@@ -75,13 +75,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-12 col-md-8 offset-md-2">
-                                <p> {{$t('register.password_help')}}
-                                    <router-link :to="{name: 'contact-us'}"> {{$t('app_name')}} {{$t('register.support')}}</router-link>
-                                </p>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

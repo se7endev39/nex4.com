@@ -27,12 +27,12 @@
                                                 <strong>{{item.name}}</strong>
                                             </h2>
                                             <div class="text-center row margin-left-auto">
-                                                <div class="stars" v-for="index in parseInt(item.rate/2 + item.rate%2)" :key="index">
+                                                <div class="stars" v-for="index in parseInt(item.rate/2 + parseInt(item.rate)%2)" :key="index">
                                                     <div class="row margin-left-auto margin-right-1">
                                                         <img src="/themes/default/img/favor.svg" alt="favor" width="17px"  height="17px" v-if="item.cloud == 'local'">
                                                     </div>
                                                 </div>
-                                                <div class="stars" v-for="index in parseInt(6-item.rate/2-item.rate%2)" :key="'A'+index">
+                                                <div class="stars" v-for="index in parseInt(6-item.rate/2-parseInt(item.rate)%2)" :key="'A'+index">
                                                     <div class="row margin-left-auto margin-right-1">
                                                         <img src="/themes/default/img/infavor.svg" alt="favor" width="17px"  height="17px" v-if="item.cloud == 'local'">
                                                     </div>

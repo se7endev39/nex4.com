@@ -32,6 +32,8 @@
         <navbar v-if="
                          $route.name ==='login'    ||
                          $route.name ==='forget_password'  ||
+                         $route.name ==='signup'  ||
+                         $route.name ==='payment'  ||
                          $route.name ==='contact-us'  ||
                          $route.name ==='plan'? false:true" ></navbar>
 
@@ -44,6 +46,8 @@
                          $route.name ==='login'    ||
                          $route.name ==='forget_password'  ||
                          $route.name ==='contact-us'  ||
+                         $route.name ==='payment'  ||
+                         $route.name ==='signup'  ||
                          $route.name ==='plan'? false:true" @click="show_sidebar = !show_sidebar">
                     <div class="hide_show_sidebar" >
                         <img src="/images/menu-options.svg" alt="actor" style="margin-top:30px;margin-left:25px;" width="25">
@@ -55,6 +59,8 @@
                 v-if="show_sidebar &&
                          ($route.name ==='login'    ||
                          $route.name ==='forget_password'  ||
+                         $route.name ==='payment'  ||
+                         $route.name ==='signup'  ||
                          $route.name ==='contact-us'  ||
                          $route.name ==='plan'? false:true)"
                 ></sidebar>

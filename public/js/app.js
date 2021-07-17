@@ -49622,12 +49622,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 
@@ -49902,34 +49896,6 @@ var render = function() {
                             )
                           ])
                         : _vm._e()
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("div", { staticClass: "col-12 col-md-8 offset-md-2" }, [
-                      _c(
-                        "p",
-                        [
-                          _vm._v(
-                            " " +
-                              _vm._s(_vm.$t("register.password_help")) +
-                              "\n                                "
-                          ),
-                          _c(
-                            "router-link",
-                            { attrs: { to: { name: "contact-us" } } },
-                            [
-                              _vm._v(
-                                " " +
-                                  _vm._s(_vm.$t("app_name")) +
-                                  " " +
-                                  _vm._s(_vm.$t("register.support"))
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
                     ])
                   ])
                 ]
@@ -54739,7 +54705,7 @@ var render = function() {
                                                 _vm._l(
                                                   parseInt(
                                                     item.rate / 2 +
-                                                      (item.rate % 2)
+                                                      (parseInt(item.rate) % 2)
                                                   ),
                                                   function(index) {
                                                     return _c(
@@ -54782,7 +54748,7 @@ var render = function() {
                                                   parseInt(
                                                     6 -
                                                       item.rate / 2 -
-                                                      (item.rate % 2)
+                                                      (parseInt(item.rate) % 2)
                                                   ),
                                                   function(index1) {
                                                     return _c(
@@ -58252,7 +58218,8 @@ var render = function() {
                                           [
                                             _vm._l(
                                               parseInt(
-                                                item.rate / 2 + (item.rate % 2)
+                                                item.rate / 2 +
+                                                  (parseInt(item.rate) % 2)
                                               ),
                                               function(index) {
                                                 return _c(
@@ -58291,7 +58258,7 @@ var render = function() {
                                               parseInt(
                                                 6 -
                                                   item.rate / 2 -
-                                                  (item.rate % 2)
+                                                  (parseInt(item.rate) % 2)
                                               ),
                                               function(index) {
                                                 return _c(
@@ -61896,7 +61863,8 @@ var render = function() {
                                           [
                                             _vm._l(
                                               parseInt(
-                                                item.rate / 2 + (item.rate % 2)
+                                                item.rate / 2 +
+                                                  (parseInt(item.rate) % 2)
                                               ),
                                               function(index) {
                                                 return _c(
@@ -61935,7 +61903,7 @@ var render = function() {
                                               parseInt(
                                                 6 -
                                                   item.rate / 2 -
-                                                  (item.rate % 2)
+                                                  (parseInt(item.rate) % 2)
                                               ),
                                               function(index) {
                                                 return _c(
@@ -87447,6 +87415,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -92783,6 +92757,8 @@ var render = function() {
       _vm._v(" "),
       (_vm.$route.name === "login" ||
       _vm.$route.name === "forget_password" ||
+      _vm.$route.name === "signup" ||
+      _vm.$route.name === "payment" ||
       _vm.$route.name === "contact-us" ||
       _vm.$route.name === "plan"
       ? false
@@ -92798,6 +92774,8 @@ var render = function() {
             (_vm.$route.name === "login" ||
             _vm.$route.name === "forget_password" ||
             _vm.$route.name === "contact-us" ||
+            _vm.$route.name === "payment" ||
+            _vm.$route.name === "signup" ||
             _vm.$route.name === "plan"
             ? false
             : true)
@@ -92817,6 +92795,8 @@ var render = function() {
             _vm.show_sidebar &&
             (_vm.$route.name === "login" ||
             _vm.$route.name === "forget_password" ||
+            _vm.$route.name === "payment" ||
+            _vm.$route.name === "signup" ||
             _vm.$route.name === "contact-us" ||
             _vm.$route.name === "plan"
               ? false
