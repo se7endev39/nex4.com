@@ -9,25 +9,17 @@ import Auth from './packages/Auth';
 import Cloudfront from './packages/Cloudfront';
 import VueCookies from 'vue-cookies'
 import VueProgressiveImage from 'vue-progressive-image';
-import Vuetify from 'vuetify'
-// import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Auth);
 Vue.use(Cloudfront);
 Vue.use(VueProgressiveImage);
 Vue.use(VueCookies)
-Vue.use(Vuetify)
-const opts = {}
-export default new Vuetify(opts)
 
 // Get theme name to render a folder of theme
 Vue.use(Helper);
 
 let themeName = Vue.helper.current_theme();
 let themePath = require('./views/' + themeName + '/app');
-var StarRating = require('vue-star-rating');
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('star-rating', StarRating);
 
 axios.defaults.headers.common ['Authorization'] = 'Bearer ' + Vue.auth.getUserInfo('token');
 

@@ -37,13 +37,19 @@
                                             <h2>
                                                 <strong>{{item.name}}</strong>
                                             </h2>
-                                            <small>{{item.genre}}</small>
-                                        </div>
-                                        <div class="overview">
-                                            <p>{{ item.overview | truncate(110, item.overview )}}</p>
-                                        </div>
-
-                                        <div class="control">
+                                            <div class="text-center row margin-left-auto">
+                                                <div class="stars" v-for="index in parseInt(item.rate/2 + item.rate%2)" key="index">
+                                                    <div class="row margin-left-auto margin-right-1">
+                                                        <img src="/themes/default/img/favor.svg" alt="favor" width="17px"  height="17px" v-if="item.cloud == 'local'">
+                                                    </div>
+                                                </div>
+                                                <div class="stars" v-for="index in parseInt(6-item.rate/2-item.rate%2)" key="index">
+                                                    <div class="row margin-left-auto margin-right-1">
+                                                        <img src="/themes/default/img/infavor.svg" alt="favor" width="17px"  height="17px" v-if="item.cloud == 'local'">
+                                                    </div>
+                                                </div>
+                                                <p style="margin-left:4px;font-size:20px;">{{item.rate}}</p>
+                                                <div class="control">
                                             <div class="btn-group">
 
                                                 <router-link role="button" class="btn btn-sm btn-warning" :to="{name: 'movie-player', params: {id: item.id}}">
@@ -101,6 +107,19 @@
 
                                             </div>
                                         </div>
+                                            </div>
+                                            <div class="row margin-left-auto">
+                                                <p class="border-radius-13" v-for="code in (item.genre.split(','))" :key="code.index">{{ code }} </p>
+                                            </div>
+
+
+                                            <!-- <small>{{item.genre}}</small> -->
+                                        </div>
+                                        <div class="overview">
+                                            <p>{{ item.overview | truncate(110, item.overview )}}</p>
+                                        </div>
+
+
 
                                     </div>
 
