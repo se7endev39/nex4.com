@@ -27,16 +27,24 @@
                          $route.name ==='collection' ||
                          $route.name ==='kids'    ||
                          $route.name ==='movies'    ||
-                         $route.name ==='channels' ? true : false" :message="message_alert"></message>
+                         $route.name ==='channels' ? true : false" :message="message_alert" :show_sidebar="show_sidebar"></message>
 
-        <navbar ></navbar>
+        <navbar v-if="
+                         $route.name ==='login'    ||
+                         $route.name ==='forget_password'  ||
+                         $route.name ==='contact-us'  ||
+                         $route.name ==='plan'? false:true" ></navbar>
 
 
         <!-- Nabvar XS -->
 
         <div class="col-12 grid">
             <div class="row">
-                <a @click="show_sidebar = !show_sidebar">
+                <a v-if="
+                         $route.name ==='login'    ||
+                         $route.name ==='forget_password'  ||
+                         $route.name ==='contact-us'  ||
+                         $route.name ==='plan'? false:true" @click="show_sidebar = !show_sidebar">
                     <div class="hide_show_sidebar" >
                         <img src="/images/menu-options.svg" alt="actor" style="margin-top:30px;margin-left:25px;" width="25">
                     </div>
@@ -44,17 +52,21 @@
 
 
                 <sidebar class="col-1 hidden-sm-down sidebar-content"
-                v-if="show_sidebar"
+                v-if="show_sidebar &&
+                         ($route.name ==='login'    ||
+                         $route.name ==='forget_password'  ||
+                         $route.name ==='contact-us'  ||
+                         $route.name ==='plan'? false:true)"
                 ></sidebar>
 
                 <!-- SideBar -->
 
 
-                <router-view class="col p-0 margin-left-auto" v-if="!show_sidebar"></router-view>
-                <router-view class="col p-0 margin-left-13" v-if="show_sidebar"></router-view>
+                <router-view :show_sidebar="show_sidebar" class="col p-0 margin-left-auto" v-if="!show_sidebar"></router-view>
+                <router-view :show_sidebar="show_sidebar" class="col p-0 margin-left-13" v-if="show_sidebar"></router-view>
                 <!-- Router view -->
 
-                <search-page v-if="showSearchPage"></search-page>
+                <search-page v-if="showSearchPage" :show_sidebar="show_sidebar"></search-page>
 
                 <!-- SearchPage -->
 
@@ -72,7 +84,7 @@
                          $route.name ==='collection' ||
                          $route.name ==='kids'    ||
                          $route.name ==='movies'    ||
-                         $route.name ==='channels' ? true : false"></ads-notifcation>
+                         $route.name ==='channels' ? true : false" :show_sidebar="show_sidebar"></ads-notifcation>
 
         <!-- END SIDEBAR IPAD col-sm -->
 

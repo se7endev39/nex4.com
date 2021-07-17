@@ -1,6 +1,6 @@
 <template>
 
-    <div class="show_series show_item" v-if="data.series != null ">
+    <div class="show_series show_item margin-top-4" v-if="data.series != null ">
 
             <collection-modal @hideModalCollectionCancel="HIDE_COLLECTION_MODAL_CANCEL" @hideModalCollectionSave="HIDE_COLLECTION_MODAL_SAVE"
                 :id="collection.id" :poster="collection.poster" :name="collection.name" :type="collection.type" :index="collection.index"></collection-modal>

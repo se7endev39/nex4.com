@@ -8,7 +8,7 @@
                                                           </g></g> </svg>' :navigationEnabled="true" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" easing="ease-in-out" :perPageCustom="[[220,1], [420,1],[768, 1], [1024, 1]]">
                 <slide v-for="(item,index) in data.top" :key="index">
 
-                    <div class="top-item__film-cover" v-if="item.type === 'movie'">
+                    <div class="top-item__film-cover" v-if="item.type === 'series'">
                         <div class="gradient"></div>
                         <img :src="'/storage/backdrops/original_' + item.backdrop" :alt="item.name" width="100%" class="backdrop" v-if="item.cloud == 'local' ">
                         <img :src=" lg_backdrop + item.backdrop" :alt="item.name" width="100%" class="backdrop" v-if="item.cloud == 'aws' ">
@@ -26,13 +26,19 @@
                                             <h2>
                                                 <strong>{{item.name}}</strong>
                                             </h2>
-                                            <small>{{item.genre}}</small>
-                                        </div>
-                                        <div class="overview">
-                                            <p>{{ item.overview | truncate(110, item.overview )}}</p>
-                                        </div>
-
-                                        <div class="control">
+                                            <div class="text-center row margin-left-auto">
+                                                <div class="stars" v-for="index in parseInt(item.rate/2 + item.rate%2)" :key="index">
+                                                    <div class="row margin-left-auto margin-right-1">
+                                                        <img src="/themes/default/img/favor.svg" alt="favor" width="17px"  height="17px" v-if="item.cloud == 'local'">
+                                                    </div>
+                                                </div>
+                                                <div class="stars" v-for="index in parseInt(6-item.rate/2-item.rate%2)" :key="'A'+index">
+                                                    <div class="row margin-left-auto margin-right-1">
+                                                        <img src="/themes/default/img/infavor.svg" alt="favor" width="17px"  height="17px" v-if="item.cloud == 'local'">
+                                                    </div>
+                                                </div>
+                                                <p style="margin-left:4px;font-size:20px;">{{item.rate}}</p>
+                                                <div class="control">
                                             <div class="btn-group">
 
                                                 <router-link role="button" class="btn btn-sm btn-warning" :to="{name: 'movie-player', params: {id: item.id}}">
@@ -90,6 +96,19 @@
 
                                             </div>
                                         </div>
+                                            </div>
+                                            <div class="row margin-left-auto">
+                                                <p class="border-radius-13" v-for="code in (item.genre.split(','))" :key="code.index">{{ code }} </p>
+                                            </div>
+
+
+                                            <!-- <small>{{item.genre}}</small> -->
+                                        </div>
+                                        <div class="overview">
+                                            <p>{{ item.overview | truncate(110, item.overview )}}</p>
+                                        </div>
+
+
 
                                     </div>
 

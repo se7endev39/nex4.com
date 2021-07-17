@@ -9,7 +9,9 @@
   z-index: 10000001;
 
 }
-
+.side_bar{
+    margin-left: 3rem;
+}
 .sidebar__list {
     margin-top: 8rem;
     .left_homepage {
@@ -74,6 +76,9 @@
     margin-left: 3rem;
 }
 @media (max-width: 576px) {
+    .sidebar__list {
+        margin-top: 0rem!important;
+    }
     .margin-left-13 {
         margin-left: 0rem!important;
     }

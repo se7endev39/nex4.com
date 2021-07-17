@@ -10242,6 +10242,7 @@ a.text-gray-dark:hover {
 
   .top-item .VueCarousel-wrapper {
     width: 120%;
+    background: #0d163c;
     height: auto !important;
     position: relative !important;
     overflow: hidden;
@@ -11722,7 +11723,7 @@ button.vjs-control.vjs-button.icon-vidoejs-exit {
 }
 
 .alertify-logs {
-  z-index: 1000001;
+  z-index: 10000003;
 }
 
 .wolf-player {
@@ -13750,7 +13751,7 @@ button.vjs-control.vjs-button.icon-vidoejs-exit {
 }
 
 .navbar-content .nav-md .bg-inverse .navbar-brand {
-  width: 80px;
+  width: 60px;
 }
 
 .navbar-content .nav-md .bg-inverse .navbar-nav a {
@@ -13853,6 +13854,10 @@ button.vjs-control.vjs-button.icon-vidoejs-exit {
   z-index: 10000001;
 }
 
+.side_bar {
+  margin-left: 3rem;
+}
+
 .sidebar__list {
   margin-top: 8rem;
 }
@@ -13929,6 +13934,10 @@ button.vjs-control.vjs-button.icon-vidoejs-exit {
 }
 
 @media (max-width: 576px) {
+  .sidebar__list {
+    margin-top: 0rem !important;
+  }
+
   .margin-left-13 {
     margin-left: 0rem !important;
   }
@@ -14317,8 +14326,12 @@ body {
   min-height: 75vh;
 }
 
+.margin-top-4 {
+  margin-top: 4rem;
+}
+
 .xjkax {
-  margin-top: 100px;
+  margin-top: 170px;
 }
 
 .xs221 {

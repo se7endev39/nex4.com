@@ -6,9 +6,7 @@
                          $route.name ==='movies'    ||
                          $route.name ==='channels' ? true : false">
 
-        <div class="col-12 search-page margin-left-13">
-
-
+        <div class="col-12 search-page" :class="{ 'margin-left-13' :show_sidebar}">
             <collection-modal @hideModalCollectionCancel="HIDE_COLLECTION_MODAL_CANCEL"
                               @hideModalCollectionSave="HIDE_COLLECTION_MODAL_SAVE"
                               :id="collection.id" :poster="collection.poster" :name="collection.name"
@@ -406,6 +404,9 @@
     import notfound from "../utils/notfound"
 
     export default {
+        props: {
+          show_sidebar: Boolean
+        } ,
         name: 'search',
         data() {
             return {

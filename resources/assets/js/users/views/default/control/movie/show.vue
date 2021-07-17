@@ -18,8 +18,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="show_item" v-if="data.movie != null ">
+        <div class="show_item margin-top-4" v-if="data.movie != null " :class="{ 'margin-left-13' :show_sidebar}">
 
             <collection-modal @hideModalCollectionCancel="HIDE_COLLECTION_MODAL_CANCEL"
                               @hideModalCollectionSave="HIDE_COLLECTION_MODAL_SAVE"
@@ -317,6 +316,9 @@
     const plyr = require("plyr");
     require("plyr/dist/plyr.css");
     export default {
+        props: {
+          show_sidebar: Boolean
+        } ,
         name: "movie-show",
 
         data() {

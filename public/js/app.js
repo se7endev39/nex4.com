@@ -54638,554 +54638,504 @@ var render = function() {
                       },
                       _vm._l(_vm.data.top, function(item, index) {
                         return _c("slide", { key: index }, [
-                          item.type === "movie"
-                            ? _c(
-                                "div",
-                                { staticClass: "top-item__film-cover" },
+                          _c(
+                            "div",
+                            { staticClass: "top-item__film-cover" },
+                            [
+                              _c("div", { staticClass: "gradient" }),
+                              _vm._v(" "),
+                              item.cloud == "local"
+                                ? _c("img", {
+                                    staticClass: "backdrop",
+                                    attrs: {
+                                      src:
+                                        "/storage/backdrops/original_" +
+                                        item.backdrop,
+                                      alt: item.name,
+                                      width: "100%"
+                                    }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              item.cloud == "aws"
+                                ? _c("img", {
+                                    staticClass: "backdrop",
+                                    attrs: {
+                                      src: _vm.lg_backdrop + item.backdrop,
+                                      alt: item.name,
+                                      width: "100%"
+                                    }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  attrs: {
+                                    to: {
+                                      name: "show-movie",
+                                      params: { id: item.id }
+                                    }
+                                  }
+                                },
                                 [
-                                  _c("div", { staticClass: "gradient" }),
-                                  _vm._v(" "),
-                                  item.cloud == "local"
-                                    ? _c("img", {
-                                        staticClass: "backdrop",
-                                        attrs: {
-                                          src:
-                                            "/storage/backdrops/original_" +
-                                            item.backdrop,
-                                          alt: item.name,
-                                          width: "100%"
-                                        }
-                                      })
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  item.cloud == "aws"
-                                    ? _c("img", {
-                                        staticClass: "backdrop",
-                                        attrs: {
-                                          src: _vm.lg_backdrop + item.backdrop,
-                                          alt: item.name,
-                                          width: "100%"
-                                        }
-                                      })
-                                    : _vm._e(),
-                                  _vm._v(" "),
                                   _c(
-                                    "router-link",
-                                    {
-                                      attrs: {
-                                        to: {
-                                          name: "show-movie",
-                                          params: { id: item.id }
-                                        }
-                                      }
-                                    },
+                                    "div",
+                                    { staticClass: "top-item__film-ovarlay" },
                                     [
                                       _c(
                                         "div",
                                         {
-                                          staticClass: "top-item__film-ovarlay"
+                                          staticClass: "top-item__film-details"
                                         },
                                         [
                                           _c(
                                             "div",
                                             {
                                               staticClass:
-                                                "top-item__film-details"
+                                                "hidden-sm-down poster"
                                             },
                                             [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "hidden-sm-down poster"
-                                                },
-                                                [
-                                                  item.cloud == "local"
-                                                    ? _c("img", {
-                                                        staticClass: "poster",
-                                                        attrs: {
-                                                          src:
-                                                            "/storage/posters/300_" +
-                                                            item.poster,
-                                                          alt: item.name
-                                                        }
-                                                      })
-                                                    : _vm._e(),
-                                                  _vm._v(" "),
-                                                  item.cloud == "aws"
-                                                    ? _c("img", {
-                                                        staticClass: "poster",
-                                                        attrs: {
-                                                          src:
-                                                            _vm.sm_poster +
-                                                            item.poster,
-                                                          alt: item.name
-                                                        }
-                                                      })
-                                                    : _vm._e()
-                                                ]
-                                              ),
+                                              item.cloud == "local"
+                                                ? _c("img", {
+                                                    staticClass: "poster",
+                                                    attrs: {
+                                                      src:
+                                                        "/storage/posters/300_" +
+                                                        item.poster,
+                                                      alt: item.name
+                                                    }
+                                                  })
+                                                : _vm._e(),
                                               _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                { staticClass: "title" },
-                                                [
-                                                  _c("h2", [
-                                                    _c("strong", [
-                                                      _vm._v(_vm._s(item.name))
-                                                    ])
-                                                  ]),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "text-center row margin-left-auto"
-                                                    },
-                                                    [
-                                                      _vm._l(
-                                                        parseInt(
-                                                          item.rate / 2 +
-                                                            (item.rate % 2)
-                                                        ),
-                                                        function(index) {
-                                                          return _c(
-                                                            "div",
-                                                            {
-                                                              key: "index",
-                                                              staticClass:
-                                                                "stars"
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "div",
-                                                                {
-                                                                  staticClass:
-                                                                    "row margin-left-auto margin-right-1"
-                                                                },
-                                                                [
-                                                                  item.cloud ==
-                                                                  "local"
-                                                                    ? _c(
-                                                                        "img",
-                                                                        {
-                                                                          attrs: {
-                                                                            src:
-                                                                              "/themes/default/img/favor.svg",
-                                                                            alt:
-                                                                              "favor",
-                                                                            width:
-                                                                              "17px",
-                                                                            height:
-                                                                              "17px"
-                                                                          }
-                                                                        }
-                                                                      )
-                                                                    : _vm._e()
-                                                                ]
-                                                              )
-                                                            ]
-                                                          )
-                                                        }
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _vm._l(
-                                                        parseInt(
-                                                          6 -
-                                                            item.rate / 2 -
-                                                            (item.rate % 2)
-                                                        ),
-                                                        function(index) {
-                                                          return _c(
-                                                            "div",
-                                                            {
-                                                              key: "index",
-                                                              staticClass:
-                                                                "stars"
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "div",
-                                                                {
-                                                                  staticClass:
-                                                                    "row margin-left-auto margin-right-1"
-                                                                },
-                                                                [
-                                                                  item.cloud ==
-                                                                  "local"
-                                                                    ? _c(
-                                                                        "img",
-                                                                        {
-                                                                          attrs: {
-                                                                            src:
-                                                                              "/themes/default/img/infavor.svg",
-                                                                            alt:
-                                                                              "favor",
-                                                                            width:
-                                                                              "17px",
-                                                                            height:
-                                                                              "17px"
-                                                                          }
-                                                                        }
-                                                                      )
-                                                                    : _vm._e()
-                                                                ]
-                                                              )
-                                                            ]
-                                                          )
-                                                        }
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "p",
-                                                        {
-                                                          staticStyle: {
-                                                            "margin-left":
-                                                              "4px",
-                                                            "font-size": "20px"
-                                                          }
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            _vm._s(item.rate)
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass: "control"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "btn-group"
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "router-link",
-                                                                {
-                                                                  staticClass:
-                                                                    "btn btn-sm btn-warning",
+                                              item.cloud == "aws"
+                                                ? _c("img", {
+                                                    staticClass: "poster",
+                                                    attrs: {
+                                                      src:
+                                                        _vm.sm_poster +
+                                                        item.poster,
+                                                      alt: item.name
+                                                    }
+                                                  })
+                                                : _vm._e()
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("div", { staticClass: "title" }, [
+                                            _c("h2", [
+                                              _c("strong", [
+                                                _vm._v(_vm._s(item.name))
+                                              ])
+                                            ]),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "text-center row margin-left-auto"
+                                              },
+                                              [
+                                                _vm._l(
+                                                  parseInt(
+                                                    item.rate / 2 +
+                                                      (item.rate % 2)
+                                                  ),
+                                                  function(index) {
+                                                    return _c(
+                                                      "div",
+                                                      {
+                                                        key: index,
+                                                        staticClass: "stars"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "row margin-left-auto margin-right-1"
+                                                          },
+                                                          [
+                                                            item.cloud ==
+                                                            "local"
+                                                              ? _c("img", {
                                                                   attrs: {
-                                                                    role:
-                                                                      "button",
-                                                                    to: {
-                                                                      name:
-                                                                        "movie-player",
-                                                                      params: {
-                                                                        id:
-                                                                          item.id
-                                                                      }
-                                                                    }
+                                                                    src:
+                                                                      "/themes/default/img/favor.svg",
+                                                                    alt:
+                                                                      "favor",
+                                                                    width:
+                                                                      "17px",
+                                                                    height:
+                                                                      "17px"
                                                                   }
+                                                                })
+                                                              : _vm._e()
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  }
+                                                ),
+                                                _vm._v(" "),
+                                                _vm._l(
+                                                  parseInt(
+                                                    6 -
+                                                      item.rate / 2 -
+                                                      (item.rate % 2)
+                                                  ),
+                                                  function(index1) {
+                                                    return _c(
+                                                      "div",
+                                                      {
+                                                        key: "A" + index1,
+                                                        staticClass: "stars"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "row margin-left-auto margin-right-1"
+                                                          },
+                                                          [
+                                                            item.cloud ==
+                                                            "local"
+                                                              ? _c("img", {
+                                                                  attrs: {
+                                                                    src:
+                                                                      "/themes/default/img/infavor.svg",
+                                                                    alt:
+                                                                      "favor",
+                                                                    width:
+                                                                      "17px",
+                                                                    height:
+                                                                      "17px"
+                                                                  }
+                                                                })
+                                                              : _vm._e()
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  }
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  {
+                                                    staticStyle: {
+                                                      "margin-left": "4px",
+                                                      "font-size": "20px"
+                                                    }
+                                                  },
+                                                  [_vm._v(_vm._s(item.rate))]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "control" },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass: "btn-group"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "router-link",
+                                                          {
+                                                            staticClass:
+                                                              "btn btn-sm btn-warning",
+                                                            attrs: {
+                                                              role: "button",
+                                                              to: {
+                                                                name:
+                                                                  "movie-player",
+                                                                params: {
+                                                                  id: item.id
+                                                                }
+                                                              }
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                                    " +
+                                                                _vm._s(
+                                                                  _vm.$t(
+                                                                    "home.play"
+                                                                  )
+                                                                ) +
+                                                                "\n\n                                                    "
+                                                            ),
+                                                            _c(
+                                                              "svg",
+                                                              {
+                                                                staticClass:
+                                                                  "top-play-svg",
+                                                                staticStyle: {
+                                                                  "enable-background":
+                                                                    "new 0 0 191.255 191.255"
                                                                 },
-                                                                [
-                                                                  _vm._v(
-                                                                    "\n                                                    " +
-                                                                      _vm._s(
-                                                                        _vm.$t(
-                                                                          "home.play"
-                                                                        )
-                                                                      ) +
-                                                                      "\n\n                                                    "
-                                                                  ),
-                                                                  _c(
-                                                                    "svg",
-                                                                    {
-                                                                      staticClass:
-                                                                        "top-play-svg",
-                                                                      staticStyle: {
-                                                                        "enable-background":
-                                                                          "new 0 0 191.255 191.255"
-                                                                      },
-                                                                      attrs: {
-                                                                        xmlns:
-                                                                          "http://www.w3.org/2000/svg",
-                                                                        "xmlns:xlink":
-                                                                          "http://www.w3.org/1999/xlink",
-                                                                        version:
-                                                                          "1.1",
-                                                                        x:
-                                                                          "0px",
-                                                                        y:
-                                                                          "0px",
-                                                                        viewBox:
-                                                                          "0 0 191.255 191.255",
-                                                                        "xml:space":
-                                                                          "preserve",
-                                                                        width:
-                                                                          "100%"
-                                                                      }
+                                                                attrs: {
+                                                                  xmlns:
+                                                                    "http://www.w3.org/2000/svg",
+                                                                  "xmlns:xlink":
+                                                                    "http://www.w3.org/1999/xlink",
+                                                                  version:
+                                                                    "1.1",
+                                                                  x: "0px",
+                                                                  y: "0px",
+                                                                  viewBox:
+                                                                    "0 0 191.255 191.255",
+                                                                  "xml:space":
+                                                                    "preserve",
+                                                                  width: "100%"
+                                                                }
+                                                              },
+                                                              [
+                                                                _c("g", [
+                                                                  _c("path", {
+                                                                    staticClass:
+                                                                      "active-path",
+                                                                    attrs: {
+                                                                      d:
+                                                                        "M162.929,66.612c-2.814-1.754-6.514-0.896-8.267,1.917s-0.895,6.513,1.917,8.266c6.544,4.081,10.45,11.121,10.45,18.833  s-3.906,14.752-10.45,18.833l-98.417,61.365c-6.943,4.329-15.359,4.542-22.512,0.573c-7.154-3.97-11.425-11.225-11.425-19.406  V34.262c0-8.181,4.271-15.436,11.425-19.406c7.153-3.969,15.569-3.756,22.512,0.573l57.292,35.723  c2.813,1.752,6.513,0.895,8.267-1.917c1.753-2.812,0.895-6.513-1.917-8.266L64.512,5.247c-10.696-6.669-23.661-7-34.685-0.883  C18.806,10.48,12.226,21.657,12.226,34.262v122.73c0,12.605,6.58,23.782,17.602,29.898c5.25,2.913,10.939,4.364,16.616,4.364  c6.241,0,12.467-1.754,18.068-5.247l98.417-61.365c10.082-6.287,16.101-17.133,16.101-29.015S173.011,72.899,162.929,66.612z",
+                                                                      "data-original":
+                                                                        "#000000",
+                                                                      "data-old_color":
+                                                                        "#ffffff",
+                                                                      fill:
+                                                                        "#ffffff"
+                                                                    }
+                                                                  })
+                                                                ])
+                                                              ]
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        !item.is_favorite
+                                                          ? _c(
+                                                              "button",
+                                                              {
+                                                                staticClass:
+                                                                  "btn btn-sm btn-plus btn-circle btn-success ml-1",
+                                                                on: {
+                                                                  click: function(
+                                                                    $event
+                                                                  ) {
+                                                                    $event.preventDefault()
+                                                                    return _vm.SHOW_COLLECTION_MODAL(
+                                                                      item.id,
+                                                                      "/storage/backdrops/600_" +
+                                                                        item.backdrop,
+                                                                      item.name,
+                                                                      "movie",
+                                                                      null,
+                                                                      index
+                                                                    )
+                                                                  }
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "\n                                                    " +
+                                                                    _vm._s(
+                                                                      _vm.$t(
+                                                                        "home.my_list"
+                                                                      )
+                                                                    ) +
+                                                                    "\n\n                                                    "
+                                                                ),
+                                                                _c(
+                                                                  "svg",
+                                                                  {
+                                                                    staticClass:
+                                                                      "top-collection-svg",
+                                                                    staticStyle: {
+                                                                      "enable-background":
+                                                                        "new 0 0 31.444 31.444"
                                                                     },
-                                                                    [
+                                                                    attrs: {
+                                                                      xmlns:
+                                                                        "http://www.w3.org/2000/svg",
+                                                                      "xmlns:xlink":
+                                                                        "http://www.w3.org/1999/xlink",
+                                                                      version:
+                                                                        "1.1",
+                                                                      x: "0px",
+                                                                      y: "0px",
+                                                                      viewBox:
+                                                                        "0 0 31.444 31.444",
+                                                                      "xml:space":
+                                                                        "preserve",
+                                                                      width:
+                                                                        "100%"
+                                                                    }
+                                                                  },
+                                                                  [
+                                                                    _c("g", [
+                                                                      _c(
+                                                                        "path",
+                                                                        {
+                                                                          staticClass:
+                                                                            "active-path",
+                                                                          attrs: {
+                                                                            d:
+                                                                              "M1.119,16.841c-0.619,0-1.111-0.508-1.111-1.127c0-0.619,0.492-1.111,1.111-1.111h13.475V1.127  C14.595,0.508,15.103,0,15.722,0c0.619,0,1.111,0.508,1.111,1.127v13.476h13.475c0.619,0,1.127,0.492,1.127,1.111  c0,0.619-0.508,1.127-1.127,1.127H16.833v13.476c0,0.619-0.492,1.127-1.111,1.127c-0.619,0-1.127-0.508-1.127-1.127V16.841H1.119z",
+                                                                            "data-original":
+                                                                              "#ffffff",
+                                                                            "data-old_color":
+                                                                              "#ffffff",
+                                                                            fill:
+                                                                              "#ffffff"
+                                                                          }
+                                                                        }
+                                                                      )
+                                                                    ])
+                                                                  ]
+                                                                )
+                                                              ]
+                                                            )
+                                                          : _vm._e(),
+                                                        _vm._v(" "),
+                                                        item.is_favorite
+                                                          ? _c(
+                                                              "button",
+                                                              {
+                                                                staticClass:
+                                                                  "btn btn-sm btn-plus btn-circle btn-danger ml-1",
+                                                                on: {
+                                                                  click: function(
+                                                                    $event
+                                                                  ) {
+                                                                    $event.preventDefault()
+                                                                    return _vm.DELETE_FROM_COLLECTION(
+                                                                      item.id,
+                                                                      "movie",
+                                                                      null,
+                                                                      index
+                                                                    )
+                                                                  }
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "\n                                                    " +
+                                                                    _vm._s(
+                                                                      _vm.$t(
+                                                                        "home.my_list"
+                                                                      )
+                                                                    ) +
+                                                                    "\n\n                                                    "
+                                                                ),
+                                                                _c(
+                                                                  "svg",
+                                                                  {
+                                                                    staticClass:
+                                                                      "top-collection-svg",
+                                                                    staticStyle: {
+                                                                      "enable-background":
+                                                                        "new 0 0 511.999 511.999"
+                                                                    },
+                                                                    attrs: {
+                                                                      version:
+                                                                        "1.1",
+                                                                      xmlns:
+                                                                        "http://www.w3.org/2000/svg",
+                                                                      "xmlns:xlink":
+                                                                        "http://www.w3.org/1999/xlink",
+                                                                      x: "0px",
+                                                                      y: "0px",
+                                                                      viewBox:
+                                                                        "0 0 511.999 511.999",
+                                                                      width:
+                                                                        "100%",
+                                                                      "xml:space":
+                                                                        "preserve"
+                                                                    }
+                                                                  },
+                                                                  [
+                                                                    _c("g", [
                                                                       _c("g", [
                                                                         _c(
                                                                           "path",
                                                                           {
-                                                                            staticClass:
-                                                                              "active-path",
                                                                             attrs: {
                                                                               d:
-                                                                                "M162.929,66.612c-2.814-1.754-6.514-0.896-8.267,1.917s-0.895,6.513,1.917,8.266c6.544,4.081,10.45,11.121,10.45,18.833  s-3.906,14.752-10.45,18.833l-98.417,61.365c-6.943,4.329-15.359,4.542-22.512,0.573c-7.154-3.97-11.425-11.225-11.425-19.406  V34.262c0-8.181,4.271-15.436,11.425-19.406c7.153-3.969,15.569-3.756,22.512,0.573l57.292,35.723  c2.813,1.752,6.513,0.895,8.267-1.917c1.753-2.812,0.895-6.513-1.917-8.266L64.512,5.247c-10.696-6.669-23.661-7-34.685-0.883  C18.806,10.48,12.226,21.657,12.226,34.262v122.73c0,12.605,6.58,23.782,17.602,29.898c5.25,2.913,10.939,4.364,16.616,4.364  c6.241,0,12.467-1.754,18.068-5.247l98.417-61.365c10.082-6.287,16.101-17.133,16.101-29.015S173.011,72.899,162.929,66.612z",
-                                                                              "data-original":
-                                                                                "#000000",
-                                                                              "data-old_color":
-                                                                                "#ffffff",
+                                                                                "M506.231,75.508c-7.689-7.69-20.158-7.69-27.849,0l-319.21,319.211L33.617,269.163c-7.689-7.691-20.158-7.691-27.849,0\n                                                                                        c-7.69,7.69-7.69,20.158,0,27.849l139.481,139.481c7.687,7.687,20.16,7.689,27.849,0l333.133-333.136\n                                                                                        C513.921,95.666,513.921,83.198,506.231,75.508z",
                                                                               fill:
                                                                                 "#ffffff"
                                                                             }
                                                                           }
                                                                         )
                                                                       ])
-                                                                    ]
-                                                                  )
-                                                                ]
-                                                              ),
-                                                              _vm._v(" "),
-                                                              !item.is_favorite
-                                                                ? _c(
-                                                                    "button",
-                                                                    {
-                                                                      staticClass:
-                                                                        "btn btn-sm btn-plus btn-circle btn-success ml-1",
-                                                                      on: {
-                                                                        click: function(
-                                                                          $event
-                                                                        ) {
-                                                                          $event.preventDefault()
-                                                                          return _vm.SHOW_COLLECTION_MODAL(
-                                                                            item.id,
-                                                                            "/storage/backdrops/600_" +
-                                                                              item.backdrop,
-                                                                            item.name,
-                                                                            "movie",
-                                                                            null,
-                                                                            index
-                                                                          )
-                                                                        }
-                                                                      }
-                                                                    },
-                                                                    [
-                                                                      _vm._v(
-                                                                        "\n                                                    " +
-                                                                          _vm._s(
-                                                                            _vm.$t(
-                                                                              "home.my_list"
-                                                                            )
-                                                                          ) +
-                                                                          "\n\n                                                    "
-                                                                      ),
-                                                                      _c(
-                                                                        "svg",
-                                                                        {
-                                                                          staticClass:
-                                                                            "top-collection-svg",
-                                                                          staticStyle: {
-                                                                            "enable-background":
-                                                                              "new 0 0 31.444 31.444"
-                                                                          },
-                                                                          attrs: {
-                                                                            xmlns:
-                                                                              "http://www.w3.org/2000/svg",
-                                                                            "xmlns:xlink":
-                                                                              "http://www.w3.org/1999/xlink",
-                                                                            version:
-                                                                              "1.1",
-                                                                            x:
-                                                                              "0px",
-                                                                            y:
-                                                                              "0px",
-                                                                            viewBox:
-                                                                              "0 0 31.444 31.444",
-                                                                            "xml:space":
-                                                                              "preserve",
-                                                                            width:
-                                                                              "100%"
-                                                                          }
-                                                                        },
-                                                                        [
-                                                                          _c(
-                                                                            "g",
-                                                                            [
-                                                                              _c(
-                                                                                "path",
-                                                                                {
-                                                                                  staticClass:
-                                                                                    "active-path",
-                                                                                  attrs: {
-                                                                                    d:
-                                                                                      "M1.119,16.841c-0.619,0-1.111-0.508-1.111-1.127c0-0.619,0.492-1.111,1.111-1.111h13.475V1.127  C14.595,0.508,15.103,0,15.722,0c0.619,0,1.111,0.508,1.111,1.127v13.476h13.475c0.619,0,1.127,0.492,1.127,1.111  c0,0.619-0.508,1.127-1.127,1.127H16.833v13.476c0,0.619-0.492,1.127-1.111,1.127c-0.619,0-1.127-0.508-1.127-1.127V16.841H1.119z",
-                                                                                    "data-original":
-                                                                                      "#ffffff",
-                                                                                    "data-old_color":
-                                                                                      "#ffffff",
-                                                                                    fill:
-                                                                                      "#ffffff"
-                                                                                  }
-                                                                                }
-                                                                              )
-                                                                            ]
-                                                                          )
-                                                                        ]
-                                                                      )
-                                                                    ]
-                                                                  )
-                                                                : _vm._e(),
-                                                              _vm._v(" "),
-                                                              item.is_favorite
-                                                                ? _c(
-                                                                    "button",
-                                                                    {
-                                                                      staticClass:
-                                                                        "btn btn-sm btn-plus btn-circle btn-danger ml-1",
-                                                                      on: {
-                                                                        click: function(
-                                                                          $event
-                                                                        ) {
-                                                                          $event.preventDefault()
-                                                                          return _vm.DELETE_FROM_COLLECTION(
-                                                                            item.id,
-                                                                            "movie",
-                                                                            null,
-                                                                            index
-                                                                          )
-                                                                        }
-                                                                      }
-                                                                    },
-                                                                    [
-                                                                      _vm._v(
-                                                                        "\n                                                    " +
-                                                                          _vm._s(
-                                                                            _vm.$t(
-                                                                              "home.my_list"
-                                                                            )
-                                                                          ) +
-                                                                          "\n\n                                                    "
-                                                                      ),
-                                                                      _c(
-                                                                        "svg",
-                                                                        {
-                                                                          staticClass:
-                                                                            "top-collection-svg",
-                                                                          staticStyle: {
-                                                                            "enable-background":
-                                                                              "new 0 0 511.999 511.999"
-                                                                          },
-                                                                          attrs: {
-                                                                            version:
-                                                                              "1.1",
-                                                                            xmlns:
-                                                                              "http://www.w3.org/2000/svg",
-                                                                            "xmlns:xlink":
-                                                                              "http://www.w3.org/1999/xlink",
-                                                                            x:
-                                                                              "0px",
-                                                                            y:
-                                                                              "0px",
-                                                                            viewBox:
-                                                                              "0 0 511.999 511.999",
-                                                                            width:
-                                                                              "100%",
-                                                                            "xml:space":
-                                                                              "preserve"
-                                                                          }
-                                                                        },
-                                                                        [
-                                                                          _c(
-                                                                            "g",
-                                                                            [
-                                                                              _c(
-                                                                                "g",
-                                                                                [
-                                                                                  _c(
-                                                                                    "path",
-                                                                                    {
-                                                                                      attrs: {
-                                                                                        d:
-                                                                                          "M506.231,75.508c-7.689-7.69-20.158-7.69-27.849,0l-319.21,319.211L33.617,269.163c-7.689-7.691-20.158-7.691-27.849,0\n                                                                                        c-7.69,7.69-7.69,20.158,0,27.849l139.481,139.481c7.687,7.687,20.16,7.689,27.849,0l333.133-333.136\n                                                                                        C513.921,95.666,513.921,83.198,506.231,75.508z",
-                                                                                        fill:
-                                                                                          "#ffffff"
-                                                                                      }
-                                                                                    }
-                                                                                  )
-                                                                                ]
-                                                                              )
-                                                                            ]
-                                                                          )
-                                                                        ]
-                                                                      )
-                                                                    ]
-                                                                  )
-                                                                : _vm._e()
-                                                            ],
-                                                            1
-                                                          )
-                                                        ]
-                                                      )
-                                                    ],
-                                                    2
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "row margin-left-auto"
-                                                    },
-                                                    _vm._l(
-                                                      item.genre.split(","),
-                                                      function(code) {
-                                                        return _c(
-                                                          "p",
-                                                          {
-                                                            key: code.index,
-                                                            staticClass:
-                                                              "border-radius-13"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              _vm._s(code) + " "
+                                                                    ])
+                                                                  ]
+                                                                )
+                                                              ]
                                                             )
-                                                          ]
-                                                        )
-                                                      }
-                                                    ),
-                                                    0
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                { staticClass: "overview" },
-                                                [
-                                                  _c("p", [
-                                                    _vm._v(
-                                                      _vm._s(
-                                                        _vm._f("truncate")(
-                                                          item.overview,
-                                                          110,
-                                                          item.overview
-                                                        )
-                                                      )
+                                                          : _vm._e()
+                                                      ],
+                                                      1
                                                     )
-                                                  ])
-                                                ]
-                                              )
+                                                  ]
+                                                )
+                                              ],
+                                              2
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "row margin-left-auto"
+                                              },
+                                              _vm._l(
+                                                item.genre.split(","),
+                                                function(code) {
+                                                  return _c(
+                                                    "p",
+                                                    {
+                                                      key: code.index,
+                                                      staticClass:
+                                                        "border-radius-13"
+                                                    },
+                                                    [_vm._v(_vm._s(code) + " ")]
+                                                  )
+                                                }
+                                              ),
+                                              0
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "overview" },
+                                            [
+                                              _c("p", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm._f("truncate")(
+                                                      item.overview,
+                                                      110,
+                                                      item.overview
+                                                    )
+                                                  )
+                                                )
+                                              ])
                                             ]
                                           )
                                         ]
                                       )
                                     ]
                                   )
-                                ],
-                                1
+                                ]
                               )
-                            : _vm._e(),
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
                           item.type === "series"
                             ? _c(
@@ -58308,7 +58258,7 @@ var render = function() {
                                                 return _c(
                                                   "div",
                                                   {
-                                                    key: "index",
+                                                    key: index,
                                                     staticClass: "stars"
                                                   },
                                                   [
@@ -58347,7 +58297,7 @@ var render = function() {
                                                 return _c(
                                                   "div",
                                                   {
-                                                    key: "index",
+                                                    key: "A" + index,
                                                     staticClass: "stars"
                                                   },
                                                   [
@@ -60036,7 +59986,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -60045,6 +59994,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var plyr = __webpack_require__(58);
 __webpack_require__(59);
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        show_sidebar: Boolean
+    },
     name: "movie-show",
 
     data: function data() {
@@ -60255,7 +60207,10 @@ var render = function() {
     _vm.data.movie != null
       ? _c(
           "div",
-          { staticClass: "show_item" },
+          {
+            staticClass: "show_item margin-top-4",
+            class: { "margin-left-13": _vm.show_sidebar }
+          },
           [
             _c("collection-modal", {
               attrs: {
@@ -61590,6 +61545,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -61825,7 +61799,7 @@ var render = function() {
               },
               _vm._l(_vm.data.top, function(item, index) {
                 return _c("slide", { key: index }, [
-                  item.type === "movie"
+                  item.type === "series"
                     ? _c(
                         "div",
                         { staticClass: "top-item__film-cover" },
@@ -61913,9 +61887,364 @@ var render = function() {
                                           ])
                                         ]),
                                         _vm._v(" "),
-                                        _c("small", [
-                                          _vm._v(_vm._s(item.genre))
-                                        ])
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "text-center row margin-left-auto"
+                                          },
+                                          [
+                                            _vm._l(
+                                              parseInt(
+                                                item.rate / 2 + (item.rate % 2)
+                                              ),
+                                              function(index) {
+                                                return _c(
+                                                  "div",
+                                                  {
+                                                    key: index,
+                                                    staticClass: "stars"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "row margin-left-auto margin-right-1"
+                                                      },
+                                                      [
+                                                        item.cloud == "local"
+                                                          ? _c("img", {
+                                                              attrs: {
+                                                                src:
+                                                                  "/themes/default/img/favor.svg",
+                                                                alt: "favor",
+                                                                width: "17px",
+                                                                height: "17px"
+                                                              }
+                                                            })
+                                                          : _vm._e()
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              }
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._l(
+                                              parseInt(
+                                                6 -
+                                                  item.rate / 2 -
+                                                  (item.rate % 2)
+                                              ),
+                                              function(index) {
+                                                return _c(
+                                                  "div",
+                                                  {
+                                                    key: "A" + index,
+                                                    staticClass: "stars"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "row margin-left-auto margin-right-1"
+                                                      },
+                                                      [
+                                                        item.cloud == "local"
+                                                          ? _c("img", {
+                                                              attrs: {
+                                                                src:
+                                                                  "/themes/default/img/infavor.svg",
+                                                                alt: "favor",
+                                                                width: "17px",
+                                                                height: "17px"
+                                                              }
+                                                            })
+                                                          : _vm._e()
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              }
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "p",
+                                              {
+                                                staticStyle: {
+                                                  "margin-left": "4px",
+                                                  "font-size": "20px"
+                                                }
+                                              },
+                                              [_vm._v(_vm._s(item.rate))]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "control" },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "btn-group" },
+                                                  [
+                                                    _c(
+                                                      "router-link",
+                                                      {
+                                                        staticClass:
+                                                          "btn btn-sm btn-warning",
+                                                        attrs: {
+                                                          role: "button",
+                                                          to: {
+                                                            name:
+                                                              "movie-player",
+                                                            params: {
+                                                              id: item.id
+                                                            }
+                                                          }
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                                " +
+                                                            _vm._s(
+                                                              _vm.$t(
+                                                                "home.play"
+                                                              )
+                                                            ) +
+                                                            "\n\n                                                "
+                                                        ),
+                                                        _c(
+                                                          "svg",
+                                                          {
+                                                            staticClass:
+                                                              "top-play-svg",
+                                                            staticStyle: {
+                                                              "enable-background":
+                                                                "new 0 0 191.255 191.255"
+                                                            },
+                                                            attrs: {
+                                                              xmlns:
+                                                                "http://www.w3.org/2000/svg",
+                                                              "xmlns:xlink":
+                                                                "http://www.w3.org/1999/xlink",
+                                                              version: "1.1",
+                                                              x: "0px",
+                                                              y: "0px",
+                                                              viewBox:
+                                                                "0 0 191.255 191.255",
+                                                              "xml:space":
+                                                                "preserve",
+                                                              width: "100%"
+                                                            }
+                                                          },
+                                                          [
+                                                            _c("g", [
+                                                              _c("path", {
+                                                                staticClass:
+                                                                  "active-path",
+                                                                attrs: {
+                                                                  d:
+                                                                    "M162.929,66.612c-2.814-1.754-6.514-0.896-8.267,1.917s-0.895,6.513,1.917,8.266c6.544,4.081,10.45,11.121,10.45,18.833  s-3.906,14.752-10.45,18.833l-98.417,61.365c-6.943,4.329-15.359,4.542-22.512,0.573c-7.154-3.97-11.425-11.225-11.425-19.406  V34.262c0-8.181,4.271-15.436,11.425-19.406c7.153-3.969,15.569-3.756,22.512,0.573l57.292,35.723  c2.813,1.752,6.513,0.895,8.267-1.917c1.753-2.812,0.895-6.513-1.917-8.266L64.512,5.247c-10.696-6.669-23.661-7-34.685-0.883  C18.806,10.48,12.226,21.657,12.226,34.262v122.73c0,12.605,6.58,23.782,17.602,29.898c5.25,2.913,10.939,4.364,16.616,4.364  c6.241,0,12.467-1.754,18.068-5.247l98.417-61.365c10.082-6.287,16.101-17.133,16.101-29.015S173.011,72.899,162.929,66.612z",
+                                                                  "data-original":
+                                                                    "#000000",
+                                                                  "data-old_color":
+                                                                    "#ffffff",
+                                                                  fill:
+                                                                    "#ffffff"
+                                                                }
+                                                              })
+                                                            ])
+                                                          ]
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    !item.is_favorite
+                                                      ? _c(
+                                                          "button",
+                                                          {
+                                                            staticClass:
+                                                              "btn btn-sm btn-plus btn-circle btn-success ml-1",
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                $event.preventDefault()
+                                                                return _vm.SHOW_COLLECTION_MODAL(
+                                                                  item.id,
+                                                                  "/storage/backdrops/600_" +
+                                                                    item.backdrop,
+                                                                  item.name,
+                                                                  "movie",
+                                                                  null,
+                                                                  index
+                                                                )
+                                                              }
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                                " +
+                                                                _vm._s(
+                                                                  _vm.$t(
+                                                                    "home.my_list"
+                                                                  )
+                                                                ) +
+                                                                "\n\n                                                "
+                                                            ),
+                                                            _c(
+                                                              "svg",
+                                                              {
+                                                                staticClass:
+                                                                  "top-collection-svg",
+                                                                staticStyle: {
+                                                                  "enable-background":
+                                                                    "new 0 0 31.444 31.444"
+                                                                },
+                                                                attrs: {
+                                                                  xmlns:
+                                                                    "http://www.w3.org/2000/svg",
+                                                                  "xmlns:xlink":
+                                                                    "http://www.w3.org/1999/xlink",
+                                                                  version:
+                                                                    "1.1",
+                                                                  x: "0px",
+                                                                  y: "0px",
+                                                                  viewBox:
+                                                                    "0 0 31.444 31.444",
+                                                                  "xml:space":
+                                                                    "preserve",
+                                                                  width: "100%"
+                                                                }
+                                                              },
+                                                              [
+                                                                _c("g", [
+                                                                  _c("path", {
+                                                                    staticClass:
+                                                                      "active-path",
+                                                                    attrs: {
+                                                                      d:
+                                                                        "M1.119,16.841c-0.619,0-1.111-0.508-1.111-1.127c0-0.619,0.492-1.111,1.111-1.111h13.475V1.127  C14.595,0.508,15.103,0,15.722,0c0.619,0,1.111,0.508,1.111,1.127v13.476h13.475c0.619,0,1.127,0.492,1.127,1.111  c0,0.619-0.508,1.127-1.127,1.127H16.833v13.476c0,0.619-0.492,1.127-1.111,1.127c-0.619,0-1.127-0.508-1.127-1.127V16.841H1.119z",
+                                                                      "data-original":
+                                                                        "#ffffff",
+                                                                      "data-old_color":
+                                                                        "#ffffff",
+                                                                      fill:
+                                                                        "#ffffff"
+                                                                    }
+                                                                  })
+                                                                ])
+                                                              ]
+                                                            )
+                                                          ]
+                                                        )
+                                                      : _vm._e(),
+                                                    _vm._v(" "),
+                                                    item.is_favorite
+                                                      ? _c(
+                                                          "button",
+                                                          {
+                                                            staticClass:
+                                                              "btn btn-sm btn-plus btn-circle btn-danger ml-1",
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                $event.preventDefault()
+                                                                return _vm.DELETE_FROM_COLLECTION(
+                                                                  item.id,
+                                                                  "movie",
+                                                                  null,
+                                                                  index
+                                                                )
+                                                              }
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                                " +
+                                                                _vm._s(
+                                                                  _vm.$t(
+                                                                    "home.my_list"
+                                                                  )
+                                                                ) +
+                                                                "\n\n                                                "
+                                                            ),
+                                                            _c(
+                                                              "svg",
+                                                              {
+                                                                staticClass:
+                                                                  "top-collection-svg",
+                                                                staticStyle: {
+                                                                  "enable-background":
+                                                                    "new 0 0 511.999 511.999"
+                                                                },
+                                                                attrs: {
+                                                                  version:
+                                                                    "1.1",
+                                                                  xmlns:
+                                                                    "http://www.w3.org/2000/svg",
+                                                                  "xmlns:xlink":
+                                                                    "http://www.w3.org/1999/xlink",
+                                                                  x: "0px",
+                                                                  y: "0px",
+                                                                  viewBox:
+                                                                    "0 0 511.999 511.999",
+                                                                  width: "100%",
+                                                                  "xml:space":
+                                                                    "preserve"
+                                                                }
+                                                              },
+                                                              [
+                                                                _c("g", [
+                                                                  _c("g", [
+                                                                    _c("path", {
+                                                                      attrs: {
+                                                                        d:
+                                                                          "M506.231,75.508c-7.689-7.69-20.158-7.69-27.849,0l-319.21,319.211L33.617,269.163c-7.689-7.691-20.158-7.691-27.849,0\n                                                                                    c-7.69,7.69-7.69,20.158,0,27.849l139.481,139.481c7.687,7.687,20.16,7.689,27.849,0l333.133-333.136\n                                                                                    C513.921,95.666,513.921,83.198,506.231,75.508z",
+                                                                        fill:
+                                                                          "#ffffff"
+                                                                      }
+                                                                    })
+                                                                  ])
+                                                                ])
+                                                              ]
+                                                            )
+                                                          ]
+                                                        )
+                                                      : _vm._e()
+                                                  ],
+                                                  1
+                                                )
+                                              ]
+                                            )
+                                          ],
+                                          2
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "row margin-left-auto"
+                                          },
+                                          _vm._l(
+                                            item.genre.split(","),
+                                            function(code) {
+                                              return _c(
+                                                "p",
+                                                {
+                                                  key: code.index,
+                                                  staticClass:
+                                                    "border-radius-13"
+                                                },
+                                                [_vm._v(_vm._s(code) + " ")]
+                                              )
+                                            }
+                                          ),
+                                          0
+                                        )
                                       ]),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "overview" }, [
@@ -61930,222 +62259,6 @@ var render = function() {
                                             )
                                           )
                                         ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("div", { staticClass: "control" }, [
-                                        _c(
-                                          "div",
-                                          { staticClass: "btn-group" },
-                                          [
-                                            _c(
-                                              "router-link",
-                                              {
-                                                staticClass:
-                                                  "btn btn-sm btn-warning",
-                                                attrs: {
-                                                  role: "button",
-                                                  to: {
-                                                    name: "movie-player",
-                                                    params: { id: item.id }
-                                                  }
-                                                }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                " +
-                                                    _vm._s(
-                                                      _vm.$t("home.play")
-                                                    ) +
-                                                    "\n\n                                                "
-                                                ),
-                                                _c(
-                                                  "svg",
-                                                  {
-                                                    staticClass: "top-play-svg",
-                                                    staticStyle: {
-                                                      "enable-background":
-                                                        "new 0 0 191.255 191.255"
-                                                    },
-                                                    attrs: {
-                                                      xmlns:
-                                                        "http://www.w3.org/2000/svg",
-                                                      "xmlns:xlink":
-                                                        "http://www.w3.org/1999/xlink",
-                                                      version: "1.1",
-                                                      x: "0px",
-                                                      y: "0px",
-                                                      viewBox:
-                                                        "0 0 191.255 191.255",
-                                                      "xml:space": "preserve",
-                                                      width: "100%"
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("g", [
-                                                      _c("path", {
-                                                        staticClass:
-                                                          "active-path",
-                                                        attrs: {
-                                                          d:
-                                                            "M162.929,66.612c-2.814-1.754-6.514-0.896-8.267,1.917s-0.895,6.513,1.917,8.266c6.544,4.081,10.45,11.121,10.45,18.833  s-3.906,14.752-10.45,18.833l-98.417,61.365c-6.943,4.329-15.359,4.542-22.512,0.573c-7.154-3.97-11.425-11.225-11.425-19.406  V34.262c0-8.181,4.271-15.436,11.425-19.406c7.153-3.969,15.569-3.756,22.512,0.573l57.292,35.723  c2.813,1.752,6.513,0.895,8.267-1.917c1.753-2.812,0.895-6.513-1.917-8.266L64.512,5.247c-10.696-6.669-23.661-7-34.685-0.883  C18.806,10.48,12.226,21.657,12.226,34.262v122.73c0,12.605,6.58,23.782,17.602,29.898c5.25,2.913,10.939,4.364,16.616,4.364  c6.241,0,12.467-1.754,18.068-5.247l98.417-61.365c10.082-6.287,16.101-17.133,16.101-29.015S173.011,72.899,162.929,66.612z",
-                                                          "data-original":
-                                                            "#000000",
-                                                          "data-old_color":
-                                                            "#ffffff",
-                                                          fill: "#ffffff"
-                                                        }
-                                                      })
-                                                    ])
-                                                  ]
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            !item.is_favorite
-                                              ? _c(
-                                                  "button",
-                                                  {
-                                                    staticClass:
-                                                      "btn btn-sm btn-plus btn-circle btn-success ml-1",
-                                                    on: {
-                                                      click: function($event) {
-                                                        $event.preventDefault()
-                                                        return _vm.SHOW_COLLECTION_MODAL(
-                                                          item.id,
-                                                          "/storage/backdrops/600_" +
-                                                            item.backdrop,
-                                                          item.name,
-                                                          "movie",
-                                                          null,
-                                                          index
-                                                        )
-                                                      }
-                                                    }
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                                                " +
-                                                        _vm._s(
-                                                          _vm.$t("home.my_list")
-                                                        ) +
-                                                        "\n\n                                                "
-                                                    ),
-                                                    _c(
-                                                      "svg",
-                                                      {
-                                                        staticClass:
-                                                          "top-collection-svg",
-                                                        staticStyle: {
-                                                          "enable-background":
-                                                            "new 0 0 31.444 31.444"
-                                                        },
-                                                        attrs: {
-                                                          xmlns:
-                                                            "http://www.w3.org/2000/svg",
-                                                          "xmlns:xlink":
-                                                            "http://www.w3.org/1999/xlink",
-                                                          version: "1.1",
-                                                          x: "0px",
-                                                          y: "0px",
-                                                          viewBox:
-                                                            "0 0 31.444 31.444",
-                                                          "xml:space":
-                                                            "preserve",
-                                                          width: "100%"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("g", [
-                                                          _c("path", {
-                                                            staticClass:
-                                                              "active-path",
-                                                            attrs: {
-                                                              d:
-                                                                "M1.119,16.841c-0.619,0-1.111-0.508-1.111-1.127c0-0.619,0.492-1.111,1.111-1.111h13.475V1.127  C14.595,0.508,15.103,0,15.722,0c0.619,0,1.111,0.508,1.111,1.127v13.476h13.475c0.619,0,1.127,0.492,1.127,1.111  c0,0.619-0.508,1.127-1.127,1.127H16.833v13.476c0,0.619-0.492,1.127-1.111,1.127c-0.619,0-1.127-0.508-1.127-1.127V16.841H1.119z",
-                                                              "data-original":
-                                                                "#ffffff",
-                                                              "data-old_color":
-                                                                "#ffffff",
-                                                              fill: "#ffffff"
-                                                            }
-                                                          })
-                                                        ])
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              : _vm._e(),
-                                            _vm._v(" "),
-                                            item.is_favorite
-                                              ? _c(
-                                                  "button",
-                                                  {
-                                                    staticClass:
-                                                      "btn btn-sm btn-plus btn-circle btn-danger ml-1",
-                                                    on: {
-                                                      click: function($event) {
-                                                        $event.preventDefault()
-                                                        return _vm.DELETE_FROM_COLLECTION(
-                                                          item.id,
-                                                          "movie",
-                                                          null,
-                                                          index
-                                                        )
-                                                      }
-                                                    }
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                                                " +
-                                                        _vm._s(
-                                                          _vm.$t("home.my_list")
-                                                        ) +
-                                                        "\n\n                                                "
-                                                    ),
-                                                    _c(
-                                                      "svg",
-                                                      {
-                                                        staticClass:
-                                                          "top-collection-svg",
-                                                        staticStyle: {
-                                                          "enable-background":
-                                                            "new 0 0 511.999 511.999"
-                                                        },
-                                                        attrs: {
-                                                          version: "1.1",
-                                                          xmlns:
-                                                            "http://www.w3.org/2000/svg",
-                                                          "xmlns:xlink":
-                                                            "http://www.w3.org/1999/xlink",
-                                                          x: "0px",
-                                                          y: "0px",
-                                                          viewBox:
-                                                            "0 0 511.999 511.999",
-                                                          width: "100%",
-                                                          "xml:space":
-                                                            "preserve"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("g", [
-                                                          _c("g", [
-                                                            _c("path", {
-                                                              attrs: {
-                                                                d:
-                                                                  "M506.231,75.508c-7.689-7.69-20.158-7.69-27.849,0l-319.21,319.211L33.617,269.163c-7.689-7.691-20.158-7.691-27.849,0\n                                                                                    c-7.69,7.69-7.69,20.158,0,27.849l139.481,139.481c7.687,7.687,20.16,7.689,27.849,0l333.133-333.136\n                                                                                    C513.921,95.666,513.921,83.198,506.231,75.508z",
-                                                                fill: "#ffffff"
-                                                              }
-                                                            })
-                                                          ])
-                                                        ])
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              : _vm._e()
-                                          ],
-                                          1
-                                        )
                                       ])
                                     ]
                                   )
@@ -63801,7 +63914,7 @@ var render = function() {
   return _vm.data.series != null
     ? _c(
         "div",
-        { staticClass: "show_series show_item" },
+        { staticClass: "show_series show_item margin-top-4" },
         [
           _c("collection-modal", {
             attrs: {
@@ -71586,8 +71699,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -71595,6 +71706,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        show_sidebar: Boolean
+    },
     name: 'search',
     data: function data() {
         return {
@@ -71766,7 +71880,10 @@ var render = function() {
     ? _c("div", [
         _c(
           "div",
-          { staticClass: "col-12 search-page margin-left-13" },
+          {
+            staticClass: "col-12 search-page",
+            class: { "margin-left-13": _vm.show_sidebar }
+          },
           [
             _c("collection-modal", {
               attrs: {
@@ -87318,6 +87435,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -88154,6 +88283,146 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -88242,6 +88511,231 @@ var render = function() {
         ? true
         : false)
           ? _c("ul", { staticClass: "list-unstyled text-center" }, [
+              _c("div", { staticClass: "side_bar" }, [
+                _c(
+                  "li",
+                  { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" },
+                  [
+                    _c("router-link", { attrs: { to: { name: "profile" } } }, [
+                      _c("div", { staticClass: "left_homepage row" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("img", {
+                            attrs: {
+                              src: "/images/profile.png",
+                              width: "25px",
+                              height: "25px",
+                              alt: "logo"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Profile")])
+                        ])
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" },
+                  [
+                    _c("router-link", { attrs: { to: { name: "security" } } }, [
+                      _c("div", { staticClass: "left_homepage row" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("img", {
+                            attrs: {
+                              src: "/images/profile.png",
+                              width: "25px",
+                              height: "25px",
+                              alt: "logo"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Security")])
+                        ])
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" },
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: { name: "support-inbox" } } },
+                      [
+                        _c("div", { staticClass: "left_homepage row" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("img", {
+                              attrs: {
+                                src: "/images/inbox.png",
+                                width: "25px",
+                                height: "25px",
+                                alt: "logo"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Inbox")])
+                          ])
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" },
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: { name: "payment-update" } } },
+                      [
+                        _c("div", { staticClass: "left_homepage row" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("img", {
+                              attrs: {
+                                src: "/images/payment.png",
+                                width: "25px",
+                                height: "25px",
+                                alt: "logo"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Payment")])
+                          ])
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" },
+                  [
+                    _c("router-link", { attrs: { to: { name: "language" } } }, [
+                      _c("div", { staticClass: "left_homepage row" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("img", {
+                            attrs: {
+                              src: "/images/language.png",
+                              width: "25px",
+                              height: "25px",
+                              alt: "logo"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Languages")])
+                        ])
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" },
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: { name: "viewing-history" } } },
+                      [
+                        _c("div", { staticClass: "left_homepage row" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("img", {
+                              attrs: {
+                                src: "/images/history.png",
+                                width: "25px",
+                                height: "25px",
+                                alt: "logo"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("History")])
+                          ])
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" },
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: { name: "device-activity" } } },
+                      [
+                        _c("div", { staticClass: "left_homepage row" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("img", {
+                              attrs: {
+                                src: "/images/activity.png",
+                                width: "25px",
+                                height: "25px",
+                                alt: "logo"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Activity")])
+                          ])
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" },
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: { name: "adjust-subtitles" } } },
+                      [
+                        _c("div", { staticClass: "left_homepage row" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("img", {
+                              attrs: {
+                                src: "/images/subtitle.png",
+                                width: "25px",
+                                height: "25px",
+                                alt: "logo"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Subtitle Adjust")])
+                          ])
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("li", { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "left_homepage row",
+                      on: { click: _vm.LOGOUT }
+                    },
+                    [_vm._m(1)]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
               _c(
                 "li",
                 { staticClass: "mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" },
@@ -88991,6 +89485,23 @@ var staticRenderFns = [
           attrs: { src: "/images/logo.png", alt: "logo", width: "100%" }
         })
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("img", {
+        attrs: {
+          src: "/images/subtitle.png",
+          width: "25px",
+          height: "25px",
+          alt: "logo"
+        }
+      }),
+      _vm._v(" "),
+      _c("p", [_vm._v("Subtitle Adjust")])
     ])
   }
 ]
@@ -92262,43 +92773,76 @@ var render = function() {
       _vm.$route.name === "channels"
       ? true
       : false)
-        ? _c("message", { attrs: { message: _vm.message_alert } })
+        ? _c("message", {
+            attrs: {
+              message: _vm.message_alert,
+              show_sidebar: _vm.show_sidebar
+            }
+          })
         : _vm._e(),
       _vm._v(" "),
-      _c("navbar"),
+      (_vm.$route.name === "login" ||
+      _vm.$route.name === "forget_password" ||
+      _vm.$route.name === "contact-us" ||
+      _vm.$route.name === "plan"
+      ? false
+      : true)
+        ? _c("navbar")
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "col-12 grid" }, [
         _c(
           "div",
           { staticClass: "row" },
           [
-            _c(
-              "a",
-              {
-                on: {
-                  click: function($event) {
-                    _vm.show_sidebar = !_vm.show_sidebar
-                  }
-                }
-              },
-              [_vm._m(2)]
-            ),
+            (_vm.$route.name === "login" ||
+            _vm.$route.name === "forget_password" ||
+            _vm.$route.name === "contact-us" ||
+            _vm.$route.name === "plan"
+            ? false
+            : true)
+              ? _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.show_sidebar = !_vm.show_sidebar
+                      }
+                    }
+                  },
+                  [_vm._m(2)]
+                )
+              : _vm._e(),
             _vm._v(" "),
-            _vm.show_sidebar
+            _vm.show_sidebar &&
+            (_vm.$route.name === "login" ||
+            _vm.$route.name === "forget_password" ||
+            _vm.$route.name === "contact-us" ||
+            _vm.$route.name === "plan"
+              ? false
+              : true)
               ? _c("sidebar", {
                   staticClass: "col-1 hidden-sm-down sidebar-content"
                 })
               : _vm._e(),
             _vm._v(" "),
             !_vm.show_sidebar
-              ? _c("router-view", { staticClass: "col p-0 margin-left-auto" })
+              ? _c("router-view", {
+                  staticClass: "col p-0 margin-left-auto",
+                  attrs: { show_sidebar: _vm.show_sidebar }
+                })
               : _vm._e(),
             _vm._v(" "),
             _vm.show_sidebar
-              ? _c("router-view", { staticClass: "col p-0 margin-left-13" })
+              ? _c("router-view", {
+                  staticClass: "col p-0 margin-left-13",
+                  attrs: { show_sidebar: _vm.show_sidebar }
+                })
               : _vm._e(),
             _vm._v(" "),
-            _vm.showSearchPage ? _c("search-page") : _vm._e()
+            _vm.showSearchPage
+              ? _c("search-page", { attrs: { show_sidebar: _vm.show_sidebar } })
+              : _vm._e()
           ],
           1
         )
@@ -92314,7 +92858,7 @@ var render = function() {
       _vm.$route.name === "channels"
       ? true
       : false)
-        ? _c("ads-notifcation")
+        ? _c("ads-notifcation", { attrs: { show_sidebar: _vm.show_sidebar } })
         : _vm._e(),
       _vm._v(" "),
       _vm.getShowPagePath != null

@@ -27,6 +27,145 @@
                             : false
                     "
                 >
+                <div class="side_bar">
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'profile' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/profile.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Profile</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'security' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/profile.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Security</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'support-inbox' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/inbox.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Inbox</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'payment-update' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/payment.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Payment</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'language' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/language.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Languages</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'viewing-history' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/history.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>History</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'device-activity' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/activity.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Activity</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'adjust-subtitles' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/subtitle.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Subtitle Adjust</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <!-- <router-link :to="{ name: 'adjust-subtitles' }"> -->
+                            <div class="left_homepage row" @click="LOGOUT">
+                                    <div class="row">
+                                        <img
+                                            src="/images/subtitle.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Subtitle Adjust</p>
+                                    </div>
+                            </div>
+                        <!-- </router-link> -->
+                    </li>
+
+                </div>
+
                     <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
                         <router-link :to="{ name: 'profile' }">
                             <div class="icon">
@@ -57,6 +196,7 @@
                             </div>
                         </router-link>
                     </li>
+
 
                     <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
                         <router-link :to="{ name: 'security' }">
