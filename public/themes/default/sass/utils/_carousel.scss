@@ -1,0 +1,14 @@
+.VueCarousel-navigation-next {
+  right: 0;
+    transform: translateY(-50%) !important;
+}
+
+.VueCarousel-navigation-prev {
+  left: 0;
+    transform: translateY(-50%) !important;
+}
+.VueCarousel-slide {
+  visibility: visible;
+  flex-basis: 100%;
+  width: 100%;
+}
