@@ -1071,7 +1071,7 @@ var render = function() {
                                     ? _c("h6", [
                                         _vm._v(
                                           _vm._s(_vm.invoices.name) +
-                                            " for\n                                                $" +
+                                            " for\r\n                                                $" +
                                             _vm._s(_vm.invoices.amount) +
                                             "/mo"
                                         )
@@ -1083,7 +1083,7 @@ var render = function() {
                                         _vm._v(
                                           " " +
                                             _vm._s(_vm.invoices.name) +
-                                            " for\n                                                $" +
+                                            " for\r\n                                                $" +
                                             _vm._s(_vm.invoices.amount) +
                                             "/y"
                                         )
@@ -1140,7 +1140,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Close\n                            ")]
+                          [_vm._v("Close\r\n                            ")]
                         )
                       ])
                     ])
@@ -1180,9 +1180,9 @@ var render = function() {
                                     _vm._v(" "),
                                     _c("td", [
                                       _vm._v(
-                                        "\n                                            " +
+                                        "\r\n                                            " +
                                           _vm._s(item.email) +
-                                          "\n                                        "
+                                          "\r\n                                        "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -1245,7 +1245,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Edit\n                                                "
+                                                "Edit\r\n                                                "
                                               )
                                             ]
                                           ),
@@ -1266,7 +1266,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Delete\n                                        "
+                                                "Delete\r\n                                        "
                                               )
                                             ]
                                           ),
@@ -1293,7 +1293,7 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "Billing\n                                        "
+                                                    "Billing\r\n                                        "
                                                   )
                                                 ]
                                               )
@@ -1338,9 +1338,9 @@ var render = function() {
                                     _vm._v(" "),
                                     _c("td", [
                                       _vm._v(
-                                        "\n                                            " +
+                                        "\r\n                                            " +
                                           _vm._s(item.email) +
-                                          "\n                                        "
+                                          "\r\n                                        "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -1420,7 +1420,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Edit\n                                                "
+                                                "Edit\r\n                                                "
                                               )
                                             ]
                                           ),
@@ -1442,7 +1442,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Delete\n                                        "
+                                                "Delete\r\n                                        "
                                               )
                                             ]
                                           ),
@@ -1469,7 +1469,7 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "Billing\n                                        "
+                                                    "Billing\r\n                                        "
                                                   )
                                                 ]
                                               )
@@ -1492,7 +1492,7 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "Billing\n                                        "
+                                                    "Billing\r\n                                        "
                                                   )
                                                 ]
                                               )

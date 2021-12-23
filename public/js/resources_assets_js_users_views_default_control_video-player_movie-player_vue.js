@@ -356,7 +356,7 @@ var alertify = __webpack_require__(/*! alertify.js */ "./node_modules/alertify.j
       report_details: null,
       report_button: false,
       episode_changed: false,
-      timeRequest: 20,
+      timeRequest: 10,
       show_report: false,
       loadPlayerFirst: true,
       loadPlayerChange: false,
@@ -411,9 +411,6 @@ var alertify = __webpack_require__(/*! alertify.js */ "./node_modules/alertify.j
             autostart: true,
             advertising: {
               client: "vast"
-            },
-            sharing: {
-              sites: ["reddit", "facebook", "twitter"]
             }
           }); // Load custom video file on error
 
@@ -429,33 +426,35 @@ var alertify = __webpack_require__(/*! alertify.js */ "./node_modules/alertify.j
           if (_this.$auth.isAuthenticated()) {
             _this.jwPlayer.once("play", function () {
               if (_this.data.current_movie.current_time != null) {
+                _this.timeRequest = _this.data.current_movie.current_time + 10;
+
                 _this.jwPlayer.seek(_this.data.current_movie.current_time);
               }
             });
 
             _this.jwPlayer.on("time", function () {
-              if (jwplayer().getPosition().toFixed() == _this.timeRequest) {
-                _this.timeRequest = _this.timeRequest + 20;
+              if (_this.timeRequest <= parseInt(jwplayer().getPosition().toFixed())) {
+                _this.timeRequest = parseInt(jwplayer().getPosition().toFixed()) + 10;
                 axios.post("/api/v1/create/watch/movie/recently", {
                   current_time: jwplayer().getPosition().toFixed(),
                   duration_time: jwplayer().getDuration().toFixed(),
                   movie_id: _this.data.current_movie.id
                 });
-              }
+              } // OnSeek
+
+
+              _this.jwPlayer.on('seek', function () {
+                setTimeout(function () {
+                  _this.timeRequest = parseInt(jwplayer().getPosition().toFixed()) + 10;
+                }, 200);
+              });
             }); // Check subtitle
 
 
             if (localStorage.getItem("caption") !== "" && localStorage.getItem("caption") != "undefined") {
               var parsedCaption = JSON.parse(localStorage.getItem("caption"));
               jwplayer().setCaptions(parsedCaption);
-            } // OnSeek
-
-
-            _this.jwPlayer.on("seek", function () {
-              setTimeout(function () {
-                _this.timeRequest = parseInt(jwplayer().getPosition().toFixed()) + 20;
-              }, 200);
-            });
+            }
           } // Check subtitle
 
 

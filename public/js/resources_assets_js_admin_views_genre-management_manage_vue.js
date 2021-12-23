@@ -860,7 +860,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Delete\n                                    "
+                                      "\r\n                                        Delete\r\n                                    "
                                     )
                                   ]
                                 )

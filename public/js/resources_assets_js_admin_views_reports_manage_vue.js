@@ -895,7 +895,7 @@ var render = function() {
                                           _vm._v(
                                             " " +
                                               _vm._s(item.id) +
-                                              "\n                                            "
+                                              "\r\n                                            "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -904,7 +904,7 @@ var render = function() {
                                           _vm._v(
                                             " " +
                                               _vm._s(item.m_name) +
-                                              "\n                                            "
+                                              "\r\n                                            "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -955,7 +955,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Show\n                                            "
+                                                "Show\r\n                                            "
                                               )
                                             ]
                                           ),
@@ -977,7 +977,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Delete\n                                            "
+                                                "Delete\r\n                                            "
                                               )
                                             ]
                                           )
@@ -1032,7 +1032,7 @@ var render = function() {
                                           _vm._v(
                                             " " +
                                               _vm._s(item.id) +
-                                              "\n                                                "
+                                              "\r\n                                                "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -1041,7 +1041,7 @@ var render = function() {
                                           _vm._v(
                                             " " +
                                               _vm._s(item.t_name) +
-                                              "\n                                                "
+                                              "\r\n                                                "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -1095,7 +1095,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Show\n                                                "
+                                                "Show\r\n                                                "
                                               )
                                             ]
                                           ),
@@ -1117,7 +1117,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "Delete\n                                            "
+                                                "Delete\r\n                                            "
                                               )
                                             ]
                                           )

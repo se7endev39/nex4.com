@@ -1398,6 +1398,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2581,7 +2591,9 @@ var render = function() {
                                                           attrs: {
                                                             role: "button",
                                                             to: {
-                                                              name: item.users_only
+                                                              name: _vm.$auth.isAuthenticated()
+                                                                ? "movie-player"
+                                                                : item.users_only
                                                                 ? "movie-player"
                                                                 : "ghost-movie-player",
                                                               params: {
@@ -2959,7 +2971,9 @@ var render = function() {
                                                           attrs: {
                                                             role: "button",
                                                             to: {
-                                                              name: item.users_only
+                                                              name: _vm.$auth.isAuthenticated()
+                                                                ? "series-player"
+                                                                : item.users_only
                                                                 ? "series-player"
                                                                 : "ghost-series-player",
                                                               params: {
@@ -3241,114 +3255,388 @@ var render = function() {
                                   item,
                                   index
                                 ) {
-                                  return _c(
-                                    "div",
-                                    {
-                                      key: index,
-                                      staticClass:
-                                        "\n                    col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2\n                    m-2\n                    mt-3\n                    mb-5\n                    ml-md-4\n                    animation\n                  "
-                                    },
-                                    [
-                                      item.type === "movie"
-                                        ? _c(
-                                            "div",
-                                            {
-                                              staticClass: "poster",
-                                              on: {
-                                                mouseover: function($event) {
-                                                  return _vm.ACTIVE_SLELECTED_MOVIE(
-                                                    item.id
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c(
-                                                "router-link",
+                                  return item.current_time <
+                                    item.duration_time - 60 * 3
+                                    ? _c(
+                                        "div",
+                                        {
+                                          key: index,
+                                          staticClass:
+                                            "\n                    col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2\n                    m-2\n                    mt-3\n                    mb-5\n                    ml-md-4\n                    animation\n                  "
+                                        },
+                                        [
+                                          item.type === "movie"
+                                            ? _c(
+                                                "div",
                                                 {
-                                                  attrs: {
-                                                    to: {
-                                                      name: "show-movie",
-                                                      params: { id: item.id }
+                                                  staticClass: "poster",
+                                                  on: {
+                                                    mouseover: function(
+                                                      $event
+                                                    ) {
+                                                      return _vm.ACTIVE_SLELECTED_MOVIE(
+                                                        item.id
+                                                      )
                                                     }
                                                   }
                                                 },
                                                 [
                                                   _c(
-                                                    "div",
+                                                    "router-link",
                                                     {
-                                                      staticClass:
-                                                        "poster__backdrop-image"
+                                                      attrs: {
+                                                        to: {
+                                                          name: "show-movie",
+                                                          params: {
+                                                            id: item.id
+                                                          }
+                                                        }
+                                                      }
                                                     },
                                                     [
-                                                      item.cloud == "local"
-                                                        ? _c(
-                                                            "progressive-img",
-                                                            {
-                                                              attrs: {
-                                                                src:
-                                                                  "/storage/backdrops/600_" +
-                                                                  item.backdrop,
-                                                                placeholder:
-                                                                  "/themes/default/img/loader-image.png",
-                                                                alt: item.name,
-                                                                width: "100%"
-                                                              }
-                                                            }
-                                                          )
-                                                        : _vm._e(),
-                                                      _vm._v(" "),
-                                                      item.cloud == "aws"
-                                                        ? _c(
-                                                            "progressive-img",
-                                                            {
-                                                              attrs: {
-                                                                src:
-                                                                  _vm.md_poster +
-                                                                  item.backdrop,
-                                                                placeholder:
-                                                                  "/themes/default/img/loader-image.png",
-                                                                alt: item.name,
-                                                                width: "100%"
-                                                              }
-                                                            }
-                                                          )
-                                                        : _vm._e(),
-                                                      _vm._v(" "),
-                                                      _vm.active_movie ===
-                                                      item.id
-                                                        ? _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "poster__backdrop_overlay-info"
-                                                            },
-                                                            [
-                                                              _c(
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "poster__backdrop-image"
+                                                        },
+                                                        [
+                                                          item.cloud == "local"
+                                                            ? _c(
+                                                                "progressive-img",
+                                                                {
+                                                                  attrs: {
+                                                                    src:
+                                                                      "/storage/backdrops/600_" +
+                                                                      item.backdrop,
+                                                                    placeholder:
+                                                                      "/themes/default/img/loader-image.png",
+                                                                    alt:
+                                                                      item.name,
+                                                                    width:
+                                                                      "100%"
+                                                                  }
+                                                                }
+                                                              )
+                                                            : _vm._e(),
+                                                          _vm._v(" "),
+                                                          item.cloud == "aws"
+                                                            ? _c(
+                                                                "progressive-img",
+                                                                {
+                                                                  attrs: {
+                                                                    src:
+                                                                      _vm.md_poster +
+                                                                      item.backdrop,
+                                                                    placeholder:
+                                                                      "/themes/default/img/loader-image.png",
+                                                                    alt:
+                                                                      item.name,
+                                                                    width:
+                                                                      "100%"
+                                                                  }
+                                                                }
+                                                              )
+                                                            : _vm._e(),
+                                                          _vm._v(" "),
+                                                          _vm.active_movie ===
+                                                          item.id
+                                                            ? _c(
                                                                 "div",
                                                                 {
                                                                   staticClass:
-                                                                    "body text-center"
+                                                                    "poster__backdrop_overlay-info"
                                                                 },
                                                                 [
                                                                   _c(
                                                                     "div",
                                                                     {
                                                                       staticClass:
-                                                                        "play"
+                                                                        "body text-center"
                                                                     },
                                                                     [
-                                                                      item.users_only
-                                                                        ? _c(
+                                                                      _c(
+                                                                        "div",
+                                                                        {
+                                                                          staticClass:
+                                                                            "play"
+                                                                        },
+                                                                        [
+                                                                          item.users_only
+                                                                            ? _c(
+                                                                                "router-link",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    to: {
+                                                                                      name: _vm.$auth.isAuthenticated()
+                                                                                        ? "movie-player"
+                                                                                        : item.users_only
+                                                                                        ? "movie-player"
+                                                                                        : "ghost-movie-player",
+                                                                                      params: {
+                                                                                        id:
+                                                                                          item.id
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                },
+                                                                                [
+                                                                                  _c(
+                                                                                    "svg",
+                                                                                    {
+                                                                                      staticClass:
+                                                                                        "play-svg",
+                                                                                      staticStyle: {
+                                                                                        "enable-background":
+                                                                                          "new 0 0 294.843 294.843"
+                                                                                      },
+                                                                                      attrs: {
+                                                                                        xmlns:
+                                                                                          "http://www.w3.org/2000/svg",
+                                                                                        "xmlns:xlink":
+                                                                                          "http://www.w3.org/1999/xlink",
+                                                                                        version:
+                                                                                          "1.1",
+                                                                                        id:
+                                                                                          "Capa_1",
+                                                                                        x:
+                                                                                          "0px",
+                                                                                        y:
+                                                                                          "0px",
+                                                                                        viewBox:
+                                                                                          "0 0 294.843 294.843",
+                                                                                        "xml:space":
+                                                                                          "preserve",
+                                                                                        width:
+                                                                                          "100%"
+                                                                                      }
+                                                                                    },
+                                                                                    [
+                                                                                      _c(
+                                                                                        "g",
+                                                                                        [
+                                                                                          _c(
+                                                                                            "g",
+                                                                                            [
+                                                                                              _c(
+                                                                                                "path",
+                                                                                                {
+                                                                                                  staticClass:
+                                                                                                    "active-path",
+                                                                                                  attrs: {
+                                                                                                    d:
+                                                                                                      "M278.527,79.946c-10.324-20.023-25.38-37.704-43.538-51.132c-2.665-1.97-6.421-1.407-8.392,1.257s-1.407,6.421,1.257,8.392   c16.687,12.34,30.521,28.586,40.008,46.983c9.94,19.277,14.98,40.128,14.98,61.976c0,74.671-60.75,135.421-135.421,135.421   S12,222.093,12,147.421S72.75,12,147.421,12c3.313,0,6-2.687,6-6s-2.687-6-6-6C66.133,0,0,66.133,0,147.421   s66.133,147.421,147.421,147.421s147.421-66.133,147.421-147.421C294.842,123.977,289.201,100.645,278.527,79.946z",
+                                                                                                    "data-original":
+                                                                                                      "#000000",
+                                                                                                    "data-old_color":
+                                                                                                      "#ffffff",
+                                                                                                    fill:
+                                                                                                      "#ffffff"
+                                                                                                  }
+                                                                                                }
+                                                                                              ),
+                                                                                              _vm._v(
+                                                                                                " "
+                                                                                              ),
+                                                                                              _c(
+                                                                                                "path",
+                                                                                                {
+                                                                                                  staticClass:
+                                                                                                    "active-path",
+                                                                                                  attrs: {
+                                                                                                    d:
+                                                                                                      "M109.699,78.969c-1.876,1.067-3.035,3.059-3.035,5.216v131.674c0,3.314,2.687,6,6,6s6-2.686,6-6V94.74l88.833,52.883   l-65.324,42.087c-2.785,1.795-3.589,5.508-1.794,8.293c1.796,2.786,5.508,3.59,8.294,1.794l73.465-47.333   c1.746-1.125,2.786-3.073,2.749-5.15c-0.037-2.077-1.145-3.987-2.93-5.05L115.733,79.029   C113.877,77.926,111.575,77.902,109.699,78.969z",
+                                                                                                    "data-original":
+                                                                                                      "#000000",
+                                                                                                    "data-old_color":
+                                                                                                      "#ffffff",
+                                                                                                    fill:
+                                                                                                      "#ffffff"
+                                                                                                  }
+                                                                                                }
+                                                                                              )
+                                                                                            ]
+                                                                                          )
+                                                                                        ]
+                                                                                      )
+                                                                                    ]
+                                                                                  )
+                                                                                ]
+                                                                              )
+                                                                            : _vm._e()
+                                                                        ],
+                                                                        1
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                ]
+                                                              )
+                                                            : _vm._e()
+                                                        ],
+                                                        1
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  item.current_time !== null &&
+                                                  _vm.$auth.isAuthenticated() ===
+                                                    "active"
+                                                    ? _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "progress"
+                                                        },
+                                                        [
+                                                          _c("div", {
+                                                            staticClass:
+                                                              "progress-bar",
+                                                            style: {
+                                                              width:
+                                                                (item.current_time /
+                                                                  item.duration_time) *
+                                                                  100 +
+                                                                "%"
+                                                            },
+                                                            attrs: {
+                                                              role:
+                                                                "progressbar",
+                                                              "aria-valuenow":
+                                                                (item.current_time /
+                                                                  item.duration_time) *
+                                                                100,
+                                                              "aria-valuemin":
+                                                                "0",
+                                                              "aria-valuemax":
+                                                                "100"
+                                                            }
+                                                          })
+                                                        ]
+                                                      )
+                                                    : _vm._e()
+                                                ],
+                                                1
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          item.type === "series"
+                                            ? _c(
+                                                "div",
+                                                {
+                                                  staticClass: "poster",
+                                                  on: {
+                                                    mouseover: function(
+                                                      $event
+                                                    ) {
+                                                      return _vm.ACTIVE_SLELECTED_SERIES(
+                                                        item.id,
+                                                        _vm.rootindex
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c(
+                                                    "router-link",
+                                                    {
+                                                      attrs: {
+                                                        to: {
+                                                          name: _vm.$auth.isAuthenticated()
+                                                            ? "series-player-sp"
+                                                            : item.users_only
+                                                            ? "series-player-sp"
+                                                            : "ghost-series-player-sp",
+                                                          params: {
+                                                            series_id: item.id,
+                                                            episode_id:
+                                                              item.episode_id
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "poster__backdrop-image"
+                                                        },
+                                                        [
+                                                          item.cloud === "local"
+                                                            ? _c(
+                                                                "progressive-img",
+                                                                {
+                                                                  attrs: {
+                                                                    src:
+                                                                      "/storage/backdrops/600_" +
+                                                                      item.backdrop,
+                                                                    placeholder:
+                                                                      "/themes/default/img/loader-image.png",
+                                                                    alt:
+                                                                      item.name,
+                                                                    width:
+                                                                      "100%"
+                                                                  }
+                                                                }
+                                                              )
+                                                            : _vm._e(),
+                                                          _vm._v(" "),
+                                                          item.cloud === "aws"
+                                                            ? _c(
+                                                                "progressive-img",
+                                                                {
+                                                                  attrs: {
+                                                                    src:
+                                                                      _vm.md_backdrop +
+                                                                      item.backdrop,
+                                                                    placeholder:
+                                                                      "/themes/default/img/loader-image.png",
+                                                                    alt:
+                                                                      item.name,
+                                                                    width:
+                                                                      "100%"
+                                                                  }
+                                                                }
+                                                              )
+                                                            : _vm._e(),
+                                                          _vm._v(" "),
+                                                          _vm.active_series ===
+                                                          item.id
+                                                            ? _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "poster__backdrop_overlay-info"
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "div",
+                                                                    {
+                                                                      staticClass:
+                                                                        "body text-center"
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "div",
+                                                                        {
+                                                                          staticClass:
+                                                                            "play"
+                                                                        },
+                                                                        [
+                                                                          _c(
                                                                             "router-link",
                                                                             {
                                                                               attrs: {
                                                                                 to: {
-                                                                                  name: item.users_only
-                                                                                    ? "movie-player"
-                                                                                    : "ghost-movie-player",
+                                                                                  name: _vm.$auth.isAuthenticated()
+                                                                                    ? "series-player-sp"
+                                                                                    : item.users_only
+                                                                                    ? "series-player-sp"
+                                                                                    : "ghost-series-player-sp",
                                                                                   params: {
-                                                                                    id:
+                                                                                    episode_id:
+                                                                                      item.episode_id,
+                                                                                    series_id:
                                                                                       item.id
                                                                                   }
                                                                                 }
@@ -3437,302 +3725,63 @@ var render = function() {
                                                                               )
                                                                             ]
                                                                           )
-                                                                        : _vm._e()
-                                                                    ],
-                                                                    1
-                                                                  )
-                                                                ]
-                                                              )
-                                                            ]
-                                                          )
-                                                        : _vm._e()
-                                                    ],
-                                                    1
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              item.current_time !== null &&
-                                              _vm.$auth.isAuthenticated() ===
-                                                "active"
-                                                ? _c(
-                                                    "div",
-                                                    { staticClass: "progress" },
-                                                    [
-                                                      _c("div", {
-                                                        staticClass:
-                                                          "progress-bar",
-                                                        style: {
-                                                          width:
-                                                            (item.current_time /
-                                                              item.duration_time) *
-                                                              100 +
-                                                            "%"
-                                                        },
-                                                        attrs: {
-                                                          role: "progressbar",
-                                                          "aria-valuenow":
-                                                            (item.current_time /
-                                                              item.duration_time) *
-                                                            100,
-                                                          "aria-valuemin": "0",
-                                                          "aria-valuemax": "100"
-                                                        }
-                                                      })
-                                                    ]
-                                                  )
-                                                : _vm._e()
-                                            ],
-                                            1
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      item.type === "series"
-                                        ? _c(
-                                            "div",
-                                            {
-                                              staticClass: "poster",
-                                              on: {
-                                                mouseover: function($event) {
-                                                  return _vm.ACTIVE_SLELECTED_SERIES(
-                                                    item.id,
-                                                    _vm.rootindex
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c(
-                                                "router-link",
-                                                {
-                                                  attrs: {
-                                                    to: {
-                                                      name: item.users_only
-                                                        ? "series-player-sp"
-                                                        : "ghost-series-player-sp",
-                                                      params: {
-                                                        series_id: item.id,
-                                                        episode_id:
-                                                          item.episode_id
-                                                      }
-                                                    }
-                                                  }
-                                                },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "poster__backdrop-image"
-                                                    },
-                                                    [
-                                                      item.cloud === "local"
-                                                        ? _c(
-                                                            "progressive-img",
-                                                            {
-                                                              attrs: {
-                                                                src:
-                                                                  "/storage/backdrops/600_" +
-                                                                  item.backdrop,
-                                                                placeholder:
-                                                                  "/themes/default/img/loader-image.png",
-                                                                alt: item.name,
-                                                                width: "100%"
-                                                              }
-                                                            }
-                                                          )
-                                                        : _vm._e(),
-                                                      _vm._v(" "),
-                                                      item.cloud === "aws"
-                                                        ? _c(
-                                                            "progressive-img",
-                                                            {
-                                                              attrs: {
-                                                                src:
-                                                                  _vm.md_backdrop +
-                                                                  item.backdrop,
-                                                                placeholder:
-                                                                  "/themes/default/img/loader-image.png",
-                                                                alt: item.name,
-                                                                width: "100%"
-                                                              }
-                                                            }
-                                                          )
-                                                        : _vm._e(),
-                                                      _vm._v(" "),
-                                                      _vm.active_series ===
-                                                      item.id
-                                                        ? _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "poster__backdrop_overlay-info"
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "div",
-                                                                {
-                                                                  staticClass:
-                                                                    "body text-center"
-                                                                },
-                                                                [
-                                                                  _c(
-                                                                    "div",
-                                                                    {
-                                                                      staticClass:
-                                                                        "play"
-                                                                    },
-                                                                    [
-                                                                      _c(
-                                                                        "router-link",
-                                                                        {
-                                                                          attrs: {
-                                                                            to: {
-                                                                              name: item.users_only
-                                                                                ? "series-player-sp"
-                                                                                : "ghost-series-player-sp",
-                                                                              params: {
-                                                                                episode_id:
-                                                                                  item.episode_id,
-                                                                                series_id:
-                                                                                  item.id
-                                                                              }
-                                                                            }
-                                                                          }
-                                                                        },
-                                                                        [
-                                                                          _c(
-                                                                            "svg",
-                                                                            {
-                                                                              staticClass:
-                                                                                "play-svg",
-                                                                              staticStyle: {
-                                                                                "enable-background":
-                                                                                  "new 0 0 294.843 294.843"
-                                                                              },
-                                                                              attrs: {
-                                                                                xmlns:
-                                                                                  "http://www.w3.org/2000/svg",
-                                                                                "xmlns:xlink":
-                                                                                  "http://www.w3.org/1999/xlink",
-                                                                                version:
-                                                                                  "1.1",
-                                                                                id:
-                                                                                  "Capa_1",
-                                                                                x:
-                                                                                  "0px",
-                                                                                y:
-                                                                                  "0px",
-                                                                                viewBox:
-                                                                                  "0 0 294.843 294.843",
-                                                                                "xml:space":
-                                                                                  "preserve",
-                                                                                width:
-                                                                                  "100%"
-                                                                              }
-                                                                            },
-                                                                            [
-                                                                              _c(
-                                                                                "g",
-                                                                                [
-                                                                                  _c(
-                                                                                    "g",
-                                                                                    [
-                                                                                      _c(
-                                                                                        "path",
-                                                                                        {
-                                                                                          staticClass:
-                                                                                            "active-path",
-                                                                                          attrs: {
-                                                                                            d:
-                                                                                              "M278.527,79.946c-10.324-20.023-25.38-37.704-43.538-51.132c-2.665-1.97-6.421-1.407-8.392,1.257s-1.407,6.421,1.257,8.392   c16.687,12.34,30.521,28.586,40.008,46.983c9.94,19.277,14.98,40.128,14.98,61.976c0,74.671-60.75,135.421-135.421,135.421   S12,222.093,12,147.421S72.75,12,147.421,12c3.313,0,6-2.687,6-6s-2.687-6-6-6C66.133,0,0,66.133,0,147.421   s66.133,147.421,147.421,147.421s147.421-66.133,147.421-147.421C294.842,123.977,289.201,100.645,278.527,79.946z",
-                                                                                            "data-original":
-                                                                                              "#000000",
-                                                                                            "data-old_color":
-                                                                                              "#ffffff",
-                                                                                            fill:
-                                                                                              "#ffffff"
-                                                                                          }
-                                                                                        }
-                                                                                      ),
-                                                                                      _vm._v(
-                                                                                        " "
-                                                                                      ),
-                                                                                      _c(
-                                                                                        "path",
-                                                                                        {
-                                                                                          staticClass:
-                                                                                            "active-path",
-                                                                                          attrs: {
-                                                                                            d:
-                                                                                              "M109.699,78.969c-1.876,1.067-3.035,3.059-3.035,5.216v131.674c0,3.314,2.687,6,6,6s6-2.686,6-6V94.74l88.833,52.883   l-65.324,42.087c-2.785,1.795-3.589,5.508-1.794,8.293c1.796,2.786,5.508,3.59,8.294,1.794l73.465-47.333   c1.746-1.125,2.786-3.073,2.749-5.15c-0.037-2.077-1.145-3.987-2.93-5.05L115.733,79.029   C113.877,77.926,111.575,77.902,109.699,78.969z",
-                                                                                            "data-original":
-                                                                                              "#000000",
-                                                                                            "data-old_color":
-                                                                                              "#ffffff",
-                                                                                            fill:
-                                                                                              "#ffffff"
-                                                                                          }
-                                                                                        }
-                                                                                      )
-                                                                                    ]
-                                                                                  )
-                                                                                ]
-                                                                              )
-                                                                            ]
-                                                                          )
-                                                                        ]
+                                                                        ],
+                                                                        1
                                                                       )
-                                                                    ],
-                                                                    1
+                                                                    ]
                                                                   )
                                                                 ]
                                                               )
-                                                            ]
-                                                          )
-                                                        : _vm._e()
-                                                    ],
-                                                    1
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              item.current_time !== null &&
-                                              _vm.$auth.isAuthenticated() ===
-                                                "active"
-                                                ? _c(
-                                                    "div",
-                                                    { staticClass: "progress" },
-                                                    [
-                                                      _c("div", {
-                                                        staticClass:
-                                                          "progress-bar",
-                                                        style: {
-                                                          width:
-                                                            (item.current_time /
-                                                              item.duration_time) *
-                                                              100 +
-                                                            "%"
-                                                        },
-                                                        attrs: {
-                                                          role: "progressbar",
-                                                          "aria-valuenow":
-                                                            (item.current_time /
-                                                              item.duration_time) *
-                                                            100,
-                                                          "aria-valuemin": "0",
-                                                          "aria-valuemax": "100"
-                                                        }
-                                                      })
+                                                            : _vm._e()
+                                                        ],
+                                                        1
+                                                      )
                                                     ]
-                                                  )
-                                                : _vm._e()
-                                            ],
-                                            1
-                                          )
-                                        : _vm._e()
-                                    ]
-                                  )
+                                                  ),
+                                                  _vm._v(" "),
+                                                  item.current_time !== null &&
+                                                  _vm.$auth.isAuthenticated() ===
+                                                    "active"
+                                                    ? _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "progress"
+                                                        },
+                                                        [
+                                                          _c("div", {
+                                                            staticClass:
+                                                              "progress-bar",
+                                                            style: {
+                                                              width:
+                                                                (item.current_time /
+                                                                  item.duration_time) *
+                                                                  100 +
+                                                                "%"
+                                                            },
+                                                            attrs: {
+                                                              role:
+                                                                "progressbar",
+                                                              "aria-valuenow":
+                                                                (item.current_time /
+                                                                  item.duration_time) *
+                                                                100,
+                                                              "aria-valuemin":
+                                                                "0",
+                                                              "aria-valuemax":
+                                                                "100"
+                                                            }
+                                                          })
+                                                        ]
+                                                      )
+                                                    : _vm._e()
+                                                ],
+                                                1
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      )
+                                    : _vm._e()
                                 }),
                                 0
                               )
@@ -4170,7 +4219,9 @@ var render = function() {
                                                                                   {
                                                                                     attrs: {
                                                                                       to: {
-                                                                                        name: item.users_only
+                                                                                        name: _vm.$auth.isAuthenticated()
+                                                                                          ? "movie-player"
+                                                                                          : item.users_only
                                                                                           ? "movie-player"
                                                                                           : "ghost-movie-player",
                                                                                         params: {
@@ -4278,7 +4329,9 @@ var render = function() {
                                                                                   {
                                                                                     attrs: {
                                                                                       to: {
-                                                                                        name: item.users_only
+                                                                                        name: _vm.$auth.isAuthenticated()
+                                                                                          ? "movie-player"
+                                                                                          : item.users_only
                                                                                           ? "movie-player"
                                                                                           : "ghost-movie-player",
                                                                                         params: {
@@ -4807,7 +4860,9 @@ var render = function() {
                                                                                       {
                                                                                         attrs: {
                                                                                           to: {
-                                                                                            name: item.users_only
+                                                                                            name: _vm.$auth.isAuthenticated()
+                                                                                              ? "series-player"
+                                                                                              : item.users_only
                                                                                               ? "series-player"
                                                                                               : "ghost-series-player",
                                                                                             params: {

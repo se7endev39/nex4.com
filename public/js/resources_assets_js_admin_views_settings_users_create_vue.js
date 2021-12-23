@@ -216,7 +216,7 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "k1_manage_table" }, [
       _c("div", { staticClass: "title p-2" }, [
-        _vm._v("\n            Create\n        ")
+        _vm._v("\r\n            Create\r\n        ")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
@@ -301,7 +301,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(_vm.errors.first("name")) + "\n              "
+                        _vm._s(_vm.errors.first("name")) + "\r\n              "
                       )
                     ]
                   )
@@ -365,7 +365,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(_vm.errors.first("email")) + "\n              "
+                        _vm._s(_vm.errors.first("email")) + "\r\n              "
                       )
                     ]
                   )
@@ -430,7 +430,7 @@ var render = function() {
                     [
                       _vm._v(
                         _vm._s(_vm.errors.first("password-field")) +
-                          "\n              "
+                          "\r\n              "
                       )
                     ]
                   )
@@ -495,7 +495,7 @@ var render = function() {
                     [
                       _vm._v(
                         _vm._s(_vm.errors.first("confirm-field")) +
-                          "\n              "
+                          "\r\n              "
                       )
                     ]
                   )
@@ -570,7 +570,7 @@ var render = function() {
                     [
                       _vm._v(
                         _vm._s(_vm.errors.first("permission")) +
-                          "\n              "
+                          "\r\n              "
                       )
                     ]
                   )
@@ -585,7 +585,7 @@ var render = function() {
                       staticClass: "btn btn-md btn-warning",
                       on: { click: _vm.CREATE }
                     },
-                    [_vm._v("Create\n              ")]
+                    [_vm._v("Create\r\n              ")]
                   )
                 ])
               ])

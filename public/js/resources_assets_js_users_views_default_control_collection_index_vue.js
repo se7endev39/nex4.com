@@ -1359,8 +1359,11 @@ var render = function() {
                                                                   {
                                                                     attrs: {
                                                                       to: {
-                                                                        name:
-                                                                          "movie-player",
+                                                                        name: _vm.$auth.isAuthenticated()
+                                                                          ? "movie-player"
+                                                                          : item.users_only
+                                                                          ? "movie-player"
+                                                                          : "ghost-movie-player",
                                                                         params: {
                                                                           id:
                                                                             item.id

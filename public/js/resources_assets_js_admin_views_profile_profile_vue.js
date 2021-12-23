@@ -813,7 +813,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            Profile\n                        "
+                          "\r\n                            Profile\r\n                        "
                         )
                       ]
                     ),
@@ -826,7 +826,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            Security\n                        "
+                          "\r\n                            Security\r\n                        "
                         )
                       ]
                     )
@@ -962,7 +962,7 @@ var render = function() {
                           [
                             _vm._v(
                               _vm._s(_vm.errors.first("name")) +
-                                "\n                                "
+                                "\r\n                                "
                             )
                           ]
                         )
@@ -1027,7 +1027,7 @@ var render = function() {
                           [
                             _vm._v(
                               _vm._s(_vm.errors.first("email")) +
-                                "\n                                "
+                                "\r\n                                "
                             )
                           ]
                         )
@@ -1048,7 +1048,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "Update\n                                    "
+                              "Update\r\n                                    "
                             )
                           ]
                         )

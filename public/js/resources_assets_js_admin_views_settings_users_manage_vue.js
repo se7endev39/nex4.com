@@ -778,7 +778,7 @@ var render = function() {
     !_vm.spinner_loading
       ? _c("div", { staticClass: "k1_manage_table" }, [
           _c("div", { staticClass: "title p-2" }, [
-            _vm._v("\n            Administrator Users\n        ")
+            _vm._v("\r\n            Administrator Users\r\n        ")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-12 my-3 p-2" }, [
@@ -838,9 +838,9 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(
-                                "\n                                " +
+                                "\r\n                                " +
                                   _vm._s(item.email) +
-                                  "\n                            "
+                                  "\r\n                            "
                               )
                             ]),
                             _vm._v(" "),
@@ -916,7 +916,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                        Delete\n                                    "
+                                        "\r\n                                        Delete\r\n                                    "
                                       )
                                     ]
                                   )

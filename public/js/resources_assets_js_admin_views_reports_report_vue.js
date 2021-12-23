@@ -874,7 +874,7 @@ var render = function() {
                                 _vm._v(
                                   " " +
                                     _vm._s(_vm.report_item.username) +
-                                    "\n                            "
+                                    "\r\n                            "
                                 )
                               ]),
                               _vm._v(" "),
@@ -923,7 +923,7 @@ var render = function() {
                                 _vm._v(
                                   " " +
                                     _vm._s(_vm.report_item.name) +
-                                    "\n                            "
+                                    "\r\n                            "
                                 )
                               ]),
                               _vm._v(" "),
@@ -934,7 +934,7 @@ var render = function() {
                                 _vm._v(
                                   " " +
                                     _vm._s(_vm.report_item.report_details) +
-                                    "\n                            "
+                                    "\r\n                            "
                                 )
                               ])
                             ])

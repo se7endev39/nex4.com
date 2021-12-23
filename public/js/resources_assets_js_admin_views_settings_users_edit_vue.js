@@ -789,7 +789,7 @@ var render = function() {
     !_vm.spinner_loading
       ? _c("div", { staticClass: "k1_manage_table" }, [
           _c("div", { staticClass: "title p-2" }, [
-            _vm._v("\n            Edit\n        ")
+            _vm._v("\r\n            Edit\r\n        ")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "container my-5" }, [
@@ -914,7 +914,7 @@ var render = function() {
                         [
                           _vm._v(
                             _vm._s(_vm.errors.first("name")) +
-                              "\n                            "
+                              "\r\n                            "
                           )
                         ]
                       )
@@ -983,7 +983,7 @@ var render = function() {
                         [
                           _vm._v(
                             _vm._s(_vm.errors.first("email")) +
-                              "\n                            "
+                              "\r\n                            "
                           )
                         ]
                       )
@@ -1097,7 +1097,7 @@ var render = function() {
                           staticClass: "btn btn-md btn-warning",
                           on: { click: _vm.UPDATE_DETAILS }
                         },
-                        [_vm._v("Update\n                            ")]
+                        [_vm._v("Update\r\n                            ")]
                       )
                     ])
                   ])

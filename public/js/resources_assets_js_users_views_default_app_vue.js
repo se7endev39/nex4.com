@@ -2573,6 +2573,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -28245,6 +28254,13 @@ var render = function() {
   _vm.$route.name === "kids" ||
   _vm.$route.name === "movies" ||
   _vm.$route.name === "manga" ||
+  _vm.$route.name === "series-player" ||
+  _vm.$route.name === "movie-player" ||
+  _vm.$route.name === "ghost-series-player" ||
+  _vm.$route.name === "ghost-movie-player" ||
+  _vm.$route.name === "tv-player" ||
+  _vm.$route.name === "series-player-sp" ||
+  _vm.$route.name === "ghost-series-player-sp" ||
   _vm.$route.name === "channels"
   ? true
   : false)
@@ -28784,7 +28800,9 @@ var render = function() {
                                                                               {
                                                                                 attrs: {
                                                                                   to: {
-                                                                                    name: item.users_only
+                                                                                    name: _vm.$auth.isAuthenticated()
+                                                                                      ? "movie-player"
+                                                                                      : item.users_only
                                                                                       ? "movie-player"
                                                                                       : "ghost-movie-player",
                                                                                     params: {
@@ -29338,7 +29356,9 @@ var render = function() {
                                                                                           {
                                                                                             attrs: {
                                                                                               to: {
-                                                                                                name: item.users_only
+                                                                                                name: _vm.$auth.isAuthenticated()
+                                                                                                  ? "series-player"
+                                                                                                  : item.users_only
                                                                                                   ? "series-player"
                                                                                                   : "ghost-series-player",
                                                                                                 params: {

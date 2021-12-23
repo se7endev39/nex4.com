@@ -668,6 +668,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -6273,7 +6275,9 @@ var render = function() {
                                     staticClass: "btn btn-primary btn-play",
                                     attrs: {
                                       to: {
-                                        name: _vm.data.series.users_only
+                                        name: _vm.$auth.isAuthenticated()
+                                          ? "series-player"
+                                          : _vm.data.series.users_only
                                           ? "series-player"
                                           : "ghost-series-player",
                                         params: {
@@ -6529,7 +6533,9 @@ var render = function() {
                                         {
                                           attrs: {
                                             to: {
-                                              name: _vm.data.series.users_only
+                                              name: _vm.$auth.isAuthenticated()
+                                                ? "series-player-sp"
+                                                : _vm.data.series.users_only
                                                 ? "series-player-sp"
                                                 : "ghost-series-player-sp",
                                               params: {

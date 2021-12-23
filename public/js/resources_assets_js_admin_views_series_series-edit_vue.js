@@ -1102,7 +1102,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Manage\n                    ")]
+                    [_vm._v("Manage\r\n                    ")]
                   )
                 ],
                 1
@@ -1124,7 +1124,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Episode API\n                    ")]
+                    [_vm._v("Episode API\r\n                    ")]
                   )
                 ],
                 1
@@ -1148,7 +1148,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        Episode custom\n                    "
+                        "\r\n                        Episode custom\r\n                    "
                       )
                     ]
                   )
@@ -1584,9 +1584,9 @@ var render = function() {
                           { key: index, domProps: { value: item.id } },
                           [
                             _vm._v(
-                              "\n                                        " +
+                              "\r\n                                        " +
                                 _vm._s(item.name) +
-                                "\n                                    "
+                                "\r\n                                    "
                             )
                           ]
                         )
@@ -1668,7 +1668,7 @@ var render = function() {
                       [
                         _vm._v(
                           _vm._s(_vm.errors.first("overview")) +
-                            "\n                            "
+                            "\r\n                            "
                         )
                       ]
                     )
@@ -2083,7 +2083,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { id: "posterLabel", for: "poster" } }, [
-      _vm._v("Choose a poster\n                                    "),
+      _vm._v("Choose a poster\r\n                                    "),
       _c("br")
     ])
   },
@@ -2100,7 +2100,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { id: "backdropLabel", for: "backdrop" } }, [
-      _vm._v("Choose a backdrop\n                                    "),
+      _vm._v("Choose a backdrop\r\n                                    "),
       _c("br")
     ])
   },

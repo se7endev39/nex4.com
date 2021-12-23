@@ -590,6 +590,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -5913,7 +5916,9 @@ var render = function() {
                     {
                       attrs: {
                         to: {
-                          name: _vm.data.movie.users_only
+                          name: _vm.$auth.isAuthenticated()
+                            ? "movie-player"
+                            : _vm.data.movie.users_only
                             ? "movie-player"
                             : "ghost-movie-player",
                           params: { id: _vm.data.movie.id }
@@ -6090,7 +6095,9 @@ var render = function() {
                                     "btn btn-md-up btn-primary btn-play",
                                   attrs: {
                                     to: {
-                                      name: _vm.data.movie.users_only
+                                      name: _vm.$auth.isAuthenticated()
+                                        ? "movie-player"
+                                        : _vm.data.movie.users_only
                                         ? "movie-player"
                                         : "ghost-movie-player",
                                       params: { id: _vm.data.movie.id }
@@ -6147,7 +6154,9 @@ var render = function() {
                                   staticClass: "btn btn-primary btn-play",
                                   attrs: {
                                     to: {
-                                      name: _vm.data.movie.users_only
+                                      name: _vm.$auth.isAuthenticated()
+                                        ? "movie-player"
+                                        : _vm.data.movie.users_only
                                         ? "movie-player"
                                         : "ghost-movie-player",
                                       params: { id: _vm.data.movie.id }

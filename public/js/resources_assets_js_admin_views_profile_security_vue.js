@@ -215,7 +215,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                            Profile\n                        "
+                      "\r\n                            Profile\r\n                        "
                     )
                   ]
                 ),
@@ -228,7 +228,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                            Security\n                        "
+                      "\r\n                            Security\r\n                        "
                     )
                   ]
                 )

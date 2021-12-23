@@ -17,7 +17,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.not-found {\n    position: absolute;\n    top: 25%;\n    left: 50%;\n    transform: translate(-50%);\n}\n.not-found  h1 {\n    font-size: 25vh;\n    font-weight: bold;\n}\n.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary.active {\n    color: #fff;\n    background-color: #03A9F4;\n    background-image: none;\n    border-color: #03A9F4;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.not-found {\r\n    position: absolute;\r\n    top: 25%;\r\n    left: 50%;\r\n    transform: translate(-50%);\n}\n.not-found  h1 {\r\n    font-size: 25vh;\r\n    font-weight: bold;\n}\n.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary.active {\r\n    color: #fff;\r\n    background-color: #03A9F4;\r\n    background-image: none;\r\n    border-color: #03A9F4;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

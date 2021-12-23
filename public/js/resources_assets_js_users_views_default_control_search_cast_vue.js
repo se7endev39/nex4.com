@@ -740,6 +740,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -1745,7 +1747,9 @@ var render = function() {
                                                                           {
                                                                             attrs: {
                                                                               to: {
-                                                                                name: item.users_only
+                                                                                name: _vm.$auth.isAuthenticated()
+                                                                                  ? "movie-player"
+                                                                                  : item.users_only
                                                                                   ? "movie-player"
                                                                                   : "ghost-movie-player",
                                                                                 params: {
@@ -2259,7 +2263,9 @@ var render = function() {
                                                                                       {
                                                                                         attrs: {
                                                                                           to: {
-                                                                                            name: item.users_only
+                                                                                            name: _vm.$auth.isAuthenticated()
+                                                                                              ? "series-player"
+                                                                                              : item.users_only
                                                                                               ? "series-player"
                                                                                               : "ghost-series-player",
                                                                                             params: {

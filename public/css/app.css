@@ -9625,7 +9625,7 @@ button.vjs-control.vjs-button.icon-vidoejs-next-movie {
 .icon-vidoejs-report:before {
   content: "";
   position: relative;
-  background: url(/images/report-player.svg?d480ee8787374e9a70455e0542d81839);
+  background: url(/images/report-player.svg?36e31c48ce2bd10ec819412f0ea12f63);
   display: block;
   text-indent: -9999px;
   width: 30px;
@@ -9705,7 +9705,7 @@ div.vjs-control-bar > div.vjs-subs-caps-button.vjs-menu-button.vjs-menu-button-p
 button.vjs-control.vjs-button.icon-vidoejs-exit::before {
   content: "";
   position: relative;
-  background: url(/images/back-player.svg?f7418569b2951f66f558c703b021bb6a);
+  background: url(/images/back-player.svg?dc8114519d8c50984922db76382cd6a8);
   display: block;
   width: 60px;
   height: 60px;

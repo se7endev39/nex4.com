@@ -1027,7 +1027,7 @@ var render = function() {
                   [
                     _vm._v(
                       _vm._s(_vm.$t("register.agree_role")) +
-                        "\n                                "
+                        "\r\n                                "
                     ),
                     _c(
                       "router-link",
@@ -1037,14 +1037,14 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "Terms Of Service\n                                "
+                          "Terms Of Service\r\n                                "
                         )
                       ]
                     ),
                     _vm._v(
-                      "\n                                " +
+                      "\r\n                                " +
                         _vm._s(_vm.$t("register.and")) +
-                        "\n                                "
+                        "\r\n                                "
                     ),
                     _c(
                       "router-link",
@@ -1054,7 +1054,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "Privacy Policy\n                                "
+                          "Privacy Policy\r\n                                "
                         )
                       ]
                     )
@@ -1087,9 +1087,9 @@ var render = function() {
                       [
                         _c("i", { attrs: { id: "btn-progress" } }),
                         _vm._v(
-                          "\n                                    " +
+                          "\r\n                                    " +
                             _vm._s(_vm.$t("register.loading")) +
-                            "\n                                "
+                            "\r\n                                "
                         )
                       ]
                     )

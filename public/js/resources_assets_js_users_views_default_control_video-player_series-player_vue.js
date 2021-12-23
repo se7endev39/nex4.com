@@ -363,8 +363,8 @@ var alertify = __webpack_require__(/*! alertify.js */ "./node_modules/alertify.j
             });
 
             _this.jwPlayer.on('time', function (e) {
-              if (jwplayer().getPosition().toFixed() == _this.timeRequest) {
-                _this.timeRequest = _this.timeRequest + 20;
+              if (_this.timeRequest <= parseInt(jwplayer().getPosition().toFixed())) {
+                _this.timeRequest = parseInt(jwplayer().getPosition().toFixed()) + 10;
                 axios.post('/api/v1/create/watch/series/recently', {
                   current_time: jwplayer().getPosition().toFixed(),
                   duration_time: jwplayer().getDuration().toFixed(),
@@ -383,7 +383,7 @@ var alertify = __webpack_require__(/*! alertify.js */ "./node_modules/alertify.j
 
             _this.jwPlayer.on('seek', function () {
               setTimeout(function () {
-                _this.timeRequest = parseInt(jwplayer().getPosition().toFixed()) + 20;
+                _this.timeRequest = parseInt(jwplayer().getPosition().toFixed()) + 10;
               }, 200);
             });
           } // Check subtitle

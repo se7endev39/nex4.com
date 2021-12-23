@@ -964,9 +964,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                        " +
+                              "\r\n                                        " +
                                 _vm._s(item.ad_name) +
-                                "\n                                    "
+                                "\r\n                                    "
                             )
                           ]
                         )
@@ -1010,9 +1010,9 @@ var render = function() {
                                 { staticClass: "left-text pull-left" },
                                 [
                                   _vm._v(
-                                    "\n                                        " +
+                                    "\r\n                                        " +
                                       _vm._s(item.ad_name) +
-                                      "\n                                    "
+                                      "\r\n                                    "
                                   )
                                 ]
                               ),
@@ -1022,9 +1022,9 @@ var render = function() {
                                 { staticClass: "right-text float-right" },
                                 [
                                   _vm._v(
-                                    "\n                                        " +
+                                    "\r\n                                        " +
                                       _vm._s(item.client) +
-                                      "\n                                    "
+                                      "\r\n                                    "
                                   )
                                 ]
                               )
@@ -1070,7 +1070,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "Duplicate\n                                    "
+                                      "Duplicate\r\n                                    "
                                     )
                                   ]
                                 )
