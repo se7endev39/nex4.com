@@ -15,9 +15,9 @@ class CreateSupportResponsesTable extends Migration
     {
         Schema::create('support_responses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('request_id', 20);
-            $table->string('from', 50);
-            $table->text('reply');
+            $table->string('request_id',20);
+            $table->string('from',50);
+            $table->string('reply',20);
             $table->boolean('readit')->default(1);
             $table->timestamps();
             $table->foreign('request_id')->references('request_id')->on('supports')->onDelete('cascade')->onUpdate('cascade');

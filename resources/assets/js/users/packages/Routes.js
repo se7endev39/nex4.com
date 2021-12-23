@@ -1,10 +1,15 @@
 import VueRouter from 'vue-router';
 
+let themeName = document.body.firstElementChild.className;
+console.log(themeName)
 let routes = [
+
+
+
     {
         name: 'login',
         path: '/login',
-        component: () => import('../views/default/auth/login'),
+        component: require('../views/' + themeName + '/auth/login'),
         meta: {
             userNotAuth: true,
             title: 'Login'
@@ -14,7 +19,7 @@ let routes = [
     {
         name: 'plan',
         path: '/signup/plan',
-        component: () => import('../views/default/auth/plan'),
+        component: require('../views/' + themeName + '/auth/plan'),
         meta: {
             userNotAuth: true,
             title: 'Subscriber Plan'
@@ -23,7 +28,7 @@ let routes = [
     {
         name: 'signup',
         path: '/signup',
-        component: () => import('../views/default/auth/register'),
+        component: require('../views/' + themeName + '/auth/register'),
         meta: {
             userNotAuth: true,
             title: 'Signup'
@@ -32,7 +37,7 @@ let routes = [
     {
         name: 'forget_password',
         path: '/forget',
-        component: () => import('../views/default/auth/forget-password'),
+        component: require('../views/' + themeName + '/auth/forget-password'),
         meta: {
             userNotAuth: true,
             title: 'Forget Password'
@@ -42,7 +47,7 @@ let routes = [
     {
         name: 'forget_change',
         path: '/forget/rest/:code',
-        component: () => import('../views/default/auth/forget-rest'),
+        component: require('../views/' + themeName + '/auth/forget-rest'),
         meta: {
             userNotAuth: true,
             title: 'Forget Password'
@@ -53,7 +58,7 @@ let routes = [
     {
         name: 'privacy',
         path: '/privacy',
-        component: () => import('../views/default/control/footer/privacy'),
+        component: require('../views/' + themeName + '/control/footer/privacy'),
         meta: {
             allAuth: true,
             title: 'Privacy'
@@ -62,7 +67,7 @@ let routes = [
     {
         name: 'terms',
         path: '/terms',
-        component: () => import('../views/default/control/footer/terms'),
+        component: require('../views/' + themeName + '/control/footer/terms'),
         meta: {
             allAuth: true,
             title: 'Terms'
@@ -71,7 +76,7 @@ let routes = [
     {
         name: 'contact-us',
         path: '/contact-us',
-        component: () => import('../views/default/control/footer/contact-us'),
+        component: require('../views/' + themeName + '/control/footer/contact-us'),
         meta: {
             allAuth: true,
             name: 'Contact Us',
@@ -80,7 +85,7 @@ let routes = [
     {
         name: 'about-us',
         path: '/about-us',
-        component: () => import('../views/default/control/footer/about-us'),
+        component: require('../views/' + themeName + '/control/footer/about-us'),
         meta: {
             allAuth: true,
             title: 'About Us',
@@ -92,7 +97,7 @@ let routes = [
     {
         name: 'payment',
         path: '/signup/payment',
-        component: () => import('../views/default/auth/payment'),
+        component: require('../views/' + themeName + '/auth/payment'),
         meta: {
             userPaymentAuth: true,
             title: 'Payment'
@@ -101,7 +106,7 @@ let routes = [
     {
         name: 'signup-non-payment',
         path: '/signup',
-        component: () => import('../views/default/auth/register-non-payment.vue'),
+        component: require('../views/' + themeName + '/auth/register-non-payment.vue'),
         meta: {
             userNotAuth: true,
             title: 'Signup'
@@ -111,7 +116,7 @@ let routes = [
     {
         name: '404',
         path: '/404',
-        component: () => import('../views/default/errors/404'),
+        component: require('../views/' + themeName + '/errors/404'),
         meta: {
             title: 'Not Found',
         }
@@ -122,7 +127,7 @@ let routes = [
     {
         name: 'discover',
         path: '/',
-        component: () => import('../views/default/control/home'),
+        component: require('../views/' + themeName + '/control/home'),
         meta: {
             allAuth: true,
             title: 'Discover'
@@ -132,7 +137,7 @@ let routes = [
     {
         name: 'movies',
         path: '/movies',
-        component: () => import('../views/default/control/movie/movies'),
+        component: require('../views/' + themeName + '/control/movie/movies'),
         meta: {
             allAuth: true,
             title: 'Movies'
@@ -141,7 +146,7 @@ let routes = [
     {
         name: 'show-movie',
         path: '/show/:id',
-        component: () => import('../views/default/control/movie/show'),
+        component: require('../views/' + themeName + '/control/movie/show'),
         meta: {
             allAuth: true,
             metaTags: [
@@ -155,7 +160,7 @@ let routes = [
     {
         name: 'series',
         path: '/series',
-        component: () => import('../views/default/control/series/series'),
+        component: require('../views/' + themeName + '/control/series/series'),
         meta: {
             allAuth: true,
             title: 'Tv Show'
@@ -165,7 +170,7 @@ let routes = [
     {
         name: 'show-series',
         path: '/series/show/:id',
-        component: () => import('../views/default/control/series/show'),
+        component: require('../views/' + themeName + '/control/series/show'),
         meta: {
             allAuth: true,
             title: 'Show Series',
@@ -174,59 +179,23 @@ let routes = [
                     name: 'description',
                     content: 'The about page of our example app.'
                 }
-            ]
+                ]
         },
 
     },
     {
         name: 'kids',
         path: '/kids',
-        component: () => import('../views/default/control/kids/kids'),
+        component: require('../views/' + themeName + '/control/kids/kids'),
         meta: {
             allAuth: true,
             title: 'Kids'
         },
     },
     {
-        name: 'manga',
-        path: '/manga',
-        component: () => import('../views/default/control/manga/index'),
-        meta: {
-            allAuth: true,
-            title: 'Manga'
-        },
-    },
-    {
-        name: 'show-manga',
-        path: '/show/manga/:id',
-        component: () => import('../views/default/control/manga/show'),
-        meta: {
-            allAuth: true,
-            title: 'Manga'
-        },
-    },
-    {
-        name: 'show-chapter',
-        path: '/show/manga/:id/chapter/:chapter_id',
-        component: () => import('../views/default/control/manga/chapters/index'),
-        meta: {
-            userAuth: true,
-            title: 'Manga'
-        },
-    },
-    {
-        name: 'ghost-show-chapter',
-        path: '/g/show/manga/:id/chapter/:chapter_id',
-        component: () => import('../views/default/control/manga/chapters/index'),
-        meta: {
-            allAuth: true,
-            title: 'Manga'
-        },
-    },
-    {
         name: 'channels',
         path: '/channels',
-        component: () => import('../views/default/control/channels/channels'),
+        component: require('../views/' + themeName + '/control/channels/channels'),
         meta: {
             allAuth: true,
             title: 'Live Tv'
@@ -235,7 +204,7 @@ let routes = [
     {
         name: 'collection',
         path: '/collection/:id',
-        component: () => import('../views/default/control/collection/index.vue'),
+        component: require('../views/' + themeName + '/control/collection/index.vue'),
         meta: {
             userAuth: true,
             title: 'My Collections'
@@ -245,7 +214,7 @@ let routes = [
     {
         name: 'series-player',
         path: '/watch/series/:series_id',
-        component: () => import('../views/default/control/video-player/series-player'),
+        component: require('../views/' + themeName + '/control/video-player/series-player'),
         meta: {
             userAuth: true,
             title: 'Series Player'
@@ -254,17 +223,16 @@ let routes = [
     {
         name: 'series-player-sp',
         path: '/watch/series/:series_id/:episode_id',
-        component: () => import('../views/default/control/video-player/series-player'),
+        component: require('../views/' + themeName + '/control/video-player/series-player'),
         meta: {
             userAuth: true,
             title: 'Series Player'
         }
     },
-
     {
         name: 'movie-player',
         path: '/watch/movie/:id',
-        component: () => import('../views/default/control/video-player/movie-player'),
+        component: require('../views/' + themeName + '/control/video-player/movie-player'),
         meta: {
             userAuth: true,
             title: 'Movie Player'
@@ -272,48 +240,20 @@ let routes = [
         }
     },
 
+
     {
         name: 'tv-player',
         path: '/watch/tv/:id',
-        component: () => import('../views/default/control/video-player/tv-player'),
+        component: require('../views/' + themeName + '/control/video-player/tv-player'),
         meta: {
             userAuth: true,
             title: 'Tv Player'
         }
     },
-
-    {
-        name: 'ghost-movie-player',
-        path: '/g/watch/movie/:id',
-        component: () => import('../views/default/control/video-player/ghost/movie-player'),
-        meta: {
-            userAuth: false,
-            title: 'Movie Player'
-
-        }
-    },
-    {
-        name: 'ghost-series-player',
-        path: '/g/watch/series/:series_id',
-        component: () => import('../views/default/control/video-player/ghost/series-player'),
-        meta: {
-            userAuth: false,
-            title: 'Series Player'
-        }
-    },
-    {
-        name: 'ghost-series-player-sp',
-        path: '/g/watch/series/:series_id/:episode_id',
-        component: () => import('../views/default/control/video-player/ghost/series-player'),
-        meta: {
-            userAuth: false,
-            title: 'Series Player'
-        }
-    },
     {
         name: 'search',
         path: '/search',
-        component: () => import('../views/default/control/search/search'),
+        component: require('../views/' + themeName + '/control/search/search'),
         meta: {
             userAuth: true,
             title: 'Search'
@@ -322,9 +262,9 @@ let routes = [
     {
         name: 'cast',
         path: '/cast/:id',
-        component: () => import('../views/default/control/search/cast'),
+        component: require('../views/' + themeName + '/control/search/cast'),
         meta: {
-            userAuth: false,
+            userAuth: true,
             title: 'Cast'
         },
     },
@@ -332,7 +272,7 @@ let routes = [
     {
         name: 'profile',
         path: '/setting/public',
-        component: () => import('../views/default/control/setting/profile'),
+        component: require('../views/' + themeName + '/control/setting/profile'),
         meta: {
             userAuth: true,
             title: 'Profile'
@@ -341,7 +281,7 @@ let routes = [
     {
         name: 'security',
         path: '/setting/security',
-        component: () => import('../views/default/control/setting/security'),
+        component: require('../views/' + themeName + '/control/setting/security'),
         meta: {
             userAuth: true,
             title: 'Security'
@@ -351,7 +291,7 @@ let routes = [
     {
         name: 'payment-update',
         path: '/setting/payment-update',
-        component: () => import('../views/default/control/setting/payment-update'),
+        component: require('../views/' + themeName + '/control/setting/payment-update'),
         meta: {
             userAuth: true,
             title: 'Payment Update'
@@ -361,7 +301,7 @@ let routes = [
     {
         name: 'billing-details',
         path: '/setting/billing-details',
-        component: () => import('../views/default/control/setting/billing-details'),
+        component: require('../views/' + themeName + '/control/setting/billing-details'),
         meta: {
             userAuth: true,
             title: 'Billing Details'
@@ -370,7 +310,7 @@ let routes = [
     {
         name: 'change-plan',
         path: '/setting/change-plan',
-        component: () => import('../views/default/control/setting/change-plan'),
+        component: require('../views/' + themeName + '/control/setting/change-plan'),
         meta: {
             userAuth: true,
             title: 'Change Your Plan'
@@ -379,7 +319,7 @@ let routes = [
     {
         name: 'language',
         path: '/setting/language',
-        component: () => import('../views/default/control/setting/language'),
+        component: require('../views/' + themeName + '/control/setting/language'),
         meta: {
             userAuth: true,
             title: 'Language'
@@ -389,7 +329,7 @@ let routes = [
     {
         name: 'adjust-subtitles',
         path: '/setting/adjust-subtitles',
-        component: () => import('../views/default/control/setting/adjust-subtitles'),
+        component: require('../views/' + themeName + '/control/setting/adjust-subtitles'),
         meta: {
             userAuth: true,
             title: 'Adjust subtitles'
@@ -399,7 +339,7 @@ let routes = [
     {
         name: 'viewing-history',
         path: '/setting/viewing-history',
-        component: () => import('../views/default/control/setting/viewing-history.vue'),
+        component: require('../views/' + themeName + '/control/setting/viewing-history.vue'),
         meta: {
             userAuth: true,
             title: 'viewing History'
@@ -409,7 +349,7 @@ let routes = [
     {
         name: 'support-inbox',
         path: '/setting/support-inbox',
-        component: () => import('../views/default/control/setting/support-inbox.vue'),
+        component: require('../views/' + themeName + '/control/setting/support-inbox.vue'),
         meta: {
             userAuth: true,
             title: 'Support Inbox'
@@ -419,7 +359,7 @@ let routes = [
     {
         name: 'support-request',
         path: '/setting/support-request/:id',
-        component: () => import('../views/default/control/setting/support-request.vue'),
+        component: require('../views/' + themeName + '/control/setting/support-request.vue'),
         meta: {
             userAuth: true,
             title: 'Support Request'
@@ -429,7 +369,7 @@ let routes = [
     {
         name: 'device-activity',
         path: '/setting/device-activity',
-        component: () => import('../views/default/control/setting/device-activity.vue'),
+        component: require('../views/' + themeName + '/control/setting/device-activity.vue'),
         meta: {
             userAuth: true,
             title: 'Device Activity'
@@ -446,7 +386,7 @@ export default new VueRouter({
         if (savedPosition) {
             return savedPosition;
         } else {
-            return { x: 0, y: 0 };
+            return {x: 0, y: 0};
         }
     }
 });

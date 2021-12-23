@@ -59,7 +59,7 @@
 
                             <transition name="slide-down-fade">
 
-                                <div class="animation-ani92X" v-show="showSlideUpAnimation">
+                                <div class="animation" v-show="showSlideUpAnimation">
 
                                     <div class="poster" @mouseover="ACTIVE_SLELECTED_MOVIE(item.id)">
 
@@ -118,7 +118,7 @@
 
 
                                                             <router-link
-                                                                    :to="{ name: $auth.isAuthenticated() ?  'movie-player' :  item.users_only ? 'movie-player' : 'ghost-movie-player', params: {id: item.id}}">
+                                                                    :to="{name: 'movie-player', params: {id: item.id}}">
 
                                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
                                                             viewBox="0 0 294.843 294.843" style="enable-background:new 0 0 294.843 294.843;"
@@ -153,8 +153,15 @@
                                     <!-- END Poster -->
 
                                     <div class="mt-2">
-                                        <b> {{item.name}} </b> <br>
-                                        <small class="text-muted">{{item.genre}}</small>
+                                        <p class="ml-2"> {{item.name}} </p>
+                                        <div class="row margin-left-auto">
+                                            <small class="text-muted ml-2">Adventure</small>
+                                            <div class="row margin-left-auto margin-right-2">
+                                                <img src="/themes/default/img/favor.svg" alt="favor" width="17px"  height="17px" v-if="item.cloud == 'local'">
+                                                <p style="margin-left:4px;">{{item.rate}}</p>
+                                            </div>
+
+                                        </div>
                                     </div>
 
 
@@ -174,7 +181,7 @@
                         <div v-if="item.type === 'series'">
                             <transition name="slide-down-fade">
 
-                                <div class="animation-ani92X" v-show="showSlideUpAnimation">
+                                <div class="animation" v-show="showSlideUpAnimation">
 
                                     <div class="poster" @mouseover="ACTIVE_SLELECTED_SERIES(item.id)">
 
@@ -280,8 +287,15 @@
 
 
                                     <div class="mt-2">
-                                        <b> {{item.name}} </b> <br>
-                                        <small class="text-muted">{{item.genre}}</small>
+                                        <p class="ml-2"> {{item.name}} </p>
+                                        <div class="row margin-left-auto">
+                                            <small class="text-muted ml-2">Adventure</small>
+                                            <div class="row margin-left-auto margin-right-2">
+                                                <img src="/themes/default/img/favor.svg" alt="favor" width="17px"  height="17px" v-if="item.cloud == 'local'">
+                                                <p style="margin-left:4px;">{{item.rate}}</p>
+                                            </div>
+
+                                        </div>
                                     </div>
 
 

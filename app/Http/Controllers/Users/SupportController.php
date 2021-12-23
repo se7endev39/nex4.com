@@ -16,7 +16,7 @@ class SupportController extends Controller
     /**
      * Get all request of user
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return void
      */
     public function get() {
 

@@ -25,6 +25,7 @@ class MoviesController extends Controller
             Helpers::checkUserPayment(Auth::user());
             return $next($request);
         });
+
     }
 
     /**
@@ -56,12 +57,11 @@ class MoviesController extends Controller
                       WHEN u3.id IS NULL THEN false
                       ELSE true
                       END AS "is_like",
-                      movies.m_cloud AS cloud,
-                      movies.m_users_only AS users_only
+                      movies.m_cloud AS cloud
                       FROM movies
-                      LEFT JOIN collection_lists  AS u1 ON u1.movie_id = movies.m_id AND u1.uid = "' . Auth::id() . '"
-                      LEFT JOIN recently_watcheds AS u2 ON u2.movie_id = movies.m_id AND u2.uid = "' . Auth::id() . '"
-                      LEFT JOIN likes AS u3 ON u3.movie_id = movies.m_id AND u3.uid = "' . Auth::id() . '"
+                      LEFT JOIN collection_lists  AS u1 ON u1.movie_id = movies.m_id AND u1.uid = "' .Auth::id(). '"
+                      LEFT JOIN recently_watcheds AS u2 ON u2.movie_id = movies.m_id AND u2.uid = "' .Auth::id(). '"
+                      LEFT JOIN likes AS u3 ON u3.movie_id = movies.m_id AND u3.uid = "' .Auth::id(). '"
                       WHERE movies.show <> 0 AND movies.m_age <> "G"
                       ORDER BY movies.created_at DESC
                       LIMIT 100');
@@ -71,12 +71,89 @@ class MoviesController extends Controller
             $movieQuery = null;
         }
 
+        // Get top movies and series
+        $getTopMas = DB::select('(SELECT
+                                "movie" AS type,
+                                movies.m_id AS id,
+                                movies.m_name AS name,
+                                movies.m_poster AS poster,
+                                movies.m_desc AS overview,
+                                movies.m_year AS year,
+                                movies.m_genre AS genre,
+                                movies.m_rate AS rate,
+                                movies.m_backdrop AS backdrop,
+                                movies.m_poster AS poster,
+                                movies.m_age AS age,
+                                u2.current_time,
+                                u2.duration_time,
+                                CASE
+                                WHEN u1.id IS NULL THEN false
+                                ELSE true
+                                END AS "is_favorite",
+                                movies.m_cloud AS cloud
+                                FROM tops
+                                INNER JOIN movies  ON movies.m_id = tops.movie_id
+                                LEFT JOIN collection_lists AS u1  ON u1.movie_id = movies.m_id AND u1.uid = "' . Auth::id() . '"
+                                LEFT JOIN recently_watcheds AS u2 ON u2.movie_id = movies.m_id AND u2.uid = "' . Auth::id() . '"
+                                GROUP BY movies.m_id DESC)
+                                UNION
+                                (SELECT
+                                "series" AS type,
+                                series.t_id AS id,
+                                series.t_name AS name,
+                                series.t_poster AS poster,
+                                series.t_desc AS overview,
+                                series.t_year AS year,
+                                series.t_genre AS genre,
+                                series.t_rate AS rate,
+                                series.t_backdrop AS backdrop,
+                                series.t_poster AS poster,
+                                series.t_age AS age,
+                                u2.current_time,
+                                u2.duration_time,
+                                CASE
+                                WHEN u1.id IS NULL THEN false
+                                ELSE true
+                                END AS "is_favorite",
+                                series.t_cloud AS cloud
+                                FROM tops
+                        	    INNER JOIN series  ON series.t_id = tops.series_id
+                                LEFT JOIN collection_lists AS u1  ON u1.series_id = series.t_id AND u1.uid = "' . Auth::id() . '"
+                                LEFT JOIN recently_watcheds AS u2 ON u2.series_id = series.t_id AND u2.uid = "' . Auth::id() . '"
+                                LEFT JOIN episodes AS u4  ON u4.series_id = series.t_id
+                                GROUP BY series.t_id DESC)');
+
+        if (empty($getTopMas)) {
+            $getTopMas = null;
+        }
+        // else
+        // {
+        //     foreach ($getTopMas as $key => $value)
+        //     {
+        //         $id = $value->id;
+        //         $getMovieCast = DB::table('casts')
+        //             ->select('casts.c_id AS id', 'casts.c_name AS name', 'casts.c_image AS image')
+        //             ->join('casts_rules', 'casts_rules.casts_id', '=', 'casts.credit_id')
+        //             ->where('casts_movies', '=', $id)
+        //             ->get();
+
+        //         // Check if there is no cast
+        //         if ($getMovieCast->isEmpty()) {
+        //             $getMovieCast = null;
+        //         }
+        //         else
+        //         {
+        //             $value['casts'] = $getMovieCast;
+        //         }
+        //     }
+        // }
+
         return response()->json([
             'status' => 'success',
             'data'   => [
-                'movies' => $movieQuery
-            ]
-        ]);
+                'movies' => $movieQuery,
+                'top' => $getTopMas
+            ]]);
     }
 
 
@@ -120,13 +197,12 @@ class MoviesController extends Controller
                       ELSE true
                       END AS "is_like",
                       COUNT(u3.movie_id) AS likes_number,
-                      movies.m_cloud AS cloud,
-                      movies.m_users_only AS users_only
+                      movies.m_cloud AS cloud
                       FROM movies
-                      LEFT JOIN collection_lists AS u1  ON u1.movie_id = movies.m_id AND u1.uid = "' . Auth::id() . '"
-                      LEFT JOIN recently_watcheds AS u2 ON u2.movie_id = movies.m_id AND u2.uid = "' . Auth::id() . '"
-                      LEFT JOIN likes AS u3  ON u3.movie_id = movies.m_id AND u3.uid = "' . Auth::id() . '"
-                      WHERE movies.m_id = "' . $id . '" AND movies.show <> 0
+                      LEFT JOIN collection_lists AS u1  ON u1.movie_id = movies.m_id AND u1.uid = "' .Auth::id(). '"
+                      LEFT JOIN recently_watcheds AS u2 ON u2.movie_id = movies.m_id AND u2.uid = "' .Auth::id(). '"
+                      LEFT JOIN likes AS u3  ON u3.movie_id = movies.m_id AND u3.uid = "' .Auth::id(). '"
+                      WHERE movies.m_id = "'. $id .'" AND movies.show <> 0
                       Group By movies.m_id,u2.current_time,u2.duration_time,u1.id,u3.id
                       LIMIT 1');
 
@@ -138,10 +214,10 @@ class MoviesController extends Controller
 
         // Get casts
         $getMovieCast = DB::table('casts')
-            ->select('casts.c_id AS id', 'casts.c_name AS name', 'casts.c_image AS image')
-            ->join('casts_rules', 'casts_rules.casts_id', '=', 'casts.credit_id')
-            ->where('casts_movies', '=', $id)
-            ->get();
+                    ->select('casts.c_id AS id', 'casts.c_name AS name', 'casts.c_image AS image')
+                    ->join('casts_rules', 'casts_rules.casts_id', '=', 'casts.credit_id')
+                    ->where('casts_movies', '=', $id)
+                    ->get();
 
         // Check if there is no cast
         if ($getMovieCast->isEmpty()) {
@@ -149,11 +225,11 @@ class MoviesController extends Controller
         }
         // Get casts
         $getSimilarMovies = DB::table('movies')
-            ->selectRaw('m_id AS id, m_name AS name,m_poster AS poster, m_cloud AS cloud')
-            ->whereRaw('m_genre LIKE "' . strtok($movieQuery[0]->genre, "-") . '%"')
-            ->whereRaw('m_id <> "' . $movieQuery[0]->id . '"')
-            ->limit(4)
-            ->get();
+                    ->selectRaw('m_id AS id, m_name AS name,m_poster AS poster, m_cloud AS cloud')
+                    ->whereRaw('m_genre LIKE "'.strtok($movieQuery[0]->genre, "-").'%"')
+                    ->whereRaw('m_id <> "'. $movieQuery[0]->id .'"')
+                    ->limit(4)
+                    ->get();
 
         // Check if there is no cast
         if ($getSimilarMovies->isEmpty()) {
@@ -166,8 +242,7 @@ class MoviesController extends Controller
                 'movie' => $movieQuery[0],
                 'casts' => $getMovieCast,
                 'similar' => $getSimilarMovies
-            ]
-        ]);
+            ]]);
     }
 
 
@@ -175,21 +250,21 @@ class MoviesController extends Controller
     /**
      * Sort by trending and genre
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
     public function sortMovies(Request $request)
     {
         $request->validate([
             'trending' => 'required|numeric|between:1,5',
-            'genre' => 'required|max:255'
+            'genre' => 'required|string|max:15'
         ]);
 
         if ($request->input('genre') === 'all') {
             $request->genre = "";
-        } else {
+        }else{
             // Check if genre request equal the array genre
-            $CheckGenre = Genre::where('name', $request->input('genre'))->first();
-            if (is_null($CheckGenre)) {
+            $CheckGenere = Genre::where('name', $request->input('genre'))->first();
+            if (is_null($CheckGenere)) {
                 return response()->json(['status' => 'error', 'message' => 'Genre not found'], 400);
             }
         }
@@ -207,7 +282,6 @@ class MoviesController extends Controller
         } elseif ($request->input('trending') === 4) {
             $trending = 'likes.movie_id';
         }
-
         $movieQuery = DB::select('
                       SELECT DISTINCT
                       movies.m_id AS id,
@@ -230,15 +304,14 @@ class MoviesController extends Controller
                       WHEN u3.id IS NULL THEN false
                       ELSE true
                       END AS "is_like",
-                      movies.m_cloud AS cloud,
-                      movies.m_users_only AS users_only
+                      movies.m_cloud AS cloud
                       FROM movies
                       LEFT JOIN likes ON likes.movie_id = movies.m_id
-                      LEFT JOIN collection_lists AS u1  ON u1.movie_id = movies.m_id AND u1.uid = "' . Auth::id() . '"
-                      LEFT JOIN recently_watcheds AS u2 ON u2.movie_id = movies.m_id AND u2.uid = "' . Auth::id() . '"
-                      LEFT JOIN likes AS u3  ON u3.movie_id = movies.m_id AND u3.uid = "' . Auth::id() . '"
-                      WHERE movies.m_genre LIKE "%' . $request->genre . '%" AND movies.show <> 0 AND movies.m_age <> "G"
-                      ORDER BY ' . $trending . ' DESC
+                      LEFT JOIN collection_lists AS u1  ON u1.movie_id = movies.m_id AND u1.uid = "' .Auth::id(). '"
+                      LEFT JOIN recently_watcheds AS u2 ON u2.movie_id = movies.m_id AND u2.uid = "' .Auth::id(). '"
+                      LEFT JOIN likes AS u3  ON u3.movie_id = movies.m_id AND u3.uid = "' .Auth::id(). '"
+                      WHERE movies.m_genre LIKE "'. $request->genre .'%" AND movies.show <> 0 AND movies.m_age <> "G"
+                      ORDER BY ' .$trending. ' DESC
                       LIMIT 100');
 
         // Check if there is no movies
@@ -250,7 +323,6 @@ class MoviesController extends Controller
             'status' => 'success',
             'data'   => [
                 'movies' => $movieQuery
-            ]
-        ]);
+            ]]);
     }
 }

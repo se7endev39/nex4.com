@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Jobs\ConvertVideoToHLS;
-use App\Jobs\ConvertVideoToMp4;
 use App\Models\Casts;
 use App\Models\Casts_rules;
 use App\Models\Episode;
@@ -21,7 +19,6 @@ use Auth;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -64,7 +61,6 @@ class SeriesController extends Controller
                         series.t_poster AS poster,
                         series.t_year AS year,
                         series.t_cloud AS cloud,
-                        series.t_users_only,
                         categories.name AS category,
                         series.created_at,
                         series.updated_at,
@@ -97,17 +93,24 @@ class SeriesController extends Controller
         $request->validate([
             'id' => 'required|numeric',
         ]);
+
+
         // Upload To Local Or AWS Cloud
         if ($request->cloud_type == 'local') {
 
             return $this->uploadSeriesTmdbInfoToLocal($request);
+
         } else if ($request->cloud_type == 'aws') {
 
             return $this->uploadSeriesTmdbInfoToAWS($request);
+
         } else {
 
             return response()->json(['message' => 'Error cloud not found'], 422);
+
         }
+
+
     }
 
 
@@ -121,8 +124,8 @@ class SeriesController extends Controller
     {
         //Validate
         $this->validate($request, [
-            'name' => 'required',
-            'overview' => 'required',
+            'name' => 'required|max:50|regex:/^[a-z0-9 .\-]+$/i',
+            'overview' => 'required|max:2000',
             'year' => 'required|numeric|between:0,2030',
             'rate' => 'required|numeric|between:0,99.99',
             'genres' => 'required|max:100',
@@ -135,13 +138,18 @@ class SeriesController extends Controller
         if ($request->cloud_type == 'local') {
 
             return $this->uploadSeriesCustomInfoToLocal($request);
+
         } else if ($request->cloud_type == 'aws') {
 
             return $this->uploadSeriesCustomInfoToAWS($request);
+
         } else {
 
             return response()->json(['message' => 'Error cloud not found'], 422);
+
         }
+
+
     }
 
 
@@ -157,13 +165,17 @@ class SeriesController extends Controller
         if ($request->cloud_type == 'local') {
 
             return $this->uploadEpisodeInfoToLocal($request);
+
         } else if ($request->cloud_type == 'aws') {
 
             return $this->uploadEpisodeInfoToAWS($request);
+
         } else {
 
             return response()->json(['message' => 'Error cloud not found'], 422);
+
         }
+
     }
 
 
@@ -185,13 +197,17 @@ class SeriesController extends Controller
         if ($request->cloud_type == 'local') {
 
             return $this->uploadCustomEpisodeInfoToLocal($request);
+
         } else if ($request->cloud_type == 'aws') {
 
             return $this->uploadCustomEpisodeInfoToAWS($request);
+
         } else {
 
             return response()->json(['message' => 'Error cloud not found'], 422);
+
         }
+
     }
 
 
@@ -208,13 +224,18 @@ class SeriesController extends Controller
         if ($request->cloud_type == 'local') {
 
             return $this->uploadEpisodeVideoToLocal($request);
+
         } else if ($request->cloud_type == 'aws') {
 
             return $this->uploadEpisodeVideoToAWS($request);
+
         } else {
 
             return response()->json(['message' => 'Error cloud not found'], 422);
+
         }
+
+
     }
 
 
@@ -257,6 +278,7 @@ class SeriesController extends Controller
                 }
 
                 return response()->json(['status' => 'success', 'message' => 'Successful upload subtitles', 'data' => $sub]);
+
             } elseif ($checkEpisode->cloud === 'aws') {
 
                 foreach ($request->file('subtitleUpload') as $key => $value) {
@@ -273,14 +295,18 @@ class SeriesController extends Controller
                 }
 
                 return response()->json(['status' => 'success', 'message' => 'Successful upload subtitles', 'data' => $sub]);
+
+
             }
+
+
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function getAllSeason($id)
@@ -317,7 +343,7 @@ class SeriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function getSeries($id)
@@ -351,8 +377,8 @@ class SeriesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -360,7 +386,7 @@ class SeriesController extends Controller
         //Validate
         $request->validate([
             'id' => 'required|uuid',
-            'name' => 'nullable',
+            'name' => 'nullable|max:40',
             'year' => 'nullable|numeric',
             'runtime' => 'nullable|numeric',
             'rate' => 'nullable|numeric|between:0,99.99',
@@ -403,6 +429,7 @@ class SeriesController extends Controller
                 $uploadOriginalPoster = Storage::disk('public')->put('posters/original_' . $newPosterName, $encodePosterOriginal->__toString());
 
                 $update->t_poster = $newPosterName;
+
             }
             if (!empty($request->file('backdrop'))) {
                 $newBackdropName = Str::random(20) . '.jpg';
@@ -420,7 +447,10 @@ class SeriesController extends Controller
                 $uploadOriginalBackdrop = Storage::disk('public')->put('backdrops/original_' . $newBackdropName, $encodeBackdropOriginal->__toString());
 
                 $update->t_backdrop = $newBackdropName;
+
             }
+
+
         } elseif ($update->t_cloud == 'aws') {
 
             if (!empty($request->file('poster'))) {
@@ -446,6 +476,7 @@ class SeriesController extends Controller
             $delete = Casts_rules::where('casts_series', $request->id)->delete();
             if (!$delete) {
                 return response()->json(['status' => 'failed', 'message' => 'Failed to delete casts'], 422);
+
             }
         }
 
@@ -464,7 +495,7 @@ class SeriesController extends Controller
     /**
      * Delete the specified resource from storage.
      *
-     * @param int $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function deleteSeries($id)
@@ -497,16 +528,16 @@ class SeriesController extends Controller
     }
 
     /**
-     * Search series by name or id
+     * Search movies by name or id
      *
-     * @param int $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
 
     public function searchSeries(Request $request)
     {
         $request->validate([
-            'query' => 'required',
+            'query' => 'required|max:40|regex:/^[a-z0-9 .\-]+$/i',
         ]);
 
         $getSeries = series::selectRaw('
@@ -515,7 +546,6 @@ class SeriesController extends Controller
                 series.t_poster AS poster,
                 series.t_year AS year,
                 series.t_cloud AS cloud,
-                series.t_users_only,
                 series.created_at,
                 series.updated_at,
                 tops.series_id,
@@ -541,7 +571,7 @@ class SeriesController extends Controller
      * Delete episode
      *
      * @param [type] $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return void
      */
     public function deleteEpisode(Request $request)
     {
@@ -556,17 +586,20 @@ class SeriesController extends Controller
 
             if ($delete->t_cloud == 'aws') {
                 // Remove video
-                Storage::disk('s3_private')->deleteDirectory('series/' . $delete->series_id . '/' . 'season_' . $delete->season_number . '_' . $delete->episode_number);
+                Storage::disk('s3_private')->deleteDirectory('series/' . $delete->series_id . '/' .  'season_' . $delete->season_number . '_' . $delete->episode_number);
 
                 $delete->delete();
             } else {
                 // Remove video
-                Storage::disk('public')->deleteDirectory('series/' . $delete->series_id . '/' . 'season_' . $delete->season_number . '_' . $delete->episode_number);
+                Storage::disk('public')->deleteDirectory('series/' . $delete->series_id . '/' .  'season_' . $delete->season_number . '_' . $delete->episode_number);
+                // Remove subtitle
+
                 $delete->delete();
             }
         }
 
         return response()->json(['status' => 'success', 'message' => 'Successful delete'], 200);
+
     }
 
     /**
@@ -590,14 +623,15 @@ class SeriesController extends Controller
             if ($check->show) {
                 $check->show = 0;
                 $check->save();
-                array_push($array, ['key' => $value['key'], 'show' => 0]);
+                array_push($array, ['key' => $value['key'], 'show' => false]);
             } else {
                 $check->show = 1;
                 $check->save();
-                array_push($array, ['key' => $value['key'], 'show' => 1]);
+                array_push($array, ['key' => $value['key'], 'show' => true]);
             }
         }
         return response(['status' => 'success', 'message' => 'Successful Request', 'list' => $array], 200);
+
     }
 
     /**
@@ -638,6 +672,7 @@ class SeriesController extends Controller
             'video_url' => $get->video_url,
             'videos' => $getVideos,
         ]], 200);
+
     }
 
     /**
@@ -651,8 +686,8 @@ class SeriesController extends Controller
     {
         $request->validate([
             'id' => 'required|uuid',
-            'name' => 'nullable',
-            'overview' => 'nullable',
+            'name' => 'nullable|max:40',
+            'overview' => 'nullable|string|max:2000',
         ]);
 
         $check = Episode::find($request->input('id'));
@@ -683,7 +718,7 @@ class SeriesController extends Controller
             $videos = json_decode($request->videos);
             foreach ($videos as $key => $value) {
                 $video = Video::where('v_id', $value->v_id)->first();
-                if (!is_null($video)) {
+                if(!is_null($video)) {
                     if ($value->video_format === 'embed') {
                         $video->embed_code = $value->embed_code;
                     } else {
@@ -692,6 +727,7 @@ class SeriesController extends Controller
                 }
                 $video->save();
             }
+
         } elseif ($check->cloud == 'local') {
 
             // Upload image if there
@@ -711,6 +747,7 @@ class SeriesController extends Controller
                 $uploadOriginalBackdrop = Storage::disk('public')->put('backdrops/original_' . $newBackdropName, $encodeBackdropOriginal->__toString());
 
                 $check->backdrop = $newBackdropName;
+
             }
 
             $check->save();
@@ -719,7 +756,7 @@ class SeriesController extends Controller
             $videos = json_decode($request->videos);
             foreach ($videos as $key => $value) {
                 $video = Video::where('v_id', $value->v_id)->first();
-                if (!is_null($video)) {
+                if(!is_null($video)) {
                     if ($value->video_format === 'embed') {
                         $video->embed_code = $value->embed_code;
                     } else {
@@ -728,10 +765,12 @@ class SeriesController extends Controller
                 }
                 $video->save();
             }
+
         }
 
 
         return response()->json(['status' => 'success', 'message' => 'Successful update ' . $request->name]);
+
     }
 
 
@@ -798,6 +837,7 @@ class SeriesController extends Controller
             $uploadBackdrop300 = Storage::disk('public')->put('backdrops/300_' . $newBackdropName, $encodeBackdrop300->__toString());
             $uploadBackdrop600 = Storage::disk('public')->put('backdrops/600_' . $newBackdropName, $encodeBackdrop600->__toString());
             $uploadOriginalBackdrop = Storage::disk('public')->put('backdrops/original_' . $newBackdropName, $encodeBackdropOriginal->__toString());
+
         }
 
         // Store data
@@ -866,6 +906,8 @@ class SeriesController extends Controller
             }
         }
         return response()->json(['status' => 'success', 'message' => 'Successful store series details in database', 'id' => $store->t_id], 200);
+
+
     }
 
     /**
@@ -1231,7 +1273,7 @@ class SeriesController extends Controller
             $store->name = $episodeData['name'];
             $store->overview = $episodeData['overview'];
             $store->backdrop = $newBackdropName;
-            $store->show = 2;
+            $store->show = 0;
             $store->cloud = 'local';
             $store->save();
 
@@ -1240,6 +1282,7 @@ class SeriesController extends Controller
 
         return response()->json(['status' => 'success', 'message' => 'Successful store episode details in database', 'id' => $EpisodeListIdStore, 'series_name' => $checkAlreadySeries->t_name], 200);
     }
+
 
     public function uploadEpisodeInfoToAWS($request)
     {
@@ -1309,7 +1352,7 @@ class SeriesController extends Controller
             $store->name = $episodeData['name'];
             $store->overview = $episodeData['overview'];
             $store->backdrop = $backdropName;
-            $store->show = 2;
+            $store->show = 0;
             $store->cloud = 'aws';
             $store->save();
 
@@ -1318,6 +1361,7 @@ class SeriesController extends Controller
 
         return response()->json(['status' => 'success', 'message' => 'Successful store episode details in database', 'id' => $EpisodeListIdStore, 'series_name' => $checkAlreadySeries->t_name], 200);
     }
+
 
     public function uploadCustomEpisodeInfoToLocal($request)
     {
@@ -1354,17 +1398,21 @@ class SeriesController extends Controller
                 $store->season_number = $request->input('season_number');
                 $store->episode_number = $episodeList[$key];
                 $store->backdrop = $newBackdropName;
-                $store->show = 2;
+                $store->show = 0;
                 $store->cloud = 'local';
                 $store->save();
 
                 $EpisodeListIdStore[] = ['id' => $store->id, 'season_number' => $request->input('season_number'), 'episode_number' => $episodeList[$key], 'episode_name' => null];
+
             } else {
                 return response(['status' => 'failed', 'message' => 'Please check if the image name is same episode number.'], 422);
             }
+
         }
         return response()->json(['status' => 'success', 'message' => 'Successful store episode details in database', 'id' => $EpisodeListIdStore, 'series_name' => $checkAlreadySeries->t_name], 200);
+
     }
+
 
     public function uploadCustomEpisodeInfoToAWS($request)
     {
@@ -1382,6 +1430,7 @@ class SeriesController extends Controller
         foreach ($request->file('backdrop') as $key => $value) {
             if ($episodeList[$key] == strtok($value->getClientOriginalName(), '.')) {
 
+
                 $backdropName = Str::random(20) . '.jpg';
                 $backdropEncode = \Image::make($value)->encode('jpg');
                 Storage::disk('s3')->put('backdrops/' . $backdropName, $backdropEncode->__toString());
@@ -1391,18 +1440,22 @@ class SeriesController extends Controller
                 $store->season_number = $request->input('season_number');
                 $store->episode_number = $episodeList[$key];
                 $store->backdrop = $backdropName;
-                $store->show = 2;
+                $store->show = 0;
                 $store->cloud = 'aws';
                 $store->save();
 
                 $EpisodeListIdStore[] = ['id' => $store->id, 'season_number' => $request->input('season_number'), 'episode_number' => $episodeList[$key], 'episode_name' => null];
+
             } else {
                 return response(['status' => 'failed', 'message' => 'Please check if the image name is same episode number.'], 422);
             }
+
         }
 
         return response()->json(['status' => 'success', 'message' => 'Successful store episode details in database', 'id' => $EpisodeListIdStore, 'series_name' => $checkAlreadySeries->t_name], 200);
+
     }
+
 
     public function uploadEpisodeVideoToLocal($request)
     {
@@ -1410,12 +1463,11 @@ class SeriesController extends Controller
         $idEpisodeList = json_decode($request->id);
         $listVideoNameAndId = [];
 
+
         if ($request->has('video_link')) {
             // Video decode
             $videos = json_decode($request->video_link);
-            $updateEpisode = Episode::find($idEpisodeList[0]->id);
-            $updateEpisode->show = 1;
-            $updateEpisode->save();
+
             foreach ($videos as $key => $value) {
                 $video = new video();
                 $video->video_cloud = 'link';
@@ -1447,11 +1499,10 @@ class SeriesController extends Controller
             }
 
             return response()->json(['status' => 'success', 'message' => 'Successful upload and transcode video to local', 'id' => $request->id], 200);
-        } elseif ($request->has('embed_code')) {
+
+        }
+        elseif ($request->has('embed_code')){
             $EmbedLinks = json_decode($request->embed_code);
-            $updateEpisode = Episode::find($idEpisodeList[0]->id);
-            $updateEpisode->show = 1;
-            $updateEpisode->save();
             foreach ($EmbedLinks as $key => $value) {
                 $video = new video();
                 $video->video_cloud = 'embed';
@@ -1462,67 +1513,227 @@ class SeriesController extends Controller
                 $video->save();
             }
             return response()->json(['status' => 'success', 'message' => 'Successful upload movie as embed code', 'id' => $request->id], 200);
-        } elseif ($request->video !== 'undefined' && !empty($request->video)) {
+
+        }
+        elseif ($request->video !== 'undefined' && !empty($request->video)) {
 
             foreach ($request->file('video') as $videoKey => $videoValue) {
-                if (count($idEpisodeList) > 1) {
-                    foreach ($idEpisodeList as $epk => $epV) {
-                        if ($epV->episode_number == strtok($videoValue->getClientOriginalName(), '.')) {
-                            Log::alert($epV->episode_number . '_' . strtok($videoValue->getClientOriginalName()));
-                            // upload videos episode
-                            $path = Storage::disk('public')->put('temp', $videoValue);
-                            $listVideoNameAndId[$epk]['id'] = $epV->id;
-                            $listVideoNameAndId[$epk]['path'] = $path;
-                            $listVideoNameAndId[$epk]['episode_number'] = $epV->episode_number;
-                            $listVideoNameAndId[$epk]['episode_name'] = $epV->episode_name;
-                            $listVideoNameAndId[$epk]['season_number'] = $epV->season_number;
-                        }
-                    }
+                if ($idEpisodeList[$videoKey]->episode_number == strtok($videoValue->getClientOriginalName(), '.')) {
+
+                    // upload videos episode
+                    $path = Storage::disk('public')->put('temp', $videoValue);
+                    $listVideoNameAndId[$videoKey]['id'] = $idEpisodeList[$videoKey]->id;
+                    $listVideoNameAndId[$videoKey]['path'] = $path;
+                    $listVideoNameAndId[$videoKey]['episode_number'] = $idEpisodeList[$videoKey]->episode_number;
+                    $listVideoNameAndId[$videoKey]['episode_name'] = $idEpisodeList[$videoKey]->episode_name;
+                    $listVideoNameAndId[$videoKey]['season_number'] = $idEpisodeList[$videoKey]->season_number;
                 } else {
-                    if ($idEpisodeList[0]->episode_number == strtok($videoValue->getClientOriginalName(), '.')) {
-                        Log::alert($idEpisodeList[0]->episode_number . '_' . strtok($videoValue->getClientOriginalName()));
-                        // upload videos episode
-                        $path = Storage::disk('public')->put('temp', $videoValue);
-                        $listVideoNameAndId[0]['id'] = $idEpisodeList[0]->id;
-                        $listVideoNameAndId[0]['path'] = $path;
-                        $listVideoNameAndId[0]['episode_number'] = $idEpisodeList[0]->episode_number;
-                        $listVideoNameAndId[0]['episode_name'] = $idEpisodeList[0]->episode_name;
-                        $listVideoNameAndId[0]['season_number'] = $idEpisodeList[0]->season_number;
-                    } else {
-                        return response(['status' => 'failed', 'message' => 'Please check if the video name is same episode number.'], 422);
-                    }
+                    return response(['status' => 'failed', 'message' => 'Please check if the video name is same episode number.'], 422);
                 }
             }
 
-            // Decode Presets Json
+            // Decode Persets Json
             $resolution = json_decode($request->resolution, true);
 
-            // If the Presets is HLS
+
+            // If the prests is HLS
             if ($resolution[0]['Container'] === 'ts') {
                 foreach ($listVideoNameAndId as $videoKey => $videoValue) {
+                    $this->number = 0;
+
+                    // Create M3U8 File name
                     $randomName = Str::random(20);
-                    $playlistName = $randomName . '.m3u8';
-                    $uploadPath = 'series/' . $request->series_id . '/' . 'season_' . $videoValue['season_number'] . '_' . $videoValue['episode_number'] . '_' . $randomName . '/';
-                    Log::alert('run jobs--' . $videoValue['episode_number']);
-                    ConvertVideoToHLS::dispatch($videoValue['path'], $videoValue['id'], $resolution, $uploadPath, $playlistName, $request->tmdb_id, 'local', 'series');
+                    $newNameM3U8 = $randomName . '.m3u8';
+
+                    $path_upload = 'series/' . $request->series_id . '/'. 'season_' . $videoValue['season_number'] . '_' . $videoValue['episode_number'] . '/';
+
+                    $transcode = $this->transcodingToHLS($videoValue['path'], $resolution, $path_upload, $randomName, 'Episode ' . $videoValue['episode_number'] . ' is in processing', $request->tmdb_id);
+
+                    if ($transcode) {
+                        //Store video data
+                        $video = new Video();
+                        $video->video_format = 'hls';
+                        $video->video_cloud = 'local';
+                        $video->episode_id = $videoValue['id'];
+                        $video->resolution = '720';
+                        $video->video_url = '/storage/' . $path_upload . $newNameM3U8;
+                        $video->save();
+                    } else {
+                        // Throw error
+                        return $transcode;
+                    }
                 }
             } else {
+
+
+                // if presets is mp4
+                $lowBitrate = (new X264('aac', 'libx264'))->setKiloBitrate(700);
+                $midBitrate = (new X264('aac', 'libx264'))->setKiloBitrate(1250);
+                $highBitrate = (new X264('aac', 'libx264'))->setKiloBitrate(2500);
+                $vHighBitrate = (new X264('aac', 'libx264'))->setKiloBitrate(4500);
+                $ultraHighBitrate = (new X264('aac', 'libx264'))->setKiloBitrate(14000);
+
                 foreach ($listVideoNameAndId as $videoKey => $videoValue) {
-                    $randomName = Str::random(20);
-                    $uploadPath = 'series/' . $request->series_id . '/' . 'season_' . $videoValue['season_number'] . '_' . $videoValue['episode_number'] . '_' . $randomName . '/';
-                    Log::alert('run jobs--' . $videoValue['episode_number']);
-                    ConvertVideoToMp4::dispatch($videoValue['path'], $videoValue['id'], $resolution, $uploadPath, $request->tmdb_id, 'local', 'series');
+
+
+                    // Check if there is watermark
+                    if (Transcoder::first()->watermark_url !== null && !empty(Transcoder::first()->watermark_url)) {
+                        $this->WatermarkPosition = Helpers::getWatermarkPosition(Transcoder::first()->watermark_position);
+                    }
+
+                    $path_upload = 'series/' . $request->series_id . '/'. 'season_' . $videoValue['season_number'] . '_' . $videoValue['episode_number'] . '/';
+
+
+                    $this->episode_number = $videoValue['episode_number'];
+                    $this->tmdb_id = $request->tmdb_id;
+
+                    foreach ($resolution as $key => $value) {
+
+                        if ($value['Resolution'] === '4k') {
+                            $this->number = 0;
+                            $newNameMP4 = Str::random(20) . '.mp4';
+                            $converVeryHigh = FFMpeg::fromDisk('public')
+                                ->open($videoValue['path'])
+                                ->addFilter(function ($filters) {
+                                    if ($this->WatermarkPosition !== null) {
+                                        $filters->watermark(storage_path('/app/public/watermark/' . Transcoder::first()->watermark_url), $this->WatermarkPosition);
+                                    }
+                                })
+                                ->export()
+                                ->toDisk('public')
+                                ->inFormat($ultraHighBitrate)
+                                ->save($path_upload . '/' . $newNameMP4);
+
+                            // Store video data
+                            $video = new Video();
+                            $video->episode_id = $videoValue['id'];
+                            $video->resolution = '4k';
+                            $video->video_url = '/storage/' . $path_upload . '/' . $newNameMP4;
+                            $video->video_cloud = 'local';
+                            $video->video_format = 'mp4';
+                            $video->save();
+                        }
+
+                        if ($value['Resolution'] === '1080') {
+                            $this->number = 0;
+
+                            $newNameMP4 = Str::random(20) . '.mp4';
+                            $converVeryHigh = FFMpeg::fromDisk('public')
+                                ->open($videoValue['path'])
+                                ->addFilter(function ($filters) {
+                                    if ($this->WatermarkPosition !== null) {
+                                        $filters->watermark(storage_path('/app/public/watermark/' . Transcoder::first()->watermark_url), $this->WatermarkPosition);
+                                    }
+                                })
+                                ->export()
+                                ->toDisk('public')
+                                ->inFormat($vHighBitrate)
+                                ->save($path_upload . '/' . $newNameMP4);
+
+                            // Store video data
+                            $video = new Video();
+                            $video->episode_id = $videoValue['id'];
+                            $video->resolution = '1080';
+                            $video->video_url = '/storage/' . $path_upload . '/' . $newNameMP4;
+                            $video->video_cloud = 'local';
+                            $video->video_format = 'mp4';
+                            $video->save();
+                        }
+
+                        if ($value['Resolution'] === '720') {
+                            $this->number = 0;
+
+                            $newNameMP4 = Str::random(20) . '.mp4';
+                            $convertHigh = FFMpeg::fromDisk('public')
+                                ->open($videoValue['path'])
+                                ->addFilter(function ($filters) {
+                                    if ($this->WatermarkPosition !== null) {
+                                        $filters->watermark(storage_path('/app/public/watermark/' . Transcoder::first()->watermark_url), $this->WatermarkPosition);
+                                    }
+                                })
+                                ->export()
+                                ->toDisk('public')
+                                ->inFormat($highBitrate)
+                                ->save($path_upload . '/' . $newNameMP4);
+
+                            // Store video data
+                            $video = new Video();
+                            $video->episode_id = $videoValue['id'];
+                            $video->resolution = '720';
+                            $video->video_url = '/storage/' . $path_upload . '/' . $newNameMP4;
+                            $video->video_cloud = 'local';
+                            $video->video_format = 'mp4';
+                            $video->save();
+                        }
+
+                        if ($value['Resolution'] === '480') {
+                            $this->number = 0;
+
+                            $newNameMP4 = Str::random(20) . '.mp4';
+                            $convertMid = FFMpeg::fromDisk('public')
+                                ->open($videoValue['path'])
+                                ->addFilter(function ($filters) {
+                                    if ($this->WatermarkPosition !== null) {
+                                        $filters->watermark(storage_path('/app/public/watermark/' . Transcoder::first()->watermark_url), $this->WatermarkPosition);
+                                    }
+                                })
+                                ->export()
+                                ->toDisk('public')
+                                ->inFormat($midBitrate)
+                                ->save($path_upload . '/' . $newNameMP4);
+
+                            // Store video data
+                            $video = new Video();
+                            $video->episode_id = $videoValue['id'];
+                            $video->resolution = '480';
+                            $video->video_url = '/storage/' . $path_upload . '/' . $newNameMP4;
+                            $video->video_cloud = 'local';
+                            $video->video_format = 'mp4';
+                            $video->save();
+                        }
+
+                        if ($value['Resolution'] === '320') {
+                            $this->number = 0;
+
+                            $newNameMP4 = Str::random(20) . '.mp4';
+                            $convertLow = FFMpeg::fromDisk('public')
+                                ->open($videoValue['path'])
+                                ->addFilter(function ($filters) {
+                                    if ($this->WatermarkPosition !== null) {
+                                        $filters->watermark(storage_path('/app/public/watermark/' . Transcoder::first()->watermark_url), $this->WatermarkPosition);
+                                    }
+                                })
+                                ->export()
+                                ->toDisk('public')
+                                ->inFormat($lowBitrate)
+                                ->save($path_upload . '/' . $newNameMP4);
+
+                            // Store video data
+                            $video = new Video();
+                            $video->episode_id = $videoValue['id'];
+                            $video->resolution = '320';
+                            $video->video_url = '/storage/' . $path_upload . '/' . $newNameMP4;
+                            $video->video_cloud = 'local';
+                            $video->video_format = 'mp4';
+                            $video->save();
+                        }
+                    }
                 }
             }
 
-            return response()->json(['status' => 'success', 'message' => 'Successful upload, Encoding videos on progress'], 200);
-        } else {
+            Storage::deleteDirectory('public/temp');
+
+            return response()->json(['status' => 'success', 'message' => 'Successful upload and transcode video to aws s3'], 200);
+        }
+        else {
             return response()->json(['status' => 'failed', 'message' => 'There is something error with video'], 422);
         }
     }
 
+
     public function uploadEpisodeVideoToAWS($request)
     {
+
         // Upload video to local Storage
         $idEpisodeList = json_decode($request->id);
         $listVideoNameAndId = [];
@@ -1531,10 +1742,6 @@ class SeriesController extends Controller
             // Video decode
             $videos = json_decode($request->video_link);
 
-            $updateEpisode = Episode::find($idEpisodeList[0]->id);
-            $updateEpisode->show = 1;
-            $updateEpisode->save();
-
             foreach ($videos as $key => $value) {
                 $video = new video();
                 $video->video_cloud = 'link';
@@ -1566,13 +1773,10 @@ class SeriesController extends Controller
             }
 
             return response()->json(['status' => 'success', 'message' => 'Successful upload and transcode video to local', 'id' => $request->id], 200);
-        } elseif ($request->has('embed_code')) {
+
+        }
+        elseif ($request->has('embed_code')){
             $EmbedLinks = json_decode($request->embed_code);
-
-            $updateEpisode = Episode::find($idEpisodeList[0]->id);
-            $updateEpisode->show = 1;
-            $updateEpisode->save();
-
             foreach ($EmbedLinks as $key => $value) {
                 $video = new video();
                 $video->video_cloud = 'embed';
@@ -1583,63 +1787,237 @@ class SeriesController extends Controller
                 $video->save();
             }
             return response()->json(['status' => 'success', 'message' => 'Successful upload movie as embed code', 'id' => $request->id], 200);
-        } elseif ($request->video !== 'undefined' && !empty($request->video)) {
+
+        }
+        elseif ($request->video !== 'undefined' && !empty($request->video)) {
 
             foreach ($request->file('video') as $videoKey => $videoValue) {
-                if (count($idEpisodeList) > 1) {
-                    foreach ($idEpisodeList as $epk => $epV) {
-                        if ($epV->episode_number == strtok($videoValue->getClientOriginalName(), '.')) {
-                            Log::alert($epV->episode_number . '_' . strtok($videoValue->getClientOriginalName()));
-                            // upload videos episode
-                            $path = Storage::disk('public')->put('temp', $videoValue);
-                            $listVideoNameAndId[$epk]['id'] = $epV->id;
-                            $listVideoNameAndId[$epk]['path'] = $path;
-                            $listVideoNameAndId[$epk]['episode_number'] = $epV->episode_number;
-                            $listVideoNameAndId[$epk]['episode_name'] = $epV->episode_name;
-                            $listVideoNameAndId[$epk]['season_number'] = $epV->season_number;
-                        }
-                    }
+                if ($idEpisodeList[$videoKey]->episode_number == strtok($videoValue->getClientOriginalName(), '.')) {
+
+                    // upload videos episode
+                    $path = Storage::disk('public')->put('temp', $videoValue);
+                    $listVideoNameAndId[$videoKey]['path'] = $path;
+                    $listVideoNameAndId[$videoKey]['id'] = $idEpisodeList[$videoKey]->id;
+                    $listVideoNameAndId[$videoKey]['episode_name'] = $idEpisodeList[$videoKey]->episode_name;
+                    $listVideoNameAndId[$videoKey]['episode_number'] = $idEpisodeList[$videoKey]->episode_number;
+                    $listVideoNameAndId[$videoKey]['season_number'] = $idEpisodeList[$videoKey]->season_number;
+                    // Store type local for each episode
+                    $addtype = Episode::find($idEpisodeList[$videoKey]->id);
+                    $addtype->save();
+
                 } else {
-                    if ($idEpisodeList[0]->episode_number == strtok($videoValue->getClientOriginalName(), '.')) {
-                        Log::alert($idEpisodeList[0]->episode_number . '_' . strtok($videoValue->getClientOriginalName()));
-                        // upload videos episode
-                        $path = Storage::disk('public')->put('temp', $videoValue);
-                        $listVideoNameAndId[0]['id'] = $idEpisodeList[0]->id;
-                        $listVideoNameAndId[0]['path'] = $path;
-                        $listVideoNameAndId[0]['episode_number'] = $idEpisodeList[0]->episode_number;
-                        $listVideoNameAndId[0]['episode_name'] = $idEpisodeList[0]->episode_name;
-                        $listVideoNameAndId[0]['season_number'] = $idEpisodeList[0]->season_number;
-                    } else {
-                        return response(['status' => 'failed', 'message' => 'Please check if the video name is same episode number.'], 422);
-                    }
+                    return response(['status' => 'failed', 'message' => 'Please check if the video name is same episode number.'], 422);
                 }
             }
 
+            // Decode Persets Json
             $resolution = json_decode($request->resolution, true);
 
-            // If the Presets is HLS
+
+            // If the prests is HLS
             if ($resolution[0]['Container'] === 'ts') {
                 foreach ($listVideoNameAndId as $videoKey => $videoValue) {
                     $this->number = 0;
+
+                    // Create M3U8 File name
                     $randomName = Str::random(20);
-                    $playlistName = $randomName . '.m3u8';
-                    $uploadPath = 'series/' . $request->series_id . '/' . 'season_' . $videoValue['season_number'] . '_' . $videoValue['episode_number'] . '_' . $randomName . '/';
-                    Log::alert('run jobs--' . $videoValue['episode_number']);
-                    ConvertVideoToHLS::dispatch($videoValue['path'], $videoValue['id'], $resolution, $uploadPath, $playlistName, $request->tmdb_id, 's3', 'series');
+                    $newNameM3U8 = $randomName . '.m3u8';
+
+
+                    $path_upload = 'series/' . $request->series_id . '/' . 'season_' . $videoValue['season_number'] . '_' . $videoValue['episode_number'] . '/';
+
+                    $transcode = $this->transcodingToHLS($videoValue['path'], $resolution, $path_upload, $randomName, 'Episode ' . $videoValue['episode_number'] . ' is in processing', $request->tmdb_id);
+
+                    if ($transcode) {
+                        //Store video data
+                        $video = new Video();
+                        $video->video_format = 'hls';
+                        $video->video_cloud = 'aws';
+                        $video->episode_id = $videoValue['id'];
+                        $video->resolution = '720';
+                        $video->video_url =  $path_upload . $newNameM3U8;
+                        $video->save();
+
+                        $s3 = App::make('aws')->createClient('s3');
+
+                        $s3->uploadDirectory(storage_path('/app/public/' . $path_upload), config('aws.private_bucket'), $path_upload, []);
+
+                    } else {
+                        // Throw error
+                        return $transcode;
+                    }
                 }
             } else {
+
+
+                // Check if there is watermark
+                if (Transcoder::first()->watermark_url !== null && !empty(Transcoder::first()->watermark_url)) {
+                    $this->WatermarkPosition = Helpers::getWatermarkPosition(Transcoder::first()->watermark_position);
+                }
+
+
+                // if presets is mp4
+                $lowBitrate = (new X264('aac', 'libx264'))->setKiloBitrate(700);
+                $midBitrate = (new X264('aac', 'libx264'))->setKiloBitrate(1250);
+                $highBitrate = (new X264('aac', 'libx264'))->setKiloBitrate(2500);
+                $vHighBitrate = (new X264('aac', 'libx264'))->setKiloBitrate(4500);
+                $ultraHighBitrate = (new X264('aac', 'libx264'))->setKiloBitrate(14000);
+
                 foreach ($listVideoNameAndId as $videoKey => $videoValue) {
-                    $randomName = Str::random(20);
-                    $uploadPath = 'series/' . $request->series_id . '/' . 'season_' . $videoValue['season_number'] . '_' . $videoValue['episode_number'] . '_' . $randomName . '/';
-                    Log::alert('run jobs--' . $videoValue['episode_number']);
-                    ConvertVideoToMp4::dispatch($videoValue['path'], $videoValue['id'], $resolution, $uploadPath, $request->tmdb_id, 's3', 'series');
+
+                    // Re-name Path Name
+                    $path_upload = 'series/' . $request->series_id . '/' . 'season_' . $videoValue['season_number'] . '_' . $videoValue['episode_number'] . '/';
+
+
+                    $this->episode_number = $videoValue['episode_number'];
+                    $this->tmdb_id = $request->tmdb_id;
+
+                    foreach ($resolution as $key => $value) {
+
+                        if ($value['Resolution'] === '4k') {
+                            $this->number = 0;
+
+                            $newNameMP4 = Str::random(20) . '.mp4';
+                            $converVeryHigh = FFMpeg::fromDisk('public')
+                                ->open($videoValue['path'])
+                                ->addFilter(function ($filters) {
+                                    if ($this->WatermarkPosition !== null) {
+                                        $filters->watermark(storage_path('/app/public/watermark/' . Transcoder::first()->watermark_url), $this->WatermarkPosition);
+                                    }
+                                })
+                                ->export()
+                                ->toDisk('s3_private')
+                                ->inFormat($ultraHighBitrate)
+                                ->save($path_upload . '/' . $newNameMP4);
+
+                            // Store video data
+                            $video = new Video();
+                            $video->episode_id = $videoValue['id'];
+                            $video->resolution = '4k';
+                            $video->video_url =  $path_upload . $newNameMP4;
+                            $video->video_cloud = 'aws';
+                            $video->video_format = 'mp4';
+                            $video->save();
+                        }
+
+                        if ($value['Resolution'] === '1080') {
+                            $this->number = 0;
+
+                            $newNameMP4 = Str::random(20) . '.mp4';
+                            $converVeryHigh = FFMpeg::fromDisk('public')
+                                ->open($videoValue['path'])
+                                ->addFilter(function ($filters) {
+                                    if ($this->WatermarkPosition !== null) {
+                                        $filters->watermark(storage_path('/app/public/watermark/' . Transcoder::first()->watermark_url), $this->WatermarkPosition);
+                                    }
+                                })
+                                ->export()
+                                ->toDisk('s3_private')
+                                ->inFormat($vHighBitrate)
+                                ->save($path_upload . '/' . $newNameMP4);
+
+                            // Store video data
+                            $video = new Video();
+                            $video->episode_id = $videoValue['id'];
+                            $video->resolution = '1080';
+                            $video->video_url =  $path_upload . $newNameMP4;
+                            $video->video_cloud = 'aws';
+                            $video->video_format = 'mp4';
+                            $video->save();
+                        }
+
+                        if ($value['Resolution'] === '720') {
+                            $this->number = 0;
+
+                            $newNameMP4 = Str::random(20) . '.mp4';
+                            $convertHigh = FFMpeg::fromDisk('public')
+                                ->open($videoValue['path'])
+                                ->addFilter(function ($filters) {
+                                    if ($this->WatermarkPosition !== null) {
+                                        $filters->watermark(storage_path('/app/public/watermark/' . Transcoder::first()->watermark_url), $this->WatermarkPosition);
+                                    }
+                                })
+                                ->export()
+                                ->toDisk('s3_private')
+                                ->inFormat($highBitrate)
+                                ->save($path_upload . '/' . $newNameMP4);
+
+                            // Store video data
+                            $video = new Video();
+                            $video->episode_id = $videoValue['id'];
+                            $video->resolution = '720';
+                            $video->video_url =  $path_upload . $newNameMP4;
+                            $video->video_cloud = 'aws';
+                            $video->video_format = 'mp4';
+                            $video->save();
+                        }
+
+                        if ($value['Resolution'] === '480') {
+                            $this->number = 0;
+
+                            $newNameMP4 = Str::random(20) . '.mp4';
+                            $convertMid = FFMpeg::fromDisk('public')
+                                ->open($videoValue['path'])
+                                ->addFilter(function ($filters) {
+                                    if ($this->WatermarkPosition !== null) {
+                                        $filters->watermark(storage_path('/app/public/watermark/' . Transcoder::first()->watermark_url), $this->WatermarkPosition);
+                                    }
+                                })
+                                ->export()
+                                ->toDisk('s3_private')
+                                ->inFormat($midBitrate)
+                                ->save($path_upload . '/' . $newNameMP4);
+
+                            // Store video data
+                            $video = new Video();
+                            $video->episode_id = $videoValue['id'];
+                            $video->resolution = '480';
+                            $video->video_url =  $path_upload . $newNameMP4;
+                            $video->video_cloud = 'aws';
+                            $video->video_format = 'mp4';
+                            $video->save();
+                        }
+
+                        if ($value['Resolution'] === '320') {
+                            $this->number = 0;
+
+                            $newNameMP4 = Str::random(20) . '.mp4';
+                            $convertLow = FFMpeg::fromDisk('public')
+                                ->open($videoValue['path'])
+                                ->addFilter(function ($filters) {
+                                    if ($this->WatermarkPosition !== null) {
+                                        $filters->watermark(storage_path('/app/public/watermark/' . Transcoder::first()->watermark_url), $this->WatermarkPosition);
+                                    }
+                                })
+                                ->export()
+                                ->toDisk('s3_private')
+                                ->inFormat($lowBitrate)
+                                ->save( $path_upload . $newNameMP4);
+
+                            // Store video data
+                            $video = new Video();
+                            $video->episode_id = $videoValue['id'];
+                            $video->resolution = '320';
+                            $video->video_url =  $path_upload . $newNameMP4;
+                            $video->video_cloud = 'aws';
+                            $video->video_format = 'mp4';
+                            $video->save();
+                        }
+                    }
                 }
             }
+
+
+
+            Storage::deleteDirectory('public/temp');
+            Storage::deleteDirectory('public/' . $path_upload);
+
             return response()->json(['status' => 'success', 'message' => 'Successful upload and transcoding video to AWS S3'], 200);
         } else {
             return response()->json(['status' => 'failed', 'message' => 'There is something error with video'], 422);
         }
     }
+
 
     public function analysisSeries($id)
     {
@@ -1778,6 +2156,8 @@ class SeriesController extends Controller
         );
     }
 
+
+
     public function createSchedulesAds(Request $request, $id)
     {
         $check = Episode::find($id);
@@ -1835,6 +2215,7 @@ class SeriesController extends Controller
                 }
             }
         }
+
         return response()->json(
             [
                 'status' => 'success',
@@ -1845,29 +2226,5 @@ class SeriesController extends Controller
     }
 
 
-    /**
-     *  Make movie for users only 
-     *
-     * @param Request $request
-     * @return ResponseFactory|\Symfony\Component\HttpFoundation\Response
-     */
-    public function userOnlyUpdate(Request $request)
-    {
-        // Check if there id in episode table
 
-        $array = [];
-        foreach ($request->list as $value) {
-            $check = Series::find($value['id']);
-
-            if (is_null($check)) {
-                return response(['status' => 'failed', 'message' => 'There is no id for this movie on database'], 422);
-            }
-
-            $check->t_users_only = $request->input('users_only');
-            $check->save();
-            array_push($array, ['key' => $value['key'], 'show' => $request->input('users_only')]);
-        }
-
-        return response(['status' => 'success', 'message' => 'Successful Request', 'list' => $array], 200);
-    }
 }

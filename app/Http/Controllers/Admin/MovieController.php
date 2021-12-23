@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Jobs\ConvertVideoToHLS;
-use App\Jobs\ConvertVideoToMp4;
 use App\Models\Casts;
 use App\Models\Casts_rules;
 use App\Http\Controllers\Controller;
@@ -14,11 +12,8 @@ use App\Traits\FFmpegTranscoding;
 use App\Models\Video;
 use App\Models\Ads_schedule;
 use Auth;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -49,7 +44,7 @@ class MovieController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function getAllMovies()
     {
@@ -61,7 +56,6 @@ class MovieController extends Controller
                         categories.name AS category,
                         movies.show,
                         movies.m_cloud,
-                        movies.m_users_only,
                         movies.created_at,
                         movies.updated_at,
                         tops.movie_id')
@@ -185,8 +179,8 @@ class MovieController extends Controller
     public function customUploadMovieDetails(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'overview' => 'required',
+            'name' => 'required|max:50|regex:/^[a-z0-9 .\-]+$/i',
+            'overview' => 'required|max:500',
             'year' => 'required|numeric|between:0,2030',
             'runtime' => 'required|numeric|between:0,500',
             'rate' => 'required|numeric|between:0,99.99',
@@ -196,6 +190,8 @@ class MovieController extends Controller
             'video' => 'mimes:mp4,x-flv,x-mpegURL,MP2T,3gpp,quicktime,x-msvideo,x-ms-wmv,webm',
             'video_link' => 'nullable|url',
         ]);
+
+
 
         // Upload To Local Or AWS Cloud
         if ($request->cloud_type == 'local') {
@@ -211,7 +207,7 @@ class MovieController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function getMovieDetails($id)
     {
@@ -248,7 +244,7 @@ class MovieController extends Controller
      * Update the specified resource in storage.
      *
      * @param  int $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
@@ -303,7 +299,7 @@ class MovieController extends Controller
                 $update->m_poster = $posterName;
             }
             if (!empty($request->file('backdrop'))) {
-                $backdropName = Str::random(20) . '.jpg';
+                $backdropName = Str::random(20). '.jpg';
 
                 $encodeBackdrop300 = Image::make($request->backdrop)->resize(300, null, function ($constraint) {
                     $constraint->aspectRatio();
@@ -345,7 +341,7 @@ class MovieController extends Controller
             $videos = json_decode($request->videos);
             foreach ($videos as $key => $value) {
                 $video = Video::where('v_id', $value->v_id)->first();
-                if (!is_null($video)) {
+                if(!is_null($video)) {
                     if ($value->video_format === 'embed') {
                         $video->embed_code = $value->embed_code;
                     } else {
@@ -354,7 +350,8 @@ class MovieController extends Controller
                 }
                 $video->save();
             }
-        } else {
+        }
+        else {
             $update->m_name = $request->name;
             $update->m_year = $request->year;
             $update->m_desc = $request->overview;
@@ -369,13 +366,13 @@ class MovieController extends Controller
             $update->m_category = $request->input('category');
 
             if (!empty($request->file('poster'))) {
-                $posterName = Str::random(20) . '.jpg';
+                $posterName = Str::random(20). '.jpg';
                 $posterEncode = \Image::make($request->file('poster'))->encode('jpg');
                 Storage::disk('s3')->put('posters/' . $posterName, $posterEncode->__toString());
                 $update->m_poster = $posterName;
             }
             if (!empty($request->file('backdrop'))) {
-                $backdropName = Str::random(20) . '.jpg';
+                $backdropName = Str::random(20). '.jpg';
                 $backdropEncode = \Image::make($request->file('backdrop'))->encode('jpg');
                 Storage::disk('s3')->put('backdrops/' . $backdropName, $backdropEncode->__toString());
                 $update->m_backdrop = $backdropName;
@@ -409,7 +406,7 @@ class MovieController extends Controller
             foreach ($videos as $key => $value) {
                 $video = Video::where('v_id', $value->v_id)->first();
 
-                if (!is_null($video)) {
+                if(!is_null($video)) {
                     if ($value->video_format === 'embed') {
                         $video->embed_code = $value->embed_code;
                     } else {
@@ -427,7 +424,7 @@ class MovieController extends Controller
      * Delete the specified resource from storage.
      *
      * @param  int $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function deleteMovie(Request $request)
     {
@@ -448,10 +445,12 @@ class MovieController extends Controller
                 // Remove video
                 Storage::disk('public')->deleteDirectory('videos/' . $delete->m_name . '/');
                 // Remove subtitle
-                Storage::disk('public')->deleteDirectory('subtitles/' . $delete->m_name . '/');
+                Storage::disk('public')->deleteDirectory('subtitles/' . $delete->m_name. '/');
                 $delete->delete();
             }
         }
+
+
 
         return response()->json(['status' => 'success', 'message' => 'successful delete movies']);
     }
@@ -460,12 +459,12 @@ class MovieController extends Controller
      * Search movies by name or id
      *
      * @param  int $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function searchMovie(Request $request)
     {
         $request->validate([
-            'query' => 'required',
+            'query' => 'required|max:40|regex:/^[a-z0-9 .\-]+$/i',
         ]);
 
         $getMovie = Movie::selectRaw('
@@ -474,9 +473,8 @@ class MovieController extends Controller
                 movies.m_poster AS poster,
                 movies.m_year AS year,
                 movies.m_cloud,
-                categories.name AS category,
+                                categories.name AS category,
                 movies.show,
-                movies.m_users_only,
                 movies.created_at,
                 movies.updated_at,
                 tops.movie_id')
@@ -501,7 +499,7 @@ class MovieController extends Controller
      *  Make movie avaliable or unavalibale
      *
      * @param Request $request
-     * @return ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function availableMovie(Request $request)
     {
@@ -518,43 +516,16 @@ class MovieController extends Controller
             if ($check->show) {
                 $check->show = 0;
                 $check->save();
-                array_push($array, ['key' => $value['key'], 'show' => 0]);
+                array_push($array, ['key' => $value['key'], 'show' => false]);
             } else {
                 $check->show = 1;
                 $check->save();
-                array_push($array, ['key' => $value['key'], 'show' => 1]);
+                array_push($array, ['key' => $value['key'], 'show' => true]);
             }
         }
 
         return response(['status' => 'success', 'message' => 'Successful Request', 'list' => $array], 200);
     }
-
-    /**
-     *  Make movie for users only 
-     *
-     * @param Request $request
-     * @return ResponseFactory|\Symfony\Component\HttpFoundation\Response
-     */
-    public function userOnlyUpdate(Request $request)
-    {
-        // Check if there id in episode table
-
-        $array = [];
-        foreach ($request->list as $value) {
-            $check = Movie::find($value['id']);
-
-            if (is_null($check)) {
-                return response(['status' => 'failed', 'message' => 'There is no id for this movie on database'], 422);
-            }
-
-            $check->m_users_only = $request->input('users_only');
-            $check->save();
-            array_push($array, ['key' => $value['key'], 'show' => $request->input('users_only')]);
-        }
-
-        return response(['status' => 'success', 'message' => 'Successful Request', 'list' => $array], 200);
-    }
-
 
 
     /**
@@ -593,15 +564,15 @@ class MovieController extends Controller
         $data_trailer = json_decode($res_trailer, true);
 
         // Get the backdrop and poster image from api themoviedb and
-        $newPosterName = (!isset($data_movies['poster_path']) ? 'none' : Str::random(20) . '.jpg');
+        $newPosterName = (!isset($data_movies['poster_path']) ? 'none' : Str::random(20). '.jpg');
         $poster = (!isset($data_movies['poster_path']) ? 'none' : $client->get('https://image.tmdb.org/t/p/w500' . $data_movies['poster_path'])->getBody());
 
-        $newBackdropName = (!isset($data_movies['backdrop_path']) ? 'none' : Str::random(20) . '.jpg');
+        $newBackdropName = (!isset($data_movies['backdrop_path']) ? 'none' : Str::random(20). '.jpg');
         $backdrop = (!isset($data_movies['backdrop_path']) ? 'none' : $client->get('https://image.tmdb.org/t/p/w1280' . $data_movies['backdrop_path'])->getBody());
 
         // If there no movies image @return json "Error"
         if ($newPosterName === 'none' || $newBackdropName === 'none') {
-            return response()->json(['status' => 'error', 'message' => 'Please use custom upload, because no image for this movie.'], 422);
+            return response()->json(['status' => 'error', 'msg' => 'Please use custom upload, because no image for this movie.']);
         } else {
 
             // Resize image and upload it to local Storage
@@ -632,7 +603,7 @@ class MovieController extends Controller
         }
 
         //Store data
-        $store = new Movie();
+        $store = new Movie;
         $store->m_name = $data_movies['title'];
         $store->m_desc = $data_movies['overview'];
         $store->m_year = substr($data_movies['release_date'], 0, 4);
@@ -643,7 +614,7 @@ class MovieController extends Controller
         $store->m_poster = $newPosterName;
         $store->m_age = $request->age;
         $store->m_category = $request->category;
-        $store->show = 2;
+        $store->show = 0;
         $store->m_cloud = 'local';
         $store->m_category = $request->input('category');
         foreach ($data_movies['genres'] as $key => $value) {
@@ -672,7 +643,7 @@ class MovieController extends Controller
 
             //Check if image not empty
             if (!empty($value['profile_path'] && !empty($value['credit_id']))) {
-                $image_name = Str::random(20) . '.jpg';
+                $image_name = Str::random(20). '.jpg';
                 $image_content = $client->get('http://image.tmdb.org/t/p/w500/' . $value['profile_path'])->getBody();
                 $image_encode = \Image::make($image_content)->widen(200)->encode('jpg');
                 $castUplaod = Storage::disk('public')->put('casts/' . $image_name, $image_encode->__toString());
@@ -706,6 +677,7 @@ class MovieController extends Controller
 
     public function uploadMovieTmdbInfoToAWS($request)
     {
+
         // Check if there is api of moviedb in config file
         $getApi = Tmdb::find(1);
         if ($getApi->api === null || empty($getApi->api)) {
@@ -715,8 +687,8 @@ class MovieController extends Controller
         $client = new \GuzzleHttp\Client();
 
         // Get details from themoviedb
-        $detils = 'https://api.themoviedb.org/3/movie/' . $request->id . '?api_key=' . $getApi->api  . '&language=' . $getApi->language;
-        $trailer = 'https://api.themoviedb.org/3/movie/' . $request->id . '/videos?api_key=' . $getApi->api  . '&language=' . $getApi->language;
+        $detils = 'https://api.themoviedb.org/3/movie/' . $request->id . '?api_key=' . $getApi->api  . '&language='. $getApi->language;
+        $trailer = 'https://api.themoviedb.org/3/movie/' . $request->id . '/videos?api_key=' . $getApi->api  . '&language='. $getApi->language;
 
         // Check if there movie or not
         try {
@@ -729,10 +701,10 @@ class MovieController extends Controller
         $res_trailer = $client->get($trailer)->getBody();
         $data_trailer = json_decode($res_trailer, true);
         // Get the backdrop and poster image from api themoviedb and
-        $name_poster = (!isset($data_movies['poster_path']) ? 'none' : Str::random(20) . '.jpg');
+        $name_poster = (!isset($data_movies['poster_path']) ? 'none' : Str::random(20). '.jpg');
         $poster = (!isset($data_movies['poster_path']) ? 'none' : $client->get('https://image.tmdb.org/t/p/w500' . $data_movies['poster_path'])->getBody());
 
-        $name_backdrop = (!isset($data_movies['backdrop_path']) ? 'none' : Str::random(20) . '.jpg');
+        $name_backdrop = (!isset($data_movies['backdrop_path']) ? 'none' : Str::random(20). '.jpg');
         $backdrop = (!isset($data_movies['backdrop_path']) ? 'none' : $client->get('https://image.tmdb.org/t/p/w1280' . $data_movies['backdrop_path'])->getBody());
 
         // If there no movies image @return json "Error"
@@ -752,13 +724,13 @@ class MovieController extends Controller
         $store->m_desc = $data_movies['overview'];
         $store->m_year = substr($data_movies['release_date'], 0, 4);
         $store->m_runtime = ($data_movies['runtime'] === null ? '0' : $data_movies['runtime']);
-        $store->m_rate = ($data_movies['vote_average'] === null ? '0' : $data_movies['vote_average']);
+        $store->m_rate = ($data_movies['vote_average']=== null ? '0' : $data_movies['vote_average']);
         $store->m_youtube = (!isset($data_trailer['results'][0]['key']) ? null : 'https://www.youtube.com/watch?v=' . $data_trailer['results'][0]['key']);
         $store->m_backdrop = $name_backdrop;
         $store->m_poster = $name_poster;
         $store->m_age = $request->age;
         $store->m_category = $request->category;
-        $store->show = 2;
+        $store->show = 0;
         $store->m_cloud = 'aws';
         $store->m_category = $request->input('category');
 
@@ -770,7 +742,7 @@ class MovieController extends Controller
         $store->save();
 
         // Get the casts details from TheMovieDB and store it in database
-        $casts = 'https://api.themoviedb.org/3/movie/' . $request->id . '/credits?api_key=' . $getApi->api . '&language=' . $getApi->language;
+        $casts = 'https://api.themoviedb.org/3/movie/' . $request->id . '/credits?api_key=' . $getApi->api . '&language='. $getApi->language;
         $res_casts = $client->get($casts)->getBody();
         $data_casts = json_decode($res_casts, true);
 
@@ -790,7 +762,7 @@ class MovieController extends Controller
 
             //Check if image not empty
             if (!empty($value['profile_path'] && !empty($value['credit_id']))) {
-                $image_name = Str::random(20) . '.jpg';
+                $image_name = Str::random(20). '.jpg';
                 $image_content = $client->get('http://image.tmdb.org/t/p/w500/' . $value['profile_path'])->getBody();
                 $image_encode = \Image::make($image_content)->widen(200)->encode('jpg');
                 Storage::disk('s3')->put('casts/'  . $image_name, $image_encode->__toString());
@@ -825,9 +797,11 @@ class MovieController extends Controller
 
     public function uploadMovieCustomInfoToLocal($request)
     {
+
+
         // Upload images to local
-        $newPosterName = Str::random(20) . '.jpg';
-        $newBackdropName = Str::random(20) . '.jpg';
+        $newPosterName = Str::random(20). '.jpg';
+        $newBackdropName = Str::random(20). '.jpg';
 
         // Resize image and upload it to local Storage
         $encodePoster300 = Image::make($request->poster)->resize(300, null, function ($constraint) {
@@ -866,7 +840,7 @@ class MovieController extends Controller
         $store->m_poster = $newPosterName;
         $store->m_age = $request->age;
         $store->m_category = $request->category;
-        $store->show = 2;
+        $store->show = 0;
         $store->m_genre = str_replace(",", "-", $request->genres);
         $store->m_cloud = 'local';
         $store->m_category = $request->input('category');
@@ -899,7 +873,7 @@ class MovieController extends Controller
 
         foreach ($casts as $key => $value) {
             if (!empty($value['image']) && $value['image'] !== 'undefined') {
-                $newActorName = Str::random(20) . '.jpg';
+                $newActorName = Str::random(20). '.jpg';
                 $img = \Image::make($value['image'])->widen(200)->encode('jpg');
                 Storage::disk('public')->put('casts/' . $newActorName, $img->__toString());
                 $casts_store = new Casts();
@@ -942,7 +916,7 @@ class MovieController extends Controller
         $store->m_poster = $name_poster;
         $store->m_age = $request->age;
         $store->m_category = $request->category;
-        $store->show = 2;
+        $store->show = 0;
         $store->m_genre = str_replace(",", "-", $request->genres);
         $store->m_cloud = 'aws';
         $store->m_category = $request->input('category');
@@ -974,7 +948,7 @@ class MovieController extends Controller
 
         foreach ($casts as $key => $value) {
             if (!empty($value['image']) && $value['image'] !== 'undefined') {
-                $img_name = Str::random(20) . '.jpg';
+                $img_name = Str::random(20). '.jpg';
                 $img = \Image::make($value['image'])->widen(200)->encode('jpg');
                 Storage::disk('s3')->put('casts/' . $store->m_id . '/' . $img_name, $img->__toString());
                 $casts_store = new Casts();
@@ -1002,11 +976,10 @@ class MovieController extends Controller
     public function uploadMovieVideoToLocal($request)
     {
         if ($request->has('video_link')) {
+
             // Video decode
             $videos = json_decode($request->video_link);
-            $movieUpdate = Movie::find($request->id);
-            $movieUpdate->show = 1;
-            $movieUpdate->save();
+
             foreach ($videos as $key => $value) {
                 $video = new video();
                 $video->video_cloud = 'link';
@@ -1038,35 +1011,64 @@ class MovieController extends Controller
             }
 
             return response()->json(['status' => 'success', 'message' => 'Successful upload and transcode video to local', 'id' => $request->id], 200);
-        } elseif ($request->has('video')) {
+        }
+        elseif ($request->has('video')) {
+            // Get movie
+            $getMovie = Movie::find($request->id);
+
+
             // Decode Presets Json
             $resolution = json_decode($request->resolution, true);
 
-            Log::alert($request);
             if ($resolution[0]['Container'] === 'ts') {
+
+                // Create M3U8 File name
+                $randomName = Str::random(20);
+                $newNameM3U8 = $randomName . '.m3u8';
+
                 // Upload video to Storage
                 $file = $request->file('video');
                 $path = Storage::disk('public')->put('temp', $file);
-                $uploadPath = 'movies/' . $request->id . '/';
+                $outputPath = 'movies/' . $getMovie->m_name .'/';
 
-                $randomName = Str::random(20);
-                $playlistName = $randomName . '.m3u8';
-                Log::alert('run jobs--' . $request->id);
-                ConvertVideoToHLS::dispatch($path, $request->id, $resolution, $uploadPath, $playlistName, $request->tmdb_id, 'local', 'movies');
-            } elseif ($resolution[0]['Container'] === 'mp4') {
+
+                // FFmpegTranscoding Video
+                $transcoding = $this->transcodingToHLS($path, $resolution, $outputPath, $randomName, 'Video Convert To HLS Playlist Wait, its take time', $request->tmdb_id);
+
+                // Store video data
+                if ($transcoding) {
+                    $video = new Video();
+                    $video->movie_id = $request->id;
+                    $video->resolution = '720';
+                    $video->video_url = '/storage/movies/' . $getMovie->m_name . '/' . $newNameM3U8;
+                    $video->video_cloud = 'local';
+                    $video->video_format = 'hls';
+
+                    $video->save();
+                } else {
+                    // Error
+                    return $transcoding;
+                }
+            }
+            elseif ($resolution[0]['Container'] === 'mp4') {
+
+
+                // Upload video to Storage
                 $file = $request->file('video');
                 $path = Storage::disk('public')->put('temp', $file);
-                $uploadPath = 'movies/' . $request->id . '/';
-                Log::alert('run jobs--' . $request->id);
-                ConvertVideoToMp4::dispatch($path, $request->id, $resolution, $uploadPath, $request->tmdb_id, 'local', 'movies');
+
+                // Transcode Video To Mp4
+                $transcode = $this->transcodeVideoToMp4($resolution, $request->id, $path, $request->tmdb_id, 'local', $getMovie->m_name);
+
+                if (!$transcode) {
+                    return response()->json(['status' => 'failed', 'message' => 'Failed to transcode video'], 422);
+                }
             }
 
-            return response()->json(['status' => 'success', 'message' => 'Successful upload video, Encoding on progress', 'id' => $request->id], 200);
-        } elseif ($request->has('embed_code')) {
+            return response()->json(['status' => 'success', 'message' => 'Successful upload movie as external link', 'id' => $request->id], 200);
+        }
+        elseif ($request->has('embed_code')) {
             $EmbedLinks = json_decode($request->embed_code);
-            $movieUpdate = Movie::find($request->id);
-            $movieUpdate->show = 1;
-            $movieUpdate->save();
             foreach ($EmbedLinks as $key => $value) {
                 $video = new video();
                 $video->video_cloud = 'embed';
@@ -1077,19 +1079,19 @@ class MovieController extends Controller
                 $video->save();
             }
             return response()->json(['status' => 'success', 'message' => 'Successful upload movie as embed code', 'id' => $request->id], 200);
+
         } else {
             return response()->json(['status' => 'failed', 'message' => 'There is something error with video'], 422);
         }
     }
 
+
     public function uploadMovieVideoToAWS($request)
     {
         if ($request->has('video_link')) {
+
             // Video decode
             $videos = json_decode($request->video_link);
-            $movieUpdate = Movie::find($request->id);
-            $movieUpdate->show = 1;
-            $movieUpdate->save();
 
             foreach ($videos as $key => $value) {
                 $video = new video();
@@ -1122,11 +1124,9 @@ class MovieController extends Controller
             }
 
             return response()->json(['status' => 'success', 'message' => 'Successful upload and transcode video to AWS S3', 'id' => $request->id], 200);
-        } elseif ($request->has('embed_code')) {
+        }
+        elseif ($request->has('embed_code')){
             $EmbedLinks = json_decode($request->embed_code);
-            $movieUpdate = Movie::find($request->id);
-            $movieUpdate->show = 1;
-            $movieUpdate->save();
             foreach ($EmbedLinks as $key => $value) {
                 $video = new video();
                 $video->video_cloud = 'embed';
@@ -1137,27 +1137,66 @@ class MovieController extends Controller
                 $video->save();
             }
             return response()->json(['status' => 'success', 'message' => 'Successful upload movie as embed code', 'id' => $request->id], 200);
-        } elseif ($request->has('video')) {
+
+        }
+        elseif ($request->has('video')) {
+
+            // Get movie
+            $getMovie = Movie::find($request->id);
+
+
             // Decode Persets Json
             $resolution = json_decode($request->resolution, true);
 
             if ($resolution[0]['Container'] === 'ts') {
+
+                // Create M3U8 File name
+                $randomName = Str::random(20);
+                $newNameM3U8 = $randomName . '.m3u8';
+
                 // Upload video to Storage
                 $file = $request->file('video');
                 $path = Storage::disk('public')->put('temp', $file);
-                $uploadPath = 'movies/' . $request->id . '/';
+                $outputPath = 'movies/' . $getMovie->m_name .'/';
 
-                $randomName = Str::random(20);
-                $playlistName = $randomName . '.m3u8';
-                Log::alert('run jobs--' . $request->id);
-                ConvertVideoToHLS::dispatch($path, $request->id, $resolution, $uploadPath, $playlistName, $request->tmdb_id, 's3', 'movies');
+                // FFmpeg Transcoding Video
+                $transcoding = $this->transcodingToHLS($path, $resolution, $outputPath, $randomName, 'Video Convert To HLS Playlist Wait, its take time', $request->tmdb_id);
+
+                // Store video data
+                if ($transcoding) {
+                    $video = new Video();
+                    $video->video_cloud = 'aws';
+                    $video->video_format = 'hls';
+                    $video->movie_id = $request->id;
+                    $video->resolution = '720';
+                    $video->video_url =  '/movies/' . $getMovie->m_name . '/' . $newNameM3U8;
+                    $video->save();
+
+                    $s3 = App::make('aws')->createClient('s3');
+
+                    $s3->uploadDirectory(storage_path('/app/public/movies/' . $getMovie->m_name . '/'), config('aws.private_bucket'), '/movies/'. $getMovie->m_name . '/', []);
+                } else {
+                    // Error
+                    return $transcoding;
+                }
             } elseif ($resolution[0]['Container'] === 'mp4') {
+
+
+                // Upload video to Storage
                 $file = $request->file('video');
                 $path = Storage::disk('public')->put('temp', $file);
-                $uploadPath = '/movies/' . $request->id . '/';
-                Log::alert('run jobs--' . $request->id);
-                ConvertVideoToMp4::dispatch($path, $request->id, $resolution, $uploadPath, $request->tmdb_id, 's3', 'movies');
+
+                // Transcode Video To Mp4
+                $transcode = $this->transcodeVideoToMp4($resolution, $request->id, $path, $request->tmdb_id, 'aws', $getMovie->m_name);
+
+                if (!$transcode) {
+                    return response()->json(['status' => 'failed', 'message' => 'Failed to transcode video'], 422);
+                }
             }
+
+            Storage::deleteDirectory('public/temp');
+            Storage::deleteDirectory('public/movies/' . $getMovie->m_name . '/');
+
             return response()->json(['status' => 'success', 'message' => 'Successful upload and transcode video to AWS S3', 'id' => $request->id], 200);
         } else {
             return response()->json(['status' => 'failed', 'message' => 'There is something error with video'], 422);
@@ -1185,6 +1224,7 @@ class MovieController extends Controller
             200
         );
     }
+
 
     public function createSchedulesAds(Request $request, $id)
     {
@@ -1253,6 +1293,7 @@ class MovieController extends Controller
         );
     }
 
+
     public function updateSchedulerDate(Request $request)
     {
         $request->validate([
@@ -1277,6 +1318,7 @@ class MovieController extends Controller
         abort(404);
     }
 
+
     public function analysisMovie($id)
     {
         if (preg_match('/[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}/', $id) !== 1) {
@@ -1291,92 +1333,92 @@ class MovieController extends Controller
 
 
         $viewsInDay = DB::table('recently_watcheds')
-            ->selectRaw('"movie" AS type, count(recently_watcheds.movie_id) AS number, movies.m_name AS name, HOUR(recently_watcheds.created_at) AS hour')
-            ->join('movies', 'movies.m_id', '=', 'recently_watcheds.movie_id')
-            ->whereRaw('recently_watcheds.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE() AND movies.m_id= "' . $id . '"')
-            ->groupBy('recently_watcheds.movie_id')
-            ->limit(10)
-            ->get();
+                ->selectRaw('"movie" AS type, count(recently_watcheds.movie_id) AS number, movies.m_name AS name, HOUR(recently_watcheds.created_at) AS hour')
+                ->join('movies', 'movies.m_id', '=', 'recently_watcheds.movie_id')
+                ->whereRaw('recently_watcheds.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE() AND movies.m_id= "'. $id . '"')
+                ->groupBy('recently_watcheds.movie_id')
+                ->limit(10)
+                ->get();
 
         // Monthly
         $viewsInMonth = DB::table('recently_watcheds')
-            ->selectRaw('"movie" AS type, count(recently_watcheds.movie_id) AS number, movies.m_name AS name, MONTHNAME(recently_watcheds.created_at) AS month')
-            ->join('movies', 'movies.m_id', '=', 'recently_watcheds.movie_id')
-            ->groupBy('recently_watcheds.movie_id')
-            ->whereRaw('recently_watcheds.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 MONTH) AND CURRENT_DATE() AND movies.m_id = "' . $id . '"')
-            ->limit(10)
-            ->get();
+                ->selectRaw('"movie" AS type, count(recently_watcheds.movie_id) AS number, movies.m_name AS name, MONTHNAME(recently_watcheds.created_at) AS month')
+                ->join('movies', 'movies.m_id', '=', 'recently_watcheds.movie_id')
+                ->groupBy('recently_watcheds.movie_id')
+                ->whereRaw('recently_watcheds.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 MONTH) AND CURRENT_DATE() AND movies.m_id = "'. $id . '"')
+                ->limit(10)
+                ->get();
 
         // Yearly
 
         $viewsInYear = DB::table('recently_watcheds')
-            ->selectRaw('"movie" AS type, count(recently_watcheds.movie_id) AS number, movies.m_name AS name, YEAR(recently_watcheds.created_at) AS year')
-            ->join('movies', 'movies.m_id', '=', 'recently_watcheds.movie_id')
-            ->whereRaw('recently_watcheds.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 YEAR) AND CURRENT_DATE() AND movies.m_id = "' . $id . '"')
-            ->groupBy('recently_watcheds.movie_id')
-            ->limit(10)
-            ->get();
+                ->selectRaw('"movie" AS type, count(recently_watcheds.movie_id) AS number, movies.m_name AS name, YEAR(recently_watcheds.created_at) AS year')
+                ->join('movies', 'movies.m_id', '=', 'recently_watcheds.movie_id')
+                ->whereRaw('recently_watcheds.created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 YEAR) AND CURRENT_DATE() AND movies.m_id = "'. $id . '"')
+                ->groupBy('recently_watcheds.movie_id')
+                ->limit(10)
+                ->get();
 
         // Count Like
         $countLikeInDay = DB::table('likes')
-            ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE() AND movie_id = "' . $id . '"')
-            ->count();
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE() AND movie_id = "'. $id . '"')
+                       ->count();
 
         $countLikeInMonth = DB::table('likes')
-            ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Month) AND CURRENT_DATE() AND movie_id = "' . $id . '"')
-            ->count();
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Month) AND CURRENT_DATE() AND movie_id = "'. $id . '"')
+                       ->count();
 
         $countLikeInYear = DB::table('likes')
-            ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Year) AND CURRENT_DATE() AND movie_id = "' . $id . '"')
-            ->count();
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Year) AND CURRENT_DATE() AND movie_id = "'. $id . '"')
+                       ->count();
 
 
         // Count Favor
         $countFavorInDay = DB::table('collection_lists')
-            ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE() AND movie_id = "' . $id . '"')
-            ->count();
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 DAY) AND CURRENT_DATE() AND movie_id = "'. $id . '"')
+                       ->count();
 
         $countFavorInMonth = DB::table('collection_lists')
-            ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Month) AND CURRENT_DATE() AND movie_id = "' . $id . '"')
-            ->count();
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Month) AND CURRENT_DATE() AND movie_id = "'. $id . '"')
+                       ->count();
 
         $countFavorInYear = DB::table('collection_lists')
-            ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Year) AND CURRENT_DATE() AND movie_id = "' . $id . '"')
-            ->count();
+                       ->whereRaw('created_at BETWEEN (CURRENT_DATE() - INTERVAL 1 Year) AND CURRENT_DATE() AND movie_id = "'. $id . '"')
+                       ->count();
 
 
 
         $latestViews =  DB::table('recently_watcheds')
-            ->selectRaw('users.name AS user_name, users.id AS user_id, recently_watcheds.created_at')
-            ->join('movies', 'movies.m_id', '=', 'recently_watcheds.movie_id')
-            ->join('users', 'users.id', '=', 'recently_watcheds.uid')
-            ->whereRaw('movies.m_id = "' . $id . '"')
-            ->orderBy('recently_watcheds.created_at', 'DESC')
-            ->limit(20)
-            ->get();
+                        ->selectRaw('users.name AS user_name, users.id AS user_id, recently_watcheds.created_at')
+                        ->join('movies', 'movies.m_id', '=', 'recently_watcheds.movie_id')
+                        ->join('users', 'users.id', '=', 'recently_watcheds.uid')
+                        ->whereRaw('movies.m_id = "'. $id . '"')
+                        ->orderBy('recently_watcheds.created_at', 'DESC')
+                        ->limit(20)
+                        ->get();
 
 
         return response()->json([
-            'status' => 'success',
-            'data' => [
-                'views' => [
-                    'day' =>  $viewsInDay,
-                    'month' => $viewsInMonth,
-                    'year' =>  $viewsInYear
-                ],
-                'like' => [
-                    'day' =>  $countLikeInDay,
-                    'month' => $countLikeInMonth,
-                    'year' =>  $countLikeInYear
-                ],
-                'favor' => [
-                    'day' =>  $countFavorInDay,
-                    'month' => $countFavorInMonth,
-                    'year' =>  $countFavorInYear
-                ],
-                'latest_views' => $latestViews,
-                'all_views' => DB::table('recently_watcheds')->where('movie_id', $id)->count()
-            ]
-        ]);
+                    'status' => 'success',
+                    'data' => [
+                        'views' => [
+                            'day' =>  $viewsInDay,
+                            'month' => $viewsInMonth,
+                            'year' =>  $viewsInYear
+                        ],
+                        'like' => [
+                            'day' =>  $countLikeInDay,
+                            'month' => $countLikeInMonth,
+                            'year' =>  $countLikeInYear
+                        ],
+                        'favor' => [
+                            'day' =>  $countFavorInDay,
+                            'month' => $countFavorInMonth,
+                            'year' =>  $countFavorInYear
+                        ],
+                        'latest_views' => $latestViews,
+                        'all_views' => DB::table('recently_watcheds')->where('movie_id', $id)->count()
+                    ]
+                ]);
     }
 }

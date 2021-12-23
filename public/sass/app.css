@@ -11785,6 +11785,12 @@ button.vjs-control.vjs-button.icon-vidoejs-exit {
   left: 10px;
   display: inline-block;
 }
+.search-nav__search .search-icon {
+    position: absolute;
+    top: 7px;
+    left: 10px;
+    display: inline-block;
+  }
 
 .search-page__cast .image {
   display: inline-block;

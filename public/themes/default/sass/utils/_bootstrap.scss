@@ -281,6 +281,7 @@ hr {
 .table-inverse td,
 .table-inverse thead th {
     border-bottom: transparent;
+    text-align: center;
 }
 
 .table-inverse tr {
@@ -292,7 +293,7 @@ hr {
 }
 
 .table-inverse {
-    background-color: $background-color2;
+    background-color: $background-color3;
     color: $primary-color;
 }
 

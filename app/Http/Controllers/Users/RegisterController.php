@@ -33,8 +33,8 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:50',
-            //  'email' => 'required|email:rfc,dns|max:255',
+            'name' => 'required|max:40|regex:/^[a-z0-9 .\-]+$/i',
+            'email' => 'required|email|max:70',
             'password' => 'required|confirmed|min:8',
         ]);
 
@@ -45,6 +45,9 @@ class RegisterController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Email has already been taken.'], 400);
         }
 
+        // Get location
+//        $ipLocation = Helpers::getIp();
+//        $ipLocationJson = json_encode($ipLocation, true);
 
         $user = new User();
         $user->name = $request->input('name');
@@ -55,7 +58,7 @@ class RegisterController extends Controller
 
         // Send confirmation message to mail
         Auth::login($user);
-        $this->sendActivityMail();
+
 
         // response success
         return response()->json(['status' => 'success', 'username' => $user->name, 'image' => 'img/avatar.png'], 200);
@@ -64,7 +67,7 @@ class RegisterController extends Controller
     /**
      * Send mail confirm
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
     public function sendActivityMail()
     {
@@ -72,12 +75,8 @@ class RegisterController extends Controller
         if ($user->confirmed !== 1) {
             $user->confirmation_code = Str::random(30);
             $user->save();
-            try {
-                Mail::to(Auth::user())
-                    ->send(new ActivityAccount());
-            } catch (\Exception $e) {
-            }
-
+            Mail::to(Auth::user())
+                ->send(new ActivityAccount());
             return response(['status' => 'success', 'message' => 'successful send to ' . $user->email]);
         } else {
             return response()->json(['status' => 404], 404);
@@ -101,7 +100,7 @@ class RegisterController extends Controller
         $user->confirmation_code = null;
         $user->confirmed = 1;
         $user->save();
-        return redirect('/');
+        return redirect('/app');
     }
 
     /**
@@ -113,7 +112,7 @@ class RegisterController extends Controller
     public function sendForgetPassword(Request $request)
     {
         $request->validate([
-            'email' => 'required|email:rfc,dns|max:100',
+            'email' => 'required|email|max:100',
         ]);
 
         $user = User::where('email', $request->input('email'))->first();
@@ -208,7 +207,7 @@ class RegisterController extends Controller
         $resultCustomer = $setupPay->customer()->create([
             'firstName' => $user->name,
             'email' => $user->email,
-            'company' => Config('app.name'),
+            'company' => 'Enki Co.',
             'paymentMethodNonce' => $request->input('token')
         ]);
 
@@ -218,28 +217,33 @@ class RegisterController extends Controller
                 'planId' => $request->input('plan')
             ]);
 
-            if ($result->subscription->status == 'Active') {
+            if($result->subscription->status == 'Active') {
                 $user->braintree_id = $resultCustomer->customer->id;
-                $user->card_brand = $request->input('card_type');
+                $user->card_brand =  $request->input('card_type');
                 $user->card_last_four = $request->input('last_four');
-                if ($result->subscription->trialPeriod) {
+                if($result->subscription->trialPeriod){
                     $user->period_end = $result->subscription->nextBillingDate->format('Y-m-d');
                     $user->trial_ends_at = $result->subscription->nextBillingDate->format('Y-m-d');
-                } else {
+                }else{
                     $user->period_end = $result->subscription->billingPeriodEndDate->format('Y-m-d');
                 }
 
                 $user->save();
-                return response()->json(['status' => 'success', 'name' => $user->name, 'email' => $user->email, 'card_number' => $user->card_last_four, 'card_brand' => $user->card_brand]);
+                return response()->json(['status' => 'success', 'name' => $user->name, 'email' => $user->email,  'card_number' => $user->card_last_four, 'card_brand' => $user->card_brand]);
             }
+
+
         } else {
-            foreach ($resultCustomer->errors->deepAll() as $error) {
-                echo ($error->code . ": " . $error->message . "\n");
+            foreach($resultCustomer->errors->deepAll() AS $error) {
+                echo($error->code . ": " . $error->message . "\n");
             }
         }
 
 
+
         return response()->json(['status' => 'failed', 'message' => 'Failed to accept payment'], 401);
+
+
     }
 
     /**
@@ -258,7 +262,7 @@ class RegisterController extends Controller
             $getDeviceLocation->confirm_hash = null;
             $getDeviceLocation->status = 'off';
             $getDeviceLocation->save();
-            return redirect('/');
+            return redirect('/app');
         }
     }
 }

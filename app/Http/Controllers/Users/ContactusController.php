@@ -10,7 +10,7 @@ use App\Mail\ContactUs;
 class ContactusController extends Controller
 {
     public function sendMail(Request $request) {
-        Mail::to(config('mail.contact_to_mail'))->send(new ContactUs($request));
+        Mail::to('support@nex4.com')->send(new ContactUs($request));
         // check for failures
         if (Mail::failures()) {
             return response()->json(['status' => 'failed'], 422);

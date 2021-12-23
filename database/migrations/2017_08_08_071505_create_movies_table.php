@@ -16,7 +16,7 @@ class CreateMoviesTable extends Migration
         Schema::create('movies', function (Blueprint $table) {
             $table->uuid('m_id');
             $table->primary('m_id');
-            $table->string('m_name');
+            $table->string('m_name',50);
             $table->text('m_desc');
             $table->string('m_genre',40);
             $table->integer('m_year');
@@ -28,7 +28,6 @@ class CreateMoviesTable extends Migration
             $table->string('m_poster');
             $table->string('m_backdrop');
             $table->integer('m_category');
-            $table->boolean('m_users_only')->default(0);
             $table->boolean('show')->default(0);
             $table->timestamps();
         });

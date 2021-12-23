@@ -24,6 +24,7 @@ class SearchController extends Controller
 
             return $next($request);
         });
+
     }
 
 
@@ -40,7 +41,7 @@ class SearchController extends Controller
 
         $request->validate([
             'query' => 'nullable|max:30|regex:/^[\w\s.,-]*$/',
-        ]);
+         ]);
 
         // Get movie and series
         $getMasQuery = DB::select('
@@ -69,10 +70,10 @@ class SearchController extends Controller
                       0 AS already_episode,
                       movies.m_cloud AS cloud
                       FROM movies
-                      LEFT JOIN collection_lists AS u1  ON u1.movie_id = movies.m_id AND u1.uid = "' . Auth::id() . '"
-                      LEFT JOIN recently_watcheds AS u2 ON u2.movie_id = movies.m_id AND u2.uid = "' . Auth::id() . '"
-                      LEFT JOIN likes AS u3  ON u3.movie_id = movies.m_id AND u3.uid = "' . Auth::id() . '"
-                      WHERE movies.show <> 0 AND movies.m_name LIKE "' . $request->input('query') . '%"
+                      LEFT JOIN collection_lists AS u1  ON u1.movie_id = movies.m_id AND u1.uid = "' .Auth::id(). '"
+                      LEFT JOIN recently_watcheds AS u2 ON u2.movie_id = movies.m_id AND u2.uid = "' .Auth::id(). '"
+                      LEFT JOIN likes AS u3  ON u3.movie_id = movies.m_id AND u3.uid = "' .Auth::id(). '"
+                      WHERE movies.m_name LIKE "'. $request->input('query') .'%"
                       GROUP BY movies.m_id DESC)
                       UNION
                       (SELECT
@@ -103,19 +104,19 @@ class SearchController extends Controller
                       END AS "already_episode",
                       series.t_cloud AS cloud
                       FROM series
-                      LEFT JOIN collection_lists AS u1  ON u1.series_id = series.t_id AND u1.uid = "' . Auth::id() . '"
-                      LEFT JOIN recently_watcheds AS u2 ON u2.series_id = series.t_id AND u2.uid = "' . Auth::id() . '"
-                      LEFT JOIN likes AS u3  ON u3.series_id = series.t_id AND u3.uid = "' . Auth::id() . '"
+                      LEFT JOIN collection_lists AS u1  ON u1.series_id = series.t_id AND u1.uid = "' .Auth::id(). '"
+                      LEFT JOIN recently_watcheds AS u2 ON u2.series_id = series.t_id AND u2.uid = "' .Auth::id(). '"
+                      LEFT JOIN likes AS u3  ON u3.series_id = series.t_id AND u3.uid = "' .Auth::id(). '"
                       LEFT JOIN episodes AS u4 ON u4.series_id = series.t_id AND u4.show = 1
-                      WHERE series.t_name LIKE "' . $request->input('query') . '%"
+                      WHERE series.t_name LIKE "'. $request->input('query') .'%"
                       GROUP BY series.t_id DESC
                       ) LIMIT 8');
 
         $getCast =  DB::table('casts')
-            ->selectRaw('"casts" AS type, casts.c_id AS id,casts.c_name AS name,casts.c_image AS image, casts.c_cloud AS cloud')
-            ->where('casts.c_name', 'like', $request->input('query') . '%')
-            ->limit(4)
-            ->get();
+        ->selectRaw('"casts" AS type, casts.c_id AS id,casts.c_name AS name,casts.c_image AS image, casts.c_cloud AS cloud')
+        ->where('casts.c_name', 'like', $request->input('query').'%')
+        ->limit(4)
+        ->get();
 
         // Check if series and movies array is empty
         if (empty($getMasQuery)) {
@@ -129,13 +130,11 @@ class SearchController extends Controller
         }
 
         return response()->json(
-            [
-                'status' => 'success',
-                'data'   => [
-                    'data' => $getMasQuery,
-                    'cast' => $getCast
-                ]
-            ],
+            [ 'status' => 'success',
+              'data'   => [
+                  'data' => $getMasQuery,
+                  'cast' => $getCast
+              ]],
 
             200
 

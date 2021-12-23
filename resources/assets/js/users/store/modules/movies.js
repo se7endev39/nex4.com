@@ -68,9 +68,9 @@ const module = {
                     commit('SET_MOVIE_DETAILS', data);
                 }
             }, error => {
-                if (error.response.status === 404) {
-                    router.push({ name: '404' });
-                } else {
+                if(error.response.status === 404){
+                    router.push({name: '404'});
+                }else{
                     router.push('/');
                 }
             });
@@ -79,7 +79,7 @@ const module = {
     mutations: {
         SET_MOVIES_LIST(state, data) {
             state.data = data;
-
+            
         },
 
         SET_MOVIE_DETAILS(state, data) {
@@ -90,6 +90,7 @@ const module = {
             state.show = [];
         },
 
+        // Spiner load
         SPINER_LOAD_MOVIES(state) {
             state.loading = true;
         },

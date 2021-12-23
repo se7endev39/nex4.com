@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\Ghost;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Helpers\Helpers;
 use DB;
+use Auth;
 
 class KidsController extends Controller
 {
+
+
+
     /**
      * Get all series and movies by age ratings (G)
      *
@@ -14,7 +20,7 @@ class KidsController extends Controller
      */
     public function getAll()
     {
-        // Get movie and series
+          // Get movie and series
         $getKidsMasQuery = DB::select('
                       (SELECT
                       "movie" AS type,
@@ -28,7 +34,6 @@ class KidsController extends Controller
                       movies.m_rate AS rate,
                       movies.m_backdrop AS backdrop,
                       movies.m_age AS age,
-                      movies.m_users_only AS users_only,
                       "0" AS already_episode,
                       movies.m_cloud AS cloud
                       FROM movies
@@ -47,7 +52,6 @@ class KidsController extends Controller
                       series.t_rate AS rate,
                       series.t_backdrop AS backdrop,
                       series.t_age AS age,
-                      series.t_users_only AS users_only,
                       CASE
                       WHEN u4.series_id IS NULL OR u4.show = 0 THEN false
                       ELSE true
@@ -62,12 +66,10 @@ class KidsController extends Controller
         if (empty($getKidsMasQuery)) {
             $getKidsMasQuery = null;
         }
-
         return response()->json([
             'status' => 'success',
             'data' => [
                 'kids' => $getKidsMasQuery
-            ]
-        ], 200);
+                ]], 200);
     }
 }

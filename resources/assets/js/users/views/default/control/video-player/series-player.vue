@@ -355,8 +355,8 @@
                             });
 
                             this.jwPlayer.on('time', (e) => {
-                                  if (this.timeRequest <= parseInt(jwplayer().getPosition().toFixed()) ) {
-                                    this.timeRequest =  parseInt(jwplayer().getPosition().toFixed()) + 10
+                                if (jwplayer().getPosition().toFixed() == this.timeRequest) {
+                                    this.timeRequest = this.timeRequest + 20;
                                     axios.post('/api/v1/create/watch/series/recently', {
                                         current_time: jwplayer().getPosition().toFixed(),
                                         duration_time: jwplayer().getDuration().toFixed(),
@@ -375,7 +375,7 @@
                             // OnSeek
                             this.jwPlayer.on('seek', () => {
                                 setTimeout(() => {
-                                    this.timeRequest = parseInt(jwplayer().getPosition().toFixed()) + 10;
+                                    this.timeRequest = parseInt(jwplayer().getPosition().toFixed()) + 20;
                                 }, 200)
                             });
                         }

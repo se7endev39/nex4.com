@@ -8,7 +8,6 @@ use App\Models\Movie;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
 class DiscoverController extends Controller
 {
 
@@ -18,6 +17,7 @@ class DiscoverController extends Controller
             Helpers::checkUserPayment(Auth::user());
             return $next($request);
         });
+
     }
 
 
@@ -46,7 +46,6 @@ class DiscoverController extends Controller
                       movies.m_rate AS rate,
                       movies.m_backdrop AS backdrop,
                       movies.m_age AS age,
-                      movies.m_users_only AS users_only,
                       categories.name AS category_name,
                       categories.kind AS category_type,
                       u2.current_time,
@@ -65,7 +64,7 @@ class DiscoverController extends Controller
                       LEFT JOIN collection_lists AS u1  ON u1.movie_id = movies.m_id AND u1.uid = "' . Auth::id() . '"
                       LEFT JOIN recently_watcheds AS u2 ON u2.movie_id = movies.m_id AND u2.uid = "' . Auth::id() . '"
                       LEFT JOIN likes AS u3  ON u3.movie_id = movies.m_id AND u3.uid = "' . Auth::id() . '"
-                      WHERE movies.m_age <> "G" AND movies.show <> 0 AND categories.active = 1
+                      WHERE movies.m_age <> "G" AND movies.show <> 0
                       GROUP BY movies.m_id DESC
                       ORDER BY movies.created_at DESC
                       LIMIT 50');
@@ -103,7 +102,6 @@ class DiscoverController extends Controller
                         $arr['backdrop'] = $movieQuery[$key]->backdrop;
                         $arr['age'] = $movieQuery[$key]->age;
                         $arr['cloud'] = $movieQuery[$key]->cloud;
-                        $arr['users_only'] = $movieQuery[$key]->users_only;
                         $arr['category_name'] = $movieQuery[$key]->category_name;
                         $arr['category_type'] = $movieQuery[$key]->category_type;
                         $arr['current_time'] = $movieQuery[$key]->current_time;
@@ -131,7 +129,6 @@ class DiscoverController extends Controller
                                 series.t_rate AS rate,
                                 series.t_poster AS poster,
                                 series.t_age AS age,
-                                series.t_users_only AS users_only,
                                 categories.name AS category_name,
                                 categories.kind AS category_type,
                                 u2.current_time,
@@ -155,7 +152,7 @@ class DiscoverController extends Controller
                                 LEFT JOIN recently_watcheds AS u2 ON u2.series_id = series.t_id AND u2.uid = "' . Auth::id() . '"
                                 LEFT JOIN likes    AS u3  ON u3.series_id = series.t_id AND u3.uid = "' . Auth::id() . '"
                                 LEFT JOIN episodes AS u4  ON u4.series_id = series.t_id
-                                WHERE series.t_age <> "G" AND categories.active = 1
+                                WHERE series.t_age <> "G"
                                 GROUP BY series.t_id DESC
                                 ORDER BY series.created_at DESC
                                 LIMIT 50');
@@ -192,7 +189,6 @@ class DiscoverController extends Controller
                         $arr['backdrop'] = $seriesQuery[$key]->backdrop;
                         $arr['age'] = $seriesQuery[$key]->age;
                         $arr['cloud'] = $seriesQuery[$key]->cloud;
-                        $arr['users_only'] = $seriesQuery[$key]->users_only;
                         $arr['category_name'] = $seriesQuery[$key]->category_name;
                         $arr['category_type'] = $seriesQuery[$key]->category_type;
                         $arr['current_time'] = $seriesQuery[$key]->current_time;
@@ -219,7 +215,6 @@ class DiscoverController extends Controller
                                 movies.m_backdrop AS backdrop,
                                 movies.m_poster AS poster,
                                 movies.m_age AS age,
-                                movies.m_users_only AS users_only,
                                 u2.current_time,
                                 u2.duration_time,
                                 CASE
@@ -245,7 +240,6 @@ class DiscoverController extends Controller
                                 series.t_backdrop AS backdrop,
                                 series.t_poster AS poster,
                                 series.t_age AS age,
-                                series.t_users_only AS users_only,
                                 u2.current_time,
                                 u2.duration_time,
                                 CASE
@@ -273,7 +267,6 @@ class DiscoverController extends Controller
                       movies.m_name AS name,
                       movies.m_backdrop AS backdrop,
                       movies.m_cloud AS cloud,
-                      movies.m_users_only AS users_only,
                       recently_watcheds.current_time,
                       recently_watcheds.duration_time
                       FROM recently_watcheds
@@ -288,13 +281,12 @@ class DiscoverController extends Controller
                       episodes.name,
                       episodes.backdrop,
                       episodes.cloud,
-                      "false/" AS users_only,
                       recently_watcheds.current_time,
                       recently_watcheds.duration_time
                       FROM recently_watcheds
                       JOIN episodes ON episodes.id = recently_watcheds.episode_id
                       WHERE recently_watcheds.uid = "' . Auth::id() . '"
-                      ) LIMIT 5');
+                      ) LIMIT 3');
 
         if (empty($getRecentlyQuery)) {
             $getRecentlyQuery = null;
@@ -306,8 +298,7 @@ class DiscoverController extends Controller
                 'data' => $getMasByGenre,
                 'top' => $getTopMas,
                 'recenlty' => $getRecentlyQuery
-            ]
-        ], 200);
+            ]], 200);
     }
 
     /**
@@ -339,7 +330,8 @@ class DiscoverController extends Controller
             'status' => 'success',
             'data' => [
                 'support' => $getSupport
-            ]
-        ], 200);
+            ]], 200);
     }
+
+
 }

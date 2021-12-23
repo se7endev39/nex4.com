@@ -125,6 +125,7 @@ class ProfileController extends Controller
         }
 
         $user = Auth::user();
+
         $setupPay = new \Braintree\Gateway([
             'environment' => config('services.braintree.environment'),
             'merchantId' => config('services.braintree.merchant_id'),
@@ -133,9 +134,11 @@ class ProfileController extends Controller
         ]);
 
         $get_customer = $setupPay->customer()->find($user->braintree_id);
-        $get_subscriptions = $get_customer->paymentMethods[0]->subscriptions;
-        $get_active_one = $get_subscriptions[count($get_subscriptions) - 1];
-        return response()->json(['status' => 'success', 'subscription_plan' => $get_active_one->planId, 'subscription_status' => $get_active_one->status, 'cancel' => $get_active_one->neverExpires, 'card_number' => $user->card_last_four, 'card_brand' => $user->card_brand]);
+
+        $subscription = $setupPay->subscription()->find($get_customer->paymentMethods[0]->subscriptions[0]->id);
+
+
+        return response()->json(['status' => 'success', 'subscription_plan' => $subscription->planId, 'subscription_status' => $subscription->status, 'cancel' => $subscription->neverExpires, 'card_number' => $user->card_last_four, 'card_brand' => $user->card_brand]);
     }
 
     /**
@@ -162,12 +165,12 @@ class ProfileController extends Controller
         $result = $setupPay->paymentMethod()->update(
             $customer->paymentMethods[0]->token,
             [
-                'options' => [
-                    'makeDefault' => true,
-                    'verifyCard' => true,
-                ]
+                'paymentMethodNonce' => $request->input('token'),
+            'options' => [
+                'makeDefault' => true,
+                'verifyCard' => true,
             ]
-        );
+        ]);
         if ($result->success) {
             $user->card_brand = $request->input('card_type');
             $user->card_last_four = $request->input('last_four');
@@ -205,22 +208,22 @@ class ProfileController extends Controller
                 \Braintree\TransactionSearch::customerId()->is($user->braintree_id),
             ]);
 
-            foreach ($collection as $transaction) {
+            foreach($collection as $transaction) {
                 array_push($invoices, [
                     'start' => $transaction->subscription['billingPeriodStartDate']->format('Y-m-d'),
                     'end' => $transaction->subscription['billingPeriodEndDate']->format('Y-m-d'),
                     'total' => $transaction->amount,
                 ]);
             }
+
         } else {
             $invoices = [];
         }
 
         $get_customer = $setupPay->customer()->find($user->braintree_id);
-        $get_subscriptions = $get_customer->paymentMethods[0]->subscriptions;
-        $get_active_one = $get_subscriptions[count($get_subscriptions) - 1];
+        $subscription = $setupPay->subscription()->find($get_customer->paymentMethods[0]->subscriptions[0]->id);
 
-        return response()->json(['invoices' => $invoices, 'amount' => $get_active_one->price, 'name' => $get_active_one->planId]);
+        return response()->json(['invoices' => $invoices, 'amount' => $subscription->price, 'name' => $subscription->planId]);
     }
 
     /**
@@ -231,22 +234,12 @@ class ProfileController extends Controller
     public function cancelMembership()
     {
         if (!$this->checkUsermManually()) {
-            return response()->json(['status' => 'success', 'message' => 'You cannot control billing, please contact with support if you have any problem.'], 403);
+            return response()->json(['status' => 'success', 'message' => 'You cannot control billing, please contact with support if you have any probelm.'], 403);
         }
-
-
-        $setupPay = new \Braintree\Gateway([
-            'environment' => config('services.braintree.environment'),
-            'merchantId' => config('services.braintree.merchant_id'),
-            'publicKey' => config('services.braintree.public_key'),
-            'privateKey' => config('services.braintree.private_key'),
-        ]);
-
         $user = Auth::user();
-        $get_customer = $setupPay->customer()->find($user->braintree_id);
-        $get_subscriptions = $get_customer->paymentMethods[0]->subscriptions;
-        $setupPay->subscription()->cancel($get_customer->paymentMethods[0]->subscriptions[count($get_subscriptions) - 1]->id);
-        return response()->json(['status' => 'success']);
+        $user->subscription('main')->cancel();
+        $subscription = $user->subscription('main')->asBraintreeSubscription();
+        return response()->json(['status' => 'success', 'subscription_status' => $subscription->status, 'cancel' => $subscription->neverExpires]);
     }
 
     /**
@@ -260,36 +253,9 @@ class ProfileController extends Controller
             return response()->json(['status' => 'success', 'message' => 'You cannot control billing, please contact with support if you have any probelm.'], 403);
         }
         $user = Auth::user();
-
-        $setupPay = new \Braintree\Gateway([
-            'environment' => config('services.braintree.environment'),
-            'merchantId' => config('services.braintree.merchant_id'),
-            'publicKey' => config('services.braintree.public_key'),
-            'privateKey' => config('services.braintree.private_key'),
-        ]);
-
-
-
-        $get_customer = $setupPay->customer()->find($user->braintree_id);
-        $get_subscriptions = $get_customer->paymentMethods[0]->subscriptions;
-        $get_active_one = $get_subscriptions[count($get_subscriptions) - 1];
-        $result = $setupPay->subscription()->create([
-            'paymentMethodToken' => $get_customer->paymentMethods[0]->token,
-            'planId' => $get_active_one->planId
-        ]);
-
-        $user->braintree_id = $get_customer->id;
-        if ($result->subscription->trialPeriod) {
-            $user->period_end = $result->subscription->nextBillingDate->format('Y-m-d');
-            $user->trial_ends_at = $result->subscription->nextBillingDate->format('Y-m-d');
-        } else {
-            $user->period_end = $result->subscription->billingPeriodEndDate->format('Y-m-d');
-        }
-
-        $user->save();
-        return response()->json(['status' => 'success', 'name' => $user->name, 'email' => $user->email, 'card_number' => $user->card_last_four, 'card_brand' => $user->card_brand]);
-
-        return response()->json(['status' => 'success', 'subscription_status' => 'Active', 'cancel' => 0]);
+        $user->subscription('main')->resume();
+        $subscription = $user->subscription('main')->asBraintreeSubscription();
+        return response()->json(['status' => 'success', 'subscription_status' => $subscription->status, 'cancel' => $subscription->neverExpires]);
     }
 
     /**
@@ -300,45 +266,45 @@ class ProfileController extends Controller
      */
     public function changePlan(Request $request)
     {
-        //        if (!$this->checkUsermManually()) {
-        //            return response()->json(['status' => 'success', 'message' => 'You cannot control billing, please contact with support if you have any probelm.'], 403);
-        //        }
-        //
-        //        $request->validate([
-        //            'plan_id' => 'min:1|max:20',
-        //        ]);
-        //
-        //        // Just add esleif statment and the request plan_id === the id number
-        //        // $request->plan_id = 'Braintree id';
-        //        $user = Auth::user();
-        //
-        //        $plan = Braintree::where('plan_id', $request->input('plan_id'))->first();
-        //
-        //        if (is_null($plan)) {
-        //            abort(404);
-        //        }
-        //
-        //        $setupPay = new \Braintree\Gateway([
-        //            'environment' => config('services.braintree.environment'),
-        //            'merchantId' => config('services.braintree.merchant_id'),
-        //            'publicKey' => config('services.braintree.public_key'),
-        //            'privateKey' => config('services.braintree.private_key'),
-        //        ]);
-        //
-        //        $get_customer = $setupPay->customer()->find($user->braintree_id);
-        //        $subscription = $setupPay->subscription()->find($get_customer->paymentMethods[0]->subscriptions[0]->id);
-        //
-        //        $result = $setupPay->subscription()->update($subscription->id, [
-        //            'planId' => $request->input('plan_id'),
-        //        ]);
-        //
-        //        if($result->success) {
-        //            return response()->json(['status' => 'success', 'message' => 'Successful Update']);
-        //        }else{
-        //            foreach($result->errors->deepAll() AS $error) {
-        //                echo($error->code . ": " . $error->message . "\n");
-        //            }
-        //        }
+//        if (!$this->checkUsermManually()) {
+//            return response()->json(['status' => 'success', 'message' => 'You cannot control billing, please contact with support if you have any probelm.'], 403);
+//        }
+//
+//        $request->validate([
+//            'plan_id' => 'min:1|max:20',
+//        ]);
+//
+//        // Just add esleif statment and the request plan_id === the id number
+//        // $request->plan_id = 'Braintree id';
+//        $user = Auth::user();
+//
+//        $plan = Braintree::where('plan_id', $request->input('plan_id'))->first();
+//
+//        if (is_null($plan)) {
+//            abort(404);
+//        }
+//
+//        $setupPay = new \Braintree\Gateway([
+//            'environment' => config('services.braintree.environment'),
+//            'merchantId' => config('services.braintree.merchant_id'),
+//            'publicKey' => config('services.braintree.public_key'),
+//            'privateKey' => config('services.braintree.private_key'),
+//        ]);
+//
+//        $get_customer = $setupPay->customer()->find($user->braintree_id);
+//        $subscription = $setupPay->subscription()->find($get_customer->paymentMethods[0]->subscriptions[0]->id);
+//
+//        $result = $setupPay->subscription()->update($subscription->id, [
+//            'planId' => $request->input('plan_id'),
+//        ]);
+//
+//        if($result->success) {
+//            return response()->json(['status' => 'success', 'message' => 'Successful Update']);
+//        }else{
+//            foreach($result->errors->deepAll() AS $error) {
+//                echo($error->code . ": " . $error->message . "\n");
+//            }
+//        }
     }
 
     /**
@@ -450,7 +416,9 @@ class ProfileController extends Controller
                     'message' => 'Error to delete session',
                 ], 422);
             }
+
         }
+
     }
 
     public function logOutAPI()
@@ -464,9 +432,11 @@ class ProfileController extends Controller
     private function checkUsermManually()
     {
         $user = Auth::user();
+		
         if ($user->period_end > date("Y-m-d") && $user->paypal_email === null && $user->card_brand === null) {
             return false;
         }
         return true;
     }
+
 }

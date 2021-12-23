@@ -298,8 +298,8 @@
                                  data-parent="#accordion">
                                 <div class="card-body">
                                     <div class="form-group video-player">
-                                        <video width="100%" v-if="item.video_format !== 'embed'" controls>
-                                            <source :src="item.video_url">
+                                        <video width="100%" controls v-if="item.video_format !== 'embed'">
+                                            <source :src="item.video_url" type="application/x-mpegurl">
                                             Your browser does not support the video tag.
                                         </video>
                                     </div>

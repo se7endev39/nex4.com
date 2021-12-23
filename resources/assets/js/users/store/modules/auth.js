@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import router from '../../packages/Routes';
 import swal from 'sweetalert';
+import {
+    stat
+} from 'fs';
+
 const alertify = require('alertify.js');
 
 const module = {
@@ -23,11 +27,11 @@ const module = {
          * @param {*} array Email And Password
          */
         LOGIN({
-            commit
-        }, {
-            email,
-            password
-        }) {
+                  commit
+              }, {
+                  email,
+                  password
+              }) {
             commit('BUTTON_LOAD');
             var data = {
                 grant_type: 'password',
@@ -89,10 +93,10 @@ const module = {
                         });
 
                 }, (error) => {
-                    commit('SET_ERROR', {
-                        'error': true
-                    });
-                    commit('BUTTON_CLEAR');
+                        commit('SET_ERROR', {
+                            'error': true
+                        });
+                        commit('BUTTON_CLEAR');
                 });
         },
 
@@ -106,8 +110,8 @@ const module = {
          */
 
         CHECK_FORGET_CODE({
-            commit
-        }, code) {
+                              commit
+                          }, code) {
 
             axios.post('/api/v1/register/forget/checkhash', {
                 code: code
@@ -133,12 +137,12 @@ const module = {
          */
 
         CHANGE_FORGET_PASSWORD({
-            commit
-        }, {
-            code,
-            password,
-            password_confirmation
-        }) {
+                                   commit
+                               }, {
+                                   code,
+                                   password,
+                                   password_confirmation
+                               }) {
             commit('BUTTON_LOAD');
             axios.post('/api/v1/update/register/password', {
                 code: code,
@@ -168,8 +172,8 @@ const module = {
          */
 
         CHECK_EMAIL({
-            commit
-        }, email) {
+                        commit
+                    }, email) {
             commit('BUTTON_LOAD');
             axios.post('/api/v1/check/register/email', {
                 email: email
@@ -236,8 +240,8 @@ const module = {
          * @param {*}
          */
         GET_PAYMENT({
-            commit
-        }) {
+                        commit
+                    }) {
             commit('SPINER_LOAD');
             axios.get('/api/v1/get/profile/payment')
                 .then(response => {
@@ -257,8 +261,8 @@ const module = {
          * @param {*}
          */
         GET_BILLING_DETAILS({
-            commit
-        }) {
+                                commit
+                            }) {
             commit('SPINER_LOAD');
             axios.get('/api/v1/get/profile/payment/billing')
                 .then(response => {
@@ -278,8 +282,8 @@ const module = {
          * @param {array} commit
          */
         CANCEL_MEMBERSHIP({
-            commit
-        }) {
+                              commit
+                          }) {
             swal({
                 title: 'Are you sure?',
                 text: 'Once Canceled, you will can resume your account Within 10 months and then will be deleted!',
@@ -315,8 +319,8 @@ const module = {
          */
 
         RESUME_MEMBERSHIP({
-            commit
-        }) {
+                              commit
+                          }) {
             commit('BUTTON_LOAD');
             axios.get('/api/v1/update/profile/payment/resume_membership').then(response => {
                 if (response.data.status === 'success') {
@@ -340,8 +344,8 @@ const module = {
          * @param {any} {commit }
          */
         CHANGE_PLAN({
-            commit
-        }, plan_id) {
+                        commit
+                    }, plan_id) {
             swal({
                 title: 'Are you sure to change your plan?',
                 icon: 'warning',
@@ -377,8 +381,8 @@ const module = {
          * @param {*} lang
          */
         SET_LANGUAGE({
-            commit
-        }, lang) {
+                         commit
+                     }, lang) {
             axios.post('/api/v1/update/profile/language', {
                 language: lang
             }).then(response => {
@@ -397,8 +401,8 @@ const module = {
          * @param {*} caption
          */
         SET_CAPTION({
-            commit
-        }, caption) {
+                        commit
+                    }, caption) {
             axios.post('/api/v1/update/profile/caption', {
                 caption: caption
             }).then(res => {
@@ -418,8 +422,8 @@ const module = {
          */
 
         GET_VIEWING_HISTORY({
-            commit
-        }) {
+                                commit
+                            }) {
             commit('SPINER_LOAD');
             axios.get('/api/v1/get/profile/viewing_history').then(response => {
                 if (response.data.status === 'success') {
@@ -439,11 +443,11 @@ const module = {
          */
 
         SUBMIT_SUPPORT_REQUEST({
-            commit
-        }, {
-            subject,
-            details
-        }) {
+                                   commit
+                               }, {
+                                   subject,
+                                   details
+                               }) {
             commit('BUTTON_LOAD');
             axios.post('/api/v1/create/support/request', {
                 subject: subject,
@@ -467,8 +471,8 @@ const module = {
          */
 
         GET_ALL_SUPPORT_REQUEST({
-            commit
-        }) {
+                                    commit
+                                }) {
             commit('SPINER_LOAD');
             axios.get('/api/v1/get/support/request').then(response => {
                 if (response.status === 200) {
@@ -493,10 +497,10 @@ const module = {
          */
 
         GET_SUPPORT_REQUEST({
-            commit
-        }, {
-            id
-        }) {
+                                commit
+                            }, {
+                                id
+                            }) {
             commit('SPINER_LOAD');
             axios.get('/api/v1/get/support/request/' + id).then(response => {
                 if (response.status === 200) {
@@ -520,11 +524,11 @@ const module = {
          */
 
         SUPPORT_REPLY({
-            commit
-        }, {
-            id,
-            reply
-        }) {
+                          commit
+                      }, {
+                          id,
+                          reply
+                      }) {
             commit('BUTTON_LOAD');
             axios.post('/api/v1/create/support/request/reply', {
                 id: id,
@@ -552,8 +556,8 @@ const module = {
          * @param {*} param0
          */
         GET_DEVICE_ACTIVITY({
-            commit
-        }) {
+                                commit
+                            }) {
             commit('SPINER_LOAD');
             axios.get('/api/v1/get/device/activity').then(response => {
                 if (response.status === 200) {
@@ -573,11 +577,11 @@ const module = {
          * @param {*} param0
          */
         DELETE_DEVICE_SESSION({
-            commit
-        }, {
-            id,
-            key
-        }) {
+                                  commit
+                              }, {
+                                  id,
+                                  key
+                              }) {
             axios.delete('/api/v1/delete/device/session/' + id).then(response => {
                 if (response.status === 200) {
                     commit('DELETE_DEVICE_SESSION', key);
@@ -602,7 +606,7 @@ const module = {
          *
          * @param {*} param0
          */
-        LOGOUT_AUTH({ commit }) {
+        LOGOUT_AUTH({commit}) {
             commit('SPINER_LOAD');
             axios.get('/api/v1/get/logout').then(response => {
                 if (response.status === 200) {
@@ -611,7 +615,7 @@ const module = {
                 }
             }, error => {
 
-                if (error.response.status === 401) {
+                if(error.response.status === 401) {
                     localStorage.removeItem('_user');
                     location.reload();
                 }

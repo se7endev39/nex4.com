@@ -34,7 +34,6 @@ class SeriesController extends Controller
                       series.t_poster AS poster,
                       series.t_age AS age,
                       series.t_cloud AS cloud,
-                      series.t_users_only AS users_only,
                       CASE
                       WHEN u4.series_id IS NULL OR u4.show = 0 THEN false
                       ELSE true
@@ -50,12 +49,65 @@ class SeriesController extends Controller
             $seriesQuery = null;
         }
 
+        // Get top movies and series
+        $getTopMas = DB::select('select * from ((SELECT
+                                "movie" AS type,
+                                movies.m_id AS id,
+                                movies.m_name AS name,
+                                movies.m_desc AS overview,
+                                movies.m_year AS year,
+                                movies.m_genre AS genre,
+                                movies.m_rate AS rate,
+                                movies.m_backdrop AS backdrop,
+                                movies.m_poster AS poster,
+                                movies.m_age AS age,
+                                u2.current_time,
+                                u2.duration_time,
+                                CASE
+                                WHEN u1.id IS NULL THEN false
+                                ELSE true
+                                END AS "is_favorite",
+                                movies.m_cloud AS cloud
+                                FROM tops
+                                INNER JOIN movies  ON movies.m_id = tops.movie_id
+                                LEFT JOIN collection_lists AS u1  ON u1.movie_id = movies.m_id AND u1.uid = "' . Auth::id() . '"
+                                LEFT JOIN recently_watcheds AS u2 ON u2.movie_id = movies.m_id AND u2.uid = "' . Auth::id() . '"
+                                GROUP BY movies.m_id DESC)
+                                UNION
+                                (SELECT
+                                "series" AS type,
+                                series.t_id AS id,
+                                series.t_name AS name,
+                                series.t_desc AS overview,
+                                series.t_year AS year,
+                                series.t_genre AS genre,
+                                series.t_rate AS rate,
+                                series.t_backdrop AS backdrop,
+                                series.t_poster AS poster,
+                                series.t_age AS age,
+                                u2.current_time,
+                                u2.duration_time,
+                                CASE
+                                WHEN u1.id IS NULL THEN false
+                                ELSE true
+                                END AS "is_favorite",
+                                series.t_cloud AS cloud
+                                FROM tops
+                        	    INNER JOIN series  ON series.t_id = tops.series_id
+                                LEFT JOIN collection_lists AS u1  ON u1.series_id = series.t_id AND u1.uid = "' . Auth::id() . '"
+                                LEFT JOIN recently_watcheds AS u2 ON u2.series_id = series.t_id AND u2.uid = "' . Auth::id() . '"
+                                LEFT JOIN episodes AS u4  ON u4.series_id = series.t_id
+                                GROUP BY series.t_id DESC)) as A where type="series"');
+
+        if (empty($getTopMas)) {
+            $getTopMas = null;
+        }
         return response()->json([
             'status' => 'success',
             'data' => [
-                'series' => $seriesQuery
-            ]
-        ]);
+                'series' => $seriesQuery,
+                'top' => $getTopMas
+            ]]);
     }
 
     /**
@@ -85,7 +137,6 @@ class SeriesController extends Controller
                       series.t_poster AS poster,
                       series.t_age AS age,
                       series.t_cloud AS cloud,
-                      series.t_users_only AS users_only,
                       CASE
                       WHEN u4.series_id IS NULL OR u4.show = 0 THEN false
                       ELSE true
@@ -127,6 +178,7 @@ class SeriesController extends Controller
         if (count($getAllSeason) === 1) {
 
             $season[$getAllSeason[0]->season_number] = $getAllSeason;
+
         } else {
 
             // Check if there is no cast
@@ -138,6 +190,7 @@ class SeriesController extends Controller
                 foreach ($getAllSeason as $key => $value) {
                     $season[$value->season_number][] = $getAllSeason[$key];
                 }
+
             }
         }
 
@@ -147,8 +200,7 @@ class SeriesController extends Controller
                 'series' => $seriesQuery[0],
                 'casts' => $getSeriesCast,
                 'season' => $season
-            ]
-        ]);
+        ]]);
     }
 
 
@@ -167,7 +219,7 @@ class SeriesController extends Controller
 
         if ($request->input('genre') === 'all') {
             $request->genre = "";
-        } else {
+        }else{
             // Check if genre request equal the array genre
             $CheckGenere = Genre::where('name', $request->input('genre'))->first();
             if (is_null($CheckGenere)) {
@@ -202,7 +254,6 @@ class SeriesController extends Controller
                             series.t_poster AS poster,
                             series.t_age AS age,
                             series.t_cloud AS cloud,
-                            series.t_users_only AS users_only,
                             CASE
                             WHEN u4.series_id IS NULL OR u4.show = 0 THEN false
                             ELSE true
@@ -224,7 +275,6 @@ class SeriesController extends Controller
             'status' => 'success',
             'data' => [
                 'series' => $seriesQuery
-            ]
-        ]);
+            ]]);
     }
 }

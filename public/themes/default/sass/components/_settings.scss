@@ -18,6 +18,39 @@
       padding: 5px;
     }
   }
+    .form-control {
+        background: #161F44 0% 0% no-repeat padding-box;
+            box-shadow: 0px 5px 10px #00000029;
+            border-radius: 8px;
+            opacity: 1;
+    }
+    .braintree-sheet {
+        background-color: #111B46!important;
+        border: 1px solid #111B46!important;
+        }
+    .braintree-loader__container{
+        background-color: #111B46;
+    }
+    .braintree-sheet__header {
+        background: #161F44 0% 0% no-repeat padding-box;
+        box-shadow: 0px 5px 10px #00000029;
+        border-radius: 8px;
+        opacity: 1;
+        border-bottom: none!important;
+    }
+    .braintree-form-number {
+        border-bottom: none!important;
+    }
+    .braintree-form__hosted-field {
+        border-bottom: none!important;
+    }
+    .braintree-form__field {
+        background: #161F44 0% 0% no-repeat padding-box;
+        box-shadow: 0px 5px 10px #00000029;
+        border-radius: 8px;
+        opacity: 1;
+        border-bottom: none!important;
+    }
   /* Profile */
   &__profile-image {
     position: relative;
@@ -95,7 +128,7 @@
     cursor: pointer;
     font-weight: bold;
   background-color: $background-color2;
-  color: $primary-color; 
+  color: $primary-color;
     transition: 300ms;
   }
   &__active-plan {

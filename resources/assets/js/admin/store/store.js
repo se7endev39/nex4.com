@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import movies from './modules/movies';
 import series from './modules/series';
-import manga from './modules/manga';
 import channels from './modules/channels';
 import tops from './modules/tops';
 import actors from './modules/actors';
@@ -26,7 +25,6 @@ export default new Vuex.Store({
     modules: {
         movies,
         series,
-        manga,
         channels,
         tops,
         actors,

@@ -14,11 +14,13 @@ export default function (Vue) {
             localStorage.setItem('caption', caption);
         },
         client_secret() {
-            return 'jRaWByH3lOfsLbcwriPn68KzoM9i5lokxex1UtG1';
+            return '2mujsVvDNyq6abf7VXRiFp58WlNmKDobM2s8Z5wz';
+			
         },
         // braintree sandbox/production key
         sandbox_key() {
-            return 'sandbox_74by38tp_z9s82h8kcpwy7fvz';
+           // return 'sandbox_74by38tp_z9s82h8kcpwy7fvz';
+			return 'production_76qxzt3t_n25s4cy7yj2bmcb6';
         },
         current_theme() {
             const theme = document.body.firstElementChild.className;

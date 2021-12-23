@@ -1,8 +1,7 @@
 <?php
 
-use App\Models\Braintree;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Models\Braintree;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 // USERS
 Route::middleware('throttle:60,1')->group(function () {
+
 
     // Footer details
     Route::get('/v1/get/app/details', 'Users\HomeController@getAppDetails');
@@ -40,7 +40,7 @@ Route::middleware('throttle:60,1')->group(function () {
     // Device Confirm
     Route::get('/v1/register/verify/device/{token}', 'Users\RegisterController@confirmDevice')->name('confirm_device');
 
-    // Auth
+
     Route::group(['middleware' => 'auth:api', 'prefix' => 'v1'], function () {
 
         // Check user status
@@ -71,9 +71,6 @@ Route::middleware('throttle:60,1')->group(function () {
         Route::get('/get/tv', 'Users\TvController@getAll');
         Route::post('/get/tv/search', 'Users\TvController@searchChannel');
 
-        // Manga
-        Route::get('/get/manga/{manga_id}/chapter/{chapter_id}', 'Users\MangaController@chapter');
-        Route::get('/get/manga/{manga_id}/chapter/one/{chapter_id}', 'Users\MangaController@oneChapter');
         // Create new collection or add to already collection
         Route::get('/get/collection', 'Users\CollectionsController@getCollection');
         Route::get('/get/collection/{id}', 'Users\CollectionsController@getCollectionList')->where('id', '^[\w-]*$');
@@ -94,6 +91,7 @@ Route::middleware('throttle:60,1')->group(function () {
 
         // Player M3u8 HLS
         Route::get('/player/data/tv/{id}/{name}', 'Users\TvController@dataTvPlayer');
+
 
         // Reports
         Route::post('/create/report/movie', 'Users\VideoPlayerController@movieReport');
@@ -146,65 +144,60 @@ Route::middleware('throttle:60,1')->group(function () {
         Route::get('/get/device/activity', 'Users\ProfileController@getDeviceActivity');
         Route::delete('/delete/device/session/{id}', 'Users\ProfileController@deleteDeviceSession');
 
+
         // Logout
         Route::get('/get/logout', 'Users\ProfileController@logOutAPI');
 
         // Get all seasons
         Route::post('/get/series/season', 'Users\VideoPlayerController@getSeason');
+
+
     });
 
     // GHOST
-    Route::group(['prefix' => 'v1/ghost'], function () {
+
+    Route::group(['prefix' => 'v1'], function () {
 
         //Discover
-        Route::get('/get/discover', 'Ghost\DiscoverController@getHomeResult');
+        Route::get('/ghost/get/discover', 'Ghost\DiscoverController@getHomeResult');
 
         // Get movies list or sort it by trening and genres
-        Route::get('/get/movies', 'Ghost\MoviesController@getAllMovies');
-        Route::get('/get/movie/{id}', 'Ghost\MoviesController@getMovieDetails')->where('id', '^[\w-]*$');
-        Route::post('/get/movies/sort', 'Ghost\MoviesController@sortMovies');
+        Route::get('/ghost/get/movies', 'Ghost\MoviesController@getAllMovies');
+        Route::get('/ghost/get/movie/{id}', 'Ghost\MoviesController@getMovieDetails')->where('id', '^[\w-]*$');
+        Route::post('/ghost/get/movies/sort', 'Ghost\MoviesController@sortMovies');
 
         // Get series list or sort it by trening and genres
-        Route::get('/get/series', 'Ghost\SeriesController@getAllSeries');
-        Route::get('/get/series/{id}', 'Ghost\SeriesController@getSeriesDetails')->where('id', '^[\w-]*$');
-        Route::post('/get/series/sort', 'Ghost\SeriesController@sortSeries');
-        Route::post('/get/series/season', 'Ghost\VideoPlayerController@getSeason');
+        Route::get('/ghost/get/series', 'Ghost\SeriesController@getAllSeries');
+        Route::get('/ghost/get/series/{id}', 'Ghost\SeriesController@getSeriesDetails')->where('id', '^[\w-]*$');
+        Route::post('/ghost/get/series/sort', 'Ghost\SeriesController@sortSeries');
+
         // Get series and movies kids rating system
-        Route::get('/get/kids', 'Ghost\KidsController@getAll');
+        Route::get('/ghost/get/kids', 'Ghost\KidsController@getAll');
 
         // Tv
-        Route::get('/get/tv', 'Users\TvController@getAll');
-        Route::post('/get/tv/search', 'Ghost\TvController@searchChannel');
+        Route::get('/ghost/get/tv', 'Users\TvController@getAll');
+        Route::post('/ghost/get/tv/search', 'Ghost\TvController@searchChannel');
 
 
         // Get search by movie name or series, cast
-        Route::post('/get/search', 'Ghost\SearchController@getSearch');
+        Route::post('/ghost/get/search', 'Ghost\SearchController@getSearch');
 
         // Get cast details
-        Route::get('/get/cast/{id}', 'Ghost\CastController@getCastDetails')->where('id', '^[\w-]*$');
+        Route::get('/ghost/get/cast/{id}', 'Ghost\CastController@getCastDetails')->where('id', '^[\w-]*$');
 
         // Tv
-        Route::get('/get/tv', 'Ghost\TvController@getAll');
+        Route::get('/ghost/get/tv', 'Ghost\TvController@getAll');
 
-        // Get Manga show 
-        Route::get('/get/manga/{id}', 'Ghost\MangaController@show')->where('id', '^[\w-]*$');
-        Route::get('/get/manga/{manga_id}/chapter/{chapter_id}', 'Ghost\MangaController@chapter');
-        Route::get('/get/manga/{manga_id}/chapter/one/{chapter_id}', 'Ghost\MangaController@oneChapter');
 
         // Get search by movie name or series, cast
-        Route::post('/get/search', 'Ghost\SearchController@getSearch');
+        Route::post('/ghost/get/search', 'Ghost\SearchController@getSearch');
 
         // Get cast details
-        Route::get('/get/cast/{id}', 'Ghost\CastController@getCastDetails')->where('id', '^[\w-]*$');
-        Route::get('/get/genres', 'Ghost\GenresController@getAllGenres');
+        Route::get('/ghost/get/cast/{id}', 'Ghost\CastController@getCastDetails')->where('id', '^[\w-]*$');
 
+        Route::get('/ghost/get/genres', 'Ghost\GenresController@getAllGenres');
 
-        // Get movie and episode video,details -- Player
-        Route::post('/get/watch/movie', 'Ghost\VideoPlayerController@getMovieVideo');
-        Route::post('/get/watch/series', 'Ghost\VideoPlayerController@getEpisodeVideo');
-        Route::get('/get/watch/tv/{id}', 'Ghost\TvController@getChannelDetails');
     });
 
-    // Get manga
-    Route::get('/v1/get/manga', 'Ghost\MangaController@index');
 });
+

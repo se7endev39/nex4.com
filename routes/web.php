@@ -1,8 +1,5 @@
 <?php
-
 use App\Events\EventTrigger;
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,7 +44,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/api/admin/get/movie/{id}', 'Admin\MovieController@getMovieDetails');
     Route::post('/api/admin/update/movie', 'Admin\MovieController@update');
     Route::post('/api/admin/update/movie/available', 'Admin\MovieController@availableMovie');
-    Route::post('/api/admin/update/movie/users-only', 'Admin\MovieController@userOnlyUpdate');
     Route::get('/api/admin/analysis/movie/{id}', 'Admin\MovieController@analysisMovie');
 
     // Series manage
@@ -69,27 +65,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/api/admin/get/series/episode/{id}', 'Admin\SeriesController@getEpisodeDetails');
     Route::post('/api/admin/update/series/episode', 'Admin\SeriesController@updateEpisodeDetails');
     Route::get('/api/admin/analysis/series/{id}', 'Admin\SeriesController@analysisSeries');
-    Route::post('/api/admin/update/series/users-only', 'Admin\SeriesController@userOnlyUpdate');
-
-
-    // Manga manage
-    Route::get('/api/admin/get/manga', 'Admin\MangaController@getAllManga');
-    Route::get('/api/admin/get/manga/{id}', 'Admin\MangaController@mangaEdit');
-    Route::post('/api/admin/update/manga', 'Admin\MangaController@update');
-    Route::post('/api/admin/get/manga/search', 'Admin\MangaController@searchManga');
-    Route::delete('/api/admin/delete/manga/{id}', 'Admin\MangaController@deleteManga');
-    Route::post('/api/admin/new/manga/manga-api', 'Admin\MangaController@mangaTmdbAPI');
-    Route::post('/api/admin/new/manga/custom-upload', 'Admin\MangaController@uploadMangaInfoByCustom');
-    Route::get('/api/admin/get/manga/info/{id}', 'Admin\MangaController@getMangaInfo');
-    Route::post('/api/admin/update/manga/users-only', 'Admin\MangaController@userOnlyUpdate');
-    // Chapters
-    Route::get('/api/admin/get/manga/chapters/{id}', 'Admin\MangaController@getAllChapters');
-    Route::get('/api/admin/get/manga/chapters/edit/{id}', 'Admin\MangaController@chpaterEdit');
-    Route::delete('/api/admin/delete/manga/chapters/{manga_id}/{id}', 'Admin\MangaController@deleteChapter');
-    Route::post('/api/admin/new/manga/chapters/{manga_id}/upload', 'Admin\MangaController@uploadChapters');
-    Route::post('/api/admin/update/manga/chapters/{manga_id}/available', 'Admin\MangaController@availableChapter');
-    Route::post('/api/admin/update/manga/chapters/{manga_id}/delete', 'Admin\MangaController@deleteChapters');
-    Route::post('/api/admin/update/manga/chapters/{id}', 'Admin\MangaController@chapterUpdate');
 
 
     // Tv manage
@@ -156,7 +131,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
     // Footer manage
     Route::get('/api/admin/get/settings/appearance/footer', 'Admin\AppearancesController@get');
     Route::post('/api/admin/update/settings/appearance/footer', 'Admin\AppearancesController@update');
-    Route::post('/api/admin/update/settings/appearance/theme/configuration', 'Admin\AppearancesController@updateThemeImage');
 
     // Tmdb manage
     Route::get('/api/admin/get/settings/tmdb', 'Admin\TmdbController@get');
@@ -249,6 +223,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::delete('/api/admin/delete/production/{id}', 'Admin\EmbedSiteController@DeleteProduction');
 });
 
-Route::get('/{vue_capture?}', function () {
+Route::get('/{vue_capture?}', function() {
     return view('home');
 })->where('vue_capture', '[\/\w\.-]*');

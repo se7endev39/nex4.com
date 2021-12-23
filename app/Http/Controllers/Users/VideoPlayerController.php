@@ -85,7 +85,7 @@ class VideoPlayerController extends Controller
                     } elseif ($videoValue->video_cloud === 'link') {
                         $videoArray[$key]['file'] = $videoValue->video_url;
                     } else {
-                        $videoArray[$key]['file'] = config('aws.cloudfront_private_url')  . '/' . $videoValue->video_url;
+                        $videoArray[$key]['file'] = config('aws.cloudfront_private_url') . $videoValue->video_url;
                     }
 
                     $videoArray[$key]['type'] = 'application/vnd.apple.mpegurl';
@@ -95,7 +95,7 @@ class VideoPlayerController extends Controller
                     } elseif ($videoValue->video_cloud === 'link') {
                         $videoArray[$key]['file'] = $videoValue->video_url;
                     } else {
-                        $videoArray[$key]['file'] = config('aws.cloudfront_private_url') . '/' . $videoValue->video_url;
+                        $videoArray[$key]['file'] = config('aws.cloudfront_private_url') . $videoValue->video_url;
                     }
                     if ($videoValue->resolution == '4k') {
                         $videoArray[$key]['label'] = '4K';
@@ -124,15 +124,13 @@ class VideoPlayerController extends Controller
                     }
 
                     return response()->json(
-                        [
-                            'status' => 'success',
+                        ['status' => 'success',
                             'data' => [
                                 'playlist' => $videoArray,
                                 'suggestion' => $getSimilarMovies,
                                 'current_movie' => $checkMovie,
                                 'embed' => true
-                            ]
-                        ]
+                            ]]
                     );
                 } else {
                     if ($videoValue->resolution == '4k') {
@@ -212,7 +210,7 @@ class VideoPlayerController extends Controller
                             } elseif ($videoValue->video_cloud === 'link') {
                                 $videoArray[$key]['file'] = $videoValue->video_url;
                             } else {
-                                $videoArray[$key]['file'] = config('aws.cloudfront_private_url') . '/' . $videoValue->video_url;
+                                $videoArray[$key]['file'] = config('aws.cloudfront_private_url') . $videoValue->video_url;
                             }
 
                             $videoArray[$key]['type'] = 'application/vnd.apple.mpegurl';
@@ -222,7 +220,7 @@ class VideoPlayerController extends Controller
                             } elseif ($videoValue->video_cloud === 'link') {
                                 $videoArray[$key]['file'] = $videoValue->video_url;
                             } else {
-                                $videoArray[$key]['file'] = config('aws.cloudfront_private_url') . '/' . $videoValue->video_url;
+                                $videoArray[$key]['file'] = config('aws.cloudfront_private_url') . $videoValue->video_url;
                             }
                             if ($videoValue->resolution == '4k') {
                                 $videoArray[$key]['label'] = '2160p';
@@ -286,8 +284,7 @@ class VideoPlayerController extends Controller
 
 
         return response()->json(
-            [
-                'status' => 'success',
+            ['status' => 'success',
                 'data' => [
                     'playlist' => [
                         'playlist' => $playlist
@@ -295,8 +292,7 @@ class VideoPlayerController extends Controller
                     'suggestion' => $getSimilarMovies,
                     'current_movie' => $checkMovie,
                     'embed' => false
-                ]
-            ]
+                ]]
         );
     }
 
@@ -440,8 +436,7 @@ class VideoPlayerController extends Controller
                                 }
 
                                 return response()->json(
-                                    [
-                                        'status' => 'success',
+                                    ['status' => 'success',
                                         'data' => [
                                             'playlist' => $videoArray,
                                             'series' => $checkAlreadySeries,
@@ -449,9 +444,10 @@ class VideoPlayerController extends Controller
                                             'current_season' => $getSeasonOne,
                                             'current_episode' => $seasonArrayEmbed[0],
                                             'embed' => true
-                                        ]
-                                    ]
+                                        ]]
                                 );
+
+
                             } else {
                                 if ($videoValue->resolution == '4k') {
                                     $videoArray[$key]['label'] = '4K';
@@ -516,8 +512,7 @@ class VideoPlayerController extends Controller
             }
 
             return response()->json(
-                [
-                    'status' => 'success',
+                ['status' => 'success',
                     'data' => [
                         'playlist' => [
                             'playlist' => $playlist
@@ -527,8 +522,7 @@ class VideoPlayerController extends Controller
                         'current_season' => $getSeasonOne,
                         'current_episode' => $seasonArray[0],
                         'embed' => false
-                    ]
-                ]
+                    ]]
             );
         }
 
@@ -618,6 +612,7 @@ class VideoPlayerController extends Controller
                                     $videoArray[$key]['file'] = $videoValue->video_url;
                                 } else {
                                     $videoArray[$key]['file'] = config('aws.cloudfront_private_url') . '/' . $videoValue->video_url;
+
                                 }
 
                                 if ($videoValue->resolution == '4k') {
@@ -649,8 +644,7 @@ class VideoPlayerController extends Controller
 
 
                                 return response()->json(
-                                    [
-                                        'status' => 'success',
+                                    ['status' => 'success',
                                         'data' => [
                                             'playlist' => $videoArray,
                                             'series' => $checkAlreadyEpisode,
@@ -658,9 +652,10 @@ class VideoPlayerController extends Controller
                                             'current_season' => $getSeasonOne,
                                             'current_episode' => $current_episode,
                                             'embed' => true
-                                        ]
-                                    ]
+                                        ]]
                                 );
+
+
                             } else {
                                 if ($videoValue->resolution == '4k') {
                                     $videoArray[$key]['label'] = '4K';
@@ -739,9 +734,9 @@ class VideoPlayerController extends Controller
                 }
             }
 
+
             return response()->json(
-                [
-                    'status' => 'success',
+                ['status' => 'success',
                     'data' => [
                         'playlist' => [
                             'playlist' => $playlist
@@ -752,10 +747,11 @@ class VideoPlayerController extends Controller
                         'current_episode' => $current_episode,
                         'embed' => false
 
-                    ]
-                ]
+                    ]]
             );
         }
+
+
     }
 
 
@@ -765,7 +761,8 @@ class VideoPlayerController extends Controller
      * @param Request $request
      * @return void
      */
-    public function movieReport(Request $request)
+    public
+    function movieReport(Request $request)
     {
         $request->validate([
             'type' => 'required|numeric',
@@ -783,7 +780,8 @@ class VideoPlayerController extends Controller
         return response()->json(['status' => 'success']);
     }
 
-    public function seriesReport(Request $request)
+    public
+    function seriesReport(Request $request)
     {
         $request->validate([
             'type' => 'required|numeric',
@@ -889,7 +887,8 @@ class VideoPlayerController extends Controller
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getSeason(Request $request)
+    public
+    function getSeason(Request $request)
     {
         $request->validate([
             'season_number' => 'required|numeric',
@@ -937,8 +936,7 @@ class VideoPlayerController extends Controller
         }
 
         return response()->json(
-            [
-                'status' => 'success',
+            ['status' => 'success',
                 'data' => $seasonArray
             ]
         );

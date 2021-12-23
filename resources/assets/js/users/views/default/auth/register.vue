@@ -1,6 +1,13 @@
 <template>
     <div class="register">
-        <div class="col-12 signup">
+        <div class="background-image">
+            <div class="background-color"></div>
+        </div>
+
+        <div class="background-logo">
+            <img src="/images/logo.png" alt="logo" width="100%">
+        </div>
+        <div class="col-12 signup login">
 
             <div class="exit-button" @click="EXIT">
                 <exit-button></exit-button>
@@ -47,77 +54,115 @@
                         </div>
                     </div>
                 </div>
-                <div class="title mt-sm-5">
-                    <h3>{{$t('register.steptwo')}}</h3>
-                </div>
-
-                <div class=" col-lg-10 offset-lg-1 ">
-                    <div class="form-group">
-                        <div class="col-12">
-                            <input class="form-control" type="name" name="name"
-                                   v-validate="'required|alpha_spaces|min:6|max:24'"
-                                   :class="{'input': true, 'input-danger': errors.has('name') }" v-model="name"
-                                   :placeholder="$t('setting.name')"
-                                   autocomplete="off">
-                            <span v-show="errors.has('name')" class="text-danger">{{errors.first('name')}}</span>
+                <div class="login-box plane-box row">
+                        <div class="signup-image">
                         </div>
-                    </div>
+                        <div class="login-form signups-form">
+                            <div class="header row">
+                                <div class="left_homepage row">
+                                    <router-link :to="{name: 'discover'}">
+                                        <div class="row">
+                                            <img src="/images/home.png" width="25px" height="25px" alt="logo">
+                                            <p>Homepage</p>
+                                        </div>
+                                    </router-link>
+                                </div>
+                                <div class="right_homepage row">
+                                    <router-link :to="{name: 'login'}" v-if="!$Helper.getIntGatewayStatus('int_gateway')">
+                                        <div class="row">
+                                            <p>Login</p>
+                                            <img src="/images/arrow.png" width="25px" height="25px" alt="logo">
+                                        </div>
+                                    </router-link>
+                                    <router-link :to="{name: 'signup-non-payment'}" v-if="$Helper.getIntGatewayStatus('int_gateway')">
+                                        <div class="row">
+                                            <p>Login</p>
+                                            <img src="/images/arrow.png" width="25px" height="25px" alt="logo">
+                                        </div>
+                                    </router-link>
+                                </div>
+                            </div>
+                        <div class="mt-sm-5 col-lg-10 offset-lg-1 ">
+                            <div class="form-group">
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon icon">
+                                            <img src="/images/envelope.png" width="33px" height="33px" alt="logo">
+                                        </div>
+                                        <input class="form-control" type="name" name="name"
+                                            v-validate="'required|alpha_spaces|min:6|max:24'"
+                                            :class="{'input': true, 'input-danger': errors.has('name') }" v-model="name"
+                                            :placeholder="$t('setting.name')"
+                                            autocomplete="off">
+                                    </div>
+                                    <span v-show="errors.has('name')" class="text-danger">{{errors.first('name')}}</span>
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <div class="col-12">
-                            <input class="form-control" type="email" name="email" v-validate="'required|email|max:50'"
-                                   :class="{'input': true, 'input-danger': errors.has('email') }" v-model="email"
-                                   :placeholder="$t('setting.mail')"
-                                   autocomplete="off">
-                            <span v-show="errors.has('email')" class="text-danger">{{errors.first('email')}}</span>
-                        </div>
-                    </div>
+                            <div class="form-group">
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon icon">
+                                            <img src="/images/users.png" width="33px" height="33px" alt="logo">
+                                        </div>
+                                        <input class="form-control" type="email" name="email" v-validate="'required|email|max:50'"
+                                        :class="{'input': true, 'input-danger': errors.has('email') }" v-model="email"
+                                        :placeholder="$t('setting.mail')"
+                                        autocomplete="off">
+                                    </div>
+
+                                    <span v-show="errors.has('email')" class="text-danger">{{errors.first('email')}}</span>
+                                </div>
+                            </div>
 
 
-                    <div class="form-group">
-                        <div class="col-12">
-                            <input class="form-control" type="password" name="password"
-                                ref="passwordRef"
-                                       v-validate="'min:8|required'"
-                                       :class="{'input': true, 'input-danger': errors.has('password') }" v-model="password"
-                                       :placeholder="$t('setting.password')">
+                            <div class="form-group">
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon icon">
+                                            <img src="/images/key.png" width="33px" height="33px" alt="logo">
+                                        </div>
+                                        <input class="form-control" type="password" name="password"
+                                            ref="passwordRef"
+                                                v-validate="'min:8|required'"
+                                                :class="{'input': true, 'input-danger': errors.has('password') }" v-model="password"
+                                                :placeholder="$t('setting.password')">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon icon">
+                                            <img src="/images/key.png" width="33px" height="33px" alt="logo">
+                                        </div>
+                                        <input class="form-control" type="password" name="password_confirmation"
+                                            v-validate="'min:8|required|confirmed:passwordRef'"
+                                            :class="{'input': true, 'input-danger': errors.has('password') }" v-model="confirm"
+                                            :placeholder="$t('setting.password_confirm')" data-vv-as="password">
+                                    </div>
+                                    <span v-show="errors.has('password_confirmation')"
+                                        class="text-danger">{{ errors.first('password_confirmation') }}</span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-12">
+                                    <span v-show="msgShow" class="text-danger">{{msg}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-12 col-md-6 offset-md-3">
+                                    <button v-if="!button_loading" class="btn btn-warning" @click="NEXT">{{$t('register.signup')}}</button>
+                                    <button v-if="button_loading" class="btn btn-warning" disabled><i id="btn-progress"></i>
+                                        {{$t('register.loading')}}
+                                    </button>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-12">
-                                <input class="form-control" type="password" name="password_confirmation"
-                                       v-validate="'min:8|required|confirmed:passwordRef'"
-                                       :class="{'input': true, 'input-danger': errors.has('password') }" v-model="confirm"
-                                       :placeholder="$t('setting.password_confirm')" data-vv-as="password">
-                                <span v-show="errors.has('password_confirmation')"
-                                      class="text-danger">{{ errors.first('password_confirmation') }}</span>
-                            </div>
                         </div>
-
-
-                    <div class="form-group">
-                        <div class="col-12">
-                            <span v-show="msgShow" class="text-danger">{{msg}}</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-12">
-                            <p>{{$t('register.agree_role')}}
-                                <router-link :to="{name: 'terms'}" style="color:#3498db;">Terms Of Service</router-link>
-                                {{$t('register.and')}}
-                                <router-link :to="{name: 'privacy'}" style="color:#3498db;">Privacy Policy</router-link>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-12 col-md-6 offset-md-3">
-                            <button v-if="!button_loading" class="btn btn-warning" @click="NEXT">{{$t('register.signup')}}</button>
-                            <button v-if="button_loading" class="btn btn-warning" disabled><i id="btn-progress"></i>
-                                {{$t('register.loading')}}
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

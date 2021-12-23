@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Siteinfo;
 use Auth;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 
 class AppearancesController extends Controller
 {
@@ -92,18 +90,5 @@ class AppearancesController extends Controller
             $check->save();
             return response()->json(['status' => 'success', 'message' => 'Successsful Update']);
         }
-    }
-
-    public function updateThemeImage(Request $request)
-    {
-        if ($request->has('logo')) {
-            $logoEncode = \Image::make($request->file('logo'))->encode('png');
-            Storage::disk('theme')->put('images/logo.png', $logoEncode->__toString());
-        }
-        if ($request->has('background')) {
-            $logoEncode = \Image::make($request->file('background'))->encode('jpg');
-            Storage::disk('theme')->put('images/background-people.jpg', $logoEncode->__toString());
-        }
-        return response()->json(['status' => 'success', 'message' => 'Successsful Update']);
     }
 }

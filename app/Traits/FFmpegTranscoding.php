@@ -513,6 +513,15 @@ trait FFmpegTranscoding
         }
     }
 
+    /**
+     * Live Livetv
+     *
+     * @param [type] $resolution
+     * @param [type] $link
+     * @param [type] $id
+     * @param [type] $name
+     * @return void
+     */
     public function transcodingToLiveHLS($resolution, $link, $id, $name)
     {
         $this->id = $id;

@@ -45,7 +45,7 @@
     <div class="footer" style="margin-top: 100px;background: #e8e8e8;padding: 20px;">
         <p>Please do not reply to this email. Emails sent to this address will not be answered.
         </p>
-        <p>Copyright © 2018-2019{{ config('app.name') }} </p>
+        <p>Copyright © 2021 {{ config('app.name') }} </p>
     </div>
 </div>
 </body>

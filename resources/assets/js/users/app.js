@@ -9,11 +9,7 @@ import Auth from './packages/Auth';
 import Cloudfront from './packages/Cloudfront';
 import VueCookies from 'vue-cookies'
 import VueProgressiveImage from 'vue-progressive-image';
-import VueScrollactive from 'vue-scrollactive';
-import VueLazyload from 'vue-lazyload'
 
-Vue.use(VueLazyload)
-Vue.use(VueScrollactive);
 Vue.use(Auth);
 Vue.use(Cloudfront);
 Vue.use(VueProgressiveImage);
@@ -22,8 +18,10 @@ Vue.use(VueCookies)
 // Get theme name to render a folder of theme
 Vue.use(Helper);
 
-const themePath = () => import('./views/default/app');
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getUserInfo('token');
+let themeName = Vue.helper.current_theme();
+let themePath = require('./views/' + themeName + '/app');
+
+axios.defaults.headers.common ['Authorization'] = 'Bearer ' + Vue.auth.getUserInfo('token');
 
 
 const options = {
@@ -45,58 +43,58 @@ Vue.use(VueProgressBar, options);
 /// If is not auth step
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.userNotAuth)) {
-        if (Vue.auth.isAuthenticated() == 'active') {
-            router.push({
+        if(Vue.auth.isAuthenticated() == 'active') {
+            next({
                 path: '/'
             });
-        } else if (Vue.auth.isAuthenticated() == 'payment_step' || Vue.auth.isAuthenticated() == "payment_reactive") {
-            router.push({
+        }else if (Vue.auth.isAuthenticated() == 'payment_step') {
+            next({
                 path: '/signup/payment'
             });
 
-        } else {
+        }else{
             next();
         }
     } else if (to.matched.some(record => record.meta.allAuth)) {
-        if (Vue.auth.isAuthenticated() == 'active') {
+        if(Vue.auth.isAuthenticated() == 'active') {
             next();
-        } else if (Vue.auth.isAuthenticated() == 'payment_step' || Vue.auth.isAuthenticated() == "payment_reactive") {
-            router.push({
+        }else if (Vue.auth.isAuthenticated() == 'payment_step') {
+            next({
                 path: '/signup/payment'
             });
 
-        } else {
+        }else{
             next();
         }
-    } else if (to.matched.some(record => record.meta.userAuth)) {
-        if (Vue.auth.isAuthenticated() == 'active') {
+    }else if (to.matched.some(record => record.meta.userAuth)) {
+        if(Vue.auth.isAuthenticated() == 'active') {
             next();
-        } else if (Vue.auth.isAuthenticated() == 'payment_step' || Vue.auth.isAuthenticated() == "payment_reactive") {
-            router.push({
+        }else if (Vue.auth.isAuthenticated() == 'payment_step') {
+            next({
                 path: '/signup/payment'
             });
 
-        } else {
-            router.push('/login');
+        }else {
+            next('/login');
         }
-    } else if (to.matched.some(record => record.meta.userPaymentAuth)) {
-        if (Vue.auth.isAuthenticated() == 'payment_step' || Vue.auth.isAuthenticated() == "payment_reactive") {
+    }else if  (to.matched.some(record => record.meta.userPaymentAuth)) {
+        if(Vue.auth.isAuthenticated() == 'payment_step') {
             next();
         } else {
-            router.push({
+            next({
                 path: '/'
 
             });
         }
     } else {
-        next(); // make sure to always call next()!
+            next(); // make sure to always call next()!
     }
 });
 
 
 router.beforeEach((to, from, next) => {
     if (!to.matched.length) {
-        router.push('/404');
+        next('/404');
     } else {
         next();
     }
@@ -114,13 +112,13 @@ router.beforeEach((to, from, next) => {
     const previousNearestWithMeta = from.matched.slice().reverse().find(r => r.meta && r.meta.metaTags);
 
     // If a route with a title was found, set the document (page) title to that value.
-    if (nearestWithTitle) document.title = nearestWithTitle.meta.title;
+    if(nearestWithTitle) document.title = nearestWithTitle.meta.title;
 
     // Remove any stale meta tags from the document using the key attribute we set below.
     Array.from(document.querySelectorAll('[data-vue-router-controlled]')).map(el => el.parentNode.removeChild(el));
 
     // Skip rendering meta tags if there are none.
-    if (!nearestWithMeta) return next();
+    if(!nearestWithMeta) return next();
 
     // Turn the meta tag definitions into actual elements in the head.
     nearestWithMeta.meta.metaTags.map(tagDef => {
@@ -135,15 +133,15 @@ router.beforeEach((to, from, next) => {
 
         return tag;
     })
-        // Add the meta tags to the document head.
+    // Add the meta tags to the document head.
         .forEach(tag => document.head.appendChild(tag));
 
     next();
-});
+  });
 
 
 new Vue({
-    el: '.default',  //root
+    el: '.' + themeName, //root
     i18n,
     store,
     router,

@@ -94,7 +94,7 @@
                                         <span class="text-danger">{{error}}</span>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group text-center">
                                     <div class="col-12">
                                         <button class="btn btn-warning" data-toggle="modal"
                                                 data-target="#checkModal">{{$t('setting.update')}}

@@ -37,7 +37,6 @@ class HomeController extends Controller
                 'social_instagram' => $getInfo->social_instagram,
                 'privacy' => $getInfo->privacy,
                 'terms' => $getInfo->terms,
-                'about' => $getInfo->about,
                 'int_gateway' => $getInfo->payment_status,
             ],
         ]);

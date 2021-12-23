@@ -3,7 +3,6 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use Junges\InviteCodes\Http\Middlewares\ProtectedByInviteCodeMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -64,6 +63,5 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'checkauth' => \App\Http\Middleware\CheckAuth::class,
-        'protected_by_invite_codes' => ProtectedByInviteCodeMiddleware::class,
     ];
 }

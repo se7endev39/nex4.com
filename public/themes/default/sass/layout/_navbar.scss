@@ -16,7 +16,11 @@
                 transform: translate(-50%, -5%);
                 left: 50%;
                 width: 40px;
-            }
+                -webkit-transform: translate(-50%, -5%);
+                -moz-transform: translate(-50%, -5%);
+                -ms-transform: translate(-50%, -5%);
+                -o-transform: translate(-50%, -5%);
+}
             .search {
                 position: relative;
                 right: 15px;
@@ -81,7 +85,7 @@
             position: fixed;
             top: -200px;
             left: 0;
-            height: 103px;
+            // height: 103px;
             width: 100%;
             background: rgba(14, 14, 14, 0.95);
             transition: 200ms ease-in-out
@@ -92,7 +96,7 @@
         .bg-inverse {
 
             .navbar-brand {
-                width: 80px;
+                width: 60px;
             }
             .navbar-nav {
                 a {
@@ -113,8 +117,8 @@
                 }
             }
 
-            background-color: transparent !important;
-            padding: 20px 7%;
+            background: #0D163C 0% 0% no-repeat padding-box!important;
+            // padding: 20px 7%;
             .register {
                 .sec1 {
                     width: 200px;
@@ -155,7 +159,8 @@
             }
             .search {
                 position: relative;
-                top: -11px;
+                // top: -11px;
+                width: 70%;
                 left: 150px;
                 display: inline-block;
                 .search-icon {

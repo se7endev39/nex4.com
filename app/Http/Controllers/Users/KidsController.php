@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helpers;
 use DB;
@@ -21,6 +22,7 @@ class KidsController extends Controller
             Helpers::checkUserPayment(Auth::user());
             return $next($request);
         });
+
     }
 
     /**
@@ -30,7 +32,7 @@ class KidsController extends Controller
      */
     public function getAll()
     {
-        // Get movie and series
+          // Get movie and series
         $getKidsMasQuery = DB::select('
                       (SELECT
                       "movie" AS type,
@@ -45,7 +47,6 @@ class KidsController extends Controller
                       movies.m_backdrop AS backdrop,
                       movies.m_age AS age,
                       movies.m_cloud AS cloud,
-                      movies.m_users_only AS users_only,
                       u2.current_time,
                       u2.duration_time,
                       CASE
@@ -58,9 +59,9 @@ class KidsController extends Controller
                       END AS "is_like",
                       "0" AS already_episode
                       FROM movies
-                      LEFT JOIN collection_lists AS u1  ON u1.movie_id = movies.m_id AND u1.uid = "' . Auth::id() . '"
-                      LEFT JOIN recently_watcheds AS u2 ON u2.movie_id = movies.m_id AND u2.uid = "' . Auth::id() . '"
-                      LEFT JOIN likes AS u3  ON u3.movie_id = movies.m_id AND u3.uid = "' . Auth::id() . '"
+                      LEFT JOIN collection_lists AS u1  ON u1.movie_id = movies.m_id AND u1.uid = "' .Auth::id(). '"
+                      LEFT JOIN recently_watcheds AS u2 ON u2.movie_id = movies.m_id AND u2.uid = "' .Auth::id(). '"
+                      LEFT JOIN likes AS u3  ON u3.movie_id = movies.m_id AND u3.uid = "' .Auth::id(). '"
                       WHERE movies.m_age = "G" AND movies.show <> 0
                       GROUP BY movies.m_id DESC
                       ORDER BY movies.created_at DESC)
@@ -78,7 +79,6 @@ class KidsController extends Controller
                       series.t_backdrop AS backdrop,
                       series.t_age AS age,
                       series.t_cloud AS cloud,
-                      series.t_users_only AS users_only,
                       u2.current_time,
                       u2.duration_time,
                       CASE
@@ -94,9 +94,9 @@ class KidsController extends Controller
                       ELSE true
                       END AS "already_episode"
                       FROM series
-                      LEFT JOIN collection_lists AS u1  ON u1.series_id = series.t_id AND u1.uid = "' . Auth::id() . '"
-                      LEFT JOIN recently_watcheds AS u2 ON u2.series_id = series.t_id AND u2.uid = "' . Auth::id() . '"
-                      LEFT JOIN likes AS u3  ON u3.series_id = series.t_id AND u3.uid = "' . Auth::id() . '"
+                      LEFT JOIN collection_lists AS u1  ON u1.series_id = series.t_id AND u1.uid = "' .Auth::id(). '"
+                      LEFT JOIN recently_watcheds AS u2 ON u2.series_id = series.t_id AND u2.uid = "' .Auth::id(). '"
+                      LEFT JOIN likes AS u3  ON u3.series_id = series.t_id AND u3.uid = "' .Auth::id(). '"
                       LEFT JOIN episodes AS u4 ON u4.series_id = series.t_id
                       WHERE series.t_age = "G"
                       GROUP BY series.t_id DESC
@@ -111,7 +111,6 @@ class KidsController extends Controller
             'status' => 'success',
             'data' => [
                 'kids' => $getKidsMasQuery
-            ]
-        ], 200);
+                ]], 200);
     }
 }

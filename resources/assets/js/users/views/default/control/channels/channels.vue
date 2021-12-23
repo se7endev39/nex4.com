@@ -35,9 +35,9 @@
 
                             </router-link>
                         </div>
-                        <div class="title text-center mt-3">
+                        <!-- <div class="title text-center mt-3">
                             {{item.name}}
-                        </div>
+                        </div> -->
                     </slide>
                 </carousel>
             </div>

@@ -8,43 +8,50 @@ const module = {
     },
     actions: {
 
-        // This function get cast details and cast  filmography
+       // This function get cast details and cast  filmography
         /**
          * Get cast details and cast filmography
          * 
          * @param {*} commit object 
          * @param {*} id cast id 
          */
-        GET_GHOST_CAST_DETAILS({ commit }, id) {
+        GET_GHOST_CAST_DETAILS({commit}, id) {
+
             // Start spinner load 
-            commit('SPINER_CAST_LOAD');
+            commit('SPINER_LOAD');
 
             // Send request 
             axios.get('/api/v1/ghost/get/cast/' + id).then(response => {
-                if (response.status === 200) {
+                                if(response.status === 200){                    
                     commit('SET_CAST_DETAILS', response.data.data);
-                    commit('SPINER_CAST_CLEAN');
-                }
+                    commit('SPINER_CLEAN');
+               }
 
             }, error => {
-                if (error.response.status === 404) {
-                    router.push({ name: '404' });
-                } else {
+                if(error.response.status === 404){
+                    router.push({name: '404'});
+                }else{
                     router.push('/');
                 }
             });
         },
     },
     mutations: {
+
+        /**
+         * 
+         * @param {*} state 
+         * @param {*} data 
+         */
         SET_CAST_DETAILS(state, data) {
             state.data = data;
         },
 
-        SPINER_CAST_LOAD(state) {
+        SPINER_LOAD(state) {
             state.loading = true;
         },
 
-        SPINER_CAST_CLEAN(state) {
+        SPINER_CLEAN(state) {
             state.loading = false;
         }
     },

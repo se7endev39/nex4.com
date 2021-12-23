@@ -6,10 +6,10 @@ use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Location_log;
 use App\Mail\ConfirmDevice;
+use Auth;
 use Illuminate\Support\Str;
+use Mail;
 use App\Models\Siteinfo;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class CheckStatusUserController extends Controller
 {
@@ -28,12 +28,12 @@ class CheckStatusUserController extends Controller
         if (!$getSiteInfo) {
 
             // Check location And Set Language
-            //            $checkLocation = $this->checkLocation();
-            //            if (!$checkLocation) {
-            //                return response()->json([
-            //                    'status' => 'failed',
-            //                    'message' => 'Please confirm the new location from your mail to access to your account'], 401);
-            //            }
+//            $checkLocation = $this->checkLocation();
+//            if (!$checkLocation) {
+//                return response()->json([
+//                    'status' => 'failed',
+//                    'message' => 'Please confirm the new location from your mail to access to your account'], 401);
+//            }
 
 
             if ($user->braintree_id !== null) {
@@ -47,20 +47,22 @@ class CheckStatusUserController extends Controller
 
                 if ($user->period_end >= date("Y-m-d")) {
                     $get_customer = $setupPay->customer()->find($user->braintree_id);
-                    $get_subscriptions = $get_customer->paymentMethods[0]->subscriptions;
-                    $payment_details = $get_subscriptions[count($get_subscriptions) - 1];
+                    $payment_details = $setupPay->subscription()->find($get_customer->paymentMethods[0]->subscriptions[0]->id);
+
                     if ($payment_details->status === 'Canceled') {
-                        $user->period_end = $payment_details->nextBillingDate->format('Y-m-d');
+                        $user->period_end = $payment_details->billingPeriodEndDate->format('Y-m-d');
                         $user->save();
                         return response()->json([
                             'name' => $user->name,
                             'email' => $user->email,
                             'language' => $user->language,
-                            'status' => 'active',
-                            'cancel_time' =>  $user->period_end,
+                            'status' => 'cancel',
+                            'cancel_time' => $payment_details->billingPeriodEndDate->format('Y-m-d'),
                             'caption' => $user->caption,
                         ]);
-                    } elseif ($payment_details->status === 'Active') {
+                    }
+                    elseif ($payment_details->status === 'Active') {
+
                         // When the mail is not confirmed
                         if ($user->confirmed === 0) {
                             return response()->json([
@@ -68,28 +70,29 @@ class CheckStatusUserController extends Controller
                                 'email' => Auth::user()->email,
                                 'status' => 'confirm_step',
                                 'language' => $user->language,
-                                'caption' => $user->caption
-                            ]);
+                                'caption' => $user->caption]);
                         } else {
                             return response()->json([
                                 'name' => $user->name,
                                 'email' => $user->email,
                                 'status' => 'active',
                                 'language' => $user->language,
-                                'caption' => $user->caption
-                            ]);
+                                'caption' => $user->caption]);
                         }
                     }
-                } else {
+                }
+                else {
+                    // Get subscription details
                     $get_customer = $setupPay->customer()->find($user->braintree_id);
-                    $get_subscriptions = $get_customer->paymentMethods[0]->subscriptions;
-                    $payment_details = $get_subscriptions[count($get_subscriptions) - 1];
-                    $period_end_date = $payment_details->nextBillingDate->format('Y-m-d');
+                    $payment_details = $setupPay->subscription()->find($get_customer->paymentMethods[0]->subscriptions[0]->id);
+
+                    $period_end_date = $payment_details->billingPeriodEndDate->format('Y-m-d');
+
                     $detect_status = $payment_details->status;
 
                     //When an invoice payment on a subscription fails, the subscription becomes past_due.
                     //After Braintree exhausts all payment retry attempts, the subscription remains past_due or moves to a status of either canceled or unpaid, depending upon your retry settings.
-                    if ($detect_status === 'PastDue' || $detect_status === 'Canceled') {
+                    if ($detect_status === 'past_due' || $detect_status === 'canceled' || $detect_status === 'unpaid') {
                         $user->save();
                         return response()->json([
                             'plan' => '1',
@@ -101,7 +104,7 @@ class CheckStatusUserController extends Controller
                     }
 
                     // When subscription is active
-                    if ($detect_status === 'Active' && $period_end_date >= date("Y-m-d")) {
+                    if ($detect_status === 'active' || $detect_status === 'trialing' && $period_end_date >= date("Y-m-d")) {
                         $user->period_end = $period_end_date;
                         $user->save();
                         return response()->json([
@@ -109,18 +112,16 @@ class CheckStatusUserController extends Controller
                             'email' => $user->email,
                             'status' => 'active',
                             'language' => $user->language,
-                            'caption' => $user->caption
-                        ]);
+                            'caption' => $user->caption]);
                     }
                 }
-            } else {
+            }else{
                 return response()->json([
                     'name' => Auth::user()->name,
                     'email' => Auth::user()->email,
                     'status' => 'payment_step',
                     'language' => $user->language,
-                    'caption' => $user->caption
-                ], 200);
+                    'caption' => $user->caption], 200);
             }
         } else {
 
@@ -134,16 +135,14 @@ class CheckStatusUserController extends Controller
                     'email' => Auth::user()->email,
                     'status' => 'confirm_step',
                     'language' => $user->language,
-                    'caption' => $user->caption
-                ]);
+                    'caption' => $user->caption]);
             } else {
                 return response()->json([
                     'name' => $user->name,
                     'email' => $user->email,
                     'status' => 'active',
                     'language' => $user->language,
-                    'caption' => $user->caption
-                ]);
+                    'caption' => $user->caption]);
             }
         }
     }
@@ -181,10 +180,8 @@ class CheckStatusUserController extends Controller
             $getLocationLogsOn = Location_log::where('uid', Auth::id())->where('status', 'on')->first();
 
             if (!is_null($getLocationLogsOn)) {
-                if (
-                    $getLocationLogsOn->country_code == $ipLocation['countryCode'] &&
-                    $getLocationLogsOn->city == $ipLocation['city']
-                ) {
+                if ($getLocationLogsOn->country_code == $ipLocation['countryCode'] &&
+                    $getLocationLogsOn->city == $ipLocation['city']) {
 
                     // Set on
                     $setStatus = Location_log::find($getLocationLogsOn->id);
@@ -199,10 +196,8 @@ class CheckStatusUserController extends Controller
                     if (!$geAlltLocationLogsOff->isEmpty()) {
 
                         foreach ($geAlltLocationLogsOff as $key => $value) {
-                            if (
-                                $value->country_code == $ipLocation['countryCode'] &&
-                                $value->city == $ipLocation['city']
-                            ) {
+                            if ($value->country_code == $ipLocation['countryCode'] &&
+                                $value->city == $ipLocation['city']) {
 
                                 // Set off all row
                                 Location_log::where('uid', Auth::id())->where('status', 'on')->update(['status' => 'off']);
@@ -215,6 +210,7 @@ class CheckStatusUserController extends Controller
                                 // Set Language
                                 $this->setLanguage();
                                 return true;
+
                             } else {
                                 $checkFailedIpExist = Location_log::where(['uid' => Auth::id(), 'ip' => $value->ip])->first();
 
@@ -243,6 +239,7 @@ class CheckStatusUserController extends Controller
                                     return false;
                                 }
                             }
+
                         }
                     } else {
 
@@ -270,17 +267,17 @@ class CheckStatusUserController extends Controller
                                 ->send(new ConfirmDevice($checkFailedIpExist));
                             return false;
                         }
+
                     }
                 }
+
             } else {
 
                 if (!$geAlltLocationLogsOff->isEmpty()) {
 
                     foreach ($geAlltLocationLogsOff as $key => $value) {
-                        if (
-                            $value->country_code == $ipLocation['countryCode'] &&
-                            $value->city == $ipLocation['city']
-                        ) {
+                        if ($value->country_code == $ipLocation['countryCode'] &&
+                            $value->city == $ipLocation['city']) {
 
                             // Set off all row
                             Location_log::where('uid', Auth::id())->where('status', 'on')->update(['status' => 'off']);
@@ -293,6 +290,7 @@ class CheckStatusUserController extends Controller
                             // Set Language
                             $this->setLanguage();
                             return true;
+
                         } else {
                             $checkFailedIpExist = Location_log::where(['uid' => Auth::id(), 'ip' => $value->ip])->first();
 
@@ -319,6 +317,7 @@ class CheckStatusUserController extends Controller
                                 return false;
                             }
                         }
+
                     }
                 } else {
 
@@ -346,8 +345,10 @@ class CheckStatusUserController extends Controller
                             ->send(new ConfirmDevice($checkFailedIpExist));
                         return false;
                     }
+
                 }
             }
+
         }
     }
 

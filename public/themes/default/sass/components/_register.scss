@@ -5,6 +5,12 @@
   .plan,
   .payment {
     .form-group {
+        .input-group {
+            background: #161F44 0% 0% no-repeat padding-box;
+            box-shadow: 0px 5px 10px #00000029;
+            border-radius: 8px;
+            opacity: 1;
+        }
       span {
         position: relative;
         top: 10px;
@@ -13,7 +19,7 @@
         border-radius: 0;
         background: transparent;
         padding: 20px 25px;
-        border: 2px solid rgba(199, 199, 199, 0.42);
+        // border: 2px solid rgba(199, 199, 199, 0.42);
         border-left: none;
         border-right: none;
         border-top: none;
@@ -31,12 +37,41 @@
         }
       }
     }
+    .braintree-loader__container{
+        background-color: #0d163c;
+    }
+    .braintree-sheet {
+        background-color: #0d163c!important;
+        border: 1px solid #0d163c!important;
+    }
+    .braintree-sheet__header {
+        background: #161F44 0% 0% no-repeat padding-box;
+        box-shadow: 0px 5px 10px #00000029;
+        border-radius: 8px;
+        opacity: 1;
+        border-bottom: none!important;
+    }
+    .braintree-form-number {
+        border-bottom: none!important;
+    }
+    .braintree-form__hosted-field {
+        border-bottom: none!important;
+    }
+    .braintree-form__field {
+        background: #161F44 0% 0% no-repeat padding-box;
+        box-shadow: 0px 5px 10px #00000029;
+        border-radius: 8px;
+        opacity: 1;
+        border-bottom: none!important;
+    }
     .form-control::placeholder {
       color: #9e9e9e;
     }
-    
+
     .btn {
+        height: 4rem;
       width: 100% !important;
+      font-size: 30px;
     }
     .btn-sm {
       width: auto !important;
@@ -62,7 +97,7 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: #212121;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
         border: 1px solid #797979;
         box-shadow: 0px 5px 20px -10px #000;
         span {
@@ -70,7 +105,7 @@
           top: 3px;
           font-size: 24px;
           font-weight: bold;
-          color: #808080;
+          color: #0D163C;
         }
       }
       .step-1,
@@ -85,7 +120,7 @@
         left: 55px;
         z-index: -1;
         svg line {
-          stroke: #eaeaea;
+          stroke: #00B1FF;
         }
       }
       .line-2 {
@@ -106,24 +141,48 @@
     .plan-form {
       position: relative;
       top: 120px;
-      box-shadow: 0px 10px 25px -12px #000;
-      background: $background-color2;
+    //   box-shadow: 0px 10px 25px -12px #000;
+    //   background: $background-color2;
       .card-plan {
-        background-color: #3a3a3a;
-        color: #9e9e9e;
+        background: #161F44 0% 0% no-repeat padding-box;
+        color: #FFFFFF;
+        height: 15rem;
         padding: 10px;
         margin: 0 auto;
-        border: 1px solid #585858;
+        // border: 1px solid #585858;
         cursor: pointer;
         transition: all .1s ease-out;
-        box-shadow: 0px 6px 20px -10px #000;
+        box-shadow: 0px 5px 10px #00000029;
+        border-radius: 8px;
+        h3 {
+            text-align: center;
+            font-size: 30px;
+            font: normal normal medium 30px/36px Exo;
+            font-family: Exo;
+            letter-spacing: 0px;
+            color: #0090F7;
+            opacity: 1;
+        }
+        h1 {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 50px;
+            font: normal normal medium 50px/60px Exo;
+            font-family: Exo;
+            letter-spacing: 0px;
+            color: #FFFFFF;
+            opacity: 1;
+        }
         &:hover {
+            h1 {
+               color:#000;
+            }
           -moz-transform: scale(1.1);
           -ms-transform: scale(1.1);
           -o-transform: scale(1.1);
           transform: scale(1.1);
           border: none;
-          background: linear-gradient(to right, #56ccf2, #2f80ed);
+          background: linear-gradient(to right, #a2c8d4, #f6f7f9);
           /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
           color: #fff;
         }
@@ -150,13 +209,17 @@
     .logo {
       width: 40px;
       padding: 30px 5%;
-      margin-bottom: 50px;
+      margin-bottom: 6rem;
       img {
         width: 80px;
       }
     }
+    .plane-box {
+        margin-top: 3rem!important;
+    }
     .login-box {
-      background: rgba(28, 28, 31, 0.82);
+        margin-top: 8rem;
+        background: #0D163C 0% 0% no-repeat padding-box;
       height: 700px;
       border-radius: 7px;
       a,
@@ -164,20 +227,85 @@
       a:hover {
         color: #0ea4f0 !important;
       }
+      .plan-image{
+        background: transparent url("../../img/ONE.png") 50% 0% no-repeat padding-box;
+        background-size: auto 700px;
+        height: 100%;
+        width: 25%;
+      }
+      .signup-image{
+        background: transparent url("../../img/ONE.png") 50% 0% no-repeat padding-box;
+        background-size: auto 700px;
+        height: 100%;
+        width: 30%;
+      }
+      .login-image{
+        background: transparent url("../../img/ONE.png") 50% 0% no-repeat padding-box;
+        background-size: auto 700px;
+        height: 100%;
+        width: 40%;
+      }
+      .signups-form {
+        width: 70%!important;
+      }
+      .mt-sm-5 {
+        margin-top: 5rem!important;
+        }
+      .plane-form {
+          width: 75%!important;
+            .left_homepage {
+            margin-left: 9rem!important;
+            margin-right: auto;
+            }
+            .right_homepage {
+                margin-left: auto;
+                margin-right: 9rem!important;
+            }
+            .mt-sm-7 {
+                margin-top: 7rem!important;
+            }
+      }
       .login-form {
+          width: 60%;
         position: relative;
-        margin-top: 100px;
+        background: #0D163C 0% 0% no-repeat padding-box;
+        border-radius: 8px;
+        opacity: 1;
+        // margin-top: 100px;
+        .header {
+            margin-top: 3rem;
+            .left_homepage {
+                margin-left: 3rem;
+                margin-right: auto;
+            }
+            .right_homepage {
+                margin-left: auto;
+                margin-right: 3rem;
+            }
+            p {
+                font: normal normal normal 15px/18px Yu Gothic UI;
+                margin-left: 4px;
+                margin-right: 4px;
+                letter-spacing: 0px;
+                color: #0091F6;
+                opacity: 1;
+                padding-top: 4px;
+            }
+        }
+
         .icon {
           position: absolute;
           left: -12px;
           top: 5px;
           background: none;
           border: none;
+          margin-left: 1rem;
         }
       }
       .form-control {
         padding: 20px 45px !important;
-        color: #fff !important;
+        color: #0090F7!important;
+        margin-left: 1.5rem;
       }
       .btn-secondary {
         color: #292b2c;
@@ -199,23 +327,38 @@
     .signup-form {
       position: relative;
       top: 120px;
-      box-shadow: 0px 10px 25px -12px #000;
-      background: $background-color2;
+    //   box-shadow: 0px 10px 25px -12px #000;
+    //   background: $background-color2;
     }
   }
-
+  .background-color
+  {
+    background: transparent linear-gradient(180deg, #121B46 0%, #142265 100%) 0% 0% no-repeat padding-box;
+    opacity: 0.93;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .background-logo {
+    width: 120px;
+    position: absolute;
+    top: 39px;
+    left: 42px;
+  }
   .background-image {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("../../img/background-people.jpg");
+    background: transparent url("../../img/background-john.png") 0% 0% no-repeat padding-box;
+    opacity: 1;
     background-color: #000;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    
     .gradient {
       position: absolute;
       top: 0;
@@ -248,8 +391,8 @@
   .payment-form {
     position: relative;
     top: 120px;
-    box-shadow: 0px 10px 25px -12px #000;
-    background: $background-color2;
+    // box-shadow: 0px 10px 25px -12px #000;
+    // background: $background-color2;
   }
   .payment-methods {
     .active-method {

@@ -2,7 +2,7 @@ export default function (Vue) {
 
     // This is a global mixin, it is applied to every vue instance
     Vue.mixin({
-        data: function () {
+        data: function() {
             return {
                 get sm_poster() {
                     return "http://d33vbryzz6e7jd.cloudfront.net/posters/";
@@ -30,9 +30,6 @@ export default function (Vue) {
                 },
                 get lg_cast() {
                     return "http://d33vbryzz6e7jd.cloudfront.net/casts/";
-                },
-                get md_manga() {
-                    return "http://d33vbryzz6e7jd.cloudfront.net";
                 },
             }
         },

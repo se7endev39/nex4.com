@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Ghost;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Helpers\Helpers;
+use Auth;
 
 class CastController extends Controller
 {
@@ -18,7 +21,7 @@ class CastController extends Controller
     {
         // Get cast details
         $getCastDetails = DB::table('casts')
-            ->selectRaw('c_id AS id, c_name AS name, c_image AS image,credit_id,c_cloud AS cloud')
+            ->selectRaw('c_id AS id, c_name AS name, c_image AS image,credit_id')
             ->where('c_id', $id)
             ->first();
 
@@ -42,11 +45,10 @@ class CastController extends Controller
                       movies.m_rate AS rate,
                       movies.m_backdrop AS backdrop,
                       movies.m_age AS age,
-                      movies.m_cloud AS cloud,
-                      0 AS already_episode
+                      0 AS already_episode,
+                      movies.m_type AS player
                       FROM casts_rules
-                      JOIN movies ON movies.m_id = casts_rules.casts_movies
-                      WHERE casts_rules.casts_id = "' . $getCastDetails->credit_id . '" AND movies.show <> 0
+                      WHERE casts_rules.casts_id = "'. $getCastDetails->credit_id .'" AND movies.show <> 0
                       GROUP BY movies.m_id DESC)
                       UNION
                       (SELECT
@@ -61,15 +63,14 @@ class CastController extends Controller
                       series.t_rate AS rate,
                       series.t_backdrop AS backdrop,
                       series.t_age AS age,
-                      series.t_cloud AS cloud,
                       CASE
                       WHEN u4.series_id IS NULL OR u4.show = 0 THEN false
                       ELSE true
-                      END AS "already_episode"
+                      END AS "already_episode",
                       FROM casts_rules
                       JOIN series ON series.t_id = casts_rules.casts_series
                       LEFT JOIN episodes AS u4 ON u4.series_id = series.t_id
-                      WHERE casts_rules.casts_id = "' . $getCastDetails->credit_id . '"
+                      WHERE casts_rules.casts_id = "'. $getCastDetails->credit_id .'"
                       GROUP BY series.t_id DESC
                       ) LIMIT 8');
 
@@ -83,9 +84,8 @@ class CastController extends Controller
         return response()->json([
             'status' => 'success',
             'data'   => [
-                'cast'        => $getCastDetails,
-                'filmography' => $getCastFilmography
-            ]
-        ], 200);
+                 'cast'        => $getCastDetails,
+                 'filmography' => $getCastFilmography
+            ]], 200);
     }
 }

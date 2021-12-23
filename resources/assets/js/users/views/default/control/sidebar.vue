@@ -1,318 +1,313 @@
 <template>
-  <div>
-
-    <div class="sidebar">
-      <div class="sidebar__log">
-      </div>
-
-      <div class="sidebar__list">
-
-
-        <ul class="list-unstyled text-center" v-if="
-                   $route.name === 'profile' ||
-                   $route.name === 'security' ||
-                   $route.name === 'payment-update' ||
-                   $route.name === 'billing-details' ||
-                   $route.name === 'change-plan' ||
-                   $route.name === 'language' ||
-                   $route.name === 'adjust-subtitles' ||
-                   $route.name === 'viewing-history' ||
-                   $route.name === 'support-inbox' ||
-                   $route.name === 'support-request' ||
-                   $route.name === 'device-activity'
-                  ? true : false">
-
-          <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
-
-            <router-link :to="{name: 'profile'}">
-              <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 258.75 258.75"
-                  style="enable-background:new 0 0 258.75 258.75;" xml:space="preserve" width="60%">
-                  <g>
-                    <circle cx="129.375" cy="60" r="60" fill="#FFFFFF" />
-                    <path d="M129.375,150c-60.061,0-108.75,48.689-108.75,108.75h217.5C238.125,198.689,189.436,150,129.375,150z" fill="#FFFFFF"
-                    />
-                  </g>
-                </svg>
-              </div>
-            </router-link>
-
-          </li>
-
-          <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
-
-            <router-link :to="{name: 'security'}">
-              <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 58 58"
-                  style="enable-background:new 0 0 58 58;" xml:space="preserve" width="60%">
-                  <path d="M40,21.314V10.22C40,4.585,35.065,0,29,0S18,4.585,18,10.22v11.094C12.584,24.896,9,31.034,9,38c0,11.028,8.972,20,20,20  s20-8.972,20-20C49,31.034,45.416,24.896,40,21.314z M20,20.157V10.22C20,5.688,24.037,2,29,2s9,3.688,9,8.22v9.938  c-0.188-0.095-0.38-0.179-0.57-0.268c-0.393-0.184-0.792-0.356-1.198-0.515c-0.261-0.102-0.523-0.198-0.787-0.289  c-0.26-0.089-0.518-0.178-0.782-0.256c-0.437-0.13-0.879-0.241-1.324-0.341c-0.193-0.043-0.387-0.084-0.582-0.122  c-0.523-0.101-1.049-0.183-1.579-0.242c-0.12-0.013-0.24-0.021-0.36-0.032C30.213,18.036,29.608,18,29,18s-1.213,0.036-1.816,0.092  c-0.12,0.011-0.241,0.019-0.36,0.032c-0.53,0.059-1.056,0.141-1.579,0.242c-0.195,0.037-0.389,0.079-0.582,0.122  c-0.445,0.1-0.887,0.211-1.324,0.341c-0.264,0.078-0.523,0.168-0.782,0.256c-0.264,0.091-0.527,0.187-0.787,0.289  c-0.407,0.158-0.805,0.331-1.198,0.515C20.38,19.978,20.188,20.062,20,20.157z M33,40c0,2.206-1.794,4-4,4s-4-1.794-4-4v-6  c0-2.206,1.794-4,4-4s4,1.794,4,4V40z"
-                    fill="#FFFFFF" />
-                </svg>
-
-              </div>
-            </router-link>
-
-          </li>
-
-          <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" v-if="!$Helper.getIntGatewayStatus('int_gateway')">
-
-            <router-link :to="{name: 'payment-update'}">
-              <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="60%"
-                  viewBox="0 0 548.176 548.176" style="enable-background:new 0 0 548.176 548.176;" xml:space="preserve">
-                  <g>
-                    <g>
-                      <path d="M534.754,68.238c-8.945-8.945-19.698-13.417-32.258-13.417H45.681c-12.562,0-23.313,4.471-32.264,13.417    C4.471,77.185,0,87.936,0,100.499v347.173c0,12.566,4.471,23.318,13.417,32.264c8.951,8.946,19.702,13.419,32.264,13.419h456.815    c12.56,0,23.312-4.473,32.258-13.419c8.945-8.945,13.422-19.697,13.422-32.264V100.499    C548.176,87.936,543.699,77.185,534.754,68.238z M511.627,447.679c0,2.478-0.903,4.613-2.711,6.427    c-1.807,1.8-3.949,2.703-6.42,2.703H45.681c-2.473,0-4.615-0.903-6.423-2.71c-1.807-1.813-2.712-3.949-2.712-6.427V274.088    h475.082V447.679z M511.627,164.449H36.545v-63.954c0-2.474,0.902-4.611,2.712-6.423c1.809-1.803,3.951-2.708,6.423-2.708h456.815    c2.471,0,4.613,0.901,6.42,2.708c1.808,1.812,2.711,3.949,2.711,6.423V164.449L511.627,164.449z"
-                        fill="#FFFFFF" />
-                      <rect x="73.092" y="383.719" width="73.089" height="36.548" fill="#FFFFFF" />
-                      <rect x="182.728" y="383.719" width="109.634" height="36.548" fill="#FFFFFF" />
-                    </g>
-                  </g>
-                </svg>
-              </div>
-            </router-link>
-
-          </li>
-
-
-          <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1" v-if="!$Helper.getIntGatewayStatus('int_gateway')">
-
-            <router-link :to="{name: 'billing-details'}">
-              <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 429.3 429.3"
-                  style="enable-background:new 0 0 429.3 429.3;" xml:space="preserve" width="60%">
-                  <g>
-                    <g>
-                      <path d="M336.45,23.3c-1.8,2.1-4.4,3.3-7.2,3.3s-5.5-1.2-7.4-3.3L300.55,0l-21.3,23.2c-0.2,0.2-0.4,0.4-0.6,0.6    c-4,3.7-10.4,3.5-14.1-0.6L243.25,0l-21.3,23.2c-0.2,0.2-0.4,0.4-0.6,0.6c-4,3.7-10.4,3.5-14.1-0.6L185.95,0l-21.3,23.2    c-0.2,0.2-0.4,0.4-0.6,0.6c-4,3.7-10.4,3.5-14.1-0.6L128.65,0l-21.3,23.3c-1.9,2.1-4.6,3.3-7.4,3.3s-5.4-1.2-7.2-3.3L81.65,11    v407.4l11.1-12.4c1.8-2.1,4.4-3.3,7.2-3.3c2.8,0,5.5,1.2,7.4,3.3l21.3,23.3l21.4-23.2c0.2-0.2,0.4-0.4,0.6-0.6    c4-3.7,10.4-3.5,14.1,0.6l21.3,23.2l21.3-23.2c0.2-0.2,0.4-0.4,0.6-0.6c4-3.7,10.4-3.5,14.1,0.6l21.3,23.2l21.3-23.2    c0.2-0.2,0.4-0.4,0.6-0.6c4-3.7,10.4-3.5,14.1,0.6l21.3,23.2l21.3-23.3c1.9-2.1,4.6-3.3,7.4-3.3s5.4,1.2,7.2,3.3l11.1,12.3V10.9    L336.45,23.3z M204.55,80.3V74c0-5.5,4.5-10,10-10s10,4.5,10,10v6.3c13.5,4.3,22.6,16.9,22.6,31c0,5.5-4.5,10-10,10s-10-4.5-10-10    c0-0.1,0-0.1,0-0.1c0-7-5.7-12.7-12.6-12.6c-6.9,0.1-12.5,5.6-12.5,12.6s5.6,12.6,12.6,12.6c14.1,0,26.7,9.1,31,22.6    c5.5,17.1-3.9,35.5-21,41v6.4c0,5.5-4.5,10-10,10s-10-4.5-10-10v-6.4c-13.5-4.4-22.6-16.9-22.6-31c0-5.5,4.5-10,10-10    s10,4.5,10,10c0,7,5.7,12.6,12.6,12.6c0.1,0,0.1,0,0.1,0.1c7-0.1,12.6-5.7,12.5-12.7c-0.1-7-5.8-12.6-12.7-12.5    c-14.1,0-26.7-9.2-31-22.6C178.05,104.2,187.45,85.8,204.55,80.3z M170.85,258.7h87.6c5.5,0,10,4.5,10,10s-4.5,10-10,10h-87.6    c-5.5,0-10-4.5-10-10S165.35,258.7,170.85,258.7z M300.15,361.7h-171c-5.5,0-10-4.5-10-10s4.5-10,10-10h171c5.5,0,10,4.5,10,10    S305.65,361.7,300.15,361.7z M300.15,319.7h-171c-5.5,0-10-4.5-10-10s4.5-10,10-10h171c5.5,0,10,4.5,10,10    S305.65,319.7,300.15,319.7z"
-                        fill="#FFFFFF" />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <path d="M347.65,418.3L347.65,418.3L347.65,418.3z" fill="#FFFFFF" />
-                    </g>
-                  </g>
-                </svg>
-              </div>
-            </router-link>
-
-          </li>
-
-
-
-          <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
-
-            <router-link :to="{name: 'language'}">
-              <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 512 512"
-                  style="enable-background:new 0 0 512 512;" xml:space="preserve" width="60%">
-                  <g>
-                    <g>
-                      <polygon points="138.71,137 132.29,137 120.293,197 150.707,197   " fill="#FFFFFF" />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <path d="M381.374,257c6.477,17.399,15.092,31.483,24.626,43.467c9.534-11.984,19.149-26.069,25.626-43.467H381.374z" fill="#FFFFFF"
-                      />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <path d="M467,91H280.717l38.842,311.679c0.687,12.748-2.798,24.75-11.118,34.146L242.663,512H467c24.814,0,45-20.186,45-45V137    C512,112.186,491.814,91,467,91z M467,257h-4.006c-8.535,27.383-22.07,48.81-36.136,65.702    c11.019,10.074,22.802,18.338,34.517,27.594c6.46,5.171,7.515,14.604,2.329,21.079c-5.162,6.465-14.632,7.513-21.079,2.329    c-12.729-10.047-24.677-18.457-36.625-29.421c-11.948,10.964-22.896,19.374-35.625,29.421c-6.447,5.184-15.917,4.136-21.079-2.329    c-5.186-6.475-4.131-15.908,2.329-21.079c11.715-9.256,22.498-17.52,33.517-27.594c-14.066-16.891-26.602-38.318-35.136-65.702    H346c-8.291,0-15-6.709-15-15s6.709-15,15-15h45v-15c0-8.291,6.709-15,15-15c8.291,0,15,6.709,15,15v15h46c8.291,0,15,6.709,15,15    S475.291,257,467,257z"
-                        fill="#FFFFFF" />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <path d="M244.164,39.419C241.366,16.948,222.162,0,199.516,0H45C20.186,0,0,20.186,0,45v332c0,24.814,20.186,45,45,45    c89.67,0,154.177,0,236.551,0c4.376-5.002,8.044-8.134,8.199-14.663C289.788,405.7,244.367,41.043,244.164,39.419z     M183.944,286.707c-7.954,1.637-16.011-3.527-17.651-11.763L156.706,227h-42.411l-9.587,47.944    c-1.611,8.115-9.434,13.447-17.651,11.763c-8.115-1.626-13.389-9.521-11.763-17.651l29.999-150    C106.699,112.054,112.852,107,120,107h31c7.148,0,13.301,5.054,14.707,12.056l30,150    C197.333,277.186,192.06,285.081,183.944,286.707z"
-                        fill="#FFFFFF" />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <path d="M175.261,452l2.574,20.581c1.716,13.783,10.874,27.838,25.938,34.856c28.428-31.294,11.229-12.362,50.359-55.437H175.261z    "
-                        fill="#FFFFFF" />
-                    </g>
-                  </g>
-                </svg>
-              </div>
-            </router-link>
-
-          </li>
-
-
-          <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
-
-            <router-link :to="{name: 'adjust-subtitles'}">
-              <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 426.667 426.667"
-                  style="enable-background:new 0 0 426.667 426.667;" xml:space="preserve" width="60%">
-                  <g>
-                    <g>
-                      <path d="M384,42.667H42.667C19.2,42.667,0,61.867,0,85.333v256C0,364.8,19.2,384,42.667,384H384    c23.467,0,42.667-19.2,42.667-42.667v-256C426.667,61.867,407.467,42.667,384,42.667z M42.667,213.333H128V256H42.667V213.333z     M256,341.333H42.667v-42.667H256V341.333z M384,341.333h-85.333v-42.667H384V341.333z M384,256H170.667v-42.667H384V256z"
-                        fill="#FFFFFF" />
-                    </g>
-                  </g>
-                </svg>
-              </div>
-            </router-link>
-
-          </li>
-
-
-          <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
-
-            <router-link :to="{name: 'viewing-history'}">
-              <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="60%"
-                  viewBox="0 0 503.379 503.379" style="enable-background:new 0 0 503.379 503.379;" xml:space="preserve">
-                  <g>
-                    <path d="M458.091,128.116v326.842c0,26.698-21.723,48.421-48.422,48.421h-220.92c-26.699,0-48.421-21.723-48.421-48.421V242.439   c6.907,1.149,13.953,1.894,21.184,1.894c5.128,0,10.161-0.381,15.132-0.969v211.594c0,6.673,5.429,12.104,12.105,12.104h220.92   c6.674,0,12.105-5.432,12.105-12.104V128.116c0-6.676-5.432-12.105-12.105-12.105H289.835c0-12.625-1.897-24.793-5.297-36.315   h125.131C436.368,79.695,458.091,101.417,458.091,128.116z M159.49,228.401c-62.973,0-114.202-51.229-114.202-114.199   C45.289,51.229,96.517,0,159.49,0c62.971,0,114.202,51.229,114.202,114.202C273.692,177.172,222.461,228.401,159.49,228.401z    M159.49,204.19c49.618,0,89.989-40.364,89.989-89.988c0-49.627-40.365-89.991-89.989-89.991   c-49.626,0-89.991,40.364-89.991,89.991C69.499,163.826,109.87,204.19,159.49,204.19z M227.981,126.308   c6.682,0,12.105-5.423,12.105-12.105s-5.423-12.105-12.105-12.105h-56.386v-47.52c0-6.682-5.423-12.105-12.105-12.105   s-12.105,5.423-12.105,12.105v59.625c0,6.682,5.423,12.105,12.105,12.105H227.981z M367.697,224.456h-131.14   c-6.682,0-12.105,5.423-12.105,12.105c0,6.683,5.423,12.105,12.105,12.105h131.14c6.685,0,12.105-5.423,12.105-12.105   C379.803,229.879,374.382,224.456,367.697,224.456z M367.91,297.885h-131.14c-6.682,0-12.105,5.42-12.105,12.105   s5.423,12.105,12.105,12.105h131.14c6.685,0,12.104-5.42,12.104-12.105S374.601,297.885,367.91,297.885z M367.91,374.353h-131.14   c-6.682,0-12.105,5.426-12.105,12.105c0,6.685,5.423,12.104,12.105,12.104h131.14c6.685,0,12.104-5.42,12.104-12.104   C380.015,379.778,374.601,374.353,367.91,374.353z"
-                      fill="#FFFFFF" />
-                  </g>
-                </svg>
-              </div>
-            </router-link>
-
-          </li>
-
-          <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
-
-            <router-link :to="{name: 'device-activity'}" v-if="!$Helper.getIntGatewayStatus('int_gateway')">
-              <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 31.603 31.603"
-                  style="enable-background:new 0 0 31.603 31.603;" xml:space="preserve" width="60%">
-                  <g>
-                    <g>
-                      <path d="M7.703,15.973c0,0,5.651-5.625,5.651-10.321C13.354,2.53,10.824,0,7.703,0S2.052,2.53,2.052,5.652    C2.052,10.614,7.703,15.973,7.703,15.973z M4.758,5.652c0-1.628,1.319-2.946,2.945-2.946s2.945,1.318,2.945,2.946    c0,1.626-1.319,2.944-2.945,2.944S4.758,7.278,4.758,5.652z"
-                        fill="#FFFFFF" />
-                      <path d="M28.59,7.643l-0.459,0.146l-2.455,0.219l-0.692,1.106l-0.501-0.16l-1.953-1.76l-0.285-0.915l-0.377-0.977L20.639,4.2    l-1.446-0.283L19.159,4.58l1.418,1.384l0.694,0.817l-0.782,0.408l-0.636-0.188l-0.951-0.396l0.033-0.769l-1.25-0.514L17.27,7.126    l-1.258,0.286l0.125,1.007l1.638,0.316l0.284-1.609l1.353,0.201l0.629,0.368h1.011l0.69,1.384l1.833,1.859l-0.134,0.723    l-1.478-0.189l-2.553,1.289l-1.838,2.205l-0.239,0.976h-0.661l-1.229-0.566l-1.194,0.566l0.297,1.261l0.52-0.602l0.913-0.027    l-0.064,1.132l0.757,0.22l0.756,0.85l1.234-0.347l1.41,0.222l1.636,0.441l0.819,0.095l1.384,1.573l2.675,1.574l-1.729,3.306    l-1.826,0.849l-0.693,1.889l-2.643,1.765l-0.282,1.019c6.753-1.627,11.779-7.693,11.779-14.95    C31.194,13.038,30.234,10.09,28.59,7.643z"
-                        fill="#FFFFFF" />
-                      <path d="M17.573,24.253l-1.12-2.078l1.028-2.146l-1.028-0.311l-1.156-1.159l-2.56-0.573l-0.85-1.779v1.057h-0.375l-1.625-2.203    c-0.793,0.949-1.395,1.555-1.47,1.629L7.72,17.384l-0.713-0.677c-0.183-0.176-3.458-3.315-5.077-7.13    c-0.966,2.009-1.52,4.252-1.52,6.63c0,8.502,6.891,15.396,15.393,15.396c0.654,0,1.296-0.057,1.931-0.135l-0.161-1.864    c0,0,0.707-2.77,0.707-2.863C18.28,26.646,17.573,24.253,17.573,24.253z"
-                        fill="#FFFFFF" />
-                      <path d="M14.586,3.768l1.133,0.187l2.75-0.258l0.756-0.834l1.068-0.714l1.512,0.228l0.551-0.083    c-1.991-0.937-4.207-1.479-6.553-1.479c-1.096,0-2.16,0.128-3.191,0.345c0.801,0.875,1.377,1.958,1.622,3.163L14.586,3.768z     M16.453,2.343l1.573-0.865l1.009,0.582l-1.462,1.113l-1.394,0.141L15.55,2.907L16.453,2.343z"
-                        fill="#FFFFFF" />
-                    </g>
-                  </g>
-                </svg>
-
-              </div>
-            </router-link>
-
-          </li>
-
-
-
-          <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
-
-            <router-link :to="{name: 'support-inbox'}">
-              <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 478.291 478.291"
-                  style="enable-background:new 0 0 478.291 478.291;" xml:space="preserve" width="60%">
-                  <g>
-                    <path d="M477.204,356.772c-6.569-19.342-19.504-75.348-83.626-88.898l8.805-2.33c20.779-5.505,35.284-24.357,35.284-45.859v-8.805   c3.184-1.646,5.451-4.566,6.351-8.121c17.316-0.358,31.276-14.442,31.276-31.844c0-17.4-13.961-31.485-31.276-31.842   c-0.87-3.386-2.966-6.149-5.932-7.835c1.056-12.594-1.569-29.436-8.837-45.485c-3.51-7.277-7.843-15.056-13.946-22.192   c-51.618-65.806-167.127-45.649-186.461,42.985c-0.032,0.132-0.032,0.24-0.062,0.364c5.466,4.713,10.419,9.521,14.209,14.38   c0.172,0.202,0.296,0.404,0.466,0.606c27.922-95.483,163.711-90.7,180.577,10.499c-2.874,2.33-4.815,5.738-4.815,9.721v57.613   c0,3.821,1.786,7.145,4.457,9.473c0.404,0.334,0.854,0.576,1.289,0.862v9.621c0,34.492-37.457,36.658-70.845,45.502   c-8.277-8.939-22.891-3.052-22.891,8.921c0,15.102,21.587,18.566,25.779,3.456c16.446-4.357,11.958-3.168,22.223-5.885   c-2.951,1.994-5.995,3.781-9.115,5.404c-2.982,25.553-37.225,31.641-48.764,8.525c-10.885-1.536-21.198-5.373-30.717-10.995   c-5.87,5.219-13.014,9.031-20.887,10.871c-0.186,0.242-0.372,0.474-0.574,0.708c0,15.878-4.597,29.459-14.21,41.347   c21.587,13.075,39.119,32.316,50.036,55.975h153.042C471.925,383.515,481.646,369.864,477.204,356.772z"
-                      fill="#FFFFFF" />
-                    <path d="M322.718,260.093c4.628-7.151,12.625-11.919,21.741-11.919c5.994,0,11.445,2.12,15.824,5.537   c26.431-14.552,45.019-49.174,45.019-89.605c0-53.554-32.596-96.959-72.818-96.959c-36.648,0-66.9,36.13-71.962,83.106   c2.842,6.779,5.202,13.79,6.801,21.058c1.74,8.231,2.128,13.41,2.47,21.183c21.12,4.969,37.006,24.077,37.006,46.487   c0,5.086-0.916,9.955-2.422,14.574C310.139,256.771,316.305,258.945,322.718,260.093z"
-                      fill="#FFFFFF" />
-                    <path d="M235.348,343.573c-10.979,5.807-15.032,5.869-57.008,16.996c-12.502,12.377-33.388,9.131-41.387-6.895   c-16.026-2.276-30.903-9.309-43.653-20.034c-38.808,5.351-71.964,32.022-84.822,69.899c-6.009,17.68-12.967,28.829-4.658,40.4   c10.001,13.992,9.301,8.587,271.842,8.587c14.07,0,23.977-13.891,19.474-27.169C287.388,402.538,278.801,365.291,235.348,343.573z"
-                      fill="#FFFFFF" />
-                    <path d="M138.321,328.151c5.979-9.217,17.144-14.248,29.071-10.731l22.549-5.979c33.932-31.819,28.993-71.746,28.993-101.368   c-17.036-97.051-124.158-99.66-141.66,0c0,159.022,0.016-114.747,0.016,44.275C84.108,293.055,108.287,322.77,138.321,328.151z"
-                      fill="#FFFFFF" />
-                    <path d="M36.619,270.824c1.382,5.499,6.133,9.661,12.067,9.661c7.019,0,12.702-5.685,12.702-12.688v-57.613   c0-3.992-1.958-7.401-4.829-9.729c3.184-19.832,13.821-39.461,27.053-52.475c19.426-20.684,51.946-32.626,88.998-23.619   c14.256,4.644,28.295,11.127,39.989,23.619c13.013,12.766,23.589,31.922,27.037,52.482c-7.501,6.081-4.815,11.329-4.815,67.336   c0,4.379,2.361,8.061,5.747,10.335v9.629c0,33.356-32.908,35.438-70.83,45.493c-8.277-8.937-22.907-3.052-22.907,8.923   c0,15.102,21.601,18.572,25.795,3.454c39.259-10.397,80.645-14.325,80.645-57.87v-8.813c3.184-1.646,5.451-4.566,6.335-8.129   c17.348-0.35,31.292-14.442,31.292-31.836c0-17.392-13.945-31.478-31.292-31.835c-0.854-3.385-2.95-6.159-5.916-7.851   c0.652-7.633-0.296-16.996-1.926-24.683c-1.398-6.337-3.572-13.41-6.895-20.795c-3.525-7.275-7.859-15.055-13.962-22.184   c-5.776-7.391-13.231-14.132-21.648-20.064c-73.346-50.82-174.628,9.295-166.755,87.742c-2.951,1.692-5.031,4.457-5.885,7.827   c-17.362,0.34-31.324,14.434-31.324,31.842S19.257,270.492,36.619,270.824z"
-                      fill="#FFFFFF" />
-                  </g>
-                </svg>
-
-              </div>
-            </router-link>
-
-          </li>
-
-
-          <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
-            <div class="icon" @click="LOGOUT">
-              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px"
-                viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;" xml:space="preserve" width="60%">
-                <g id="XMLID_2_">
-                  <path id="XMLID_4_" d="M51.213,180h173.785c8.284,0,15-6.716,15-15s-6.716-15-15-15H51.213l19.394-19.393   c5.858-5.857,5.858-15.355,0-21.213c-5.856-5.858-15.354-5.858-21.213,0L4.397,154.391c-0.348,0.347-0.676,0.71-0.988,1.09   c-0.076,0.093-0.141,0.193-0.215,0.288c-0.229,0.291-0.454,0.583-0.66,0.891c-0.06,0.09-0.109,0.185-0.168,0.276   c-0.206,0.322-0.408,0.647-0.59,0.986c-0.035,0.067-0.064,0.138-0.099,0.205c-0.189,0.367-0.371,0.739-0.53,1.123   c-0.02,0.047-0.034,0.097-0.053,0.145c-0.163,0.404-0.314,0.813-0.442,1.234c-0.017,0.053-0.026,0.108-0.041,0.162   c-0.121,0.413-0.232,0.83-0.317,1.257c-0.025,0.127-0.036,0.258-0.059,0.386c-0.062,0.354-0.124,0.708-0.159,1.069   C0.025,163.998,0,164.498,0,165s0.025,1.002,0.076,1.498c0.035,0.366,0.099,0.723,0.16,1.08c0.022,0.124,0.033,0.251,0.058,0.374   c0.086,0.431,0.196,0.852,0.318,1.269c0.015,0.049,0.024,0.101,0.039,0.15c0.129,0.423,0.28,0.836,0.445,1.244   c0.018,0.044,0.031,0.091,0.05,0.135c0.16,0.387,0.343,0.761,0.534,1.13c0.033,0.065,0.061,0.133,0.095,0.198   c0.184,0.341,0.387,0.669,0.596,0.994c0.056,0.088,0.104,0.181,0.162,0.267c0.207,0.309,0.434,0.603,0.662,0.895   c0.073,0.094,0.138,0.193,0.213,0.285c0.313,0.379,0.641,0.743,0.988,1.09l44.997,44.997C52.322,223.536,56.161,225,60,225   s7.678-1.464,10.606-4.394c5.858-5.858,5.858-15.355,0-21.213L51.213,180z"
-                    fill="#FFFFFF" />
-                  <path id="XMLID_5_" d="M207.299,42.299c-40.944,0-79.038,20.312-101.903,54.333c-4.62,6.875-2.792,16.195,4.083,20.816   c6.876,4.62,16.195,2.794,20.817-4.083c17.281-25.715,46.067-41.067,77.003-41.067C258.414,72.299,300,113.884,300,165   s-41.586,92.701-92.701,92.701c-30.845,0-59.584-15.283-76.878-40.881c-4.639-6.865-13.961-8.669-20.827-4.032   c-6.864,4.638-8.67,13.962-4.032,20.826c22.881,33.868,60.913,54.087,101.737,54.087C274.956,287.701,330,232.658,330,165   S274.956,42.299,207.299,42.299z"
-                    fill="#FFFFFF" />
-                </g>
-              </svg>
+    <div>
+        <div class="sidebar">
+            <div class="sidebar__log">
+                <div class="background-logo">
+                    <img src="/images/logo.png" alt="logo" width="100%">
+                </div>
             </div>
 
-          </li>
+            <div class="sidebar__list">
 
-        </ul>
+                <ul
+                    class="list-unstyled text-center"
+                    v-if="
+                        $route.name === 'profile' ||
+                        $route.name === 'security' ||
+                        $route.name === 'payment-update' ||
+                        $route.name === 'billing-details' ||
+                        $route.name === 'change-plan' ||
+                        $route.name === 'language' ||
+                        $route.name === 'adjust-subtitles' ||
+                        $route.name === 'viewing-history' ||
+                        $route.name === 'support-inbox' ||
+                        $route.name === 'support-request' ||
+                        $route.name === 'device-activity'
+                            ? true
+                            : false
+                    "
+                >
+                <div class="side_bar">
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'profile' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/profile.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Profile</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'security' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/profile.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Security</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'support-inbox' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/inbox.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Inbox</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'payment-update' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/payment.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Payment</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'language' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/language.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Languages</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'viewing-history' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/history.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>History</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'device-activity' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/activity.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Activity</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'adjust-subtitles' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/subtitle.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Subtitle Adjust</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                </div>
+                </ul>
+                <ul
+                    class="list-unstyled text-center margin-left-3"
+                    v-if="
+                        $route.name === 'profile' ||
+                        $route.name === 'security' ||
+                        $route.name === 'payment-update' ||
+                        $route.name === 'billing-details' ||
+                        $route.name === 'change-plan' ||
+                        $route.name === 'language' ||
+                        $route.name === 'adjust-subtitles' ||
+                        $route.name === 'viewing-history' ||
+                        $route.name === 'support-inbox' ||
+                        $route.name === 'support-request' ||
+                        $route.name === 'device-activity'
+                            ? false
+                            : true
+                    "
+                >
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'discover' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/home_side.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>On Demand</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'movies' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/film-roll.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Movies</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'series' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/spotlight.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Shows</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'kids' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/clown.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Kids</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="mt-md-4 mt-lg-4 mt-xl-4 m-xl-1">
+                        <router-link :to="{ name: 'channels' }">
+                            <div class="left_homepage row">
+                                    <div class="row">
+                                        <img
+                                            src="/images/tv.png"
+                                            width="25px"
+                                            height="25px"
+                                            alt="logo"
+                                        />
+                                        <p>Live TV</p>
+                                    </div>
+                            </div>
+                        </router-link>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
-  import {
-    mapState
-  } from "vuex";
+import { mapState } from "vuex";
 
-  export default {
+export default {
     data() {
-      return {
-        isAuth: null,
-        search_query: "",
-        email_confirmed: false,
-        username: "",
-        active_login: false,
-        active: null,
-        activeMenu: null,
-        activeGenre: 0,
-        activeTrending: 1,
-        show_phone_meuu: false,
-        show_profile_dropdown: ""
-      };
+        return {
+            isAuth: null,
+            search_query: "",
+            email_confirmed: false,
+            username: "",
+            active_login: false,
+            active: null,
+            activeMenu: null,
+            activeGenre: 0,
+            activeTrending: 1,
+            show_phone_meuu: false,
+            show_profile_dropdown: ""
+        };
     },
     computed: mapState({
-      collections: state => state.collections.collections
+        collections: state => state.collections.collections
     }),
     watch: {
-      search_query(val) {
-        if (val !== "") {
-          this.$router.push({
-            name: "search",
-            params: {
-              search: val
+        search_query(val) {
+            if (val !== "") {
+                this.$router.push({
+                    name: "search",
+                    params: {
+                        search: val
+                    }
+                });
             }
-          });
         }
-      }
     },
     methods: {
-      SORT_BY(type, trending, genre) {
-        this.activeGenre = genre;
-        this.activeMenu = this.$route.name;
-        this.$parent.SORT_BY(type, this.$parent.activeTrending, genre);
-      },
+        SORT_BY(type, trending, genre) {
+            this.activeGenre = genre;
+            this.activeMenu = this.$route.name;
+            this.$parent.SORT_BY(type, this.$parent.activeTrending, genre);
+        },
 
-      SHOW_PHONE_MENU() {
-        this.show_phone_meuu = !this.show_phone_meuu;
-      },
+        SHOW_PHONE_MENU() {
+            this.show_phone_meuu = !this.show_phone_meuu;
+        },
 
-      GO_TO_COLLECTION(id) {
-        this.show_phone_meuu = false;
-        this.$router.push({
-          name: "collection",
-          params: {
-            id: id
-          }
-        });
-      },
+        GO_TO_COLLECTION(id) {
+            this.show_phone_meuu = false;
+            this.$router.push({
+                name: "collection",
+                params: {
+                    id: id
+                }
+            });
+        },
 
-      LOGOUT() {
-       this.$store.dispatch("LOGOUT_AUTH");
-      }
+        LOGOUT() {
+            this.$store.dispatch("LOGOUT_AUTH");
+        }
     }
-  };
+};
 </script>

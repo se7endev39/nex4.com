@@ -40,12 +40,11 @@ class DiscoverController extends Controller
                       movies.m_backdrop AS backdrop,
                       movies.m_age AS age,
                       movies.m_cloud AS cloud,
-                      movies.m_users_only AS users_only,
                       categories.name AS category_name,
                       categories.kind AS category_type
                       FROM movies
                       JOIN categories ON categories.id = movies.m_category
-                      WHERE movies.m_age <> "G" AND movies.show <> 0  AND categories.active = 1
+                      WHERE movies.m_age <> "G" AND movies.show <> 0
                       GROUP BY movies.m_id
                       ORDER BY movies.created_at DESC
                       LIMIT 50');
@@ -83,7 +82,6 @@ class DiscoverController extends Controller
                         $arr['backdrop'] = $movieQuery[$key]->backdrop;
                         $arr['age'] = $movieQuery[$key]->age;
                         $arr['cloud'] = $movieQuery[$key]->cloud;
-                        $arr['users_only'] = $movieQuery[$key]->users_only;
                         $arr['category_name'] = $movieQuery[$key]->category_name;
                         $arr['category_type'] = $movieQuery[$key]->category_type;
                         array_push($getMasByGenre[$key1]['list'], $arr);
@@ -107,7 +105,6 @@ class DiscoverController extends Controller
                                 series.t_poster AS poster,
                                 series.t_age AS age,
                                 series.t_cloud AS cloud,
-                                series.t_users_only AS users_only,
                                 CASE
                                 WHEN u4.series_id IS NULL OR u4.show = 0 THEN false
                                 ELSE true
@@ -116,8 +113,8 @@ class DiscoverController extends Controller
                                 categories.kind AS category_type
                                 FROM series
                                 JOIN categories ON categories.id = series.t_category
-                                LEFT JOIN episodes AS u4  ON u4.series_id = series.t_id 
-                                WHERE series.t_age <> "G" AND categories.active = 1
+                                LEFT JOIN episodes AS u4  ON u4.series_id = series.t_id
+                                WHERE series.t_age <> "G"
                                 GROUP BY series.t_id
                                 ORDER BY series.created_at DESC
                                 LIMIT 50');
@@ -154,7 +151,6 @@ class DiscoverController extends Controller
                         $arr['backdrop'] = $seriesQuery[$key]->backdrop;
                         $arr['age'] = $seriesQuery[$key]->age;
                         $arr['cloud'] = $seriesQuery[$key]->cloud;
-                        $arr['users_only'] = $seriesQuery[$key]->users_only;
                         $arr['category_name'] = $seriesQuery[$key]->category_name;
                         $arr['category_type'] = $seriesQuery[$key]->category_type;
                         array_push($getMasByGenre[$key1]['list'], $arr);
@@ -177,10 +173,9 @@ class DiscoverController extends Controller
                                 movies.m_backdrop AS backdrop,
                                 movies.m_poster AS poster,
                                 movies.m_age AS age,
-                                movies.m_cloud AS cloud,
-                                movies.m_users_only AS users_only
+                                movies.m_cloud AS cloud
                                 FROM tops
-                                INNER JOIN movies ON movies.m_id = tops.movie_id
+                                INNER JOIN movies  ON movies.m_id = tops.movie_id
                                 GROUP BY movies.m_id DESC)
                                 UNION
                                 (SELECT
@@ -195,8 +190,7 @@ class DiscoverController extends Controller
                                 series.t_backdrop AS backdrop,
                                 series.t_poster AS poster,
                                 series.t_age AS age,
-                                series.t_cloud AS cloud,
-                                series.t_users_only AS users_only
+                                series.t_cloud AS cloud
                                 FROM tops
                         	    INNER JOIN series  ON series.t_id = tops.series_id
                                 LEFT JOIN episodes AS u4  ON u4.series_id = series.t_id
@@ -211,8 +205,7 @@ class DiscoverController extends Controller
             'data' => [
                 'data' => $getMasByGenre,
                 'top' => $getTopMas,
-            ]
-        ], 200);
+            ]], 200);
     }
 
     /**
@@ -222,7 +215,9 @@ class DiscoverController extends Controller
      */
     public function getNotifaction()
     {
+
         // Get support
+
         $getSupport = DB::table('supports')
             ->selectRaw('supports.*, support_responses.readit, support_responses.reply')
             ->leftJoin('support_responses', function ($join) {
@@ -242,7 +237,8 @@ class DiscoverController extends Controller
             'status' => 'success',
             'data' => [
                 'support' => $getSupport
-            ]
-        ], 200);
+            ]], 200);
     }
+
+
 }

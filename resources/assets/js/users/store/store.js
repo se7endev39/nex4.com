@@ -10,7 +10,6 @@ import movies from './modules/movies';
 import series from './modules/series';
 import kids from './modules/kids';
 import tv from './modules/tv';
-import manga from './modules/manga';
 import event from './modules/event';
 
 // GHost
@@ -38,7 +37,6 @@ export default new Vuex.Store({
         movies,
         series,
         kids,
-        manga,
         tv,
         genres,
         ghost_home,
