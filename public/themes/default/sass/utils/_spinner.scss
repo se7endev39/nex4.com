@@ -1,0 +1,80 @@
+/* spinner */
+
+.spinner-load-show {
+background-color: rgba(0, 0, 0, 0.93) !important
+}
+
+.spinner-load {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+width: 100%;
+height: 100%;
+background-color: $background-color;
+z-index: 1000;
+}
+
+.spinner-load .phone #main {
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-size: 64px;
+}
+
+.spinner-load .other #main {
+position: fixed;
+top: 40%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-size: 64px;
+}
+
+.spinner-load-show .other #main {
+left: 50% !important;
+}
+
+.spinner-load .spinner {
+position: relative;
+}
+
+.spinner-load .spinner:before,
+.spinner:after {
+content: "";
+position: relative;
+display: block;
+}
+
+.spinner-load .spinner:before {
+animation: spinner 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+width: 1em;
+height: 1em;
+background-color: $border-yellow;
+}
+
+.spinner-load .spinner:after {
+animation: shadow 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+bottom: -.5em;
+height: .25em;
+border-radius: 50%;
+background-color: #ffff;
+}
+
+@keyframes spinner {
+50% {
+border-radius: 50%;
+transform: scale(0.5) rotate(360deg);
+}
+100% {
+transform: scale(1) rotate(720deg);
+}
+}
+
+@keyframes shadow {
+50% {
+transform: scale(0.5);
+background-color: rgba(#000, 0.1);
+}
+}

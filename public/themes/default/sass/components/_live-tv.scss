@@ -1,0 +1,140 @@
+/**
+    Animation
+ */
+
+.animation-tv {
+  position: relative;
+  transition: all .1s ease-out;
+  cursor: pointer;
+  padding: 15px;
+  box-shadow: 0px 5px 20px -10px #000;
+  background: $background-color2;
+  &:hover {
+    position: relative;
+    box-shadow: 0px 5px 20px -5px #000;
+    transform: scale(1.05);
+  }
+  .title {
+    color: #4b4b4b;
+    font-weight: bold;
+  }
+}
+
+.tv-player {
+
+  .flowplayer, .flowplayer-player {
+    position: relative !important;
+  }
+
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  .side-bar {
+    padding: 0;
+    .active {
+      border-left: 7px solid #2196F3;
+      cursor: pointer;
+    }
+    .channel-list {
+      height: 100%;
+      overflow: auto;
+
+      .channel {
+        text-align: center;
+        padding: 0;
+        transition: 300ms;
+        box-shadow: 0px 5px 20px -10px #000;
+        margin-top: 10px;
+        background: $background-color2;
+        .log {
+          position: relative;
+          left: 10px;
+          padding: 0;
+        }
+        &:hover {
+          border-left: 7px solid #2196F3;
+          cursor: pointer;
+        }
+      }
+    }
+    .title {
+      font-weight: bold;
+      font-size: 18px;
+      color: #949494;
+      margin-top: 6px;
+    }
+  }
+
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #535353;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #313131;
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: #1a1a1a;
+  }
+  ::-webkit-scrollbar-track {
+    background: #d8d8d8;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+  }
+  ::-webkit-scrollbar-track:hover {
+    background: #666666;
+  }
+  ::-webkit-scrollbar-track:active {
+    background: #525252;
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #949494;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: #949494;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: #949494;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: #949494;
+  }
+
+  .form-control:focus {
+    color: #fff;
+    background-color: $background-color2;
+    border-radius: 20px;
+    border: 1px solid rgba(160, 160, 160, 0.43);
+    padding: 5px 10px;
+  }
+  .form-control {
+    color: #fff;
+    background-color: $background-color2;
+    border-radius: 20px;
+    border: 1px solid rgba(160, 160, 160, 0.43);
+    padding: 5px 10px;
+  }
+
+  .loader {
+    position: absolute;
+    left: -40px;
+    top: -40px;
+  }
+
+}

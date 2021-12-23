@@ -1,0 +1,9 @@
+.file-manager {
+  .control-btn {
+    color: $border-blue;
+    &:hover {
+      text-decoration-line: underline;
+      cursor: pointer;
+    }
+  }
+}

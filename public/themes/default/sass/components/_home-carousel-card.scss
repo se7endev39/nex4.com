@@ -1,0 +1,167 @@
+.center-row {
+  margin: auto;
+  max-width: 80%;
+}
+
+.genre {
+  small {
+    font-size: 12px;
+  }
+  hr {
+    position: absolute;
+    top: 15px;
+    left: 7px;
+    width: 40px;
+    border-top: 2px solid #2196F3;
+  }
+}
+
+/**
+    Animation
+ */
+
+.animation {
+  position: relative;
+  transition: all 300ms ease-in;
+  display: block;
+  cursor: pointer;
+  padding: 0;
+  &:hover {
+    background: #2f2f2f;
+    z-index: 1;
+    padding: 15px !important;
+  }
+  &:hover .poster {
+    display: block;
+  }
+  .progress {
+    height: 2px;
+    position: relative;
+    top: 5px;
+  }
+  .poster {
+    &__backdrop-image {
+      background: $background-color;
+      position: relative;
+    }
+    &__backdrop_overlay-info {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(14, 14, 14, 0.65) 0%, rgba(14, 14, 14, 0.65) 100%);
+      z-index: 1;
+      .header {
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        z-index: 10000;
+      }
+      .body {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        .play h3,
+        .play svg {
+          width: 100%;
+          transition: all 300ms ease-out;
+          &:hover {
+            width: 75px !important;
+            path:nth-child(2) {
+              fill: #2196F3;
+            }
+          }
+        }
+        .play strong {
+          color: #fff;
+        }
+      }
+    }
+    &__footer {
+      position: absolute;
+      bottom: 0;
+      padding: 5px;
+      padding-bottom: 0;
+      z-index: 10000;
+    }
+    &__title {
+      color: rgb(241, 241, 241);
+    }
+  }
+}
+
+
+.alert-notification {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100000;
+  background-color: $background-color2;
+  padding: 10px;
+
+.icon {
+  animation: MoveUpDown 3s linear infinite;
+  position: relative;
+  bottom: 0;
+  width: 60%;
+}
+
+@keyframes MoveUpDown {
+  0% {
+    bottom: 0;
+  }
+  50% {
+    bottom: 10px;
+  }
+  100% {
+    bottom: 0;
+  }
+}
+}
+.app-slider {
+    position: relative;
+    height: 200px;
+    .item-app-slider {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .slider-arrow-right {
+        position: absolute;
+        top: 50%;
+        right: -100px;
+        width: 100px;
+        transform: translate(-50%, -50%);
+        background: rgba(80, 80, 80, .3);
+        border: navajowhite;
+        padding: 13px;
+        z-index: 1;
+    }
+
+    .slider-arrow-left {
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        left: 0;
+        background: rgba(80, 80, 80, .3);
+        border: navajowhite;
+        padding: 13px;
+        z-index: 1;
+
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .app-slider {
+        position: relative;
+        .item-app-slider {
+            overflow-x: auto !important;
+        }
+    }
+}
